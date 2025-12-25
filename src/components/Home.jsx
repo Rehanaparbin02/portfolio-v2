@@ -82,8 +82,9 @@ export default function Home() {
 
             // Individual text elements for more dynamic effect
             gsap.to(".text-uiux", {
-                x: -100,
-                rotation: -10,
+                x: -150,
+                y: -50,
+                rotation: -15,
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top top",
@@ -93,7 +94,43 @@ export default function Home() {
             });
 
             gsap.to(".designer-wrapper", {
-                x: 100,
+                x: 150,
+                y: -80,
+                rotation: 15,
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1,
+                }
+            });
+
+            gsap.to(".text-ampersand", {
+                rotation: 180,
+                scale: 1.2,
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1,
+                }
+            });
+
+            gsap.to(".frontend-wrapper", {
+                x: -120,
+                y: 50,
+                rotation: -10,
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 1,
+                }
+            });
+
+            gsap.to(".text-developer", {
+                x: 120,
+                y: 80,
                 rotation: 10,
                 scrollTrigger: {
                     trigger: containerRef.current,
