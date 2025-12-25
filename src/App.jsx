@@ -13,6 +13,7 @@ import AboutFull from './components/AboutFull'
 import Footer from './components/Footer'
 import ProjectShowcase from './components/ProjectShowcase'
 import DoItProject from './components/DoItProject'
+import PageTransition from './components/PageTransition'
 
 
 gsap.registerPlugin(ScrollTrigger)
@@ -63,11 +64,31 @@ function App() {
       <div className="main-wrapper">
         <HamburgerMenu />
         <Routes>
-          <Route path="/" element={<HomeLayout />} />
-          <Route path="/about" element={<AboutFull />} />
-          <Route path="/projects" element={<ProjectShowcase />} />
-          <Route path="/doit-project" element={<DoItProject />} />
-          <Route path="*" element={<HomeLayout />} />
+          <Route path="/" element={
+            <PageTransition>
+              <HomeLayout />
+            </PageTransition>
+          } />
+          <Route path="/about" element={
+            <PageTransition>
+              <AboutFull />
+            </PageTransition>
+          } />
+          <Route path="/projects" element={
+            <PageTransition>
+              <ProjectShowcase />
+            </PageTransition>
+          } />
+          <Route path="/doit-project" element={
+            <PageTransition>
+              <DoItProject />
+            </PageTransition>
+          } />
+          <Route path="*" element={
+            <PageTransition>
+              <HomeLayout />
+            </PageTransition>
+          } />
 
         </Routes>
         <Footer />

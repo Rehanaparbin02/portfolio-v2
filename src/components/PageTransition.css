@@ -1,0 +1,163 @@
+.page-transition-mosaic {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.vertical-strips-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+}
+
+.vertical-strip {
+    flex: 1;
+    height: 100%;
+    will-change: transform, opacity;
+    transform-origin: center center;
+    backface-visibility: hidden;
+    position: relative;
+
+    /* Pure solid colors - no blur effects */
+    border-left: 0.5px solid rgba(128, 128, 128, 0.3);
+    border-right: 0.5px solid rgba(128, 128, 128, 0.3);
+}
+
+@keyframes shimmerVertical {
+
+    0%,
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(0%);
+        opacity: 0.3;
+    }
+}
+
+.transition-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    opacity: 0;
+    z-index: 10000;
+}
+
+.loader-pixel {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+    animation: pixelPulse 1.2s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6),
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+    will-change: transform, opacity;
+    position: relative;
+}
+
+/* Create pixelated effect with sharp edges */
+.loader-pixel::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.loader-pixel:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loader-pixel:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.loader-pixel:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.loader-pixel:nth-child(4) {
+    animation-delay: 0.45s;
+}
+
+@keyframes pixelPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 0.6;
+    }
+}
+
+.page-transition-container {
+    opacity: 0;
+    will-change: opacity, transform, filter;
+    transform-origin: center center;
+}
+
+/* Optional: Add this class to elements you want to animate in after page transition */
+.animate-in {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    will-change: opacity, transform;
+}
+
+/* Smooth out any potential flicker and enable hardware acceleration */
+.page-transition-mosaic *,
+.page-transition-container * {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+/* Prevent scrolling during transition */
+body.transitioning {
+    overflow: hidden;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+
+    /* Strips automatically adjust with flexbox, no changes needed */
+    .loader-pixel {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Strips automatically adjust with flexbox, no changes needed */
+    .loader-pixel {
+        width: 14px;
+        height: 14px;
+        gap: 6px;
+    }
+}

@@ -238,6 +238,7 @@ export default function ProjectShowcase() {
                                 className="liquid-btn"
                                 onClick={() => {
                                     if (project.id === "01") {
+                                        window.scrollTo(0, 0);
                                         navigate('/doit-project');
                                     }
                                 }}

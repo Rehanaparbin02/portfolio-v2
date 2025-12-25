@@ -91,6 +91,11 @@ export default function HamburgerMenu() {
         setIsOpen(!isOpen);
     };
 
+    const handleLinkClick = () => {
+        setIsOpen(false);
+        window.scrollTo(0, 0);
+    };
+
     return (
         <>
             {/* Hamburger Button */}
@@ -111,19 +116,19 @@ export default function HamburgerMenu() {
                         <div className="menu-links-section">
                             <ul className="menu-links">
                                 <li className="menu-item">
-                                    <Link to="/" onClick={toggleMenu}>
+                                    <Link to="/" onClick={handleLinkClick}>
                                         <span className="link-number">01</span>
                                         <span className="link-text">Home</span>
                                     </Link>
                                 </li>
                                 <li className="menu-item">
-                                    <Link to="/about" onClick={toggleMenu}>
+                                    <Link to="/about" onClick={handleLinkClick}>
                                         <span className="link-number">02</span>
                                         <span className="link-text">About</span>
                                     </Link>
                                 </li>
                                 <li className="menu-item">
-                                    <Link to="/projects" onClick={toggleMenu}>
+                                    <Link to="/projects" onClick={handleLinkClick}>
                                         <span className="link-number">03</span>
                                         <span className="link-text">Projects</span>
                                     </Link>
