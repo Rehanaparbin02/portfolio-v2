@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
+
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Projects.css';
 
@@ -181,6 +183,11 @@ export default function Projects() {
                             </div>
                         </div>
                     ))}
+                </div>
+                <div className="view-all-projects-wrapper" style={{ display: 'flex', justifyContent: 'center', marginTop: '10vh', paddingBottom: '10vh' }}>
+                    <Link to="/projects" className="view-all-projects-btn">
+                        VIEW ALL PROJECTS <span>→</span>
+                    </Link>
                 </div>
             </div>
         </section>

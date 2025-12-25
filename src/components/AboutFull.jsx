@@ -104,7 +104,7 @@ export default function AboutFull() {
                     // x: 0, // REMOVED: Managed manually via onUpdate/updateX to allow smooth transition
                     width: "100%", // Expand to full width
                     height: "100vh", // Expand to full height of screen/section
-                    borderRadius: "0px",
+                    borderRadius: "2rem",
                     ease: "none"
                 });
             }
@@ -124,21 +124,94 @@ export default function AboutFull() {
                 ease: "power3.out"
             });
 
-            // Scroll animations for other sections
-            gsap.utils.toArray(".about-full-section").forEach((section) => {
-                if (section.classList.contains('about-full-story')) return; // Skip story section for standard fade in
+            // EXPERTISE (02) - Staggered List Reveal
+            gsap.from(".expertise-item", {
+                scrollTrigger: {
+                    trigger: ".about-full-expertise",
+                    start: "top 75%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2, // Stagger columns
+                ease: "power2.out"
+            });
 
-                gsap.from(section, {
+            // Stagger list items inside each column
+            gsap.utils.toArray(".expertise-item ul li").forEach((li, i) => {
+                gsap.from(li, {
                     scrollTrigger: {
-                        trigger: section,
-                        start: "top 80%",
+                        trigger: li,
+                        start: "top 90%",
                         toggleActions: "play none none reverse"
                     },
-                    y: 60,
+                    x: -10,
                     opacity: 0,
-                    duration: 1,
-                    ease: "power3.out"
+                    duration: 0.5,
+                    delay: 0.1,
+                    ease: "power1.out"
                 });
+            });
+
+            // PHILOSOPHY (03) - Clip Path Text Reveal
+            // We'll wrap the h3 in a clip-path container effectively
+            gsap.from(".about-full-philosophy h3", {
+                scrollTrigger: {
+                    trigger: ".about-full-philosophy",
+                    start: "top 70%",
+                    toggleActions: "play none none reverse"
+                },
+                clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)", // Starts invisible (left-to-right wipe if we animate to polygon(0 0, 100% 0, 100% 100%, 0 100%)) 
+                // Actually, let's do a simple gradient text reveal or just a nice mask using opacity/y stagger on words if we could split them.
+                // Simpler reliable effect:
+                y: 30,
+                opacity: 0,
+                filter: "blur(10px)",
+                duration: 1.2,
+                ease: "power2.out"
+            });
+
+            gsap.from(".about-full-philosophy p", {
+                scrollTrigger: {
+                    trigger: ".about-full-philosophy",
+                    start: "top 70%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 20,
+                opacity: 0,
+                duration: 1,
+                delay: 0.3,
+                ease: "power2.out"
+            });
+
+            // PROCESS (04) - New Section Animation (Cards flip up)
+            gsap.from(".process-card", {
+                scrollTrigger: {
+                    trigger: ".about-full-process",
+                    start: "top 75%",
+                    toggleActions: "play none none reverse"
+                },
+                rotateX: -15,
+                y: 50,
+                opacity: 0,
+                transformOrigin: "top center",
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "back.out(1.7)"
+            });
+
+            // Footer Parallax/Reveal
+            gsap.from(".about-full-footer h2", {
+                scrollTrigger: {
+                    trigger: ".about-full-footer",
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                scale: 0.9,
+                opacity: 0,
+                duration: 1,
+                ease: "expo.out"
             });
 
             // Cleanup function for the listener
@@ -241,10 +314,37 @@ export default function AboutFull() {
                 </div>
             </section>
 
-            <footer className="about-full-footer">
-                <h2>Let's create something together.</h2>
-                <a href="mailto:hello@example.com" className="email-cta">hello@example.com</a>
-            </footer>
+            <section className="about-full-section about-full-process">
+                <div className="section-grid">
+                    <div className="section-label">04 / PROCESS</div>
+                    <div className="section-content">
+                        <h3>How I Work</h3>
+                        <div className="process-grid">
+                            <div className="process-card">
+                                <span className="process-number">01</span>
+                                <h4>Discovery</h4>
+                                <p>Understanding the core problem and user needs through research.</p>
+                            </div>
+                            <div className="process-card">
+                                <span className="process-number">02</span>
+                                <h4>Design</h4>
+                                <p>Crafting intuitive interfaces and visual systems that align with the brand.</p>
+                            </div>
+                            <div className="process-card">
+                                <span className="process-number">03</span>
+                                <h4>Develop</h4>
+                                <p>Building robust, scalable solutions using modern technologies.</p>
+                            </div>
+                            <div className="process-card">
+                                <span className="process-number">04</span>
+                                <h4>Launch</h4>
+                                <p>Testing, optimizing, and deploying the final product to the world.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
     );
 }

@@ -34,14 +34,16 @@ export default function About() {
             });
 
             // Split text into characters for animation
-            const eyebrowText = document.querySelector(".section-eyebrow");
-            if (eyebrowText && !eyebrowText.dataset.split) {
-                const text = eyebrowText.textContent;
-                eyebrowText.innerHTML = text.split('').map(char =>
-                    `<span class="char">${char === ' ' ? '&nbsp;' : char}</span>`
-                ).join('');
-                eyebrowText.dataset.split = 'true';
-            }
+            const eyebrowTexts = document.querySelectorAll(".section-eyebrow");
+            eyebrowTexts.forEach(eyebrowText => {
+                if (eyebrowText && !eyebrowText.dataset.split) {
+                    const text = eyebrowText.textContent;
+                    eyebrowText.innerHTML = text.split('').map(char =>
+                        `<span class="char">${char === ' ' ? '&nbsp;' : char}</span>`
+                    ).join('');
+                    eyebrowText.dataset.split = 'true';
+                }
+            });
 
             tl.from(".section-eyebrow .char", {
                 y: -100,
@@ -99,7 +101,7 @@ export default function About() {
                     <h1 className="section-eyebrow" style={{ position: "relative", top: "27rem" }}>HEY</h1>
                     <h1 className="section-eyebrow" style={{ position: "relative", top: "27rem" }}>THERE!</h1>
                     <p className="about-description">
-                        I'm a passionate <span className="highlight highlight-left">Frontend Developer</span> <span className="emoji">🚀</span> crafting
+                        I'm a passionate <span className="highlight highlight-left">Full Stack Developer</span> <span className="emoji">🚀</span> crafting
                         interactive and immersive <span className="highlight highlight-right">web experiences</span> <span className="emoji">🌐</span>.
                         Blurring the line between design and code <span className="emoji">🎨</span> to create digital magic <span className="emoji">✨</span>.
                     </p>

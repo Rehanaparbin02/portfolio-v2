@@ -28,9 +28,9 @@ export default function Footer() {
         // GSAP Animations
         const ctx = gsap.context(() => {
             // Uncover Reveal Effect
+            // Uncover Reveal Effect
             gsap.from(contentRef.current, {
                 yPercent: -50,
-                opacity: 0,
                 scrollTrigger: {
                     trigger: footerRef.current,
                     start: "top bottom",

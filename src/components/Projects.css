@@ -301,3 +301,34 @@
         height: 250px;
     }
 }
+
+.view-all-projects-btn {
+    padding: 1.2rem 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.view-all-projects-btn span {
+    transition: transform 0.4s ease;
+}
+
+.view-all-projects-btn:hover {
+    background: white;
+    color: black !important;
+    border-color: white;
+    transform: translateY(-5px);
+}
+
+.view-all-projects-btn:hover span {
+    transform: translateX(5px);
+}

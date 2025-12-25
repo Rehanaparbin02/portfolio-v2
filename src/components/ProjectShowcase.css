@@ -1,0 +1,328 @@
+.project-showcase-container {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    min-height: 100vh;
+    padding-top: 15vh;
+    overflow-x: hidden;
+    position: relative;
+    font-family: 'Outfit', sans-serif;
+}
+
+.project-showcase-hero {
+    padding: 0 8vw;
+    margin-bottom: 20vh;
+}
+
+.hero-sub {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    margin-bottom: 2rem;
+    display: block;
+    font-weight: 300;
+}
+
+.hero-title {
+    font-size: clamp(4rem, 10vw, 12rem);
+    font-weight: 800;
+    line-height: 0.9;
+    margin: 0;
+    letter-spacing: -0.04em;
+}
+
+.hero-title .outline {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    color: transparent;
+}
+
+.showcase-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30vh;
+    padding: 0 8vw 20vh;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    gap: 5vw;
+    position: relative;
+}
+
+.project-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.project-image-wrapper {
+    flex: 1.5;
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #111;
+    cursor: pointer;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-image-wrapper:hover .project-image {
+    transform: scale(1.05);
+}
+
+.project-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    z-index: 2;
+}
+
+.project-num {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.2);
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+}
+
+.project-name {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.project-category {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+}
+
+.project-description {
+    font-size: 1.1rem;
+    color: #a1a1a1;
+    line-height: 1.6;
+    max-width: 450px;
+}
+
+.view-project-btn {
+    width: fit-content;
+    padding: 1.4rem 3.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 100px;
+    background: transparent;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.4s ease, color 0.4s ease;
+    z-index: 1;
+}
+
+.btn-fill {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 160%;
+    height: 160%;
+    background: #ffffff;
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
+    will-change: transform;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.view-project-btn:hover {
+    color: #000;
+    border-color: #ffffff;
+}
+
+.btn-text {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.btn-text-inner {
+    display: flex;
+    flex-direction: column;
+    height: 1.2em;
+    overflow: hidden;
+    position: relative;
+    line-height: 1.2em;
+}
+
+.btn-text-1,
+.btn-text-2 {
+    display: block;
+    height: 1.2em;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.view-project-btn:hover .btn-text-1 {
+    transform: translateY(-100%);
+}
+
+.view-project-btn:hover .btn-text-2 {
+    transform: translateY(-100%);
+}
+
+.btn-text svg {
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.view-project-btn:hover svg {
+    transform: translateX(5px) scale(1.1);
+}
+
+/* Background elements */
+.bg-glow {
+    position: fixed;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    top: -20vh;
+    right: -20vw;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bg-glow-2 {
+    position: fixed;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+    bottom: -10vh;
+    left: -10vw;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Custom Scroll Progress */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #ffffff;
+    z-index: 999;
+}
+
+@media (max-width: 1024px) {
+
+    .project-item,
+    .project-item:nth-child(even) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .project-image-wrapper {
+        width: 100%;
+    }
+
+    .project-info {
+        align-items: flex-start;
+        text-align: left;
+    }
+}
+
+/* Liquid Button Styles - Adapted from GSAP CodePen */
+.liquid-btn {
+    --color-surface-white: #ffffff;
+    --color-just-black: #000000;
+    --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+    align-items: center;
+    background: 0 0;
+    border: 1px solid var(--color-surface-white);
+    /* Adapted width */
+    border-radius: 100px;
+    color: var(--color-surface-white);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 0.85rem;
+    font-weight: 600;
+    gap: 1rem;
+    justify-content: center;
+    letter-spacing: 0.1rem;
+    line-height: 1;
+    overflow: hidden;
+    padding: 1.4rem 3.2rem;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    word-break: break-word;
+    margin-top: 2.5rem;
+    /* Preserve existing margin */
+    z-index: 1;
+}
+
+@media (hover: hover) {
+    .liquid-btn:hover {
+        color: var(--color-just-black);
+    }
+}
+
+.liquid-btn__label {
+    position: relative;
+    text-align: center;
+    transition: color 50ms var(--ease-in-out-quart);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.liquid-btn:hover .liquid-btn__label {
+    transition: color 0.15s var(--ease-in-out-quart);
+}
+
+.liquid-btn__flair {
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.liquid-btn .liquid-btn__flair {
+    transform: scale(0);
+    transform-origin: 0 0;
+    will-change: transform;
+}
+
+.liquid-btn__flair:before {
+    aspect-ratio: 1/1;
+    background-color: var(--color-surface-white);
+    border-radius: 50%;
+    content: "";
+    display: block;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width: 200%;
+    /* Increased slightly to ensure coverage */
+}
