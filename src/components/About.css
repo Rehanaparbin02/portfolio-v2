@@ -1,0 +1,135 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap');
+
+/* About Section Container */
+.about-section {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 0 2rem 8rem 2rem;
+    /* Added bottom padding for marquee space */
+    font-family: 'Inter', sans-serif;
+    color: white;
+    background-color: transparent;
+    /* Assuming global bg is black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Parallax Background */
+.parallax-bg {
+    position: absolute;
+    top: 19%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.bg-text {
+    font-size: 15vw;
+    font-weight: 900;
+    white-space: nowrap;
+    line-height: 1;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    -webkit-text-stroke: 10px white;
+    color: transparent;
+    user-select: none;
+}
+
+/* Content */
+.about-card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about-text-content p {
+    font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.35;
+    text-align: center;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.highlight {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 0.1em 0.4em;
+    font-weight: 800;
+    display: inline-block;
+    line-height: 1.1;
+    margin: 0 0.2em;
+    vertical-align: middle;
+}
+
+/* Section Eyebrow */
+.eyebrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    position: relative;
+    top: 5rem;
+    margin-bottom: 4rem;
+}
+
+.section-eyebrow {
+    display: block;
+    font-family: 'BBH Bartle', sans-serif;
+    font-size: clamp(5rem, 15vw, 12rem);
+    font-weight: 900;
+    margin: -0.2em 0;
+    line-height: 0.8;
+    overflow: hidden;
+}
+
+.section-eyebrow .char {
+    display: inline-block;
+    perspective: 1000px;
+}
+
+.about-description {
+    /* font-family: 'BBH Bartle', sans-serif; */
+    position: relative;
+    top: 33rem;
+    height: 39rem;
+}
+
+.emoji {
+    filter: grayscale(100%) brightness(0) invert(1);
+    display: inline-block;
+    font-style: normal;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .about-text-content p {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        line-height: 1.4;
+    }
+
+    .highlight {
+        padding: 0.1em 0.3em;
+    }
+
+
+}

@@ -1,0 +1,303 @@
+/* Projects Section */
+.projects-section {
+    /* background-color: #0d0d0d; */
+    color: #ffffff;
+    padding: 10rem 2rem;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+}
+
+.projects-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Header */
+.projects-header {
+    margin-bottom: 8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.projects-title-wrapper {
+    overflow: hidden;
+}
+
+.projects-title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0;
+}
+
+.projects-subtitle {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #888;
+    max-width: 400px;
+    line-height: 1.5;
+}
+
+/* Projects Stack */
+.projects-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    position: relative;
+    padding-bottom: 20vh;
+}
+
+/* Project Card */
+.project-card {
+    position: sticky;
+    top: 15vh;
+    height: 70vh;
+    width: 100%;
+    background-color: #1a1a1a;
+    border-radius: 2rem;
+    overflow: hidden;
+    transform-origin: center top;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: box-shadow 0.3s ease, transform 0.3s ease-out;
+    /* Smooth hover lift if needed */
+}
+
+/* Spotlight Effect */
+.project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+            rgba(255, 255, 255, 0.06),
+            transparent 40%);
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    height: 100%;
+    position: relative;
+    z-index: 4;
+    /* Above spotlight */
+}
+
+/* Card Content */
+.project-content {
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(to right, rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0));
+    /* Fade text bg */
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.project-number {
+    font-size: 1rem;
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(5px);
+}
+
+.project-category {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    font-weight: 500;
+}
+
+.project-details {
+    margin-top: auto;
+}
+
+.project-name {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.project-description {
+    font-size: 1.1rem;
+    color: #aaa;
+    max-width: 90%;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+}
+
+.project-tags {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 3.5rem;
+}
+
+.project-tag {
+    font-size: 0.85rem;
+    padding: 0.5rem 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 100px;
+    color: #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.project-tag:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* Link Underline Animation */
+.project-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background-color: #fff;
+    transition: width 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.project-link:hover::after {
+    width: 100%;
+}
+
+.project-link span.arrow {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.project-link:hover span.arrow {
+    transform: translateX(5px);
+}
+
+/* Card Image */
+.project-image-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.project-image-wrapper {
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.08);
+}
+
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #1a1a1a 0%, transparent 25%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .project-card-inner {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+
+    .project-content {
+        padding: 2.5rem;
+        order: 2;
+        background: none;
+        /* No fade needed vertically as much */
+    }
+
+    .project-image-container {
+        order: 1;
+        height: 300px;
+        /* Fixed height for image on tablet */
+    }
+
+    .project-overlay {
+        background: linear-gradient(to bottom, transparent 0%, #1a1a1a 90%);
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-header {
+        margin-bottom: 4rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .project-card {
+        height: auto;
+        min-height: 70vh;
+        border-radius: 1.5rem;
+    }
+
+    .project-name {
+        font-size: 2rem;
+    }
+
+    .project-image-container {
+        height: 250px;
+    }
+}

@@ -1,0 +1,222 @@
+/* Home Container */
+.home-container {
+    min-height: 100vh;
+    /* Transparent to let index.css grid show through, or redefine here if needed */
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    padding: 2rem;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Common Typography */
+h1 {
+    font-size: clamp(5rem, 14vw, 14rem);
+    line-height: 0.9;
+    font-weight: 900;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    user-select: none;
+    overflow: hidden;
+}
+
+/* Top Row */
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.text-uiux {
+    color: white;
+}
+
+.designer-wrapper {
+    position: relative;
+    transform: rotate(-2deg);
+    /* Slight tilt from design? Or straight? Image looks straight but handles suggest selection. Let's keep it straight for now but position it higher/right */
+}
+
+/* Outline Text Effect for DESIGNER */
+.text-designer {
+    color: #000;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 4px #facc15;
+    paint-order: stroke fill;
+    /* Yellow-400 */
+    position: relative;
+    z-index: 2;
+}
+
+/* Designer Box (Blue frame usually, but image shows Yellow for DESIGNER box?) 
+   Wait, zooming in the user image... 
+   "DESIGNER" has a blue selection box actually? 
+   No, it looks like "DESIGNER" is outlined in yellow, but the selection box is blue with white handles. 
+   "FRONTEND" is outlined in white, and has a blue selection box with handles.
+   Let's check the request image carefully.
+   "DESIGNER" -> Yellow text outline. Blue Bounding box.
+   "FRONTEND" -> White text outline. Blue Bounding box.
+*/
+
+.selection-box {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid #3b82f6;
+    /* Blue-500 */
+    pointer-events: none;
+    z-index: 3;
+}
+
+
+
+.handle {
+    width: 8px;
+    height: 8px;
+    background: white;
+    position: absolute;
+    border: 1px solid #3b82f6;
+}
+
+.handle.tl {
+    top: -5px;
+    left: -5px;
+}
+
+.handle.tr {
+    top: -5px;
+    right: -5px;
+}
+
+.handle.bl {
+    bottom: -5px;
+    left: -5px;
+}
+
+.handle.br {
+    bottom: -5px;
+    right: -5px;
+}
+
+/* Middle Row */
+.middle-row {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.text-ampersand {
+    color: #000;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 4px white;
+    paint-order: stroke fill;
+    font-size: clamp(2rem, 8vw, 6rem);
+    /* Smaller than main text */
+}
+
+/* Bottom Row */
+.bottom-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.frontend-wrapper {
+    position: relative;
+    margin-right: auto;
+    transform: rotate(5deg);
+    /* Push to left */
+}
+
+.frontend-wrapper-fullstack {
+    position: relative;
+    margin-right: auto;
+    transform: rotate(5deg);
+
+    /* Push to left */
+}
+
+.text-frontend {
+    color: #000;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 4px white;
+    paint-order: stroke fill;
+    /* rotate: 5deg; */
+}
+
+.text-frontend-fullstack {
+    color: #000;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 4px rgb(216, 97, 255);
+    paint-order: stroke fill;
+    /* rotate: 5deg; */
+}
+
+.text-developer {
+    color: white;
+    margin-left: auto;
+    /* Push to right */
+}
+
+/* Adjustments for Specific text positions to match image closely */
+/* The image has staggered layout. 
+   UI/UX (Left) ------- DESIGNER (Right/Up)
+                 & (Center)
+   FRONTEND (Left) -------- DEVELOPER (Right/Down)
+*/
+
+.top-row {
+    margin-bottom: -20px;
+    /* Pull them closer if needed */
+}
+
+.text-designer {
+    /* "DESIGNER" is outlined in yellow in the image */
+    -webkit-text-stroke-color: #facc15;
+}
+
+/* Selection box visibility based on image:
+   "DESIGNER" has a box.
+   "FRONTEND" has a box.
+*/
+
+/* Mobile Stack */
+@media (max-width: 768px) {
+
+    .top-row,
+    .bottom-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text-developer,
+    .frontend-wrapper {
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+        /* Manageable size on mobile */
+    }
+}
