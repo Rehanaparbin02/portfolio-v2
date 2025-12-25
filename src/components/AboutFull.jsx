@@ -19,6 +19,18 @@ export default function AboutFull() {
             // Target the WHOLE square (heroImageRef) - Horizontal Only
             const xTo = gsap.quickTo(heroImageRef.current, "x", { duration: 0.5, ease: "power3", overwrite: "auto" });
 
+            // State to manage blending between mouse follow and centered scroll state
+            const scrollProgress = { current: 0 };
+            const mouseOffset = { current: 0 };
+
+            const updateX = () => {
+                // As scroll progress increases, the influence of mouse fades to 0 (centering the element)
+                // We clamp progress between 0 and 1 just in case
+                const progress = Math.min(Math.max(scrollProgress.current, 0), 1);
+                const currentOffset = mouseOffset.current * (1 - progress);
+                xTo(currentOffset);
+            };
+
             const handleMouseMove = (e) => {
                 if (!heroImageRef.current) return;
 
@@ -29,11 +41,10 @@ export default function AboutFull() {
                 const centerX = left - currentX + width / 2;
                 const mouseX = e.clientX;
 
-                // Calculate distance from center - Horizontal only
-                // Use factor of 1 to allow full range movement to the edges
-                const xMove = (mouseX - centerX) * 1;
+                // Calculate raw distance from center
+                mouseOffset.current = (mouseX - centerX) * 1;
 
-                xTo(xMove);
+                updateX();
             };
 
             window.addEventListener("mousemove", handleMouseMove);
@@ -66,8 +77,57 @@ export default function AboutFull() {
                     ease: "power3.out"
                 }, "-=1");
 
-            // Scroll animations for sections
+            // Hero Image Expansion ScrollTrigger
+            const storySection = document.querySelector(".about-full-story");
+            if (heroImageRef.current && storySection) {
+                // Calculate distance to move down
+                // We want the image to roughly cover the story section
+                // We can't rely on exact pixel math if screen resizes, but we can try to get initial delta
+                const heroRect = heroImageRef.current.getBoundingClientRect();
+                const storyRect = storySection.getBoundingClientRect();
+                // Adjustment: align centers?
+                // Visual guess: move top of hero to top of story
+                const accumulatedY = storyRect.top - heroRect.top;
+
+                gsap.to(heroImageRef.current, {
+                    scrollTrigger: {
+                        trigger: ".about-full-story",
+                        start: "top bottom", // when story starts entering viewport
+                        end: "center center", // when story is centered
+                        scrub: 1,
+                        onUpdate: (self) => {
+                            scrollProgress.current = self.progress;
+                            updateX();
+                        }
+                    },
+                    y: accumulatedY,
+                    // x: 0, // REMOVED: Managed manually via onUpdate/updateX to allow smooth transition
+                    width: "100%", // Expand to full width
+                    height: "100vh", // Expand to full height of screen/section
+                    borderRadius: "0px",
+                    ease: "none"
+                });
+            }
+
+            // Story Text Reveal Animation
+            // Reveals the text as if it's appearing "inside" the expanded card
+            gsap.from(".about-full-story .section-label, .about-full-story .section-content h3, .about-full-story .section-content p", {
+                scrollTrigger: {
+                    trigger: ".about-full-story",
+                    start: "top 60%", // Triggers as the card background is establishing itself
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.1,
+                ease: "power3.out"
+            });
+
+            // Scroll animations for other sections
             gsap.utils.toArray(".about-full-section").forEach((section) => {
+                if (section.classList.contains('about-full-story')) return; // Skip story section for standard fade in
+
                 gsap.from(section, {
                     scrollTrigger: {
                         trigger: section,
