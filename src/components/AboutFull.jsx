@@ -8,11 +8,40 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutFull() {
     const containerRef = useRef(null);
+    const heroImageRef = useRef(null);
+    const sphereRef = useRef(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
 
         const ctx = gsap.context(() => {
+            // Mouse follower setup
+            // Target the WHOLE square (heroImageRef) - Horizontal Only
+            const xTo = gsap.quickTo(heroImageRef.current, "x", { duration: 0.5, ease: "power3", overwrite: "auto" });
+
+            const handleMouseMove = (e) => {
+                if (!heroImageRef.current) return;
+
+                // Calculate the center of the element relative to the viewport
+                const currentX = gsap.getProperty(heroImageRef.current, "x");
+                const { left, width } = heroImageRef.current.getBoundingClientRect();
+
+                const centerX = left - currentX + width / 2;
+                const mouseX = e.clientX;
+
+                // Calculate distance from center - Horizontal only
+                // Use factor of 1 to allow full range movement to the edges
+                const xMove = (mouseX - centerX) * 1;
+
+                xTo(xMove);
+            };
+
+            window.addEventListener("mousemove", handleMouseMove);
+
+            // Cleanup listener inside context cleanup? 
+            // Better to do it in return of useEffect or use GSAP's matchMedia/context scoping if possible.
+            // Since we're adding to window, we should manually remove it.
+
             // Entrance animation
             const tl = gsap.timeline();
 
@@ -52,6 +81,11 @@ export default function AboutFull() {
                 });
             });
 
+            // Cleanup function for the listener
+            return () => {
+                window.removeEventListener("mousemove", handleMouseMove);
+            };
+
         }, containerRef);
 
         return () => ctx.revert();
@@ -76,9 +110,9 @@ export default function AboutFull() {
                 <div className="about-full-intro">
                     <p>I am a creative developer based in the digital world, specializing in building exceptional digital experiences.</p>
                 </div>
-                <div className="about-full-hero-image">
+                <div className="about-full-hero-image" ref={heroImageRef}>
                     {/* Decorative element */}
-                    <div className="gradient-sphere"></div>
+                    <div className="gradient-sphere" ref={sphereRef}></div>
                 </div>
             </section>
 
