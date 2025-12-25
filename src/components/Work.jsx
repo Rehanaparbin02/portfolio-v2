@@ -173,7 +173,7 @@ export default function Work() {
     ];
 
     return (
-        <section className="work-section" ref={sectionRef}>
+        <section className="work-section" id="work" ref={sectionRef}>
             {/* Background decoration */}
             <div className="work-bg-decoration"></div>
 

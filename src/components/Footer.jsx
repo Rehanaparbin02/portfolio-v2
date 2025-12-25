@@ -98,7 +98,7 @@ export default function Footer() {
     }, []);
 
     return (
-        <footer className="footer-section" ref={footerRef}>
+        <footer className="footer-section" id="contact" ref={footerRef}>
             <div className="footer-blobs">
                 <div className="footer-blob blob-1"></div>
                 <div className="footer-blob blob-2"></div>

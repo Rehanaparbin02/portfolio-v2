@@ -85,7 +85,7 @@ export default function About() {
     }, []);
 
     return (
-        <section className="about-section" ref={containerRef}>
+        <section className="about-section" id="about" ref={containerRef}>
             <div className="parallax-bg">
                 <h1 className="bg-text">
                     CREATIVE • DEVELOPER • DESIGNER • CREATIVE • DEVELOPER • DESIGNER •

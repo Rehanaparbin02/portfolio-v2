@@ -146,7 +146,7 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="home-container" ref={containerRef}>
+        <div className="home-container" id="home" ref={containerRef}>
             <div className="hero-content">
                 <div className="top-row">
                     <h1 className="text-uiux">UI/UX</h1>
