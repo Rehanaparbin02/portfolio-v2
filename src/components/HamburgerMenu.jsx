@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './HamburgerMenu.css';
@@ -7,6 +8,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function HamburgerMenu() {
     const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        // Close menu when route changes
+        setIsOpen(false);
+    }, [location]);
 
     useEffect(() => {
         // Hide/Show on scroll
@@ -102,36 +109,33 @@ export default function HamburgerMenu() {
                     {/* Main Navigation */}
                     <nav className="menu-nav" style={{ position: 'relative', top: '3rem' }}>
                         <div className="menu-links-section">
-                            {/* <h3 className="section-label">LINKS</h3> */}
                             <ul className="menu-links">
                                 <li className="menu-item">
-                                    <a href="#home" onClick={toggleMenu}>
+                                    <Link to="/" onClick={toggleMenu}>
                                         <span className="link-number">01</span>
                                         <span className="link-text">Home</span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="menu-item">
-                                    <a href="#work" onClick={toggleMenu}>
+                                    <Link to="/about" onClick={toggleMenu}>
                                         <span className="link-number">02</span>
+                                        <span className="link-text">About</span>
+                                    </Link>
+                                </li>
+                                <li className="menu-item">
+                                    <a href="/#work" onClick={toggleMenu}>
+                                        <span className="link-number">03</span>
                                         <span className="link-text">Work</span>
                                     </a>
                                 </li>
                                 <li className="menu-item">
-                                    <a href="#about" onClick={toggleMenu}>
-                                        <span className="link-number">03</span>
-                                        <span className="link-text">About</span>
-                                    </a>
-                                </li>
-                                <li className="menu-item">
-                                    <a href="#contact" onClick={toggleMenu}>
+                                    <a href="/#contact" onClick={toggleMenu}>
                                         <span className="link-number">04</span>
                                         <span className="link-text">Contact</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
-
-
                     </nav>
                 </div>
             </div>

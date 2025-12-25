@@ -1,4 +1,5 @@
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
@@ -8,9 +9,22 @@ import HamburgerMenu from './components/HamburgerMenu'
 import About from './components/About'
 import Work from './components/Work'
 import Projects from './components/Projects'
-// import Contact from './components/Contact'
+import AboutFull from './components/AboutFull'
 import Footer from './components/Footer'
+
 gsap.registerPlugin(ScrollTrigger)
+
+function HomeLayout() {
+  return (
+    <>
+      <Home />
+      <About />
+      <Work />
+      <Projects />
+      <Footer />
+    </>
+  )
+}
 
 function App() {
   useEffect(() => {
@@ -43,15 +57,15 @@ function App() {
   }, [])
 
   return (
-    <div className="main-wrapper">
-      <HamburgerMenu />
-      <Home />
-      <About />
-      <Work />
-      <Projects />
-      {/* <Contact /> */}
-      <Footer />
-    </div>
+    <Router>
+      <div className="main-wrapper">
+        <HamburgerMenu />
+        <Routes>
+          <Route path="/" element={<HomeLayout />} />
+          <Route path="/about" element={<AboutFull />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 
