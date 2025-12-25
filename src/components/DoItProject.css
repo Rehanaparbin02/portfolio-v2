@@ -1,0 +1,400 @@
+.doit-project-container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #050505;
+    color: #ffffff;
+    overflow-x: hidden;
+    padding-bottom: 5rem;
+}
+
+.doit-hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.doit-hero-content {
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.doit-hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15vw;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin: 0;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.doit-hero-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-top: 2rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.doit-hero-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.doit-hero-image {
+    width: 100%;
+    height: 120%;
+    /* For parallax */
+    object-fit: cover;
+    filter: brightness(0.4) grayscale(0.2);
+}
+
+.doit-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10vh 5vw;
+}
+
+.doit-section {
+    margin-bottom: 15vh;
+}
+
+.section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    text-transform: uppercase;
+    border-left: 4px solid #fff;
+    padding-left: 2rem;
+}
+
+/* Overview Section */
+.doit-overview {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+}
+
+.doit-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: #888;
+    border-top: 1px solid #333;
+    padding-top: 1rem;
+    display: inline-block;
+    height: fit-content;
+}
+
+.doit-text h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.doit-text h3:first-child {
+    margin-top: 0;
+}
+
+.doit-text p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #ccc;
+}
+
+/* Details Grid */
+.doit-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 3rem 0;
+}
+
+.doit-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.doit-detail-item .label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #666;
+    letter-spacing: 0.05rem;
+}
+
+.doit-detail-item .value {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+/* Solutions / Features Grid */
+.doit-solutions .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.feature-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.feature-card p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #aaa;
+    margin: 0;
+}
+
+/* Tech Stack */
+.doit-tech-stack .tech-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.tech-column h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #888;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+}
+
+.tech-item {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    color: #eee;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(34, 197, 94, 0.1);
+    /* Green tint */
+    border-radius: 4px;
+    border-left: 2px solid #22C55E;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Design Journey Timeline */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 1px solid #333;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 4rem;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -2.4rem;
+    top: 0.5rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    background: #22C55E;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.timeline-content h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.timeline-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: #aaa;
+    line-height: 1.6;
+    max-width: 800px;
+}
+
+/* Impact */
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+}
+
+.impact-stat {
+    padding: 2rem;
+    border: 1px solid #222;
+    border-radius: 8px;
+}
+
+.impact-stat .number {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    color: #22C55E;
+    margin-bottom: 0.5rem;
+}
+
+.impact-stat .desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: #fff;
+}
+
+/* Gallery - Existing styles reused + adjustments */
+.doit-gallery {
+    margin-top: 10rem;
+}
+
+.gallery-image {
+    margin-bottom: 5rem;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    filter: grayscale(0.2);
+    transition: filter 0.5s ease;
+}
+
+.gallery-image img:hover {
+    filter: grayscale(0);
+}
+
+.gallery-image .caption {
+    margin-top: 1rem;
+    font-family: 'Roboto Mono', monospace;
+    color: #666;
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+/* Lessons */
+.doit-lessons {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+}
+
+.doit-lessons blockquote {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-style: italic;
+    line-height: 1.4;
+    margin: 0 0 2rem 0;
+    color: #fff;
+    padding-left: 2rem;
+    border-left: 4px solid #22C55E;
+}
+
+
+/* Next Project Link */
+.doit-next {
+    text-align: center;
+    padding: 5rem 0;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    border-top: 1px solid #222;
+    margin-top: 5rem;
+}
+
+.doit-next:hover {
+    opacity: 0.7;
+}
+
+.doit-next h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.doit-next p {
+    font-family: 'Syne', sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .doit-hero-title {
+        font-size: 18vw;
+    }
+
+    .doit-overview,
+    .doit-lessons {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .doit-details {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .doit-tech-stack .tech-content,
+    .impact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .timeline {
+        padding-left: 1.5rem;
+    }
+
+    .timeline-dot {
+        left: -1.9rem;
+    }
+
+    .doit-next p {
+        font-size: 3rem;
+    }
+}

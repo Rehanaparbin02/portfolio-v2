@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ProjectShowcase.css';
@@ -39,6 +40,7 @@ const projects = [
 export default function ProjectShowcase() {
     const containerRef = useRef(null);
     const progressRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -232,7 +234,14 @@ export default function ProjectShowcase() {
                             <span className="project-category">{project.category}</span>
                             <h2 className="project-name">{project.name}</h2>
                             <p className="project-description">{project.description}</p>
-                            <button className="liquid-btn">
+                            <button
+                                className="liquid-btn"
+                                onClick={() => {
+                                    if (project.id === "01") {
+                                        navigate('/doit-project');
+                                    }
+                                }}
+                            >
                                 <span className="liquid-btn__flair"></span>
                                 <span className="liquid-btn__label">
                                     VIEW FULL PROJECT

@@ -12,6 +12,7 @@ import Projects from './components/Projects'
 import AboutFull from './components/AboutFull'
 import Footer from './components/Footer'
 import ProjectShowcase from './components/ProjectShowcase'
+import DoItProject from './components/DoItProject'
 
 
 gsap.registerPlugin(ScrollTrigger)
@@ -65,6 +66,7 @@ function App() {
           <Route path="/" element={<HomeLayout />} />
           <Route path="/about" element={<AboutFull />} />
           <Route path="/projects" element={<ProjectShowcase />} />
+          <Route path="/doit-project" element={<DoItProject />} />
           <Route path="*" element={<HomeLayout />} />
 
         </Routes>
