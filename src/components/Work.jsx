@@ -8,8 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Work() {
     const sectionRef = useRef(null);
     const heroRef = useRef(null);
-    const servicesContainerRef = useRef(null);
-    const servicesGridRef = useRef(null);
+    const cardsContainerRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -44,51 +43,57 @@ export default function Work() {
                     }
                 });
 
-                // Horizontal scroll for desktop
-                const servicesGrid = servicesGridRef.current;
-                const servicesContainer = servicesContainerRef.current;
+                // Sticky card stack scroll effect
+                const cards = gsap.utils.toArray(".service-card");
 
-                if (servicesGrid && servicesContainer) {
-                    const cards = gsap.utils.toArray(".service-card");
-                    const scrollWidth = servicesGrid.scrollWidth - window.innerWidth;
+                cards.forEach((card, index) => {
+                    const isLast = index === cards.length - 1;
 
-                    const horizontalScroll = gsap.to(servicesGrid, {
-                        x: () => -scrollWidth,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: servicesContainer,
-                            start: "top top",
-                            end: () => `+=${scrollWidth + window.innerHeight}`,
-                            scrub: 1,
-                            pin: true,
-                            anticipatePin: 1,
-                            invalidateOnRefresh: true
-                        }
+                    ScrollTrigger.create({
+                        trigger: card,
+                        start: "top 120px",
+                        end: isLast ? "bottom top" : "bottom 120px",
+                        pin: true,
+                        pinSpacing: false,
+                        invalidateOnRefresh: true,
                     });
 
-                    // Card reveal animations
-                    cards.forEach((card, index) => {
-                        gsap.from(card, {
+                    // Scale down and fade effect for cards being covered
+                    if (!isLast) {
+                        gsap.to(card, {
+                            scale: 0.95,
+                            opacity: 0.7,
+                            filter: "blur(2px)",
                             scrollTrigger: {
-                                trigger: card,
-                                containerAnimation: horizontalScroll,
-                                start: "left 90%",
-                                end: "left 60%",
+                                trigger: cards[index + 1],
+                                start: "top 120px",
+                                end: "top 80px",
                                 scrub: 1,
-                            },
-                            opacity: 0,
-                            scale: 0.9,
-                            y: 50
+                                invalidateOnRefresh: true,
+                            }
                         });
+                    }
+
+                    // Card entrance animation
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top bottom",
+                            end: "top center",
+                            scrub: 1,
+                        },
+                        y: 100,
+                        opacity: 0,
+                        scale: 0.9,
                     });
-                }
+                });
             });
 
             mm.add("(max-width: 768px)", () => {
                 // Mobile: simple stagger animation
                 gsap.from(".service-card", {
                     scrollTrigger: {
-                        trigger: ".services-grid",
+                        trigger: ".cards-container",
                         start: "top 80%",
                     },
                     y: 100,
@@ -199,36 +204,34 @@ export default function Work() {
                 </p>
             </div>
 
-            {/* Horizontal Scroll Services */}
-            <div className="services-container" ref={servicesContainerRef}>
-                <div className="services-grid" ref={servicesGridRef}>
-                    {services.map((service, index) => (
-                        <div
-                            key={index}
-                            className="service-card"
-                        >
-                            <div className="service-card-inner">
-                                <div className="service-header">
-                                    <span className="service-number">{service.number}</span>
-                                    <div className="service-icon">
-                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                            <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2" />
-                                            <path d="M15 20L18 23L25 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <h3 className="service-title">{service.title}</h3>
-                                <p className="service-description">{service.description}</p>
-                                <div className="service-tags">
-                                    {service.tags.map((tag, tagIndex) => (
-                                        <span key={tagIndex} className="service-tag">{tag}</span>
-                                    ))}
+            {/* Sticky Card Stack Container */}
+            <div className="cards-container" ref={cardsContainerRef}>
+                {services.map((service, index) => (
+                    <div
+                        key={index}
+                        className="service-card"
+                    >
+                        <div className="service-card-inner">
+                            <div className="service-header">
+                                <span className="service-number">{service.number}</span>
+                                <div className="service-icon">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                        <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2" />
+                                        <path d="M15 20L18 23L25 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
                                 </div>
                             </div>
-                            <div className="service-card-glow"></div>
+                            <h3 className="service-title">{service.title}</h3>
+                            <p className="service-description">{service.description}</p>
+                            <div className="service-tags">
+                                {service.tags.map((tag, tagIndex) => (
+                                    <span key={tagIndex} className="service-tag">{tag}</span>
+                                ))}
+                            </div>
                         </div>
-                    ))}
-                </div>
+                        <div className="service-card-glow"></div>
+                    </div>
+                ))}
             </div>
         </section>
     );

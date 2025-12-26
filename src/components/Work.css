@@ -101,29 +101,12 @@
     line-height: 1.6;
 }
 
-/* Services Container - Horizontal Scroll Wrapper */
-.services-container {
+/* Cards Container - Vertical Stack Wrapper */
+.cards-container {
     position: relative;
     width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
+    padding: 4rem 0;
     z-index: 1;
-    padding: 0;
-    background: #f8f8f8;
-    /* Subtle background change for the gallery */
-}
-
-/* Services Grid - Horizontal Layout */
-.services-grid {
-    display: flex;
-    gap: 3rem;
-    padding: 0 10vw;
-    width: max-content;
-    will-change: transform;
-    align-items: center;
-    perspective: 1500px;
 }
 
 /* Service Card */
@@ -135,13 +118,14 @@
     overflow: hidden;
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
-    min-width: 450px;
-    max-width: 450px;
-    height: 65vh;
-    min-height: 500px;
-    max-height: 650px;
-    flex-shrink: 0;
+    width: 90%;
+    max-width: 900px;
+    height: 70vh;
+    min-height: 550px;
+    max-height: 700px;
+    margin: 0 auto 2rem auto;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+    will-change: transform, opacity, filter;
 }
 
 .service-card-inner {
@@ -261,15 +245,11 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .services-grid {
-        gap: 2rem;
-        padding: 0 2rem;
-    }
-
     .service-card {
-        min-width: 420px;
-        max-width: 420px;
-        height: 580px;
+        width: 85%;
+        max-width: 750px;
+        height: 65vh;
+        min-height: 520px;
     }
 }
 
@@ -281,24 +261,23 @@
     }
 
     .work-hero {
-        margin-bottom: 5rem;
+        margin-bottom: 3rem;
         padding: 0 1.5rem;
+        min-height: 50vh;
     }
 
-    .services-container {
+    .cards-container {
         padding: 2rem 0;
     }
 
-    .services-grid {
-        gap: 1.5rem;
-        padding: 0 1.5rem;
-    }
-
     .service-card {
-        min-width: 360px;
-        max-width: 360px;
-        height: 560px;
+        width: 90%;
+        max-width: none;
+        height: auto;
+        min-height: 500px;
+        max-height: none;
         border-radius: 24px;
+        margin-bottom: 1.5rem;
     }
 
     .service-card-inner {
@@ -319,6 +298,7 @@
 
     .work-hero {
         padding: 0 1rem;
+        min-height: 45vh;
     }
 
     .work-eyebrow {
@@ -326,16 +306,16 @@
         padding: 0.4rem 1.2rem;
     }
 
-    .services-grid {
-        gap: 1.25rem;
-        padding: 0 1rem;
+    .cards-container {
+        padding: 1.5rem 0;
     }
 
     .service-card {
-        min-width: 320px;
-        max-width: 320px;
-        height: 540px;
+        width: 92%;
+        height: auto;
+        min-height: 480px;
         border-radius: 20px;
+        margin-bottom: 1.25rem;
     }
 
     .service-card-inner {
