@@ -1,260 +1,215 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
-/* Work Section */
+/* --- SECTION LAYOUT --- */
 .work-section {
     position: relative;
-    background: #050505;
-    color: #ffffff;
-    padding: 0;
+    background: #ffffff;
+    color: #000000;
     overflow: hidden;
-    font-family: 'Inter', sans-serif;
-    border-top-left-radius: 4rem;
-    border-top-right-radius: 4rem;
-    border-bottom-left-radius: 4rem;
-    border-bottom-right-radius: 4rem;
+    padding-bottom: 30vh;
+    /* Extra space for the scroll end */
+    font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* Background Decoration */
-.work-bg-decoration {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Hero Section */
+/* --- HERO & PARALLAX BACKGROUND --- */
 .work-hero {
-    position: relative;
-    max-width: 1200px;
-    min-height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
     text-align: center;
-    z-index: 1;
-    padding: 8rem 2rem 4rem;
+    padding: 160px 0 100px;
+    position: relative;
+    z-index: 10;
+    will-change: transform, opacity;
+}
+
+.parallax-bg {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-20%);
+    font-size: 32vw;
+    font-weight: 950;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.05);
+    z-index: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+    line-height: 1;
+    will-change: transform;
 }
 
 .work-eyebrow {
-    display: inline-block;
-    font-size: 0.875rem;
-    font-weight: 700;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.5em;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: #ffffff;
-    margin-bottom: 1.5rem;
-    padding: 0.5rem 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #999;
+    margin-bottom: 24px;
+    display: block;
 }
 
 .work-title {
-    font-size: clamp(2.5rem, 5vw, 5rem);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-    color: #ffffff;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    font-weight: 950;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    margin: 0;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #000 30%, #666 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.work-subtitle {
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    font-weight: 500;
-    color: #a0a0a0;
-    line-height: 1.6;
-}
-
-/* Cards Container - Vertical Stack Wrapper */
+/* --- CARDS CONTAINER & SVG --- */
 .cards-container {
     position: relative;
-    width: 100%;
-    padding-bottom: 10vh;
-    /* Space at the bottom */
-    z-index: 1;
-}
-
-/* Service Card */
-.service-card {
-    position: relative;
-    background: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    overflow: hidden;
-    width: 90%;
-    max-width: 1000px;
-    height: 500px;
-    /* Base height */
+    max-width: 1400px;
     margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    will-change: transform, opacity;
-    display: flex;
-    flex-direction: column;
+    min-height: 1600px;
+    padding: 0 5%;
 }
 
-.service-card-inner {
-    position: relative;
-    padding: 4rem;
-    z-index: 2;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 4rem;
-}
-
-/* Glow Effect */
-.service-card-glow {
+.curved-svg {
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
+    left: 50%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-50%);
     z-index: 1;
+    overflow: visible;
 }
 
-.service-card:hover .service-card-glow {
-    opacity: 1;
+.moving-ball {
+    filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.3));
 }
 
-/* Left Content: Number and Title */
-.card-left {
-    flex: 1;
+.cards-list {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    gap: 250px;
+    /* Large gap allows the "ball" to travel between cards */
+    padding-top: 100px;
 }
 
+/* --- SERVICE CARD UI --- */
+.service-card {
+    width: 42%;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    padding: 60px;
+    border-radius: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition:
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.5s ease,
+        border-color 0.5s ease;
+    will-change: transform, opacity;
+}
+
+.service-card:hover {
+    transform: translateY(-15px) scale(1.02) !important;
+    /* !important to override GSAP scroll position slightly */
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.2);
+    background: #ffffff;
+}
+
+.service-card.left {
+    align-self: flex-start;
+}
+
+.service-card.right {
+    align-self: flex-end;
+}
+
+/* --- CARD CONTENT --- */
 .service-number {
-    font-size: 8rem;
+    font-size: 1rem;
     font-weight: 900;
-    line-height: 1;
-    color: rgba(255, 255, 255, 0.1);
-    margin-bottom: 2rem;
-    font-variant-numeric: tabular-nums;
+    margin-bottom: 16px;
+    display: block;
+    letter-spacing: 0.1em;
+    background: linear-gradient(90deg, #000, #ccc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .service-title {
-    font-size: clamp(2rem, 3vw, 3.5rem);
-    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 900;
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+    color: #000;
     line-height: 1.1;
-    color: #ffffff;
-    letter-spacing: -0.02em;
-    margin: 0;
-}
-
-/* Right Content: Description and Tags */
-.card-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    padding-top: 2rem;
 }
 
 .service-description {
-    font-size: 1.125rem;
+    color: #555;
+    font-size: 1.15rem;
     line-height: 1.7;
-    color: #b0b0b0;
-    margin-bottom: 3rem;
-    font-weight: 400;
+    margin-bottom: 35px;
+    max-width: 90%;
 }
 
 .service-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 12px;
+    margin-bottom: 45px;
 }
 
 .service-tag {
-    display: inline-block;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 0.5rem 1.25rem;
+    background: #f4f4f4;
+    padding: 10px 20px;
     border-radius: 100px;
-    transition: all 0.3s ease;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
-.service-card:hover .service-tag {
-    color: #ffffff;
-    border-color: #ffffff;
-    background: rgba(255, 255, 255, 0.05);
+/* --- CTA BUTTON --- */
+.service-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 900;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    color: #000;
 }
 
-/* Responsive Design */
+.cta-arrow {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 1.4rem;
+}
+
+.service-card:hover .cta-arrow {
+    transform: translateX(10px);
+}
+
+/* --- RESPONSIVENESS --- */
 @media (max-width: 1024px) {
-    .service-card {
-        height: auto;
-        min-height: 550px;
-        width: 95%;
-    }
-
-    .service-card-inner {
-        padding: 3rem;
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    .card-right {
-        padding-top: 0;
-        justify-content: flex-start;
-    }
-
-    .service-number {
-        font-size: 5rem;
-        margin-bottom: 1rem;
-    }
-
-    .service-description {
-        margin-bottom: 2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .work-section {
-        border-radius: 2rem;
-    }
-
-    .work-hero {
-        padding: 6rem 1.5rem 3rem;
-        min-height: auto;
+    .curved-svg {
+        display: none;
+        /* Path is often too messy for small screens */
     }
 
     .service-card {
-        border-radius: 20px;
-        min-height: auto;
-        padding-bottom: 2rem;
+        width: 100%;
+        margin: 0 !important;
+        padding: 40px;
     }
 
-    .service-card-inner {
-        padding: 2rem;
+    .cards-list {
+        gap: 60px;
     }
 
-    .service-title {
-        font-size: 2rem;
-    }
-
-    .service-number {
-        font-size: 4rem;
+    .parallax-bg {
+        font-size: 40vw;
     }
 }

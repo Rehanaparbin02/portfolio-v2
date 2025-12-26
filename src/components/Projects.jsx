@@ -72,7 +72,7 @@ export default function Projects() {
                 // Stacking Scale Animation
                 gsap.to(card, {
                     scale: 0.95 - (cardsRef.current.length - index) * 0.02,
-                    filter: `blur(${(cardsRef.current.length - index) * 4}px)`,
+                    filter: `blur(${(cardsRef.current.length - index) * 1}px)`,
                     scrollTrigger: {
                         trigger: card,
                         start: "top 10%",
