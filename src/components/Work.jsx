@@ -7,131 +7,67 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Work() {
     const sectionRef = useRef(null);
-    const heroRef = useRef(null);
     const cardsContainerRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Section entrance animation
-            gsap.from(sectionRef.current, {
-                y: 150,
-                opacity: 0,
-                duration: 1.2,
-                ease: "power3.out",
+            // Section Title Animation
+            gsap.from(".work-eyebrow", {
                 scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top bottom",
-                    toggleActions: "play none none reverse"
-                }
-            });
-
-            // Border radius animation (Desktop only)
-            const mm = gsap.matchMedia();
-
-            mm.add("(min-width: 769px)", () => {
-                gsap.fromTo(sectionRef.current, {
-                    borderTopLeftRadius: "5rem",
-                    borderTopRightRadius: "5rem"
-                }, {
-                    borderTopLeftRadius: "15rem",
-                    borderTopRightRadius: "15rem",
-                    scrollTrigger: {
-                        trigger: sectionRef.current,
-                        start: "top bottom",
-                        end: "top center",
-                        scrub: 1
-                    }
-                });
-
-                // Sticky card stack scroll effect
-                const cards = gsap.utils.toArray(".service-card");
-
-                cards.forEach((card, index) => {
-                    const isLast = index === cards.length - 1;
-
-                    ScrollTrigger.create({
-                        trigger: card,
-                        start: "top 120px",
-                        end: isLast ? "bottom top" : "bottom 120px",
-                        pin: true,
-                        pinSpacing: false,
-                        invalidateOnRefresh: true,
-                    });
-
-                    // Scale down and fade effect for cards being covered
-                    if (!isLast) {
-                        gsap.to(card, {
-                            scale: 0.95,
-                            opacity: 0.7,
-                            filter: "blur(2px)",
-                            scrollTrigger: {
-                                trigger: cards[index + 1],
-                                start: "top 120px",
-                                end: "top 80px",
-                                scrub: 1,
-                                invalidateOnRefresh: true,
-                            }
-                        });
-                    }
-
-                    // Card entrance animation
-                    gsap.from(card, {
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top bottom",
-                            end: "top center",
-                            scrub: 1,
-                        },
-                        y: 100,
-                        opacity: 0,
-                        scale: 0.9,
-                    });
-                });
-            });
-
-            mm.add("(max-width: 768px)", () => {
-                // Mobile: simple stagger animation
-                gsap.from(".service-card", {
-                    scrollTrigger: {
-                        trigger: ".cards-container",
-                        start: "top 80%",
-                    },
-                    y: 100,
-                    opacity: 0,
-                    duration: 0.8,
-                    stagger: 0.2,
-                    ease: "power3.out"
-                });
-            });
-
-            // Hero entrance animation
-            const heroTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionRef.current,
+                    trigger: ".work-hero",
                     start: "top 80%",
-                    toggleActions: "play none none reverse"
-                }
+                },
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
             });
 
-            heroTl
-                .from(".work-eyebrow", {
-                    y: 20,
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: "power3.out"
-                })
-                .from(".work-title", {
-                    y: 30,
-                    opacity: 0,
-                    duration: 1,
-                    ease: "power3.out"
-                }, "-=0.5")
-                .from(".work-subtitle", {
-                    y: 20,
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: "power3.out"
-                }, "-=0.6");
+            gsap.from(".work-title", {
+                scrollTrigger: {
+                    trigger: ".work-hero",
+                    start: "top 80%",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.1,
+                ease: "power3.out"
+            });
+
+            // Sticky Cards Animation
+            const cards = gsap.utils.toArray(".service-card");
+
+            cards.forEach((card, i) => {
+                const isLast = i === cards.length - 1;
+
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: "top 15%", // Pin when the card reaches 15% from the top of the viewport
+                    endTrigger: cardsContainerRef.current, // Pin until the container ends
+                    end: "bottom bottom",
+                    pin: true,
+                    pinSpacing: false, // Ensures next card scrolls OVER the pinned one
+                    id: `card-${i}`,
+                    invalidateOnRefresh: true,
+                });
+
+                if (!isLast) {
+                    // Animate current card when next card overlaps
+                    gsap.to(card, {
+                        scale: 0.9,
+                        opacity: 0.4,
+                        filter: "blur(5px)",
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: cards[i + 1], // The NEXT card
+                            start: "top 85%", // When next card starts overlapping (entering view)
+                            end: "top 15%", // When next card is fully on top
+                            scrub: true,
+                        }
+                    });
+                }
+            });
 
         }, sectionRef);
 
@@ -179,32 +115,18 @@ export default function Work() {
 
     return (
         <section className="work-section" id="work" ref={sectionRef}>
-            {/* Background decoration */}
             <div className="work-bg-decoration"></div>
 
-            {/* Decorative Curves */}
-            <svg className="work-curve work-curve-left" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 10 Q 10 100, 100 100 L 90 110" stroke="#00ff00" strokeWidth="3" fill="none" strokeLinecap="round" />
-                <path d="M90 110 L 100 100 L 110 110" stroke="#00ff00" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-
-            <svg className="work-curve work-curve-right" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M190 10 Q 190 100, 100 100 L 110 110" stroke="#00ff00" strokeWidth="3" fill="none" strokeLinecap="round" />
-                <path d="M110 110 L 100 100 L 90 110" stroke="#00ff00" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-
-            {/* Hero Section */}
-            <div className="work-hero" ref={heroRef}>
-                <div className="work-eyebrow">What I Do</div>
+            <div className="work-hero">
+                <div className="work-eyebrow">Services</div>
                 <h2 className="work-title">
-                    Transforming ideas into exceptional digital experiences
+                    Digital Solutions &<br />Creative Engineering
                 </h2>
                 <p className="work-subtitle">
-                    Through expertise and innovation
+                    Comprehensive web expertise to elevate your business
                 </p>
             </div>
 
-            {/* Sticky Card Stack Container */}
             <div className="cards-container" ref={cardsContainerRef}>
                 {services.map((service, index) => (
                     <div
@@ -212,21 +134,17 @@ export default function Work() {
                         className="service-card"
                     >
                         <div className="service-card-inner">
-                            <div className="service-header">
+                            <div className="card-left">
                                 <span className="service-number">{service.number}</span>
-                                <div className="service-icon">
-                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                        <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2" />
-                                        <path d="M15 20L18 23L25 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
+                                <h3 className="service-title">{service.title}</h3>
                             </div>
-                            <h3 className="service-title">{service.title}</h3>
-                            <p className="service-description">{service.description}</p>
-                            <div className="service-tags">
-                                {service.tags.map((tag, tagIndex) => (
-                                    <span key={tagIndex} className="service-tag">{tag}</span>
-                                ))}
+                            <div className="card-right">
+                                <p className="service-description">{service.description}</p>
+                                <div className="service-tags">
+                                    {service.tags.map((tag, tagIndex) => (
+                                        <span key={tagIndex} className="service-tag">{tag}</span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                         <div className="service-card-glow"></div>
