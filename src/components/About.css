@@ -21,17 +21,17 @@
 /* Parallax Background */
 .parallax-bg {
     position: absolute;
-    top: 19%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 3%;
+    left: 48rem;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.05;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    user-select: none;
+    will-change: transform;
 }
 
 .bg-text {
@@ -41,7 +41,7 @@
     line-height: 2;
     margin: 0;
     font-family: 'Inter', sans-serif;
-    -webkit-text-stroke: 10px white;
+    -webkit-text-stroke: 10px rgba(255, 255, 255, 0.129);
     color: transparent;
     user-select: none;
 }

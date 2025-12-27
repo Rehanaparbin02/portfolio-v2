@@ -14,11 +14,15 @@ export default function Home() {
             // Entrance Animation
             const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-            tl.from(".hero-content > div", {
-                y: 100,
+            // 1. Character Reveal (Staggered)
+            const chars = containerRef.current.querySelectorAll('.char');
+
+            tl.from(chars, {
+                y: 100, // Move from below
                 opacity: 0,
+                rotateX: -90,
+                stagger: 0.02,
                 duration: 1,
-                stagger: 0.2,
                 ease: "power4.out"
             })
                 .from(".selection-box", {
@@ -28,14 +32,6 @@ export default function Home() {
                     stagger: 0.2,
                     ease: "back.out(1.7)"
                 }, "-=0.5");
-
-            // Hero Text Reveal (Clip-path)
-            gsap.from(".hero-content h1", {
-                clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
-                duration: 1.5,
-                ease: "power4.inOut",
-                stagger: 0.1
-            });
 
             // Parallax Scroll Effect
             gsap.to(".top-row", {
@@ -149,9 +145,17 @@ export default function Home() {
         <div className="home-container" id="home" ref={containerRef}>
             <div className="hero-content">
                 <div className="top-row">
-                    <h1 className="text-uiux">UI/UX</h1>
+                    <h1 className="text-uiux">
+                        {"UI/UX".split("").map((c, i) => (
+                            <span key={i} className="char" style={{ display: "inline-block" }}>{c}</span>
+                        ))}
+                    </h1>
                     <div className="designer-wrapper">
-                        <h1 className="text-designer">DESIGNER</h1>
+                        <h1 className="text-designer">
+                            {"DESIGNER".split("").map((c, i) => (
+                                <span key={i} className="char" style={{ display: "inline-block" }}>{c}</span>
+                            ))}
+                        </h1>
                         <div className="selection-box designer-box">
                             <div className="handle tl"></div>
                             <div className="handle tr"></div>
@@ -162,12 +166,20 @@ export default function Home() {
                 </div>
 
                 <div className="middle-row">
-                    <h1 className="text-ampersand">&</h1>
+                    <h1 className="text-ampersand">
+                        {"&".split("").map((c, i) => (
+                            <span key={i} className="char" style={{ display: "inline-block" }}>{c}</span>
+                        ))}
+                    </h1>
                 </div>
 
                 <div className="bottom-row">
                     <div className="frontend-wrapper">
-                        <h1 className="text-frontend-fullstack">FULLSTACK</h1>
+                        <h1 className="text-frontend-fullstack">
+                            {"FULLSTACK".split("").map((c, i) => (
+                                <span key={i} className="char" style={{ display: "inline-block" }}>{c}</span>
+                            ))}
+                        </h1>
                         <div className="selection-box frontend-box">
                             <div className="handle tl"></div>
                             <div className="handle tr"></div>
@@ -175,7 +187,11 @@ export default function Home() {
                             <div className="handle br"></div>
                         </div>
                     </div>
-                    <h1 className="text-developer">DEVELOPER</h1>
+                    <h1 className="text-developer">
+                        {"DEVELOPER".split("").map((c, i) => (
+                            <span key={i} className="char" style={{ display: "inline-block" }}>{c}</span>
+                        ))}
+                    </h1>
                 </div>
             </div>
         </div>

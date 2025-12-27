@@ -56,11 +56,14 @@ export default function AboutFull() {
             // Entrance animation
             const tl = gsap.timeline();
 
-            tl.from(".about-full-title h1", {
+            const titleChars = containerRef.current.querySelectorAll('.about-full-title .char');
+
+            tl.from(titleChars, {
                 y: 100,
                 opacity: 0,
+                rotateX: -90,
+                stagger: 0.04,
                 duration: 1.2,
-                stagger: 0.1,
                 ease: "power4.out"
             })
                 .from(".about-full-hero-image", {
@@ -236,9 +239,21 @@ export default function AboutFull() {
             {/* Hero Section */}
             <section className="about-full-hero">
                 <div className="about-full-title">
-                    <h1>DESIGNING</h1>
-                    <h1>WITH</h1>
-                    <h1 className="outline-text">PURPOSE</h1>
+                    <h1>
+                        {"DESIGNING".split("").map((c, i) => (
+                            <span key={i} className="char" style={{ display: "inline-block" }}>{c}</span>
+                        ))}
+                    </h1>
+                    <h1>
+                        {"WITH".split("").map((c, i) => (
+                            <span key={i} className="char" style={{ display: "inline-block" }}>{c}</span>
+                        ))}
+                    </h1>
+                    <h1 className="outline-text">
+                        {"PURPOSE".split("").map((c, i) => (
+                            <span key={i} className="char" style={{ display: "inline-block" }}>{c}</span>
+                        ))}
+                    </h1>
                 </div>
                 <div className="about-full-intro">
                     <p>I am a creative developer based in the digital world, specializing in building exceptional digital experiences.</p>

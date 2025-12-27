@@ -10,30 +10,34 @@ const projects = [
     {
         id: "01",
         name: "Lumina Noir",
-        category: "E-Commerce • Web Platform",
+        category: "E-Commerce",
         description: "A luxury dark-mode e-commerce experience tailored for high-end fashion brands. Features seamless page transitions, WebGL product previews, and a bespoke checkout flow.",
-        imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop"
+        imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop",
+        tags: ["Next.js", "WebGL", "Stripe", "GSAP"]
     },
     {
         id: "02",
         name: "Vanguard",
-        category: "Fintech • SaaS Dashboard",
+        category: "Fintech",
         description: "Real-time dashboard for cryptocurrency trading with predictive analytics. Implements heavy data visualization using D3.js and efficient WebSocket connections.",
-        imageUrl: "https://images.unsplash.com/photo-1611974717483-3600997e550e?q=80&w=2070&auto=format&fit=crop"
+        imageUrl: "https://images.unsplash.com/photo-1611974717483-3600997e550e?q=80&w=2070&auto=format&fit=crop",
+        tags: ["React", "D3.js", "WebSockets", "Node.js"]
     },
     {
         id: "03",
         name: "Nebula OS",
-        category: "Web Application • Operating System",
+        category: "Web Application",
         description: "A cloud-based operating system interface running entirely in the browser. Mimics desktop styling with window management, file systems, and multitasking capabilities.",
-        imageUrl: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop"
+        imageUrl: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop",
+        tags: ["Vue.js", "Firebase", "SCSS", "PWA"]
     },
     {
         id: "04",
         name: "Aether Lens",
-        category: "AI Platform • Creative Tool",
+        category: "AI Platform",
         description: "Generative AI platform interface for editing and synthesizing images. Focuses on intuitive controls and instant feedback loops using edge computing.",
-        imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+        imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
+        tags: ["React Three Fiber", "TensorFlow.js", "Python", "AWS"]
     }
 ];
 
@@ -78,29 +82,29 @@ export default function ProjectShowcase() {
             const projectItems = gsap.utils.toArray('.project-item');
             projectItems.forEach((item, i) => {
                 const img = item.querySelector('.project-image-wrapper');
-                const info = item.querySelector('.project-info');
+                const content = item.querySelector('.project-card-content');
 
                 const tl = gsap.timeline({
                     scrollTrigger: {
                         trigger: item,
-                        start: "top 80%",
+                        start: "top 85%",
                         toggleActions: "play none none reverse"
                     }
                 });
 
-                tl.from(img, {
-                    x: i % 2 === 0 ? -100 : 100,
+                tl.from(item, {
+                    y: 100,
                     opacity: 0,
-                    duration: 1.5,
+                    duration: 1.2,
                     ease: "power3.out"
                 })
-                    .from(info.children, {
-                        y: 50,
+                    .from(content.children, {
+                        y: 30,
                         opacity: 0,
-                        duration: 1,
+                        duration: 0.8,
                         stagger: 0.1,
                         ease: "power3.out"
-                    }, "-=1");
+                    }, "-=0.8");
 
                 // Hover Parallax Effect on Image
                 if (img) {
@@ -225,32 +229,51 @@ export default function ProjectShowcase() {
 
             <section className="showcase-grid">
                 {projects.map((project, index) => (
-                    <div className="project-item" key={project.id}>
-                        <div className="project-image-wrapper">
-                            <img src={project.imageUrl} alt={project.name} className="project-image" />
-                        </div>
-                        <div className="project-info">
-                            <span className="project-num">{project.id}</span>
-                            <span className="project-category">{project.category}</span>
+                    <div
+                        className="project-item"
+                        key={project.id}
+                        onClick={() => {
+                            if (project.id === "01") {
+                                window.scrollTo(0, 0);
+                                navigate('/doit-project');
+                            }
+                        }}
+                    >
+                        <div className="project-card-content">
+                            <div className="project-header">
+                                <span className="project-num">{project.id}</span>
+                                <span className="project-category">{project.category}</span>
+                            </div>
+
                             <h2 className="project-name">{project.name}</h2>
                             <p className="project-description">{project.description}</p>
-                            <button
-                                className="liquid-btn"
-                                onClick={() => {
-                                    if (project.id === "01") {
-                                        window.scrollTo(0, 0);
-                                        navigate('/doit-project');
-                                    }
-                                }}
-                            >
-                                <span className="liquid-btn__flair"></span>
-                                <span className="liquid-btn__label">
-                                    VIEW FULL PROJECT
-                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.5 7.5H13.5M13.5 7.5L7.5 1.5M13.5 7.5L7.5 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </span>
-                            </button>
+
+                            <div className="project-tags">
+                                {project.tags.map(tag => (
+                                    <span key={tag} className="project-tag">{tag}</span>
+                                ))}
+                            </div>
+
+                            {project.id === "01" && (
+                                <button
+                                    className="liquid-btn"
+                                >
+                                    <span className="liquid-btn__flair"></span>
+                                    <span className="liquid-btn__label">
+                                        VIEW FULL PROJECT
+                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1.5 7.5H13.5M13.5 7.5L7.5 1.5M13.5 7.5L7.5 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </span>
+                                </button>
+                            )}
+                        </div>
+
+                        <div className="project-card-visual">
+                            <div className="project-image-wrapper">
+                                <div className="img-overlay"></div>
+                                <img src={project.imageUrl} alt={project.name} className="project-image" />
+                            </div>
                         </div>
                     </div>
                 ))}

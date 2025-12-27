@@ -13,6 +13,7 @@ import AboutFull from './components/AboutFull'
 import Footer from './components/Footer'
 import ProjectShowcase from './components/ProjectShowcase'
 import DoItProject from './components/DoItProject'
+import CustomCursor from './components/CustomCursor'
 // import PageTransition from './components/PageTransition'
 
 
@@ -61,6 +62,7 @@ function App() {
 
   return (
     <Router>
+      <CustomCursor />
       <div className="main-wrapper">
         <HamburgerMenu />
         <Routes>

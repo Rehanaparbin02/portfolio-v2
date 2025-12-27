@@ -1,7 +1,6 @@
 /* Home Container */
 .home-container {
-    min-height: 140vh;
-    /* Transparent to let index.css grid show through, or redefine here if needed */
+    min-height: 155vh;
     background: transparent;
     display: flex;
     align-items: center;
@@ -9,6 +8,7 @@
     overflow: hidden;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     padding: 2rem;
+    margin-top: 7rem;
 }
 
 .hero-content {
@@ -31,6 +31,7 @@
         letter-spacing: -0.02em;
         user-select: none;
         overflow: hidden;
+        perspective: 1000px;
     }
 
     /* Top Row */

@@ -27,6 +27,7 @@
 
 .projects-title-wrapper {
     overflow: hidden;
+    perspective: 1000px;
 }
 
 .projects-title {
@@ -54,22 +55,49 @@
     gap: 4rem;
     position: relative;
     padding-bottom: 20vh;
+    perspective: 2000px;
 }
 
 /* Project Card */
 .project-card {
     position: sticky;
     top: 15vh;
-    height: 70vh;
+    height: 75vh;
     width: 100%;
-    background-color: #1a1a1a;
-    border-radius: 2rem;
+    background-color: #111111;
+    border-radius: 2.5rem;
     overflow: hidden;
-    transform-origin: center top;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+
+    /* 🔴 REMOVE implicit animation states */
+    /* opacity: 0; ❌ */
+    /* transform: translateY(...) ❌ */
+
+    will-change: transform;
+    cursor: none;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
     border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: box-shadow 0.3s ease, transform 0.3s ease-out;
-    /* Smooth hover lift if needed */
+}
+
+.project-card:hover {
+    background-color: #151515;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+
+.project-reveal-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0) 30%,
+            rgba(255, 255, 255, 0.1) 45%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0.1) 55%,
+            rgba(255, 255, 255, 0) 70%,
+            transparent 100%);
+    z-index: 5;
+    pointer-events: none;
+    transform: translateX(-100%) skewX(-15deg);
 }
 
 /* Spotlight Effect */
@@ -302,33 +330,86 @@
     }
 }
 
-.view-all-projects-btn {
-    padding: 1.2rem 3rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: transparent;
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
+/* view-all-projects-btn is being replaced by liquid-btn but keeping it commented out or removing it is fine. I'll just leave or remove. The user wants to replace it. I'll remove it to be clean. */
+
+/* Liquid Button Styles - Adapted from GSAP CodePen */
+.liquid-btn {
+    --color-surface-white: #ffffff;
+    --color-just-black: #000000;
+    --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+    align-items: center;
+    background: 0 0;
+    border: 1px solid var(--color-surface-white);
+    /* Adapted width */
+    border-radius: 100px;
+    color: var(--color-surface-white);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 0.85rem;
+    font-weight: 600;
+    gap: 1rem;
+    justify-content: center;
     letter-spacing: 0.1rem;
-    border-radius: 50px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    line-height: 1;
+    overflow: hidden;
+    padding: 1.4rem 3.2rem;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    word-break: break-word;
+    /* margin-top: 2.5rem; */
+    /* Removed margin-top to let wrapper handle it or just keep it relative */
+    z-index: 1;
+}
+
+@media (hover: hover) {
+    .liquid-btn:hover {
+        color: var(--color-just-black);
+    }
+}
+
+.liquid-btn__label {
+    position: relative;
+    text-align: center;
+    transition: color 50ms var(--ease-in-out-quart);
+    z-index: 2;
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.view-all-projects-btn span {
-    transition: transform 0.4s ease;
+.liquid-btn:hover .liquid-btn__label {
+    transition: color 0.15s var(--ease-in-out-quart);
 }
 
-.view-all-projects-btn:hover {
-    background: white;
-    color: black !important;
-    border-color: white;
-    transform: translateY(-5px);
+.liquid-btn__flair {
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
 }
 
-.view-all-projects-btn:hover span {
-    transform: translateX(5px);
+.liquid-btn .liquid-btn__flair {
+    transform: scale(0);
+    transform-origin: 0 0;
+    will-change: transform;
+}
+
+.liquid-btn__flair:before {
+    aspect-ratio: 1/1;
+    background-color: var(--color-surface-white);
+    border-radius: 50%;
+    content: "";
+    display: block;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width: 200%;
+    /* Increased slightly to ensure coverage */
 }
