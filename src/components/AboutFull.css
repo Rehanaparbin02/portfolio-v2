@@ -240,6 +240,29 @@
 
 /* Content Sections */
 /* Philosophy Section Redesign - White Theme */
+/* Interactive Blobs for White Sections */
+.phi-blob,
+.edu-blob {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23000' d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'/%3E%3C/svg%3E") no-repeat center/contain,
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    filter: blur(45px);
+    mix-blend-mode: multiply;
+}
+
+.philosophy-section.white-theme,
+.education-section.white-theme {
+    position: relative;
+    overflow: hidden;
+}
+
 .philosophy-section.white-theme {
     background: #fff;
     padding: 25vh 0;

@@ -194,6 +194,38 @@ export default function AboutFull() {
                 }
             });
 
+            // --- MOUSE FOLLOW BLOBS (WHITE SECTIONS) ---
+            const whiteBlobs = document.querySelectorAll('.phi-blob, .edu-blob');
+            whiteBlobs.forEach(blob => {
+                const container = blob.parentElement;
+                const xTo = gsap.quickTo(blob, "x", { duration: 0.8, ease: "power3" });
+                const yTo = gsap.quickTo(blob, "y", { duration: 0.8, ease: "power3" });
+
+                container.addEventListener("mousemove", (e) => {
+                    const { left, top, width, height } = container.getBoundingClientRect();
+                    const x = e.clientX - left;
+                    const y = e.clientY - top;
+                    xTo(x);
+                    yTo(y);
+                });
+
+                container.addEventListener("mouseleave", () => {
+                    gsap.to(blob, {
+                        opacity: 0,
+                        scale: 0,
+                        duration: 0.5
+                    });
+                });
+
+                container.addEventListener("mouseenter", () => {
+                    gsap.to(blob, {
+                        opacity: 0.4,
+                        scale: 1,
+                        duration: 0.5
+                    });
+                });
+            });
+
             // --- LIQUID BUTTON INTERACTION ---
             const liquidBtn = document.querySelector('.liquid-btn.resume-btn');
             const flair = liquidBtn?.querySelector('.liquid-btn__flair');
@@ -386,6 +418,7 @@ export default function AboutFull() {
 
             {/* Redesigned Philosophy Section - White Theme */}
             <section className="philosophy-section white-theme">
+                <div className="phi-blob"></div>
                 <div className="phi-container">
                     <span className="section-label">THE PHILOSOPHY</span>
                     <div className="phi-content-layout">
@@ -495,6 +528,7 @@ export default function AboutFull() {
 
             {/* Redesigned Education Section - White Theme */}
             <section className="education-section white-theme">
+                <div className="edu-blob"></div>
                 <div className="edu-container">
                     <span className="section-label">EDUCATION</span>
                     <div className="edu-content-layout">
@@ -503,7 +537,7 @@ export default function AboutFull() {
                         </div>
                         <div className="edu-details-area">
                             <div className="edu-item">
-                                <span className="edu-year">2019 — 2023</span>
+                                {/* <span className="edu-year">2019 — 2023</span> */}
                                 <h3 className="edu-degree-title">Bachelor of Technology</h3>
                                 <p className="edu-spec">Computer Science & Engineering</p>
                                 <p className="edu-inst">Barak Valley Engineering College, Assam</p>
