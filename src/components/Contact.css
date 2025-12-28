@@ -1,0 +1,229 @@
+.contact-wrapper {
+    min-height: 100vh;
+    background: #000;
+    color: #fff;
+    padding: 8rem 5vw 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-blobs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.contact-blob {
+    position: absolute;
+    width: 50vw;
+    height: 50vw;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.15;
+}
+
+.blob-purple {
+    background: #7000ff;
+    top: -10%;
+    right: -10%;
+}
+
+.blob-blue {
+    background: #0070ff;
+    bottom: -10%;
+    left: -10%;
+}
+
+.contact-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 8rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Header */
+.contact-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.contact-heading h1 {
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.contact-heading p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    max-width: 450px;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.detail-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.detail-link {
+    font-size: 1.8rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: fit-content;
+    position: relative;
+}
+
+.detail-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+}
+
+.detail-link:hover::after {
+    width: 100%;
+}
+
+/* Form Section */
+.contact-form-section {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4rem;
+    border-radius: 30px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.8rem 0;
+    color: #fff;
+    font-size: 1.1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-bottom-color: #fff;
+}
+
+.form-label {
+    position: absolute;
+    top: 0.8rem;
+    left: 0;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus~.form-label,
+.form-input:not(:placeholder-shown)~.form-label {
+    top: -1.2rem;
+    font-size: 0.75rem;
+    color: #fff;
+    letter-spacing: 0.1em;
+}
+
+textarea.form-input {
+    min-height: 120px;
+    resize: none;
+}
+
+.submit-btn-wrapper {
+    margin-top: 2rem;
+}
+
+.submit-btn {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 1.2rem 3rem;
+    border-radius: 100px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.2, 0.6, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    width: fit-content;
+}
+
+.submit-btn:hover {
+    transform: scale(1.05);
+    background: #fff;
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
+}
+
+.submit-btn:active {
+    transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 6rem;
+    }
+
+    .contact-info-section {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-wrapper {
+        padding-top: 6rem;
+    }
+
+    .contact-form-section {
+        padding: 2.5rem;
+    }
+
+    .detail-link {
+        font-size: 1.4rem;
+    }
+}

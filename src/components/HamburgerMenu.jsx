@@ -140,10 +140,10 @@ export default function HamburgerMenu() {
                                     </a>
                                 </li> */}
                                 <li className="menu-item">
-                                    <a href="/#contact" onClick={toggleMenu}>
-                                        <span className="link-number">05</span>
+                                    <Link to="/contact" onClick={handleLinkClick}>
+                                        <span className="link-number">04</span>
                                         <span className="link-text">Contact</span>
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

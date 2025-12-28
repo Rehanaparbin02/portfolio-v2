@@ -219,7 +219,12 @@ export default function ProjectShowcase() {
             <div className="bg-glow-2"></div>
 
             <section className="project-showcase-hero">
-                <span className="hero-sub">Curation 2024-25</span>
+                <div className="hero-sub-reveal">
+                    <span className="hero-sub">
+                        {splitText("Curating creative projects")}
+                    </span>
+                    <div className="hero-sub-line"></div>
+                </div>
                 <h1 className="hero-title">
                     <div>{splitText("CRAFTING")}</div>
                     <div className="outline">{splitText("DIGITAL")}</div>

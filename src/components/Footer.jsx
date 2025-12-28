@@ -22,7 +22,7 @@ export default function Footer() {
         //     // setTime(timeString);
         // };
 
-      //  const interval = setInterval(updateTime, 1000);
+        //  const interval = setInterval(updateTime, 1000);
 
         // GSAP Animations
         const ctx = gsap.context(() => {

@@ -13,6 +13,7 @@ import AboutFull from './components/AboutFull'
 import Footer from './components/Footer'
 import ProjectShowcase from './components/ProjectShowcase'
 import DoItProject from './components/DoItProject'
+import Contact from './components/Contact'
 import CustomCursor from './components/CustomCursor'
 // import PageTransition from './components/PageTransition'
 
@@ -84,6 +85,11 @@ function App() {
           <Route path="/doit-project" element={
             // <PageTransition>
             <DoItProject />
+            // </PageTransition>
+          } />
+          <Route path="/contact" element={
+            // <PageTransition>
+            <Contact />
             // </PageTransition>
           } />
           <Route path="*" element={
