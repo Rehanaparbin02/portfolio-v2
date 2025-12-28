@@ -1,4 +1,4 @@
-.custom-cursor-container {
+.custom-cursor-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,45 +8,80 @@
     z-index: 9999;
 }
 
-.cursor-dot {
+.cursor-core-dot {
     position: fixed;
-    top: -4px;
-    left: -4px;
-    width: 8px;
-    height: 8px;
-    background-color: #fff;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    margin-top: -6px;
+    margin-left: -6px;
+    background: #ffffff;
     border-radius: 50%;
     pointer-events: none;
     z-index: 10000;
     mix-blend-mode: difference;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    will-change: transform;
+    opacity: 0;
+    /* Hidden initially */
 }
 
-.cursor-follower {
+.cursor-follower-ring {
     position: fixed;
-    top: -20px;
-    left: -20px;
+    top: 0;
+    left: 0;
     width: 40px;
     height: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-top: -20px;
+    margin-left: -20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     mix-blend-mode: difference;
-    transition: transform 0.1s ease-out, border-color 0.3s ease, border-width 0.3s ease;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent 70%);
+    will-change: transform;
+    opacity: 0;
+    /* Hidden initially */
 }
 
-/* Hide default cursor only if on a device that supports hover */
-@media (hover: hover) and (pointer: fine) {
-    body {
-        cursor: none !important;
-    }
+.cursor-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    will-change: transform;
+    opacity: 0;
+    /* Hidden initially */
+}
 
+.cursor-particle {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9997;
+    mix-blend-mode: difference;
+    will-change: transform, opacity;
+}
+
+/* Hide default cursor globally */
+@media (hover: hover) and (pointer: fine) {
+
+    body,
     a,
     button,
     [role="button"],
-    input[type="submit"],
-    input[type="button"],
-    label {
+    input,
+    label,
+    .cursor-pointer {
         cursor: none !important;
     }
 }

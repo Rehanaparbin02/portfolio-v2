@@ -64,7 +64,7 @@
     top: 15vh;
     height: 75vh;
     width: 100%;
-    background-color: #111111;
+    background-color: #080808;
     border-radius: 2.5rem;
     overflow: hidden;
 
@@ -72,15 +72,17 @@
     /* opacity: 0; ❌ */
     /* transform: translateY(...) ❌ */
 
-    will-change: transform;
+    /* Removed will-change - only add when actively animating */
     cursor: none;
     transition: background-color 0.4s ease, border-color 0.4s ease;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transform: translateZ(0); /* GPU acceleration */
+    backface-visibility: hidden; /* Performance optimization */
 }
 
 .project-card:hover {
-    background-color: #151515;
-    border-color: rgba(255, 255, 255, 0.15);
+    background-color: #0b0b0b;
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 
@@ -116,6 +118,8 @@
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.5s;
+    transform: translateZ(0); /* GPU acceleration */
+    will-change: opacity; /* Only when hovering */
 }
 
 .project-card:hover::before {
@@ -146,7 +150,9 @@
 .project-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
+    width: 100%;
+    position: relative;
 }
 
 .project-number {
@@ -156,16 +162,18 @@
     border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 0.4rem 0.8rem;
     border-radius: 50px;
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.05); /* Increased opacity to compensate for removed backdrop-filter */
+    /* Removed backdrop-filter - very expensive */
+    z-index: 2;
 }
 
 .project-category {
-    font-size: 0.9rem;
+    font-size: 1.9rem;
+    color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #888;
+    letter-spacing: 0.2rem;
     font-weight: 500;
+    margin-top: -0.4rem;
 }
 
 .project-details {
@@ -173,19 +181,21 @@
 }
 
 .project-name {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    margin: 0 0 1.5rem 0;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 800;
+    margin: 0 0 2rem 0;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
 }
 
 .project-description {
-    font-size: 1.1rem;
-    color: #aaa;
-    max-width: 90%;
-    margin-bottom: 2.5rem;
-    line-height: 1.7;
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 550px;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    font-weight: 400;
 }
 
 .project-tags {
@@ -256,19 +266,35 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
 }
 
 .project-image-wrapper {
     width: 100%;
-    height: 100%;
-    will-change: transform;
+    height: 93%;
+    position: relative;
+    bottom: 2.5rem;
+    /* Removed will-change - only needed during active animation */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateZ(0); /* GPU acceleration */
+    backface-visibility: hidden;
 }
 
 .project-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 1.5rem;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.7),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transform: translateZ(0); /* GPU acceleration */
+    will-change: transform; /* Only on image hover - acceptable */
 }
 
 .project-card:hover .project-image {
@@ -278,7 +304,7 @@
 .project-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, #1a1a1a 0%, transparent 25%);
+    background: linear-gradient(to right, #080808 0%, transparent 60%);
     pointer-events: none;
     z-index: 1;
 }
@@ -394,9 +420,10 @@
 }
 
 .liquid-btn .liquid-btn__flair {
-    transform: scale(0);
+    transform: scale(0) translateZ(0); /* GPU acceleration */
     transform-origin: 0 0;
-    will-change: transform;
+    will-change: transform; /* Needed for smooth animation */
+    backface-visibility: hidden;
 }
 
 .liquid-btn__flair:before {
