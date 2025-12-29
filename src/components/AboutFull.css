@@ -1571,6 +1571,8 @@
     .back-link {
         font-size: 0.65rem;
         gap: 10px;
+        position: relative;
+        top: 2rem;
     }
 
     .hero-section {

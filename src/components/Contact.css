@@ -1,13 +1,13 @@
 .contact-wrapper {
     min-height: 100vh;
-    background: #000;
+    /* background: #000; */
     color: #fff;
     padding: 8rem 5vw 4rem;
     position: relative;
     overflow: hidden;
 }
 
-.contact-blobs {
+/* .contact-blobs {
     position: absolute;
     top: 0;
     left: 0;
@@ -36,7 +36,7 @@
     background: #0070ff;
     bottom: -10%;
     left: -10%;
-}
+} */
 
 .contact-container {
     max-width: 1400px;
@@ -115,102 +115,234 @@
     width: 100%;
 }
 
-/* Form Section */
+/* Form Section - Postcard Style */
 .contact-form-section {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 4rem;
-    border-radius: 30px;
+    background: #f7f3f0;
+    color: #2c2c2c;
+    padding: 3rem;
+    border-radius: 4px;
+    box-shadow:
+        10px 10px 0px rgba(0, 0, 0, 0.1),
+        0 20px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: visible;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    /* Paper Texture */
+    background-image:
+        radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.05) 1px, transparent 0);
+    background-size: 24px 24px;
+}
+
+.contact-form-section::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 2px solid #e0dcd9;
+    border-radius: 2px;
+    pointer-events: none;
+}
+
+/* Postcard Stamp */
+.postcard-stamp {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 80px;
+    height: 100px;
+    background: #fff;
+    border: 4px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(5deg);
+    z-index: 5;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stamp-inner {
+    width: 80%;
+    height: 85%;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #999;
+}
+
+.stamp-logo {
+    width: 30px;
+    height: 30px;
+    background: #ff4d4d;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    opacity: 0.6;
+}
+
+.postcard-divider {
+    position: absolute;
+    top: 15%;
+    bottom: 15%;
+    left: 50%;
+    width: 2px;
+    background: rgba(0, 0, 0, 0.08);
+    transform: translateX(-50%);
 }
 
 .contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.form-left {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 2rem;
+}
+
+.form-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 4rem;
+    /* Leave room for stamp */
 }
 
 .form-group {
     position: relative;
+    width: 100%;
 }
 
 .form-input {
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     padding: 0.8rem 0;
-    color: #fff;
+    color: #2c2c2c;
     font-size: 1.1rem;
-    transition: border-color 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
 }
 
 .form-input:focus {
     outline: none;
-    border-bottom-color: #fff;
+    border-bottom-color: #000;
 }
 
 .form-label {
     position: absolute;
     top: 0.8rem;
     left: 0;
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.4);
     pointer-events: none;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .form-input:focus~.form-label,
 .form-input:not(:placeholder-shown)~.form-label {
     top: -1.2rem;
-    font-size: 0.75rem;
-    color: #fff;
-    letter-spacing: 0.1em;
+    font-size: 0.7rem;
+    color: #ff4d4d;
+    font-weight: 700;
 }
 
 textarea.form-input {
-    min-height: 120px;
-    resize: none;
+    min-height: 250px;
+    line-height: 1.8;
+    background-image: linear-gradient(transparent, transparent 31px, rgba(0, 0, 0, 0.05) 31px);
+    background-size: 100% 32px;
+    padding-top: 0;
 }
 
 .submit-btn-wrapper {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
     margin-top: 2rem;
 }
 
 .submit-btn {
-    background: #fff;
-    color: #000;
+    background: #2c2c2c;
+    color: #fff;
     border: none;
-    padding: 1.2rem 3rem;
-    border-radius: 100px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    padding: 1.2rem 4rem;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.2, 0.6, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    width: fit-content;
+    transition: all 0.3s ease;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .submit-btn:hover {
-    transform: scale(1.05);
-    background: #fff;
-    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.3);
+    background: #000;
 }
 
 .submit-btn:active {
-    transform: scale(0.98);
+    transform: translate(0, 0);
+}
+
+/* Postcard Lines Decoration */
+.address-lines {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.address-line {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
     .contact-container {
         grid-template-columns: 1fr;
-        gap: 6rem;
+        gap: 4rem;
     }
 
-    .contact-info-section {
-        gap: 3rem;
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+
+    .postcard-divider {
+        display: none;
+    }
+
+    .form-right {
+        padding-top: 0;
+    }
+
+    .postcard-stamp {
+        width: 60px;
+        height: 75px;
+        top: 1rem;
+        right: 1rem;
     }
 }
 
@@ -220,7 +352,7 @@ textarea.form-input {
     }
 
     .contact-form-section {
-        padding: 2.5rem;
+        padding: 2rem;
     }
 
     .detail-link {

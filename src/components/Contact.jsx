@@ -11,7 +11,6 @@ export default function Contact() {
         window.scrollTo(0, 0);
 
         const ctx = gsap.context(() => {
-            // Entrances
             const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1.5 } });
 
             tl.from(".contact-heading h1", {
@@ -30,29 +29,38 @@ export default function Contact() {
                     stagger: 0.1
                 }, "-=1")
                 .from(".contact-form-section", {
-                    x: 100,
+                    x: 200,
+                    rotationY: -45,
+                    rotationZ: -5,
                     opacity: 0,
-                    scale: 0.95,
-                    duration: 2
-                }, "-=1.5");
+                    scale: 0.8,
+                    duration: 2,
+                    transformPerspective: 1000,
+                }, "-=1.5")
+                .from(".postcard-stamp", {
+                    scale: 3,
+                    opacity: 0,
+                    rotation: 45,
+                    ease: "back.out(1.7)",
+                    duration: 1
+                }, "-=1")
+                .from(".form-group", {
+                    y: 20,
+                    opacity: 0,
+                    stagger: 0.05,
+                    duration: 1
+                }, "-=1");
 
-            // Floating Blobs
-            gsap.to(".blob-purple", {
-                x: "10%",
-                y: "10%",
-                duration: 20,
+            // Floating movement for the postcard
+            gsap.to(".contact-form-section", {
+                y: "15px",
+                rotation: "0.5deg",
+                duration: 4,
                 repeat: -1,
                 yoyo: true,
                 ease: "sine.inOut"
             });
-            gsap.to(".blob-blue", {
-                x: "-10%",
-                y: "-10%",
-                duration: 25,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut"
-            });
+
         }, contactRef);
 
         return () => ctx.revert();
@@ -60,17 +68,11 @@ export default function Contact() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add form submission logic here
         console.log("Form submitted");
     };
 
     return (
         <div className="contact-wrapper" ref={contactRef}>
-            <div className="contact-blobs">
-                <div className="contact-blob blob-purple"></div>
-                <div className="contact-blob blob-blue"></div>
-            </div>
-
             <div className="contact-container">
                 <div className="contact-info-section" ref={infoRef}>
                     <div className="contact-heading">
@@ -98,31 +100,50 @@ export default function Contact() {
                 </div>
 
                 <div className="contact-form-section" ref={formRef}>
+                    <div className="postcard-stamp">
+                        <div className="stamp-inner">
+                            <div className="stamp-logo"></div>
+                            <span>First Class</span>
+                            <span>Postage</span>
+                        </div>
+                    </div>
+
+                    <div className="postcard-divider"></div>
+
                     <form className="contact-form" onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <input type="text" id="name" className="form-input" placeholder=" " required />
-                            <label htmlFor="name" className="form-label">Full Name</label>
+                        <div className="form-left">
+                            <div className="form-group">
+                                <textarea id="message" className="form-input" placeholder=" " required></textarea>
+                                <label htmlFor="message" className="form-label">Dear Rehana...</label>
+                            </div>
                         </div>
 
-                        <div className="form-group">
-                            <input type="email" id="email" className="form-input" placeholder=" " required />
-                            <label htmlFor="email" className="form-label">Email Address</label>
-                        </div>
+                        <div className="form-right">
+                            <div className="form-group">
+                                <input type="text" id="name" className="form-input" placeholder=" " required />
+                                <label htmlFor="name" className="form-label">Your Name</label>
+                            </div>
 
-                        <div className="form-group">
-                            <input type="text" id="subject" className="form-input" placeholder=" " required />
-                            <label htmlFor="subject" className="form-label">Subject</label>
-                        </div>
+                            <div className="form-group">
+                                <input type="email" id="email" className="form-input" placeholder=" " required />
+                                <label htmlFor="email" className="form-label">Your Email</label>
+                            </div>
 
-                        <div className="form-group">
-                            <textarea id="message" className="form-input" placeholder=" " required></textarea>
-                            <label htmlFor="message" className="form-label">Message</label>
+                            <div className="form-group">
+                                <input type="text" id="subject" className="form-input" placeholder=" " required />
+                                <label htmlFor="subject" className="form-label">Subject</label>
+                            </div>
+
+                            <div className="address-lines">
+                                <div className="address-line"></div>
+                                <div className="address-line"></div>
+                                <div className="address-line"></div>
+                            </div>
                         </div>
 
                         <div className="submit-btn-wrapper">
                             <button type="submit" className="submit-btn">
-                                Send Message
-                                <span className="btn-glow"></span>
+                                Post Message
                             </button>
                         </div>
                     </form>
@@ -131,3 +152,4 @@ export default function Contact() {
         </div>
     );
 }
+
