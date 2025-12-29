@@ -112,7 +112,7 @@
 
 /* Hero Section */
 .hero-section {
-    height: 100vh;
+    height: 152vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -957,9 +957,227 @@
     display: inline-block;
 }
 
-@media (max-width: 1024px) {
-    .split-content {
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Large Monitors (27 inch - 2560px and above) */
+@media (min-width: 2560px) {
+    .hero-main-title {
+        font-size: 18rem;
+    }
+
+    .hero-portrait-wrapper {
+        width: 30vw;
+        height: 55vh;
+    }
+
+    .phi-title,
+    .edu-main-title {
+        font-size: 8rem;
+    }
+
+    .exp-sticky-title h2 {
+        font-size: 6rem;
+    }
+}
+
+/* Standard Monitors (22 inch - 1920px to 2559px) */
+@media (min-width: 1920px) and (max-width: 2559px) {
+    .hero-portrait-wrapper {
+        width: 32vw;
+        height: 58vh;
+    }
+
+    .hero-desc-right {
+        left: 60rem;
+    }
+
+    .liquid-btn.resume-btn {
+        min-width: 60rem;
+    }
+}
+
+/* Laptops 15 inch (1440px to 1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+    .hero-portrait-wrapper {
+        width: 33vw;
+        height: 58vh;
+    }
+
+    .hero-desc-right {
+        left: 50rem;
+        font-size: 18px;
+    }
+
+    .liquid-btn.resume-btn {
+        min-width: 55rem;
+        padding: 2rem 6rem;
+    }
+
+    .edu-item {
+        left: 18rem;
+    }
+}
+
+/* Laptops 14 inch (1366px to 1439px) */
+@media (min-width: 1366px) and (max-width: 1439px) {
+    .hero-portrait-wrapper {
+        width: 34vw;
+        height: 56vh;
+    }
+
+    .hero-desc-right {
+        left: 45rem;
+        font-size: 16px;
+    }
+
+    .liquid-btn.resume-btn {
+        min-width: 50rem;
+        padding: 2rem 5rem;
+    }
+
+    .liquid-btn__label {
+        font-size: 1.8rem;
+    }
+
+    .edu-item {
+        left: 16rem;
+    }
+
+    .phi-content-layout,
+    .edu-content-layout {
+        gap: 2vw;
+    }
+}
+
+/* Small Laptops (1024px to 1365px) */
+@media (min-width: 1024px) and (max-width: 1365px) {
+    .hero-portrait-wrapper {
+        width: 36vw;
+        height: 54vh;
+        top: 2vh;
+    }
+
+    .hero-desc-right {
+        left: 35rem;
+        font-size: 14px;
+        max-width: 350px;
+    }
+
+    .liquid-btn.resume-btn {
+        min-width: 45rem;
+        padding: 2rem 4rem;
+    }
+
+    .liquid-btn__label {
+        font-size: 1.6rem;
+    }
+
+    .edu-item {
+        left: 12rem;
+        bottom: 5rem;
+    }
+
+    .edu-degree-title {
+        font-size: 3.5rem;
+    }
+
+    .phi-content-layout,
+    .edu-content-layout {
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 2vw;
+    }
+
+    .experience-section {
+        grid-template-columns: 0.9fr 1.1fr;
+    }
+}
+
+/* Tablets (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .about-full-header {
+        padding: 1.5rem 4vw;
+    }
+
+    .hero-section {
+        height: 120vh;
+        padding: 0 4vw 8vh;
+    }
+
+    .hero-portrait-wrapper {
+        width: 45vw;
+        height: 50vh;
+        top: 5vh;
+        right: 4vw;
+    }
+
+    .hero-main-title {
+        height: 70vh;
+    }
+
+    .hero-sub {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .hero-desc-right {
+        position: static;
+        text-align: left;
+        max-width: 100%;
+        font-size: 14px;
+    }
+
+    .phi-content-layout,
+    .edu-content-layout {
         grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .edu-item {
+        position: static;
+        max-width: 100%;
+    }
+
+    .edu-degree-title {
+        font-size: 3rem;
+        text-align: left;
+    }
+
+    .edu-spec,
+    .edu-inst,
+    .edu-description {
+        text-align: left;
+    }
+
+    .experience-section {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .exp-sticky-title {
+        position: static;
+    }
+
+    .liquid-btn.resume-btn {
+        min-width: auto;
+        width: 100%;
+        max-width: 40rem;
+        padding: 2rem 3rem;
+    }
+
+    .liquid-btn__label {
+        font-size: 1.4rem;
+    }
+
+    .skill-category-row {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-category-name {
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        padding: 2rem 4vw;
     }
 
     .bento-container {
@@ -967,7 +1185,139 @@
     }
 }
 
-@media (max-width: 640px) {
+/* Large Phones (640px to 767px) */
+@media (min-width: 640px) and (max-width: 767px) {
+    .about-full-header {
+        padding: 1.5rem 4vw;
+    }
+
+    .hero-section {
+        height: auto;
+        min-height: 100vh;
+        padding: 4rem 4vw 6vh;
+    }
+
+    .hero-portrait-wrapper {
+        position: relative;
+        width: 100%;
+        height: 50vh;
+        top: 0;
+        right: 0;
+        margin-bottom: 3rem;
+    }
+
+    .hero-main-title {
+        height: auto;
+        margin-bottom: 2rem;
+    }
+
+    .hero-sub {
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .hero-desc-right {
+        position: static;
+        text-align: left;
+        max-width: 100%;
+        font-size: 12px;
+    }
+
+    .philosophy-section.white-theme,
+    .education-section.white-theme {
+        padding: 15vh 0;
+    }
+
+    .phi-content-layout,
+    .edu-content-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        margin-top: 3rem;
+    }
+
+    .edu-item {
+        position: static;
+        max-width: 100%;
+    }
+
+    .edu-degree-title {
+        font-size: 2.5rem;
+        text-align: left;
+    }
+
+    .edu-spec,
+    .edu-inst,
+    .edu-description {
+        text-align: left;
+    }
+
+    .experience-section {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 10vh 0;
+    }
+
+    .exp-sticky-title {
+        position: static;
+        padding: 0 4vw;
+    }
+
+    .experience-list {
+        padding-right: 4vw;
+        padding-left: 4vw;
+    }
+
+    .experience-item {
+        padding: 4rem 0;
+    }
+
+    .exp-index {
+        font-size: 5rem;
+    }
+
+    .liquid-btn.resume-btn {
+        min-width: auto;
+        width: 100%;
+        padding: 1.8rem 2rem;
+    }
+
+    .liquid-btn__label {
+        font-size: 1.2rem;
+        gap: 1rem;
+    }
+
+    .marquee-band {
+        height: 60px;
+    }
+
+    .marquee-item {
+        font-size: 1.8rem;
+    }
+
+    .skill-category-row {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-category-name {
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        padding: 2rem 4vw;
+    }
+
+    .skills-items-container.graph-view {
+        gap: 1.5rem;
+    }
+
+    .skill-graph-item {
+        max-width: 50px;
+    }
+
+    .skill-bar-outer {
+        width: 40px;
+        height: 120px;
+    }
+
     .bento-container {
         grid-template-columns: 1fr;
     }
@@ -976,5 +1326,533 @@
     .bento-card.tall {
         grid-column: span 1;
         grid-row: span 1;
+    }
+}
+
+/* Medium Phones (480px to 639px) */
+@media (min-width: 480px) and (max-width: 639px) {
+    .about-full-container {
+        margin-top: 5rem;
+    }
+
+    .about-full-header {
+        padding: 1.2rem 5vw;
+    }
+
+    .back-link {
+        font-size: 0.7rem;
+    }
+
+    .hero-section {
+        height: auto;
+        min-height: 90vh;
+        padding: 3rem 5vw 5vh;
+    }
+
+    .hero-portrait-wrapper {
+        position: relative;
+        width: 100%;
+        height: 45vh;
+        top: 0;
+        right: 0;
+        margin-bottom: 2rem;
+    }
+
+    .hero-main-title {
+        height: auto;
+        font-size: clamp(3rem, 15vw, 6rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-sub {
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .hero-desc-right {
+        position: static;
+        text-align: left;
+        max-width: 100%;
+        font-size: 11px;
+        letter-spacing: 0.15em;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .philosophy-section.white-theme,
+    .education-section.white-theme {
+        padding: 12vh 0;
+    }
+
+    .phi-container,
+    .edu-container {
+        padding: 0 5vw;
+    }
+
+    .phi-content-layout,
+    .edu-content-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        margin-top: 2.5rem;
+    }
+
+    .phi-title,
+    .edu-main-title {
+        font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+
+    .phi-lead {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .phi-paragraph {
+        font-size: 1rem;
+        gap: 1.5rem;
+    }
+
+    .edu-item {
+        position: static;
+        max-width: 100%;
+    }
+
+    .edu-degree-title {
+        font-size: 2rem;
+        text-align: left;
+    }
+
+    .edu-spec {
+        font-size: 1.2rem;
+        text-align: left;
+    }
+
+    .edu-inst {
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .edu-description {
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .experience-section {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 8vh 0;
+    }
+
+    .exp-sticky-title {
+        position: static;
+        padding: 0 5vw;
+    }
+
+    .exp-sticky-title h2 {
+        font-size: clamp(2.5rem, 9vw, 4rem);
+    }
+
+    .experience-list {
+        padding-right: 5vw;
+        padding-left: 5vw;
+    }
+
+    .experience-item {
+        padding: 3.5rem 0;
+    }
+
+    .experience-item:hover {
+        padding-left: 1rem;
+    }
+
+    .exp-role {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+    }
+
+    .exp-index {
+        font-size: 4rem;
+        top: 1rem;
+    }
+
+    .exp-desc {
+        font-size: 1rem;
+    }
+
+    .liquid-btn.resume-btn {
+        min-width: auto;
+        width: 100%;
+        padding: 1.6rem 2rem;
+    }
+
+    .liquid-btn__label {
+        font-size: 1rem;
+        gap: 0.8rem;
+    }
+
+    .marquee-wrapper {
+        height: 30vh;
+        margin: 8vh 0;
+    }
+
+    .marquee-band {
+        height: 50px;
+    }
+
+    .marquee-item {
+        font-size: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .marquee-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .skill-category-row {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-category-name {
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        padding: 1.8rem 5vw;
+        font-size: 0.7rem;
+    }
+
+    .skills-items-container.graph-view {
+        padding: 2rem 5vw;
+        gap: 1.2rem;
+    }
+
+    .skill-graph-item {
+        max-width: 45px;
+    }
+
+    .skill-bar-outer {
+        width: 35px;
+        height: 100px;
+    }
+
+    .skill-name-label {
+        font-size: 0.65rem;
+    }
+
+    .bento-container {
+        grid-template-columns: 1fr;
+    }
+
+    .bento-card.wide,
+    .bento-card.tall {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .bento-card {
+        padding: 2rem;
+    }
+}
+
+/* Small Phones (below 480px) */
+@media (max-width: 479px) {
+    .about-full-container {
+        margin-top: 4rem;
+    }
+
+    .about-full-header {
+        padding: 1rem 5vw;
+    }
+
+    .back-link {
+        font-size: 0.65rem;
+        gap: 10px;
+    }
+
+    .hero-section {
+        height: auto;
+        min-height: 85vh;
+        padding: 2rem 5vw 4vh;
+    }
+
+    .hero-portrait-wrapper {
+        position: relative;
+        width: 100%;
+        height: 40vh;
+        top: 0;
+        right: 0;
+        margin-bottom: 1.5rem;
+        border-radius: 1.5rem;
+    }
+
+    .hero-main-title {
+        height: auto;
+        font-size: clamp(2.5rem, 13vw, 5rem);
+        margin-bottom: 1rem;
+    }
+
+    .hero-sub {
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-top: 1rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .hero-desc-right {
+        position: static;
+        text-align: left;
+        max-width: 100%;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        line-height: 1.6;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .philosophy-section.white-theme,
+    .education-section.white-theme {
+        padding: 10vh 0;
+    }
+
+    .phi-container,
+    .edu-container {
+        padding: 0 5vw;
+    }
+
+    .section-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
+    }
+
+    .phi-content-layout,
+    .edu-content-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .phi-title,
+    .edu-main-title {
+        font-size: clamp(2rem, 9vw, 3.5rem);
+    }
+
+    .phi-lead {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .phi-paragraph {
+        font-size: 0.95rem;
+        gap: 1.2rem;
+    }
+
+    .edu-item {
+        position: static;
+        max-width: 100%;
+    }
+
+    .edu-degree-title {
+        font-size: 1.8rem;
+        text-align: left;
+    }
+
+    .edu-spec {
+        font-size: 1.1rem;
+        text-align: left;
+    }
+
+    .edu-inst {
+        font-size: 0.95rem;
+        text-align: left;
+    }
+
+    .edu-description {
+        font-size: 0.95rem;
+        text-align: left;
+    }
+
+    .experience-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 8vh 0;
+    }
+
+    .exp-sticky-title {
+        position: static;
+        padding: 0 5vw;
+    }
+
+    .exp-sticky-title .section-label {
+        margin-bottom: 1.5rem;
+    }
+
+    .exp-sticky-title h2 {
+        font-size: clamp(2rem, 8vw, 3.5rem);
+    }
+
+    .experience-list {
+        padding-right: 5vw;
+        padding-left: 5vw;
+    }
+
+    .experience-item {
+        padding: 3rem 0;
+    }
+
+    .experience-item:hover {
+        padding-left: 0.5rem;
+    }
+
+    .exp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .exp-role {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        line-height: 1;
+    }
+
+    .exp-index {
+        font-size: 3.5rem;
+        top: 0.5rem;
+    }
+
+    .exp-company {
+        font-size: 0.9rem;
+    }
+
+    .exp-desc {
+        font-size: 0.95rem;
+    }
+
+    .exp-period {
+        font-size: 0.75rem;
+    }
+
+    .resume-section {
+        padding: 8vh 5vw;
+    }
+
+    .liquid-btn.resume-btn {
+        min-width: auto;
+        width: 100%;
+        padding: 1.5rem 1.5rem;
+    }
+
+    .liquid-btn__label {
+        font-size: 0.9rem;
+        gap: 0.6rem;
+        letter-spacing: 0.15rem;
+    }
+
+    .marquee-wrapper {
+        height: 25vh;
+        margin: 6vh 0;
+    }
+
+    .marquee-band {
+        height: 45px;
+    }
+
+    .marquee-item {
+        font-size: 1.2rem;
+        gap: 1.2rem;
+    }
+
+    .marquee-dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .tech-living-section {
+        padding: 10vh 0;
+    }
+
+    .skills-matrix {
+        margin-top: 5rem;
+    }
+
+    .skill-category-row {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-category-name {
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        padding: 1.5rem 5vw;
+        font-size: 0.65rem;
+    }
+
+    .skills-items-container.graph-view {
+        padding: 1.5rem 5vw;
+        gap: 1rem;
+        min-height: 200px;
+    }
+
+    .skill-graph-item {
+        max-width: 40px;
+    }
+
+    .skill-bar-outer {
+        width: 30px;
+        height: 80px;
+    }
+
+    .skill-name-label {
+        font-size: 0.6rem;
+    }
+
+    .bento-section {
+        padding: 8vh 5vw;
+    }
+
+    .bento-container {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 200px;
+        gap: 1rem;
+    }
+
+    .bento-card.wide,
+    .bento-card.tall {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .bento-card {
+        padding: 1.8rem;
+    }
+
+    .card-num {
+        font-size: 0.7rem;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+    }
+
+    .card-info {
+        font-size: 0.85rem;
+    }
+
+    .cta-title {
+        font-size: clamp(2.5rem, 10vw, 6rem);
+        margin-bottom: 3rem;
+    }
+
+    .magnetic-btn {
+        padding: 2rem 4rem;
+        font-size: 1.2rem;
     }
 }
