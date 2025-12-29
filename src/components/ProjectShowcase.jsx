@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -44,24 +44,26 @@ const projects = [
 export default function ProjectShowcase() {
     const containerRef = useRef(null);
     const progressRef = useRef(null);
-    const cardRef = useRef(null);
-    const flipInnerRef = useRef(null);
     const navigate = useNavigate();
 
-    const [frontIndex, setFrontIndex] = useState(0);
-    const [backIndex, setBackIndex] = useState(1);
-    const scrollSectionRef = useRef(null);
-    const currentProjectRef = useRef(0);
-
     useEffect(() => {
-        let scrollTrigger = null;
-        
         const ctx = gsap.context(() => {
-            // hero animation (kept lightweight)
-            gsap.from(".hero-sub", { y: 20, opacity: 0, duration: 0.8, delay: 0.3 });
-            gsap.from(".hero-title .char", { y: 60, opacity: 0, duration: 1, stagger: 0.03, delay: 0.4 });
+            // Hero Reveal
+            const heroTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".project-showcase-hero",
+                    start: "top 80%",
+                }
+            });
 
-            // progress bar
+            heroTl.from(".hero-sub", {
+                y: 30, opacity: 0, duration: 1, ease: "power3.out"
+            })
+                .from(".hero-title .char", {
+                    y: 100, skewY: 10, opacity: 0, duration: 1.2, stagger: 0.02, ease: "expo.out"
+                }, "-=0.7");
+
+            // Progress Bar
             gsap.to(progressRef.current, {
                 width: "100%",
                 ease: "none",
@@ -69,148 +71,122 @@ export default function ProjectShowcase() {
                     trigger: containerRef.current,
                     start: "top top",
                     end: "bottom bottom",
-                    scrub: 0.3
+                    scrub: 1
                 }
             });
 
-            // background glow tracking
-            const onMouseMove = (e) => {
-                const x = e.clientX;
-                const y = e.clientY;
-                gsap.to('.bg-glow', { x: x * 0.06, y: y * 0.06, duration: 2, ease: 'power2.out' });
-            };
-            document.addEventListener('mousemove', onMouseMove);
-
-            // Create scroll section for pinning and scrubbing flip animation
-            requestAnimationFrame(() => {
-                if (!scrollSectionRef.current) return;
-
-                // Pin the card and scrub rotation based on scroll
-                scrollTrigger = ScrollTrigger.create({
-                    trigger: scrollSectionRef.current,
-                    start: 'top top',
-                    end: `+=${projects.length * 100}vh`, // 4 projects = 400vh scroll distance
-                    pin: cardRef.current,
-                    pinSpacing: true,
-                    anticipatePin: 1,
-                    scrub: 1,
-                    onUpdate: (self) => {
-                        const progress = self.progress; // 0 to 1
-                        // Map progress to rotation: 0-1 progress = 0-720deg
-                        // 720deg = 2 full rotations = 4 projects (each gets 180deg)
-                        const rotation = progress * 720;
-                        
-                        // Update rotation
-                        gsap.set(flipInnerRef.current, {
-                            rotationY: rotation,
-                            force3D: true
-                        });
-
-                        // Calculate which project segment we're in (each 180deg = one project)
-                        const segment = Math.floor(rotation / 180);
-                        const normalizedRotation = rotation % 360;
-                        const isFlipped = normalizedRotation >= 180;
-                        
-                        // Calculate project indices
-                        // Segment 0 (0-180deg): front=0, back=1
-                        // Segment 1 (180-360deg): flipped, back=1 visible, but we need front=1, back=2
-                        // Segment 2 (360-540deg): front=2, back=3
-                        // Segment 3 (540-720deg): flipped, back=3 visible
-                        
-                        let frontProjectIndex, backProjectIndex;
-                        
-                        if (isFlipped) {
-                            // When flipped, the back face is visible
-                            // Back shows the project for current segment
-                            backProjectIndex = segment % projects.length;
-                            frontProjectIndex = (segment - 1 + projects.length) % projects.length;
-                        } else {
-                            // When not flipped, front face is visible
-                            // Front shows the project for current segment
-                            frontProjectIndex = segment % projects.length;
-                            backProjectIndex = (segment + 1) % projects.length;
+            // Card Stack Animation
+            const cards = gsap.utils.toArray('.project-item');
+            cards.forEach((card, i) => {
+                if (i !== cards.length - 1) {
+                    gsap.to(card, {
+                        scale: 0.9,
+                        opacity: 0.5,
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 10% ",
+                            end: "bottom 10%",
+                            scrub: true,
+                            onEnter: () => {
+                                gsap.to(card, { boxShadow: "0 20px 50px rgba(0,0,0,0.5)" });
+                            }
                         }
-                        
-                        // Update state only if indices changed
-                        const newCurrent = isFlipped ? backProjectIndex : frontProjectIndex;
-                        if (currentProjectRef.current !== newCurrent) {
-                            setFrontIndex(frontProjectIndex);
-                            setBackIndex(backProjectIndex);
-                            currentProjectRef.current = newCurrent;
-                        }
+                    });
+                }
+
+                // Content Entrance Reveal
+                gsap.from(card.querySelector('.project-card-content > *'), {
+                    y: 50,
+                    opacity: 0,
+                    stagger: 0.1,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 60%",
+                    }
+                });
+
+                // Image Entrance Reveal
+                gsap.from(card.querySelector('.project-image'), {
+                    scale: 1.2,
+                    opacity: 0,
+                    duration: 1.5,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 60%",
                     }
                 });
             });
 
-            // cleanup
-            return () => {
-                if (scrollTrigger) {
-                    scrollTrigger.kill();
-                }
-                document.removeEventListener('mousemove', onMouseMove);
+            // Premium Button Hover Logic
+            const buttonElements = document.querySelectorAll('[data-block="button"]');
+            buttonElements.forEach((btn) => {
+                const flair = btn.querySelector('.button__flair');
+                const xSet = gsap.quickSetter(flair, "xPercent");
+                const ySet = gsap.quickSetter(flair, "yPercent");
+
+                const getXY = (e) => {
+                    const { left, top, width, height } = btn.getBoundingClientRect();
+                    const xTransformer = gsap.utils.pipe(
+                        gsap.utils.mapRange(0, width, 0, 100),
+                        gsap.utils.clamp(0, 100)
+                    );
+                    const yTransformer = gsap.utils.pipe(
+                        gsap.utils.mapRange(0, height, 0, 100),
+                        gsap.utils.clamp(0, 100)
+                    );
+                    return {
+                        x: xTransformer(e.clientX - left),
+                        y: yTransformer(e.clientY - top)
+                    };
+                };
+
+                btn.addEventListener("mouseenter", (e) => {
+                    const { x, y } = getXY(e);
+                    xSet(x);
+                    ySet(y);
+                    gsap.to(flair, { scale: 1, duration: 0.4, ease: "power2.out" });
+                });
+
+                btn.addEventListener("mouseleave", (e) => {
+                    const { x, y } = getXY(e);
+                    gsap.killTweensOf(flair);
+                    gsap.to(flair, {
+                        xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
+                        yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
+                        scale: 0,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                });
+
+                btn.addEventListener("mousemove", (e) => {
+                    const { x, y } = getXY(e);
+                    gsap.to(flair, { xPercent: x, yPercent: y, duration: 0.4, ease: "power2" });
+                });
+            });
+
+            // Background Smooth tracking
+            const onMouseMove = (e) => {
+                const x = (e.clientX - window.innerWidth / 2) * 0.05;
+                const y = (e.clientY - window.innerHeight / 2) * 0.05;
+                gsap.to('.bg-glow', { x, y, duration: 2, ease: 'power2.out' });
+                gsap.to('.bg-glow-2', { x: -x, y: -y, duration: 3, ease: 'power2.out' });
             };
+            window.addEventListener('mousemove', onMouseMove);
+
+            return () => window.removeEventListener('mousemove', onMouseMove);
 
         }, containerRef);
 
-        return () => {
-            ctx.revert();
-            if (scrollTrigger) {
-                scrollTrigger.kill();
-            }
-        };
+        return () => ctx.revert();
     }, []);
 
-    // split text helper
     const splitText = (text) => text.split("").map((char, i) => (
         <span key={i} className="char" style={{ display: 'inline-block' }}>{char === ' ' ? '\u00A0' : char}</span>
     ));
-
-    // renders the face content for a project index
-    const renderFace = (projectIndex) => {
-        const project = projects[projectIndex % projects.length];
-        if (!project) return null;
-
-        return (
-            <>
-                <div className="project-card-content">
-                    <div className="project-header">
-                        <span className="project-num">{project.id}</span>
-                        <span className="project-category">{project.category}</span>
-                    </div>
-
-                    <h2 className="project-name">{project.name}</h2>
-                    <p className="project-description">{project.description}</p>
-
-                    <div className="project-tags">
-                        {project.tags.map(tag => (
-                            <span key={tag} className="project-tag">{tag}</span>
-                        ))}
-                    </div>
-
-                    {project.id === "01" && (
-                        <button
-                            className="liquid-btn"
-                            onClick={() => { window.scrollTo(0, 0); navigate('/doit-project'); }}
-                        >
-                            <span className="liquid-btn__flair"></span>
-                            <span className="liquid-btn__label">VIEW FULL PROJECT
-                                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1.5 7.5H13.5M13.5 7.5L7.5 1.5M13.5 7.5L7.5 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </span>
-                        </button>
-                    )}
-                </div>
-
-                <div className="project-card-visual">
-                    <div className="project-image-wrapper">
-                        <div className="img-overlay"></div>
-                        <img src={project.imageUrl} alt={project.name} className="project-image" />
-                    </div>
-                </div>
-            </>
-        );
-    };
 
     return (
         <div className="project-showcase-container" ref={containerRef}>
@@ -227,26 +203,51 @@ export default function ProjectShowcase() {
                 </h1>
             </section>
 
-            {/* Single flip card that will be pinned and flipped on scroll */}
-            <div className="project-item flip-card" ref={cardRef}>
-                <div className="flip-card-inner" ref={flipInnerRef}>
-                    <div className="card-face front">
-                        {renderFace(frontIndex)}
-                    </div>
+            <div className="project-stack">
+                {projects.map((project, index) => (
+                    <div key={project.id} className="project-item">
+                        <div className="project-card-content">
+                            <div className="project-header">
+                                <span className="project-num">{project.id}</span>
+                                <span className="project-category">{project.category}</span>
+                            </div>
 
-                    <div className="card-face back">
-                        {renderFace(backIndex)}
-                    </div>
-                </div>
-            </div>
+                            <h2 className="project-name">{project.name}</h2>
+                            <p className="project-description">{project.description}</p>
 
-            {/* Scroll section for pinning and scrubbing flip animation */}
-            <div 
-                className="project-scroll-section" 
-                ref={scrollSectionRef}
-                style={{ height: `${projects.length * 100}vh` }}
-            >
-                {/* This section drives the scroll-based flip */}
+                            <div className="project-tags">
+                                {project.tags.map(tag => (
+                                    <span key={tag} className="project-tag">{tag}</span>
+                                ))}
+                            </div>
+
+                            <a
+                                href="#"
+                                className="button button--stroke"
+                                data-block="button"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.scrollTo(0, 0);
+                                    navigate('/doit-project');
+                                }}
+                            >
+                                <span className="button__flair"></span>
+                                <span className="button__label">VIEW FULL PROJECT
+                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1.5 7.5H13.5M13.5 7.5L7.5 1.5M13.5 7.5L7.5 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div className="project-card-visual">
+                            <div className="project-image-wrapper">
+                                <div className="img-overlay"></div>
+                                <img src={project.imageUrl} alt={project.name} className="project-image" />
+                            </div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );

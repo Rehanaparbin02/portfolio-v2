@@ -73,14 +73,6 @@ export default function About() {
                     ease: "power3.out"
                 }, "<");
 
-            // Marquee Animation
-            gsap.to(".marquee-inner", {
-                xPercent: -50,
-                repeat: -1,
-                duration: 20,
-                ease: "linear"
-            });
-
         }, containerRef);
 
         return () => ctx.revert();

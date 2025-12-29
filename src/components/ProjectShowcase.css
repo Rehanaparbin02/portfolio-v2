@@ -1,8 +1,16 @@
+/* Basic Responsiveness & Fluid Typography */
+:root {
+    --card-height: 70vh;
+    --card-max-width: 1400px;
+    --card-gap: 5vh;
+}
+
 .project-showcase-container {
     background-color: transparent;
     color: #ffffff;
     min-height: 100vh;
-    padding-top: 15vh;
+    padding-top: 20vh;
+    padding-bottom: 20vh;
     overflow-x: hidden;
     position: relative;
     font-family: 'Outfit', sans-serif;
@@ -10,11 +18,11 @@
 
 .project-showcase-hero {
     padding: 0 8vw;
-    margin-bottom: 20vh;
+    margin-bottom: 25vh;
 }
 
 .hero-sub {
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 1.2vw, 1.2rem);
     color: rgba(255, 255, 255, 0.6);
     text-transform: uppercase;
     letter-spacing: 0.5rem;
@@ -24,155 +32,116 @@
 }
 
 .hero-title {
-    font-size: clamp(4rem, 10vw, 12rem);
+    font-size: clamp(3.5rem, 10vw, 12rem);
     font-weight: 800;
-    line-height: 0.9;
+    line-height: 0.85;
     margin: 0;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em;
+}
+
+.hero-title div {
+    height: 1.1em;
+    overflow: hidden;
 }
 
 .hero-title .outline {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
     color: transparent;
 }
 
-.showcase-grid {
+/* Card Stack Layout */
+.project-stack {
     display: flex;
     flex-direction: column;
-    gap: 15vh;
-    padding: 0 8vw 20vh;
+    align-items: center;
+    gap: var(--card-gap);
+    padding: 0 8vw;
+    position: relative;
 }
 
-/* Card Design */
 .project-item {
     display: flex;
     background-color: #0e0e0e;
-    /* Dark card background */
-    border-radius: 40px;
+    border-radius: clamp(20px, 3vw, 40px);
     overflow: hidden;
+    width: 100%;
+    max-width: var(--card-max-width);
+    height: var(--card-height);
     min-height: 600px;
-    position: relative;
+    position: sticky;
+    top: 15vh;
+    /* This creates the stacking effect */
     border: 1px solid rgba(255, 255, 255, 0.05);
-    cursor: pointer;
-    transition: border-color 0.3s ease, transform 0.3s ease;
-    transform-style: preserve-3d;
-}
-
-.flip-card-inner {
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    position: relative;
-    transform: rotateY(0deg);
-    will-change: transform;
-}
-
-.card-face {
-    position: absolute;
-    inset: 0;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    display: flex;
-    align-items: stretch;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    will-change: transform;
-}
-
-.card-face.front { 
-    z-index: 2;
-    transform: rotateY(0deg);
-}
-
-.card-face.back {
-    transform: rotateY(180deg);
-    z-index: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    will-change: transform, opacity;
 }
 
 .project-card-content {
     flex: 0 0 45%;
-    padding: 4rem;
+    padding: clamp(2rem, 4vw, 5rem);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     z-index: 2;
-}
-
-/* When content is inside a face (absolute parent) make it position:relative so padding works */
-.card-face .project-card-content {
-    position: relative;
+    background: #0e0e0e;
 }
 
 .project-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 4rem;
+    margin-bottom: clamp(2rem, 4vw, 4rem);
 }
 
 .project-num {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: clamp(40px, 3vw, 50px);
+    height: clamp(40px, 3vw, 50px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     font-family: 'Space Mono', monospace;
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
 }
 
 .project-category {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     font-weight: 500;
-    margin-top: 1rem;
-    /* Align vaguely with number */
 }
 
 .project-name {
-    font-size: clamp(3rem, 5vw, 5rem);
+    font-size: clamp(2.5rem, 5vw, 5rem);
     font-weight: 700;
     margin: 0 0 1.5rem 0;
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
 }
 
 .project-description {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 1.1vw, 1.2rem);
     color: #a1a1a1;
     line-height: 1.6;
-    max-width: 90%;
-    margin-bottom: 3rem;
-    font-weight: 300;
+    margin-bottom: 2rem;
 }
 
 .project-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.8rem;
     margin-bottom: auto;
-    /* Push tags up if there's space, or keep them below desc */
 }
 
 .project-tag {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 0.6rem 1.4rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.6rem 1.2rem;
     border-radius: 100px;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
-    letter-spacing: 0.02rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: background 0.3s ease;
-}
-
-.project-tag:hover {
-    background: rgba(255, 255, 255, 0.15);
 }
 
 /* Visual Side */
@@ -180,115 +149,104 @@
     flex: 1;
     position: relative;
     overflow: hidden;
-    /* Create a fade from the content side to the image */
-    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 15%);
-    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 15%);
-}
-
-.card-face .project-card-visual {
-    position: relative;
+    mask-image: linear-gradient(to right, transparent 0%, black 15%);
 }
 
 .project-image-wrapper {
     width: 100%;
-    height: 107%;
-    position: relative;
+    height: 100%;
 }
 
 .project-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Gradient Overlay on image */
 .img-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, #0e0e0e 0%, transparent 50%);
+    inset: 0;
+    background: linear-gradient(to right, #0e0e0e 0%, transparent 40%);
     z-index: 1;
-    pointer-events: none;
 }
 
-
-/* Hover Effects */
-.project-item:hover .project-image {
-    transform: scale(1.03);
-}
-
-
-/* Liquid Button Styles - Adapted/Keep existing */
-.liquid-btn {
+/* GSAP Button Design */
+.button {
     --color-surface-white: #ffffff;
     --color-just-black: #000000;
     --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
     align-items: center;
     background: 0 0;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 100px;
+    border: none;
+    border-radius: 6.25rem;
     color: var(--color-surface-white);
     cursor: pointer;
     display: inline-flex;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    gap: 1rem;
+    gap: 0.8rem;
     justify-content: center;
     letter-spacing: 0.1rem;
     line-height: 1;
     overflow: hidden;
     padding: 1.2rem 2.8rem;
     position: relative;
-    /* Changed from absolute/fixed */
     text-decoration: none;
     text-transform: uppercase;
-    margin-top: 3rem;
-    width: fit-content;
-    z-index: 10;
+    margin-top: 2rem;
 }
 
 @media (hover: hover) {
-    .liquid-btn:hover {
+    .button.button--stroke:hover {
         color: var(--color-just-black);
-        border-color: #fff;
+        text-decoration: none;
     }
 }
 
-.liquid-btn__label {
+.button--stroke:after {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6.25rem;
+    content: "";
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.button__label {
     position: relative;
     text-align: center;
     transition: color 50ms var(--ease-in-out-quart);
     z-index: 2;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
-.liquid-btn:hover .liquid-btn__label {
+.button--stroke:hover .button__label {
     transition: color 0.15s var(--ease-in-out-quart);
 }
 
-.liquid-btn__flair {
+.button__flair {
     bottom: 0;
     left: 0;
     pointer-events: none;
     position: absolute;
     right: 0;
     top: 0;
-    z-index: 1;
 }
 
-.liquid-btn .liquid-btn__flair {
+.button--stroke .button__flair {
     transform: scale(0);
     transform-origin: 0 0;
     will-change: transform;
 }
 
-.liquid-btn__flair:before {
+.button__flair:before {
     aspect-ratio: 1/1;
     background-color: var(--color-surface-white);
     border-radius: 50%;
@@ -299,95 +257,124 @@
     position: absolute;
     top: 0;
     transform: translate(-50%, -50%);
-    width: 200%;
+    width: 170%;
 }
 
 /* Background elements */
-.bg-glow {
+.bg-glow,
+.bg-glow-2 {
     position: fixed;
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
-    top: -20vh;
-    right: -20vw;
+    border-radius: 50%;
+    filter: blur(80px);
     pointer-events: none;
     z-index: -1;
+}
+
+.bg-glow {
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+    top: -10%;
+    right: -10%;
 }
 
 .bg-glow-2 {
-    position: fixed;
     width: 40vw;
     height: 40vw;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
-    bottom: -10vh;
-    left: -10vw;
-    pointer-events: none;
-    z-index: -1;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    bottom: -10%;
+    left: -10%;
 }
 
-/* Custom Scroll Progress */
 .scroll-progress-bar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 0%;
     height: 2px;
-    background: #ffffff;
-    z-index: 999;
+    background: #fff;
+    z-index: 1000;
 }
 
+/* RESPONSIVE ADJUSTMENTS */
+
+/* Large Monitors (27", 22") */
+@media (min-width: 1900px) {
+    :root {
+        --card-height: 75vh;
+        --card-max-width: 1600px;
+    }
+
+    .project-name {
+        font-size: 6rem;
+    }
+}
+
+/* Laptops (15", 14") */
+@media (max-width: 1600px) {
+    :root {
+        --card-height: 80vh;
+    }
+}
+
+/* Tablets */
 @media (max-width: 1024px) {
     .project-item {
         flex-direction: column;
         height: auto;
+        min-height: 800px;
+        top: 10vh;
     }
 
     .project-card-content {
-        padding: 3rem;
-        flex: auto;
+        flex: 1;
+        padding: 2.5rem;
     }
 
     .project-card-visual {
-        min-height: 300px;
-        -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 15%);
-        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 15%);
+        flex: 0 0 350px;
+        mask-image: linear-gradient(to bottom, transparent 0%, black 15%);
     }
 
     .img-overlay {
-        background: linear-gradient(to bottom, #0e0e0e 0%, transparent 50%);
+        background: linear-gradient(to bottom, #0e0e0e 0%, transparent 40%);
+    }
+}
+
+/* Phones (Large/Medium/Small) */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .project-item {
+        min-height: 600px;
+        top: 8vh;
+    }
+
+    .project-card-content {
+        padding: 1.5rem;
     }
 
     .project-name {
-        font-size: 3rem;
+        font-size: 2.5rem;
+    }
+
+    .project-description {
+        font-size: 0.95rem;
+    }
+
+    .liquid-btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 
-/* Space used to drive scroll-based flips */
-.flip-scroll-space {
-    width: 100%;
-}
+@media (max-width: 380px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
 
-/* Flip card styles - will be pinned by ScrollTrigger */
-.flip-card {
-    position: relative;
-    margin: 10vh auto 0;
-    width: 84vw;
-    max-width: 1400px;
-    height: 64vh;
-    min-height: 600px;
-    z-index: 50;
-    border-radius: 40px;
-    padding: 0;
-    display: block;
-    perspective: 2000px;
-    perspective-origin: center center;
-    overflow: visible;
-    transform-style: preserve-3d;
-}
-
-/* Scroll sections for triggering flips */
-.project-scroll-section {
-    height: 100vh;
-    width: 100%;
-    position: relative;
+    .project-name {
+        font-size: 2.2rem;
+    }
 }
