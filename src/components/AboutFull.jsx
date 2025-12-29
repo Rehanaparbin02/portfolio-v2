@@ -275,35 +275,19 @@ export default function AboutFull() {
                 });
             }
 
-            // --- SKILL GRAPH ANIMATION (SCRUBBED) ---
-            gsap.from(".skill-bar", {
+            // --- TECH STACK BOOKS REVEAL ---
+            gsap.from(".book-item", {
                 scrollTrigger: {
-                    trigger: ".skills-matrix",
-                    start: "top 70%",
-                    end: "bottom 20%",
-                    scrub: 1,
-                    toggleActions: "play reverse play reverse"
+                    trigger: ".books-shelf",
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
                 },
-                scaleY: 0,
-                transformOrigin: "bottom",
-                stagger: {
-                    each: 0.1,
-                    from: "start"
-                },
-                ease: "power2.inOut"
-            });
-
-            // --- UP AND DOWN FLOATING FOR GRAPH ---
-            gsap.to(".skill-bar", {
-                y: -10,
-                duration: 2,
-                repeat: -1,
-                yoyo: true,
-                ease: "power1.inOut",
-                stagger: {
-                    each: 0.1,
-                    from: "center"
-                }
+                y: 100,
+                opacity: 0,
+                rotateY: 45,
+                duration: 1.5,
+                stagger: 0.2,
+                ease: "expo.out"
             });
 
         }, containerRef);
@@ -315,9 +299,9 @@ export default function AboutFull() {
         {
             category: "LANGUAGES",
             items: [
-                { name: "JS", level: 95 },
-                { name: "TS", level: 90 },
-                { name: "PY", level: 85 },
+                { name: "JavaScript", level: 95 },
+                { name: "TypeScript", level: 90 },
+                { name: "Python", level: 85 },
                 { name: "C++", level: 80 },
                 { name: "SQL", level: 88 }
             ]
@@ -325,30 +309,22 @@ export default function AboutFull() {
         {
             category: "FRONTEND",
             items: [
-                { name: "React", level: 98 },
-                { name: "Native", level: 92 },
-                { name: "HTML", level: 99 },
-                { name: "CSS", level: 99 },
-                { name: "TW", level: 95 }
+                { name: "React.js", level: 98 },
+                { name: "React Native", level: 92 },
+                { name: "HTML5", level: 99 },
+                { name: "CSS3", level: 99 },
+                { name: "Tailwind CSS", level: 95 }
             ]
         },
         {
-            category: "BACKEND",
+            category: "BACKEND & DATA",
             items: [
-                { name: "Node", level: 90 },
-                { name: "Exprs", level: 92 },
-                { name: "Flask", level: 75 },
-                { name: "GQL", level: 82 },
-                { name: "REST", level: 95 }
-            ]
-        },
-        {
-            category: "DATABASES",
-            items: [
-                { name: "PSQL", level: 90 },
-                { name: "Mongo", level: 85 },
-                { name: "Supa", level: 95 },
-                { name: "FB", level: 88 }
+                { name: "Node.js", level: 90 },
+                { name: "Express.js", level: 92 },
+                { name: "Supabase", level: 95 },
+                { name: "PostgreSQL", level: 90 },
+                { name: "MongoDB", level: 85 },
+                { name: "Firebase", level: 88 }
             ]
         }
     ];
@@ -499,27 +475,46 @@ export default function AboutFull() {
                 </div>
             </section>
 
-            {/* Redesigned Tech Matrix Section - Graph Style */}
+            {/* Redesigned Tech Matrix Section - Book Style */}
             <section className="tech-living-section">
                 <div className="exp-sticky-title">
                     <span className="section-label">TECH STACK</span>
                     <h2>Skills & Tools</h2>
                 </div>
-                <div className="skills-matrix">
+                <div className="books-shelf">
                     {skillGroups.map((group, i) => (
-                        <div key={i} className="skill-category-row">
-                            <div className="skill-category-name">{group.category}</div>
-                            <div className="skills-items-container graph-view">
-                                {group.items.map((skill, j) => (
-                                    <div key={j} className="skill-graph-item">
-                                        <div className="skill-bar-outer">
-                                            <div className="skill-bar" style={{ height: `${skill.level}%` }}>
-                                                <span className="skill-percent">{skill.level}%</span>
-                                            </div>
+                        <div key={i} className="book-item">
+                            <div className="book">
+                                <div className="book-cover">
+                                    <div className="book-spine"></div>
+                                    <div className="book-front">
+                                        <div className="cover-blob"></div>
+                                        <div className="book-cover-design">
+                                            <span className="book-tag">Notebook Vol. 0{i + 1}</span>
+                                            <h3 className="book-title">{group.category}</h3>
+                                            <div className="book-decorator"></div>
+                                            <span className="book-author">RP / Handcrafted</span>
                                         </div>
-                                        <span className="skill-name-label">{skill.name}</span>
                                     </div>
-                                ))}
+                                </div>
+                                <div className="book-pages">
+                                    <div className="notebook-page">
+                                        <div className="page-header">
+                                            <span className="page-no">pg. 0{i + 1}</span>
+                                        </div>
+                                        <div className="notebook-lines">
+                                            <h4 className="notebook-title">{group.category}</h4>
+                                            <ul className="skills-notebook-list">
+                                                {group.items.map((skill, j) => (
+                                                    <li key={j} className="skill-note">
+                                                        <span className="bullet">✻</span>
+                                                        <span className="skill-name">{skill.name}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}
