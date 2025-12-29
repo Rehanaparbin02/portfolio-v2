@@ -106,6 +106,16 @@
     margin-bottom: 2.5rem;
 }
 
+.contact-title {
+    margin-top: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .contact-title {
+        margin-top: 0;
+    }
+}
+
 .footer-links {
     list-style: none;
     padding: 0;
@@ -210,24 +220,91 @@
 }
 
 /* Responsive */
+
+/* 22 & 27 inch Monitors */
+@media (min-width: 1600px) {
+    .footer-container {
+        max-width: 1600px;
+        padding: 6rem;
+    }
+
+    .footer-marquee-section {
+        padding: 12rem 0 8rem;
+    }
+}
+
+/* 15 inch Laptops / Standard Desktop */
+@media (max-width: 1536px) {
+    .footer-container {
+        max-width: 1300px;
+        padding: 4rem;
+    }
+}
+
+/* 14 inch Laptops */
+@media (max-width: 1366px) {
+    .footer-container {
+        max-width: 1100px;
+        padding: 3.5rem;
+    }
+
+    .footer-main {
+        gap: 3rem;
+        padding: 4rem 0;
+    }
+
+    .marquee-item a {
+        font-size: clamp(3rem, 12vw, 12rem);
+    }
+}
+
+/* Tablets & Small Laptops */
 @media (max-width: 1024px) {
+    .footer-section {
+        border-width: 0.75rem;
+    }
+
     .footer-main {
         grid-template-columns: repeat(2, 1fr);
         gap: 3rem;
     }
+
+    .footer-col:last-child {
+        grid-column: span 2;
+        text-align: center;
+    }
 }
 
+/* Large Phones & Small Tablets */
 @media (max-width: 768px) {
     .footer-section {
-        padding: 8rem 2rem 2rem;
+        padding: 0;
         border-top-left-radius: 40px;
         border-top-right-radius: 40px;
+        border-width: 0.5rem;
+    }
+
+    .footer-container {
+        padding: 3rem 1.5rem;
+    }
+
+    .footer-marquee-section {
+        padding: 6rem 0 4rem;
+    }
+
+    .marquee-item a {
+        font-size: clamp(2.5rem, 15vw, 8rem);
     }
 
     .footer-main {
         grid-template-columns: 1fr;
-        gap: 4rem;
+        gap: 3rem;
         text-align: center;
+        padding: 4rem 0;
+    }
+
+    .footer-col:last-child {
+        grid-column: span 1;
     }
 
     .footer-links {
@@ -236,7 +313,60 @@
 
     .footer-bottom {
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
         text-align: center;
+    }
+
+    .footer-contact-item {
+        font-size: 1.25rem;
+    }
+}
+
+/* Medium & Small Phones */
+@media (max-width: 480px) {
+    .footer-section {
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        border-width: 0.4rem;
+    }
+
+    .footer-container {
+        padding: 2.5rem 1rem;
+    }
+
+    .footer-marquee-section {
+        padding: 4rem 0 3rem;
+    }
+
+    .marquee-item {
+        padding: 0 2rem;
+    }
+
+    .footer-contact-item.email {
+        font-size: 1.1rem;
+        word-break: break-all;
+    }
+
+    .footer-contact-item.phone {
+        font-size: 1.25rem;
+    }
+
+    .footer-col-title {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Very Small Phones */
+@media (max-width: 360px) {
+    .footer-section {
+        border-width: 0.25rem;
+    }
+
+    .marquee-item a {
+        font-size: 2.2rem;
+    }
+
+    .footer-contact-item.email {
+        font-size: 1rem;
     }
 }

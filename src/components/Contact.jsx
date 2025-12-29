@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import stampImg from '../assets/stamp.png';
 import './Contact.css';
 
 export default function Contact() {
@@ -101,11 +102,7 @@ export default function Contact() {
 
                 <div className="contact-form-section" ref={formRef}>
                     <div className="postcard-stamp">
-                        <div className="stamp-inner">
-                            <div className="stamp-logo"></div>
-                            <span>First Class</span>
-                            <span>Postage</span>
-                        </div>
+                        <img src={stampImg} alt="Vintage Stamp" className="stamp-image" />
                     </div>
 
                     <div className="postcard-divider"></div>

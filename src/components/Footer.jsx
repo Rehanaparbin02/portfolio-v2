@@ -168,7 +168,7 @@ export default function Footer() {
                         <div className="footer-col">
                             {/* <h4 className="footer-col-title">Local Time</h4>
                             <div className="footer-contact-item current-time">{time}</div> */}
-                            <h4 className="footer-col-title" style={{ marginTop: '2.5rem' }}>Contact</h4>
+                            <h4 className="footer-col-title contact-title">Contact</h4>
                             <a href="mailto:rehanaparbin0210@gmail.com" className="footer-contact-item email">rehanaparbin0210@gmail.com</a>
                             <a href="tel:+918638401703" className="footer-contact-item phone">+91 8638401703</a>
                         </div>
