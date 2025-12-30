@@ -61,7 +61,10 @@ export default function ProjectShowcase() {
             })
                 .from(".hero-title .char", {
                     y: 100, skewY: 10, opacity: 0, duration: 1.2, stagger: 0.02, ease: "expo.out"
-                }, "-=0.7");
+                }, "-=0.7")
+                .from(".hero-extra-text", {
+                    y: 20, opacity: 0, duration: 1, ease: "power3.out"
+                }, "-=0.5");
 
             // Progress Bar
             gsap.to(progressRef.current, {
@@ -199,13 +202,22 @@ export default function ProjectShowcase() {
                     <span className="arrow">←</span> <span>GO BACK</span>
                 </Link>
             </header>
-            <section className="project-showcase-hero">
-                {/* <span className="hero-sub">Curation 2024-25</span> */}
-                <h1 className="hero-title">
-                    <div>{splitText("CRAFTING")}</div>
-                    <div className="outline">{splitText("DIGITAL")}</div>
-                    <div>{splitText("LEGACIES")}</div>
-                </h1>
+            <section className="project-showcase-hero" style={{ height: '45rem' }}>
+                <div className="hero-content">
+                    <h1 className="hero-title">
+                        <div>{splitText("CRAFTING")}</div>
+                        <div className="outline">{splitText("DIGITAL")}</div>
+                        <div>{splitText("LEGACIES")}</div>
+                    </h1>
+
+                    <div className="hero-extra-text">
+                        <p>
+                            We merge creative vision with technical excellence
+                            to build digital masterpieces that stand the test of time.
+                            Every pixel is curated for impact.
+                        </p>
+                    </div>
+                </div>
             </section>
 
             <div className="project-stack">
