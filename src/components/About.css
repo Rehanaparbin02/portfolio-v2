@@ -597,3 +597,74 @@
         font-weight: 800;
     }
 }
+
+/* Custom Optimization for 14-16" Laptops with Short Screens (e.g. 1536 x 695) */
+@media (min-width: 1300px) and (max-width: 1600px) and (max-height: 850px) {
+    .about-section {
+        min-height: 100vh;
+        padding-bottom: 5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .parallax-bg {
+        top: 5%;
+        left: 40rem;
+        transform: scale(0.9);
+    }
+
+    .bg-text {
+        font-size: 12vw;
+        line-height: 1.8;
+    }
+
+    .about-card {
+        max-width: 1200px;
+    }
+
+    /* Pull up the eyebrow text */
+    .eyebrow-container {
+        top: 0rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-eyebrow {
+        font-size: clamp(4rem, 11vw, 9rem);
+    }
+
+    /* Adjust the main description text positioning */
+    .about-description {
+        top: 2rem;
+        /* Significantly reduced from 33rem */
+        height: auto;
+        margin-top: 2rem;
+    }
+
+    .about-text-content {
+        bottom: auto !important;
+        /* Override inline style */
+        position: relative;
+    }
+
+    /* Override inline styles for HEY THERE */
+    .section-eyebrow[style] {
+        top: 0 !important;
+    }
+
+    .about-text-content[style] {
+        bottom: 0 !important;
+    }
+
+    .about-text-content p {
+        font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+        max-width: 70rem;
+        margin: 0 auto;
+        line-height: 1.4;
+    }
+
+    /* Adjust highlight padding for this scale */
+    .highlight {
+        padding: 0.1em 0.3em;
+    }
+}

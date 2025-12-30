@@ -868,3 +868,110 @@
 .floating-wrapper.inline-flower {
     top: -0.1em;
 }
+
+/* Custom Optimization for 14-16" Laptops with Short Screens (e.g. 1536 x 695) */
+@media (min-width: 1300px) and (max-width: 1600px) and (max-height: 850px) {
+    .home-container {
+        min-height: 100vh;
+        /* Fit to screen */
+        padding: 1rem;
+        margin-top: 3rem;
+        /* Reduce top margin */
+        padding-top: 2rem;
+        /* Reduce padding */
+        align-items: center;
+        /* Center vertically */
+    }
+
+    .hero-content {
+        max-width: 1200px;
+        margin-top: 0;
+        bottom: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(3.5rem, 9vw, 8rem);
+        /* Slightly smaller to fit vertical space */
+        line-height: 0.9;
+    }
+
+    .hero-content .text-ampersand {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .hero-content .middle-row {
+        margin: 0.5rem 0;
+        /* Tighten Space around & */
+    }
+
+    /* Stack Top Row Vertically and Tighten */
+    .hero-content .top-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 0rem;
+    }
+
+    /* Stack Bottom Row Vertically and Tighten */
+    .hero-content .bottom-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        margin-top: 0.5rem;
+        /* Reduced from 2rem */
+    }
+
+    /* Reset alignment overrides for centered column look */
+    .frontend-wrapper {
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: -0.5rem;
+        transform: rotate(0deg);
+        align-self: center;
+    }
+
+    .text-developer {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0 !important;
+        transform: rotate(0deg);
+        align-self: center;
+        text-align: center;
+        width: auto !important;
+    }
+
+    /* Adjust floating elements to be less intrusive */
+    .floating-ribbon {
+        width: 160px;
+        top: 25%;
+        left: 8%;
+    }
+
+    .floating-heart {
+        width: 140px;
+        top: 15%;
+        left: 80%;
+    }
+
+    .floating-butterfly {
+        width: 180px;
+        bottom: 10%;
+        right: 5%;
+    }
+
+    .floating-cherry {
+        width: 130px;
+        top: 65%;
+        right: 85%;
+    }
+
+    /* Ensure selection boxes fit tight */
+    .hero-content .selection-box {
+        top: -3px;
+        bottom: -3px;
+        left: -3px;
+        right: -3px;
+    }
+}

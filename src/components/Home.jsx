@@ -128,7 +128,7 @@ export default function Home() {
             gsap.to(".frontend-wrapper", {
                 x: -120,
                 y: 50,
-                rotation: -10,
+                rotation: -20,
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top top",
@@ -140,7 +140,7 @@ export default function Home() {
             gsap.to(".text-developer", {
                 x: 120,
                 y: 80,
-                rotation: 10,
+                rotation: 20,
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top top",
@@ -273,7 +273,7 @@ export default function Home() {
                         {"DEVELOPER".split("").map((c, i) => {
                             if (c === "O") {
                                 return (
-                                    <div key={i} className="floating-wrapper floating-flower inline-flower" style={{ display: 'inline-block' }}>
+                                    <div key={i} className="floating-wrapper inline-flower" style={{ display: 'inline-block' }}>
                                         <img src={flower} alt="O" className="floating-item" />
                                     </div>
                                 );
