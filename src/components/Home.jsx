@@ -269,7 +269,7 @@ export default function Home() {
                             <div className="handle br"></div>
                         </div>
                     </div>
-                    <h1 className="text-developer" style={{ position: "relative", right: "9rem", width: "96rem" }}>
+                    <h1 className="text-developer" style={{ width: "96rem" }}>
                         {"DEVELOPER".split("").map((c, i) => {
                             if (c === "O") {
                                 return (

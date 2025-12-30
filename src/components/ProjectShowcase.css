@@ -2,7 +2,7 @@
 
 /* Basic Responsiveness & Fluid Typography */
 :root {
-    --card-height: 70vh;
+    --card-height: 85vh;
     --card-max-width: 1400px;
     --card-gap: 5vh;
 }
@@ -34,8 +34,8 @@
     max-width: 350px;
     margin-top: 2rem;
     position: relative;
-    left: 46rem;
-    bottom: 33rem;
+    /* Removed hardcoded offsets to allow flex/grid to place it naturally across screens */
+    margin-left: auto;
 }
 
 .hero-extra-text p {
@@ -136,7 +136,7 @@
     overflow: hidden;
     width: 100%;
     max-width: var(--card-max-width);
-    height: var(--card-height);
+    height: 85vh;
     min-height: 600px;
     position: sticky;
     top: 15vh;
@@ -176,11 +176,13 @@
 }
 
 .project-category {
-    font-size: 0.85rem;
+    font-size: 1.85rem;
     color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     font-weight: 500;
+    margin-bottom: 1rem;
+    display: block;
 }
 
 .project-name {
@@ -380,9 +382,48 @@
 }
 
 /* Laptops (15", 14") */
+/* Laptops (15", 14") - Targeting ~1280px to ~1600px width */
 @media (max-width: 1600px) {
     :root {
         --card-height: 80vh;
+        --card-max-width: 1200px;
+    }
+
+    .project-showcase-hero {
+        padding: 0 6vw;
+        height: auto;
+        min-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    .hero-title {
+        font-size: clamp(3rem, 8vw, 6rem);
+    }
+
+    .hero-extra-text {
+        text-align: left;
+        margin-left: 0;
+        max-width: 500px;
+    }
+
+    .hero-extra-text p {
+        text-align: left;
+        border-right: none;
+        border-left: 2px solid rgba(255, 255, 255, 0.3);
+        padding-left: 1.5rem;
+        padding-right: 0;
+    }
+
+    .project-category {
+        font-size: 1.4rem;
     }
 }
 

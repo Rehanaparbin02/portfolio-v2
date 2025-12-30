@@ -93,6 +93,7 @@
     text-transform: uppercase;
     background: linear-gradient(180deg, #000 30%, #000000 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: black;
 }
 
@@ -243,5 +244,46 @@
 
     .service-title {
         font-size: 2.5rem;
+    }
+
+    .work-title {
+        font-size: clamp(2.5rem, 10vw, 5rem);
+        padding: 0 10px;
+        word-wrap: break-word;
+    }
+
+    .work-desc {
+        font-size: 1.2rem;
+        margin-left: 0;
+        text-align: center;
+        padding: 0 20px;
+        max-width: 100%;
+        margin-top: 1.5rem;
+    }
+
+    .work-hero {
+        padding-bottom: 50px;
+    }
+
+    .cards-list {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .work-title {
+        font-size: clamp(2rem, 12vw, 3.5rem);
+    }
+
+    .work-desc {
+        font-size: 1rem;
+    }
+
+    .service-card {
+        padding: 40px 25px;
+    }
+
+    .work-hero {
+        padding-bottom: 30px;
     }
 }

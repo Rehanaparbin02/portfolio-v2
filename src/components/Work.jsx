@@ -245,9 +245,13 @@ export default function Work() {
                     ))}
                 </span>
                 <h2 className="work-title">
-                    {"Digital SolutionsThat Deliver".split("").map((char, index) => (
-                        <span key={index} className="char" style={{ display: "inline-block" }}>
-                            {char === " " ? "\u00A0" : char}
+                    {"Digital Solutions That Deliver".split(" ").map((word, index) => (
+                        <span key={index} className="word-wrapper" style={{ display: "inline-block", whiteSpace: "nowrap", margin: "0 0.2em" }}>
+                            {word.split("").map((char, charIndex) => (
+                                <span key={charIndex} className="char" style={{ display: "inline-block" }}>
+                                    {char}
+                                </span>
+                            ))}
                         </span>
                     ))}
                 </h2>

@@ -20,6 +20,7 @@
     max-width: 1310px;
     position: relative;
     bottom: 7rem;
+    margin-top: 4rem;
 
     /* Common Typography */
     h1 {
@@ -540,6 +541,8 @@
     .hero-content .handle.br {
         right: -3px;
     }
+
+
 }
 
 /* Small Phones (below 480px) */
@@ -560,6 +563,12 @@
         letter-spacing: -0.05em;
         line-height: 0.95;
     }
+
+    .floating-wrapper.inline-flower {
+        width: 1.5em;
+        height: 1.5em;
+    }
+
 }
 
 .hero-content .text-ampersand {
@@ -587,9 +596,17 @@
     margin: 0;
 }
 
-.hero-content .text-uiux,
+.hero-content .text-uiux {
+    margin: 0;
+}
+
 .hero-content .text-developer {
     margin: 0;
+    margin-top: -150px;
+}
+
+.floating-wrapper.inline-flower {
+    top: 1rem;
 }
 
 .hero-content .text-designer,
@@ -674,6 +691,8 @@
     .hero-content .text-ampersand {
         -webkit-text-stroke-width: 1.5px;
     }
+
+
 }
 
 /* Floating Elements */
@@ -834,8 +853,8 @@
     }
 
     .floating-cherry {
-        top: 55%;
-        right: 82%;
+        top: 35%;
+        right: 85%;
         opacity: 0.8;
     }
 
@@ -844,4 +863,8 @@
         right: -5%;
         opacity: 0.8;
     }
+}
+
+.floating-wrapper.inline-flower {
+    top: -0.1em;
 }

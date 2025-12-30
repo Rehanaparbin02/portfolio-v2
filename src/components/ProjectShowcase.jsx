@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import koaMockup from '../assets/koa-mockup.png';
 import './ProjectShowcase.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -9,19 +10,19 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
     {
         id: "01",
-        name: "Lumina Noir",
-        category: "E-Commerce",
-        description: "A luxury dark-mode e-commerce experience tailored for high-end fashion brands. Features seamless page transitions, WebGL product previews, and a bespoke checkout flow.",
-        imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop",
-        tags: ["Next.js", "WebGL", "Stripe", "GSAP"]
+        name: "Do-It: Manage with ease",
+        category: "Productivity",
+        description: "A task management app that helps users stay organized and productive by allowing them to create, prioritize, and track their tasks in one place.",
+        imageUrl: koaMockup,
+        tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"]
     },
     {
         id: "02",
-        name: "Vanguard",
+        name: "Koa - Budgeting made easy",
         category: "Fintech",
-        description: "Real-time dashboard for cryptocurrency trading with predictive analytics. Implements heavy data visualization using D3.js and efficient WebSocket connections.",
+        description: "A comprehensive personal finance tracker that simplifies money management by automating expense categorization, visualizing financial trends, and helping users plan smarter savings goals with clarity-driven dashboards.",
         imageUrl: "https://images.unsplash.com/photo-1611974717483-3600997e550e?q=80&w=2070&auto=format&fit=crop",
-        tags: ["React", "D3.js", "WebSockets", "Node.js"]
+        tags: ["React Native", "Figma", "Express.js", "Node.js", "Supabase", "Firebase"]
     },
     {
         id: "03",
@@ -202,7 +203,7 @@ export default function ProjectShowcase() {
                     <span className="arrow">←</span> <span>GO BACK</span>
                 </Link>
             </header>
-            <section className="project-showcase-hero" style={{ height: '45rem' }}>
+            <section className="project-showcase-hero">
                 <div className="hero-content">
                     <h1 className="hero-title">
                         <div>{splitText("CRAFTING")}</div>
@@ -258,7 +259,7 @@ export default function ProjectShowcase() {
                         </div>
 
                         <div className="project-card-visual">
-                            <div className="project-image-wrapper">
+                            <div className="project-image-wrapper" style={{ position: 'relative', top: '0rem' }}>
                                 <div className="img-overlay"></div>
                                 <img src={project.imageUrl} alt={project.name} className="project-image" />
                             </div>
