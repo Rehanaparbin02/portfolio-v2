@@ -93,7 +93,7 @@ const CustomCursor = () => {
             followerYTo(clientY);
 
             // Create glitter trail (throttle slightly if needed, but modern browsers handle this okay)
-            if (Math.random() > 0.5) { // 50% chance per frame to thin it out a bit if too dense
+            if (Math.random() > 0.92) { // 8% chance per frame to make it very sparse
                 createGlitter(clientX, clientY);
             }
         };
