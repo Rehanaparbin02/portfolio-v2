@@ -4,6 +4,12 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Home.css';
 
+import ribbon from '../assets/ribbon.png';
+import heart from '../assets/heart.png';
+import flower from '../assets/flower.png';
+import cherry from '../assets/cherry.png';
+import butterfly from '../assets/butterfly.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -31,7 +37,14 @@ export default function Home() {
                     duration: 0.6,
                     stagger: 0.2,
                     ease: "back.out(1.7)"
-                }, "-=0.5");
+                }, "-=0.5")
+                .from(".floating-wrapper", {
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "back.out(1.2)"
+                }, "-=0.8");
 
             // Parallax Scroll Effect
             gsap.to(".top-row", {
@@ -136,6 +149,60 @@ export default function Home() {
                 }
             });
 
+            // Floating Elements Parallax (Targets the wrappers)
+            gsap.to(".floating-ribbon", {
+                y: -200,
+                rotate: 45,
+                scrollTrigger: { trigger: containerRef.current, start: "top top", end: "bottom top", scrub: 1.5 }
+            });
+            gsap.to(".floating-heart", {
+                y: -150,
+                scale: 1.1,
+                scrollTrigger: { trigger: containerRef.current, start: "top top", end: "bottom top", scrub: 2 }
+            });
+            gsap.to(".floating-flower", {
+                y: -100,
+                rotate: -30,
+                scrollTrigger: { trigger: containerRef.current, start: "top top", end: "bottom top", scrub: 1.2 }
+            });
+            gsap.to(".floating-cherry", {
+                y: -180,
+                rotate: 20,
+                scrollTrigger: { trigger: containerRef.current, start: "top top", end: "bottom top", scrub: 1.8 }
+            });
+            gsap.to(".floating-butterfly", {
+                y: -250,
+                x: 50,
+                rotate: 15,
+                scrollTrigger: { trigger: containerRef.current, start: "top top", end: "bottom top", scrub: 2.5 }
+            });
+
+            // Continuous rotation for inline flower
+            gsap.to(".floating-wrapper.inline-flower .floating-item", {
+                rotation: 360,
+                duration: 8,
+                repeat: -1,
+                ease: "linear"
+            });
+
+            // Hover Effects for floating elements (Targets the images)
+            const floatingItems = document.querySelectorAll('.floating-item');
+            const getRotation = (el) => gsap.getProperty(el, "rotation");
+
+            floatingItems.forEach((el) => {
+                const isInline = el.parentElement?.classList.contains('inline-flower');
+
+                // Skip hover effects for the continuously rotating flower
+                if (isInline) return;
+
+                el.addEventListener('mouseenter', () => {
+                    gsap.to(el, { scale: 1.2, rotation: 10, duration: 0.4, ease: 'elastic.out(1, 0.3)' });
+                });
+                el.addEventListener('mouseleave', () => {
+                    gsap.to(el, { scale: 1, rotation: 0, duration: 0.4, ease: 'power2.out' });
+                });
+            });
+
         }, containerRef);
 
         return () => ctx.revert();
@@ -143,6 +210,21 @@ export default function Home() {
 
     return (
         <div className="home-container" id="home" ref={containerRef}>
+            {/* Floating Elements (Wrappers for Parallax, Images for Hover) */}
+            <div className="floating-wrapper floating-ribbon">
+                <img src={ribbon} alt="ribbon" className="floating-item" />
+            </div>
+            <div className="floating-wrapper floating-heart">
+                <img src={heart} alt="heart" className="floating-item" />
+            </div>
+            {/* Flower moved to text */}
+            <div className="floating-wrapper floating-cherry">
+                <img src={cherry} alt="cherry" className="floating-item" />
+            </div>
+            <div className="floating-wrapper floating-butterfly">
+                <img src={butterfly} alt="butterfly" className="floating-item" />
+            </div>
+
             <div className="hero-content">
                 <div className="top-row">
                     <h1 className="text-uiux">
@@ -187,10 +269,17 @@ export default function Home() {
                             <div className="handle br"></div>
                         </div>
                     </div>
-                    <h1 className="text-developer">
-                        {"DEVELOPER".split("").map((c, i) => (
-                            <span key={i} className="char" style={{ display: "inline-block" }}>{c}</span>
-                        ))}
+                    <h1 className="text-developer" style={{ position: "relative", right: "9rem", width: "96rem" }}>
+                        {"DEVELOPER".split("").map((c, i) => {
+                            if (c === "O") {
+                                return (
+                                    <div key={i} className="floating-wrapper floating-flower inline-flower" style={{ display: 'inline-block' }}>
+                                        <img src={flower} alt="O" className="floating-item" />
+                                    </div>
+                                );
+                            }
+                            return <span key={i} className="char" style={{ display: "inline-block" }}>{c}</span>
+                        })}
                     </h1>
                 </div>
             </div>
