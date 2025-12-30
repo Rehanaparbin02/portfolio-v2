@@ -230,6 +230,7 @@
     flex: 1;
     position: relative;
     overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%);
     mask-image: linear-gradient(to right, transparent 0%, black 15%);
 }
 
@@ -398,11 +399,12 @@
     }
 
     .project-showcase-hero {
-        padding: 0 6vw;
-    }
-
+           /* padding: 0 6vw; */
+           position: relative;
+           left: 6rem;
+       }
     .hero-title {
-        font-size: clamp(3rem, 9vw, 9rem);
+        font-size: clamp(3rem, 9vw, 8rem);
     }
 
     /* Adjust hero text to fit better */
@@ -589,6 +591,7 @@
         flex: 0 0 400px;
         /* Fixed height for image area */
         width: 100%;
+        -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
         mask-image: linear-gradient(to top, transparent 0%, black 15%);
     }
 

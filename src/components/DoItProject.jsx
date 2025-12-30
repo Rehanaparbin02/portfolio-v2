@@ -1,111 +1,92 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import koaMockup from '../assets/koa-mockup.png';
 import './DoItProject.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const DoItProject = () => {
-    const containerRef = useRef(null);
-    const heroImageRef = useRef(null);
-    const heroTitleRef = useRef(null);
-    const techStackRef = useRef(null);
+    const componentRef = useRef(null);
+    const heroTextRef = useRef(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
+        let ctx = gsap.context(() => {
             const tl = gsap.timeline();
-            // 1. Hero Entrance
-            tl.to(".doit-hero-image", {
-                scale: 1,
+
+            // --- HERO ANIMATION ---
+            // Use .from() for safer initialization (content visible if JS fails, hidden instantly if JS runs)
+            tl.from('.hero-visual', {
+                autoAlpha: 0,
+                scale: 0.2,
+                rotationX: 20,
                 duration: 2,
-                ease: "expo.inOut"
+                ease: "power3.out"
             })
-                .from(".doit-hero-title .char", {
-                    y: 150,
-                    opacity: 0,
-                    rotateX: -60,
-                    duration: 1.2,
-                    stagger: 0.03,
-                    ease: "power4.out"
+                .to('.hero-title-filled', {
+                    width: "100%",
+                    duration: 1.5,
+                    ease: "power2.inOut"
                 }, "-=1.5")
-                .to(".doit-hero-subtitle", {
-                    autoAlpha: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: "power3.out"
-                }, "-=0.8");
+                .from('.hero-meta span', {
+                    y: 20,
+                    autoAlpha: 0,
+                    stagger: 0.1,
+                    duration: 0.8
+                }, "-=1");
 
-            // Hero Mouse Parallax
-            const heroSection = document.querySelector('.doit-hero');
-            if (heroSection) {
-                heroSection.addEventListener('mousemove', (e) => {
-                    const { clientX, clientY } = e;
-                    const { innerWidth, innerHeight } = window;
-                    const xPos = (clientX / innerWidth - 0.5) * 20;
-                    const yPos = (clientY / innerHeight - 0.5) * 20;
-
-                    gsap.to(".doit-hero-content", {
-                        x: xPos,
-                        y: yPos,
-                        duration: 1,
-                        ease: "power2.out"
-                    });
-                    gsap.to(heroImageRef.current, {
-                        scale: 1.05,
-                        x: -xPos * 0.5,
-                        y: -yPos * 0.5,
-                        duration: 1.2,
-                        ease: "power2.out"
-                    });
-                });
-            }
-
-            // Tech Stack Spotlight Effect
-            const techSection = techStackRef.current;
-            if (techSection) {
-                techSection.addEventListener('mousemove', (e) => {
-                    const rect = techSection.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    techSection.style.setProperty('--mouse-x', `${x}px`);
-                    techSection.style.setProperty('--mouse-y', `${y}px`);
-                });
-            }
-
-            // Hero Scroll Parallax
-            gsap.to(heroImageRef.current, {
-                y: 200,
-                ease: "none",
+            // 3. Hero Scroll Effect (Parallax & Fade)
+            gsap.to('.hero-title-container', {
+                y: -100,
+                opacity: 0,
                 scrollTrigger: {
-                    trigger: ".doit-hero",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
+                    trigger: '.doit-hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1
                 }
             });
 
-            // 2. Section Titles Reveal
-            gsap.utils.toArray('.section-title').forEach(title => {
-                gsap.to(title, {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.8,
-                    scrollTrigger: {
-                        trigger: title,
-                        start: "top 80%",
-                        toggleActions: "play none none reverse"
-                    }
-                });
+            gsap.to('.hero-visual', {
+                y: 100,
+                scale: 0.8,
+                scrollTrigger: {
+                    trigger: '.doit-hero',
+                    start: 'top top',
+                    end: 'bottom 20%',
+                    scrub: 1
+                }
             });
 
-            // 3. Text Reveal (Lines)
-            gsap.utils.toArray('.doit-text h3, .doit-text p').forEach(el => {
+
+            // --- HORIZONTAL SCROLL SECTION (PROCESS) ---
+            const slides = gsap.utils.toArray('.h-slide');
+
+            if (slides.length > 0) {
+                const totalMove = 100 * (slides.length - 1);
+
+                gsap.to(slides, {
+                    xPercent: -totalMove,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".h-scroll-wrapper",
+                        pin: true,
+                        scrub: 1,
+                        start: "top top",
+                        end: "+=" + (slides.length * 100) + "%",
+                    }
+                });
+            }
+
+
+            // --- CONTENT REVEALS ---
+            gsap.utils.toArray('.reveal-text, .bento-item, .reflection-card, .visual-element').forEach(el => {
                 gsap.from(el, {
-                    y: 30,
+                    y: 50,
                     opacity: 0,
-                    duration: 0.8,
+                    duration: 1,
                     ease: "power3.out",
                     scrollTrigger: {
                         trigger: el,
@@ -115,401 +96,320 @@ const DoItProject = () => {
                 });
             });
 
-            // 4. Details Stagger
-            gsap.to('.doit-detail-item', {
-                y: 0,
-                opacity: 1,
-                duration: 0.8,
-                stagger: 0.1,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: '.doit-details',
-                    start: "top 80%"
-                }
-            });
-
-
-            // 5. Feature Cards 3D Flip In
-            gsap.utils.toArray('.feature-card').forEach((card, i) => {
-                gsap.to(card, {
-                    opacity: 1,
-                    transform: "translateY(0) rotateX(0)",
-                    duration: 0.8,
-                    delay: i * 0.1,
-                    ease: "back.out(1.2)",
-                    scrollTrigger: {
-                        trigger: ".features-grid", // Trigger on the grid, not individual
-                        start: "top 75%",
-                    }
-                });
-            });
-
-            // 6. Tech Stack reveal with card tilt
-            const techCards = gsap.utils.toArray('.tech-column');
-            techCards.forEach((card, i) => {
-                gsap.from(card, {
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.8,
-                    delay: i * 0.2,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: ".doit-tech-stack",
-                        start: "top 70%"
-                    }
-                });
-            });
-
-
-            // 7. Timeline Drawing Animation
-            const timelineLine = document.querySelector('.timeline-line-active');
-            gsap.to(timelineLine, {
-                height: "100%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".timeline",
-                    start: "top 60%",
-                    end: "bottom 80%",
-                    scrub: 1
-                }
-            });
-
-            gsap.utils.toArray('.timeline-item').forEach((item, i) => {
-                gsap.to(item, {
-                    opacity: 1,
-                    duration: 0.5,
-                    scrollTrigger: {
-                        trigger: item,
-                        start: "top 70%",
-                        toggleActions: "play reverse play reverse"
-                    }
-                });
-            });
-
-            // 8. Impact Counts
-            gsap.utils.toArray('.impact-stat').forEach((stat) => {
-                const numEl = stat.querySelector('.number');
-                const rawValue = numEl.innerText;
-                const value = parseInt(rawValue.replace(/,/g, '').replace('+', ''));
-                const isPlus = rawValue.includes('+');
-
+            // --- STATS COUNT UP ---
+            gsap.utils.toArray('.stat-item').forEach(stat => {
                 gsap.from(stat, {
-                    scale: 0.5,
+                    y: 30,
                     opacity: 0,
                     duration: 0.6,
-                    ease: "back.out(1.7)",
                     scrollTrigger: {
-                        trigger: '.impact-grid',
-                        start: "top 80%"
-                    }
-                });
-
-                ScrollTrigger.create({
-                    trigger: stat,
-                    start: "top 85%",
-                    once: true,
-                    onEnter: () => {
-                        let proxy = { val: 0 };
-                        gsap.to(proxy, {
-                            val: value,
-                            duration: 2,
-                            ease: "power2.out",
-                            onUpdate: () => {
-                                numEl.innerText = Math.floor(proxy.val).toLocaleString() + (isPlus ? '+' : isPlus === '%' ? '%' : '');
-                            }
-                        });
+                        trigger: '.stats-grid',
+                        start: 'top 85%'
                     }
                 });
             });
 
-            // 9. Gallery Image Reveal
-            gsap.utils.toArray('.gallery-image-wrapper').forEach(wrapper => {
-                const overlay = wrapper.querySelector('.gallery-overlay');
-                const img = wrapper.querySelector('img');
-
-                const tlG = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: wrapper,
-                        start: "top 75%"
-                    }
-                });
-
-                tlG.to(overlay, {
-                    scaleY: 0,
-                    transformOrigin: "top",
-                    duration: 1,
-                    ease: "power3.inOut"
-                })
-                    .from(img, {
-                        scale: 1.2,
-                        duration: 1.5,
-                        ease: "power2.out"
-                    }, "-=1");
-            });
-
-            // 10. Next Section Hover Effect
-            const nextSection = document.querySelector('.doit-next');
-            if (nextSection) {
-                nextSection.addEventListener('mouseenter', () => {
-                    gsap.to('.doit-next p', {
-                        scale: 1.1,
-                        duration: 0.6,
-                        ease: "power2.out"
-                    });
-                });
-                nextSection.addEventListener('mouseleave', () => {
-                    gsap.to('.doit-next p', {
-                        scale: 1,
-                        duration: 0.6,
-                        ease: "power2.out"
+            // --- TECH STACK HOVER EFFECT ---
+            const techSection = document.querySelector('.tech-section');
+            if (techSection) {
+                techSection.addEventListener('mousemove', (e) => {
+                    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                    gsap.to('.tech-grid', {
+                        x: x,
+                        y: y,
+                        duration: 1,
+                        ease: 'power2.out'
                     });
                 });
             }
 
-            // Refresh ScrollTrigger on load
-            window.addEventListener('load', () => ScrollTrigger.refresh());
-
-        }, containerRef);
+        }, componentRef);
 
         return () => ctx.revert();
     }, []);
 
-    const splitText = (text) => {
-        return text.split("").map((char, i) => (
-            <span key={i} className="char" style={{ display: 'inline-block' }}>
-                {char === " " ? "\u00A0" : char}
-            </span>
-        ));
-    };
-
     return (
-        <div className="doit-project-container" ref={containerRef}>
-            <header className="doit-header">
-                <Link to="/projects" className="back-link">
-                    <span className="arrow">←</span> <span>GO BACK</span>
-                </Link>
-            </header>
+        <div className="doit-wrapper" ref={componentRef}>
+            {/* Ambient Background Elements */}
+            <div className="floater f-1"></div>
+            <div className="floater f-2"></div>
+
+            <nav className="doit-nav">
+                <a href="#" onClick={(e) => { e.preventDefault(); navigate('/projects'); }} className="nav-back">
+                    <div className="nav-indicator">←</div>
+                    <span>Back to Portfolio</span>
+                </a>
+                <div className="nav-logo" style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }}>DO-IT.APP</div>
+            </nav>
+
             <section className="doit-hero">
-                <div className="doit-hero-content">
-                    <h1 className="doit-hero-title" ref={heroTitleRef}>
-                        {splitText("DO-IT")}
+                <div className="hero-visual">
+                    <img src={koaMockup} alt="DO-IT App Mockup" />
+                </div>
+
+                <div className="hero-title-container">
+                    <h1 className="hero-title" ref={heroTextRef}>
+                        DO-IT
+                        <span className="hero-title-filled">DO-IT</span>
                     </h1>
-                    <p className="doit-hero-subtitle">
-                        A Task Management Revolution
-                    </p>
+                    <div className="hero-meta">
+                        <span>IOS / ANDROID</span>
+                        <span>•</span>
+                        <span>PRODUCTIVITY</span>
+                        <span>•</span>
+                        <span>2024</span>
+                    </div>
                 </div>
-                <div className="doit-hero-image-wrapper">
-                    <img
-                        ref={heroImageRef}
-                        src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop"
-                        alt="DO-IT App Hero"
-                        className="doit-hero-image"
-                    />
+
+                <div className="scroll-prompt">SCROLL TO DISCOVER</div>
+            </section>
+
+            <div className="content-block">
+                <div className="stats-grid">
+                    <div className="stat-item">
+                        <span className="stat-value">8 Weeks</span>
+                        <span className="stat-label">Development Time</span>
+                    </div>
+                    <div className="stat-item">
+                        <span className="stat-value">8.5k+</span>
+                        <span className="stat-label">Lines of Code</span>
+                    </div>
+                    <div className="stat-item">
+                        <span className="stat-value">18</span>
+                        <span className="stat-label">Screens</span>
+                    </div>
+                    <div className="stat-item">
+                        <span className="stat-value">Zero</span>
+                        <span className="stat-label">Friction</span>
+                    </div>
+                </div>
+
+                <div className="story-layout">
+                    <h2 className="story-heading reveal-text">
+                        Overview
+                    </h2>
+                    <div className="story-text reveal-text">
+                        <p>
+                            DO-IT is a <span style={{ color: 'var(--accent-secondary)', fontWeight: 600 }}>full-stack, cross-platform productivity application</span> built with React Native and Expo. It delivers a comprehensive task management experience with a powerful offline-first architecture.
+                        </p>
+                        <p>
+                            Featuring an innovative guest mode, custom spaces, rich media attachments, and integrated productivity tools like Pomodoro timers—it consolidates scattered workflows into one calm, intelligent interface.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="story-layout" style={{ marginTop: '-5vh' }}>
+                    <h2 className="story-heading reveal-text">
+                        The Challenge
+                    </h2>
+                    <div className="story-text reveal-text">
+                        <p>
+                            Modern professionals struggle with fragmented tools. Notes live in one app, tasks in another, and timers in a third. Existing solutions often enforce mandatory sign-ups, creating barriers to entry.
+                        </p>
+                        <p>
+                            The goal was to build a <span style={{ color: 'var(--accent-secondary)', fontWeight: 600 }}>unified, native mobile experience</span> that organizes thoughts and tasks efficiently while respecting privacy and offering immediate value through friction-free onboarding.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {/* --- KEY FEATURES (BENTO GRID) --- */}
+            <div className="content-block">
+                <span className="section-label">KEY FEATURES</span>
+                <h2 className="story-heading reveal-text" style={{ marginBottom: '4rem' }}>
+                    INTELLIGENT DESIGN
+                </h2>
+
+                <div className="bento-grid">
+                    <div className="bento-item large">
+                        <div className="bento-icon">🎭</div>
+                        <h3>Frictionless Guest Mode</h3>
+                        <p>Start instantly without an account. Full functionality with local storage, isolated sessions, and seamless migration to authenticated accounts whenever you're ready.</p>
+                    </div>
+                    <div className="bento-item">
+                        <div className="bento-icon">📂</div>
+                        <h3>Smart Workspaces</h3>
+                        <p>Organize notes into custom Spaces. Dedicated contexts keep your work separated from personal projects.</p>
+                    </div>
+                    <div className="bento-item">
+                        <div className="bento-icon">⚡</div>
+                        <h3>Native Speed</h3>
+                        <p>Built with React Native Reanimated for 60fps gesture-driven interactions that feel magical.</p>
+                    </div>
+                    <div className="bento-item large">
+                        <div className="bento-icon">📡</div>
+                        <h3>Offline-First Architecture</h3>
+                        <p>Full functionality without internet. Changes sync automatically to Supabase when connectivity returns, with conflict resolution and optimistic UI updates.</p>
+                    </div>
+                    <div className="bento-item">
+                        <div className="bento-icon">📎</div>
+                        <h3>Rich Media</h3>
+                        <p>Attach photos, videos, PDFs, and audio recordings directly to notes.</p>
+                    </div>
+                    <div className="bento-item large">
+                        <div className="bento-icon">🧩</div>
+                        <h3>Android Widgets</h3>
+                        <p>Interactive home screen widgets for recent notes and quick creation without launching the app, featuring deep linking.</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Horizontal Scroll Section (Process) */}
+            <div className="h-scroll-wrapper">
+                <div className="horizontal-scroll-container">
+                    <div className="h-slide">
+                        <div className="h-slide-content">
+                            <span className="section-label">01. DISCOVERY</span>
+                            <h3>USER PAIN POINTS</h3>
+                            <p>Analysis revealed that mandatory sign-ups constitute the biggest drop-off point. Users want to test utility before committing to an identity.</p>
+                        </div>
+                        <div className="h-slide-image">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974" alt="Research" />
+                        </div>
+                    </div>
+                    <div className="h-slide">
+                        <div className="h-slide-content">
+                            <span className="section-label">02. INFORMATION ARCHITECTURE</span>
+                            <h3>THE GUEST PARADIGM</h3>
+                            <p>We designed a dual-track data layer: local SQLite (WatermelonDB) for guests, and Supabase for cloud sync. The switch is invisible to the user.</p>
+                        </div>
+                        <div className="h-slide-image">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070" alt="Architecture" />
+                        </div>
+                    </div>
+                    <div className="h-slide">
+                        <div className="h-slide-content">
+                            <span className="section-label">03. VISUAL LANGUAGE</span>
+                            <h3>DARK MODE NATIVE</h3>
+                            <p>Using deep navy tones (#050505) and vibrant green/cyan accents to create a sense of focus and energy without eye strain.</p>
+                        </div>
+                        <div className="h-slide-image">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070" alt="Design" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* --- VISUAL SYSTEM --- */}
+            <div className="content-block visuals-section">
+                <div className="story-layout">
+                    <div>
+                        <span className="section-label">VISUAL IDENTITY</span>
+                        <h2 className="story-heading reveal-text" style={{ marginTop: '1rem' }}>
+                            SYSTEM DESIGN
+                        </h2>
+                        <p className="reveal-text story-text" style={{ marginTop: '2rem' }}>
+                            The interface uses a strict 8px grid system and system fonts to feel entirely native. The color palette is designed to convey trust (navy) and energy (neon green).
+                        </p>
+                        <div className="color-palette reveal-text">
+                            <div className="color-swatch" style={{ background: '#0A0A0A', color: '#fff' }}>DEEP VOID</div>
+                            <div className="color-swatch" style={{ background: '#22C55E', color: '#000' }}>NEON GREEN</div>
+                            <div className="color-swatch" style={{ background: '#06B6D4', color: '#fff' }}>CYAN</div>
+                            <div className="color-swatch" style={{ background: '#3B82F6', color: '#fff' }}>ELECTRIC</div>
+                        </div>
+                    </div>
+                    <div className="visual-element">
+                        <div className="typography-preview">
+                            <div style={{ opacity: 0.5, fontSize: '1rem', letterSpacing: '0.2em', marginBottom: '1rem' }}>
+                                TYPOGRAPHY
+                            </div>
+                            Space Grotesk<br />
+                            <span style={{ fontFamily: 'var(--font-display)', fontSize: '2rem' }}>SYNCOPATE DISPLAY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* --- DEVELOPMENT HIGHLIGHTS --- */}
+            <div className="content-block">
+                <div className="story-layout">
+                    <div>
+                        <span className="section-label">ENGINEERING</span>
+                        <h2 className="story-heading reveal-text" style={{ marginTop: '1rem' }}>
+                            UNDER THE HOOD
+                        </h2>
+                    </div>
+                    <div className="dev-highlights reveal-text">
+                        <ul className="highlight-list">
+                            <li>
+                                <span>Architecture</span>
+                                <strong>Offline-First / Local-First</strong>
+                            </li>
+                            <li>
+                                <span>Backend</span>
+                                <strong>Supabase + PostgreSQL</strong>
+                            </li>
+                            <li>
+                                <span>State</span>
+                                <strong>Zustand + React Query</strong>
+                            </li>
+                            <li>
+                                <span>Forms</span>
+                                <strong>Zod + Hook Form</strong>
+                            </li>
+                            <li>
+                                <span>Performance</span>
+                                <strong>Memoization + Virtualization</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {/* --- TECH STACK CARDS --- */}
+            <section className="tech-section">
+                <span className="section-label">FULL STACK</span>
+                <h2 className="story-heading" style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                    TECHNOLOGIES
+                </h2>
+
+                <div className="tech-grid">
+                    <div className="tech-card">React Native 0.81</div>
+                    <div className="tech-card">Expo SDK 54</div>
+                    <div className="tech-card">TypeScript</div>
+                    <div className="tech-card">Supabase Auth</div>
+                    <div className="tech-card">PostgreSQL RLS</div>
+                    <div className="tech-card">Edge Functions</div>
+                    <div className="tech-card">Reanimated 3</div>
+                    <div className="tech-card">FlashList</div>
                 </div>
             </section>
 
-            <section className="doit-content">
-                <div className="doit-section doit-details">
-                    <div className="doit-detail-item">
-                        <span className="label">Role</span>
-                        <span className="value">Solo Developer</span>
+            {/* --- REFLECTIONS --- */}
+            <div className="content-block">
+                <span className="section-label">KEY LEARNINGS</span>
+                <h2 className="story-heading reveal-text" style={{ marginBottom: '4rem' }}>
+                    REFLECTIONS
+                </h2>
+                <div className="reflections-grid">
+                    <div className="reflection-card reveal-text">
+                        <div className="reflection-icon">📡</div>
+                        <h4>Offline-First Simplicity</h4>
+                        <p>Writing to local storage first, then syncing, removed most network edge cases and made failure modes predictable.</p>
                     </div>
-                    <div className="doit-detail-item">
-                        <span className="label">Timeline</span>
-                        <span className="value">8 Weeks (Agile)</span>
+                    <div className="reflection-card reveal-text">
+                        <div className="reflection-icon">🚪</div>
+                        <h4>Guest Mode Wins</h4>
+                        <p>Letting users try DO-IT without an account turned "maybe later" into real engaged sessions.</p>
                     </div>
-                    <div className="doit-detail-item">
-                        <span className="label">Stack</span>
-                        <span className="value">React Native, Expo, Supabase</span>
+                    <div className="reflection-card reveal-text">
+                        <div className="reflection-icon">⚡</div>
+                        <h4>Perceived Performance</h4>
+                        <p>Optimistic UI and background worker queues make the app feel instant, regardless of actual network latency.</p>
+                    </div>
+                    <div className="reflection-card reveal-text">
+                        <div className="reflection-icon">📊</div>
+                        <h4>Behavior Over Requests</h4>
+                        <p>Analytics showed users valued quick capture widgets far more than deep organizational folders, shifting our roadmap.</p>
                     </div>
                 </div>
+            </div>
 
-                <div className="doit-section doit-overview">
-                    <div className="doit-label">The Concept</div>
-                    <div className="doit-text">
-                        <h3>The Story Behind the App</h3>
-                        <p>
-                            In a world where productivity apps multiplied faster than the tasks they promised to organize, professionals and students found themselves trapped in digital chaos. The promise of productivity had become a burden.
-                        </p>
-                        <p>
-                            DO-IT emerged from a simple realization: productivity tools should remove friction, not create it. The vision was clear—build a single, native mobile experience that could handle everything from quick notes to complex project management, without forcing users through unnecessary gates.
-                        </p>
-                        <h3>The Challenge</h3>
-                        <p>
-                            **Barrier to Entry:** Every app demanded an account before revealing its value.<br />
-                            **Fragmented Experience:** Notes lived in one app, tasks in another.<br />
-                            **Mobile-First Gaps:** Most apps were desktop tools squeezed into mobile screens.<br />
-                        </p>
-                    </div>
-                </div>
-
-                <div className="doit-section doit-solutions">
-                    <h2 className="section-title">The Solution Takes Shape</h2>
-                    <div className="features-grid">
-                        <div className="feature-card">
-                            <h4>Frictionless Beginning</h4>
-                            <p>No splash screens, no sign-ups. The app opens to full functionality immediately. Guest mode is the real experience.</p>
-                        </div>
-                        <div className="feature-card">
-                            <h4>Unified Intelligence</h4>
-                            <p>Notes, Spaces, and Pomodoro timers live together. One app, one interface, one source of truth.</p>
-                        </div>
-                        <div className="feature-card">
-                            <h4>Native Speed</h4>
-                            <p>Built with React Native & Expo for buttery smooth Reanimated transitions and Native performance.</p>
-                        </div>
-                        <div className="feature-card">
-                            <h4>Offline-First</h4>
-                            <p>Local-first architecture. Every action writes to storage instantly and syncs to Supabase in the background.</p>
-                        </div>
-                        <div className="feature-card">
-                            <h4>Instant Access</h4>
-                            <p>Android home screen widgets enable one-tap note creation and deep linking.</p>
-                        </div>
-                        <div className="feature-card">
-                            <h4>Privacy by Design</h4>
-                            <p>Guest sessions are isolated. Data stays local until you choose to sync.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="doit-section doit-tech-stack" ref={techStackRef}>
-                    <h2 className="section-title">Technical Foundation</h2>
-                    <div className="tech-content">
-                        <div className="tech-column">
-                            <div className="tech-column-header">
-                                <span className="tech-icon">⚡</span>
-                                <h3>Frontend</h3>
-                            </div>
-                            <div className="tech-items-grid">
-                                <div className="tech-chip">React Native 0.81</div>
-                                <div className="tech-chip">Expo SDK 54</div>
-                                <div className="tech-chip">React Navigation</div>
-                                <div className="tech-chip">Zod + Hook Form</div>
-                                <div className="tech-chip">Reanimated</div>
-                                <div className="tech-chip">FlashList</div>
-                            </div>
-                        </div>
-                        <div className="tech-column">
-                            <div className="tech-column-header">
-                                <span className="tech-icon">🔒</span>
-                                <h3>Backend</h3>
-                            </div>
-                            <div className="tech-items-grid">
-                                <div className="tech-chip">Supabase</div>
-                                <div className="tech-chip">PostgreSQL</div>
-                                <div className="tech-chip">Edge Functions</div>
-                                <div className="tech-chip">Row Level Security</div>
-                                <div className="tech-chip">Realtime Sync</div>
-                            </div>
-                        </div>
-                        <div className="tech-column">
-                            <div className="tech-column-header">
-                                <span className="tech-icon">🏗️</span>
-                                <h3>Architecture</h3>
-                            </div>
-                            <div className="tech-items-grid">
-                                <div className="tech-chip">Offline-First</div>
-                                <div className="tech-chip">Optimistic UI</div>
-                                <div className="tech-chip">Custom Contexts</div>
-                                <div className="tech-chip">Deep Linking</div>
-                                <div className="tech-chip">Widgets</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="doit-section doit-design-journey">
-                    <h2 className="section-title">The Design Journey</h2>
-                    <div className="timeline">
-                        <div className="timeline-line-active"></div>
-                        <div className="timeline-item">
-                            <span className="timeline-dot"></span>
-                            <div className="timeline-content">
-                                <h4>Research & Discovery</h4>
-                                <p>Studied how people use productivity apps. Identified personas: the quick capturer, the project organizer, and the focused worker.</p>
-                            </div>
-                        </div>
-                        <div className="timeline-item">
-                            <span className="timeline-dot"></span>
-                            <div className="timeline-content">
-                                <h4>Information Architecture</h4>
-                                <p>Focused on progressive disclosure. Navigation centers around a home hub where Spaces live and quick actions float within reach.</p>
-                            </div>
-                        </div>
-                        <div className="timeline-item">
-                            <span className="timeline-dot"></span>
-                            <div className="timeline-content">
-                                <h4>Wireframing & Prototyping</h4>
-                                <p>Explored gesture patterns. High-fidelity prototypes in Figma tested micro-animations and state transitions.</p>
-                            </div>
-                        </div>
-                        <div className="timeline-item">
-                            <span className="timeline-dot"></span>
-                            <div className="timeline-content">
-                                <h4>Visual Language</h4>
-                                <p>Dark-first theme (#050505) with Green accents (#22C55E) for energy and Blue tones (#3B82F6) for navigation.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="doit-section doit-impact">
-                    <h2 className="section-title">Impact & Results</h2>
-                    <div className="impact-grid">
-                        <div className="impact-stat">
-                            <span className="number">8,500+</span>
-                            <span className="desc">Lines of Code</span>
-                        </div>
-                        <div className="impact-stat">
-                            <span className="number">18</span>
-                            <span className="desc">Screens</span>
-                        </div>
-                        <div className="impact-stat">
-                            <span className="number">80%</span>
-                            <span className="desc">Faster Load Times</span>
-                        </div>
-                        <div className="impact-stat">
-                            <span className="number">15</span>
-                            <span className="desc">Beta Testers</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="doit-section doit-gallery">
-                    <div className="doit-label">Screenshots</div>
-                    <div className="gallery-image-wrapper">
-                        <div className="gallery-overlay"></div>
-                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=2070&auto=format&fit=crop" alt="Interface" />
-                        <p className="caption">Smart Workspace Organization with native gesture handling</p>
-                    </div>
-                    <div className="gallery-image-wrapper">
-                        <div className="gallery-overlay"></div>
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop" alt="Mobile Code" />
-                        <p className="caption">Built for speed: Virtualized lists handling thousands of items</p>
-                    </div>
-                </div>
-
-                <div className="doit-section doit-lessons">
-                    <div className="doit-label">Key Takeaways</div>
-                    <div className="doit-text">
-                        <h3>Lessons Learned</h3>
-                        <blockquote>
-                            "Guest Mode Beats Forced Sign-Up. Letting users experience full functionality without commitment transformed 'maybe later' into engaged sessions."
-                        </blockquote>
-                        <p>
-                            <strong>Offline-First Simplifies Everything:</strong> Writing to local storage first eliminated most network edge cases.<br />
-                            <strong>Speed Is Part of the Experience:</strong> Virtualized lists and memoization made screens feel instant.<br />
-                            <strong>Behavior Trumps Requests:</strong> Analytics revealed users valued quick access widgets more than complex organization.
-                        </p>
-                    </div>
-                </div>
-
-                <div className="doit-section doit-next" onClick={() => navigate('/projects')}>
-                    <h2>Back to</h2>
-                    <p>All Projects</p>
-                </div>
-            </section>
+            <div className="next-project-footer" onClick={() => navigate('/projects')}>
+                <span className="next-label">NEXT PROJECT</span>
+                <h2 className="next-title">ALL<br />PROJECTS</h2>
+            </div>
         </div>
     );
 };

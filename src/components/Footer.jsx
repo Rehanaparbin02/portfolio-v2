@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,7 +12,7 @@ export default function Footer() {
     const contentRef = useRef(null);
     const bottomRef = useRef(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const ctx = gsap.context(() => {
             // 1. Reveal Animation for the entire footer section
             gsap.fromTo(footerRef.current,
@@ -108,8 +108,23 @@ export default function Footer() {
                 });
             });
 
-            // Refresh ScrollTrigger on load
-            window.addEventListener('load', () => ScrollTrigger.refresh());
+            // Robust Refresh Logic
+            ScrollTrigger.refresh();
+            const handleLoad = () => ScrollTrigger.refresh();
+
+            if (document.readyState === 'complete') {
+                ScrollTrigger.refresh();
+            } else {
+                window.addEventListener('load', handleLoad);
+            }
+
+            // Fallback refresh for layout shifts
+            const timeout = setTimeout(() => ScrollTrigger.refresh(), 500);
+
+            return () => {
+                window.removeEventListener('load', handleLoad);
+                clearTimeout(timeout);
+            };
 
         }, footerRef);
 

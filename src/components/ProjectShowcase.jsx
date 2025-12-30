@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import koaMockup from '../assets/koa-mockup.png';
 import './ProjectShowcase.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -13,7 +12,7 @@ const projects = [
         name: "Do-It: Manage with ease",
         category: "Productivity",
         description: "A task management app that helps users stay organized and productive by allowing them to create, prioritize, and track their tasks in one place.",
-        imageUrl: koaMockup,
+        imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
         tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"]
     },
     {

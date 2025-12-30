@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
+import emailjs from '@emailjs/browser';
 import stampImg from '../assets/stamp.png';
 import './Contact.css';
 
@@ -8,6 +9,14 @@ export default function Contact() {
     const contactRef = useRef(null);
     const formRef = useRef(null);
     const infoRef = useRef(null);
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
+
+    // Replace these with your EmailJS credentials
+    const SERVICE_ID = 'service_d1oecta';
+    const TEMPLATE_ID = 'template_tgkgak9';
+    const PUBLIC_KEY = '_3ds4Qyhq-FP5hjqA';
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -68,9 +77,50 @@ export default function Contact() {
         return () => ctx.revert();
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted");
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        // Get form data
+        const formData = {
+            from_name: e.target.name.value,
+            from_email: e.target.email.value,
+            subject: e.target.subject.value,
+            message: e.target.message.value,
+        };
+
+        try {
+            // Send email using EmailJS
+            const response = await emailjs.send(
+                SERVICE_ID,
+                TEMPLATE_ID,
+                formData,
+                PUBLIC_KEY
+            );
+
+            console.log('Email sent successfully:', response);
+            setSubmitStatus('success');
+
+            // Reset form
+            e.target.reset();
+
+            // Clear success message after 5 seconds
+            setTimeout(() => {
+                setSubmitStatus(null);
+            }, 5000);
+
+        } catch (error) {
+            console.error('Email sending failed:', error);
+            setSubmitStatus('error');
+
+            // Clear error message after 5 seconds
+            setTimeout(() => {
+                setSubmitStatus(null);
+            }, 5000);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -116,24 +166,55 @@ export default function Contact() {
                     <form className="contact-form" onSubmit={handleSubmit}>
                         <div className="form-left">
                             <div className="form-group">
-                                <textarea id="message" className="form-input" placeholder=" " required></textarea>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    className="form-input"
+                                    placeholder=" "
+                                    required
+                                    disabled={isSubmitting}
+                                ></textarea>
                                 <label htmlFor="message" className="form-label">Dear Rehana...</label>
                             </div>
                         </div>
 
                         <div className="form-right">
                             <div className="form-group">
-                                <input type="text" id="name" className="form-input" placeholder=" " required />
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    className="form-input"
+                                    placeholder=" "
+                                    required
+                                    disabled={isSubmitting}
+                                />
                                 <label htmlFor="name" className="form-label">Your Name</label>
                             </div>
 
                             <div className="form-group">
-                                <input type="email" id="email" className="form-input" placeholder=" " required />
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    className="form-input"
+                                    placeholder=" "
+                                    required
+                                    disabled={isSubmitting}
+                                />
                                 <label htmlFor="email" className="form-label">Your Email</label>
                             </div>
 
                             <div className="form-group">
-                                <input type="text" id="subject" className="form-input" placeholder=" " required />
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    name="subject"
+                                    className="form-input"
+                                    placeholder=" "
+                                    required
+                                    disabled={isSubmitting}
+                                />
                                 <label htmlFor="subject" className="form-label">Subject</label>
                             </div>
 
@@ -145,14 +226,48 @@ export default function Contact() {
                         </div>
 
                         <div className="submit-btn-wrapper">
-                            <button type="submit" className="submit-btn">
-                                Post Message
+                            <button
+                                type="submit"
+                                className="submit-btn"
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? 'Sending...' : 'Post Message'}
                             </button>
                         </div>
+
+                        {/* Status Messages */}
+                        {submitStatus === 'success' && (
+                            <div style={{
+                                gridColumn: '1 / -1',
+                                textAlign: 'center',
+                                padding: '1rem',
+                                background: '#d4edda',
+                                color: '#155724',
+                                borderRadius: '4px',
+                                marginTop: '1rem',
+                                border: '1px solid #c3e6cb'
+                            }}>
+                                ✓ Message sent successfully! I'll get back to you soon.
+                            </div>
+                        )}
+
+                        {submitStatus === 'error' && (
+                            <div style={{
+                                gridColumn: '1 / -1',
+                                textAlign: 'center',
+                                padding: '1rem',
+                                background: '#f8d7da',
+                                color: '#721c24',
+                                borderRadius: '4px',
+                                marginTop: '1rem',
+                                border: '1px solid #f5c6cb'
+                            }}>
+                                ✗ Failed to send message. Please try again or email me directly.
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>
         </div>
     );
 }
-
