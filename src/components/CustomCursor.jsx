@@ -1,33 +1,82 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import './CustomCursor.css';
+import starIcon from '../assets/star.png';
 
 const CustomCursor = () => {
     const cursorRef = useRef(null);
+    const starRef = useRef(null); // New ref for independent rotation
     const followerRef = useRef(null);
-    const trailRefs = useRef([]);
     const mousePos = useRef({ x: 0, y: 0 });
     const isHovering = useRef(false);
 
     useEffect(() => {
         const cursor = cursorRef.current;
+        const star = starRef.current;
         const follower = followerRef.current;
-        const trails = trailRefs.current;
 
-        if (!cursor || !follower) return;
+        if (!cursor || !follower || !star) return;
 
-        // GSAP QuickTo for ultra-smooth movement
+        // Center the anchor point
+        gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+        gsap.set(follower, { xPercent: -50, yPercent: -50 });
+
+        // Continuous rotation applied SEPARATELY to the inner image
+        // This avoids conflicts with the quickTo x/y transforms on the parent
+        gsap.to(star, { rotation: 360, duration: 12, repeat: -1, ease: "linear" });
+
+        // GSAP QuickTo for ultra-smooth movement on the parent cursor
         const xTo = gsap.quickTo(cursor, "x", { duration: 0.1, ease: "power2.out" });
         const yTo = gsap.quickTo(cursor, "y", { duration: 0.1, ease: "power2.out" });
 
         const followerXTo = gsap.quickTo(follower, "x", { duration: 0.4, ease: "power3.out" });
         const followerYTo = gsap.quickTo(follower, "y", { duration: 0.4, ease: "power3.out" });
 
-        // Trail quickSetters
-        const trailQuickTo = trails.map((trail, i) => ({
-            x: gsap.quickTo(trail, "x", { duration: 0.15 + i * 0.1, ease: "power2.out" }),
-            y: gsap.quickTo(trail, "y", { duration: 0.15 + i * 0.1, ease: "power2.out" })
-        }));
+        const createGlitter = (x, y) => {
+            const particle = document.createElement('div');
+            particle.classList.add('glitter-particle');
+            document.body.appendChild(particle);
+
+            // Size: 5px to 20px
+            const size = Math.random() * 15 + 5;
+
+            // Initial Random Rotation
+            const rotation = Math.random() * 360;
+
+            // Set initial state
+            gsap.set(particle, {
+                x: x,
+                y: y,
+                width: size,
+                height: size,
+                rotation: rotation,
+                opacity: 0,
+                scale: 0
+            });
+
+            // Animate
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    particle.remove();
+                }
+            });
+
+            tl.to(particle, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.15,
+                ease: "power2.out"
+            })
+                .to(particle, {
+                    x: x + (Math.random() - 0.5) * 40,
+                    y: y + (Math.random() - 0.5) * 40,
+                    rotation: rotation + 180,
+                    scale: 0,
+                    opacity: 0,
+                    duration: 0.5 + Math.random() * 0.5,
+                    ease: "power2.in"
+                });
+        };
 
         const onMouseMove = (e) => {
             const { clientX, clientY } = e;
@@ -35,7 +84,7 @@ const CustomCursor = () => {
 
             // Show cursor on first move
             if (cursor.style.opacity === "0" || !cursor.style.opacity) {
-                gsap.to([cursor, follower, trails], { opacity: 1, duration: 0.3 });
+                gsap.to([cursor, follower], { opacity: 1, duration: 0.3 });
             }
 
             xTo(clientX);
@@ -43,34 +92,32 @@ const CustomCursor = () => {
             followerXTo(clientX);
             followerYTo(clientY);
 
-            trailQuickTo.forEach(t => {
-                t.x(clientX);
-                t.y(clientY);
-            });
+            // Create glitter trail (throttle slightly if needed, but modern browsers handle this okay)
+            if (Math.random() > 0.5) { // 50% chance per frame to thin it out a bit if too dense
+                createGlitter(clientX, clientY);
+            }
         };
 
         const onMouseDown = () => {
-            gsap.to(cursor, { scale: 0.7, duration: 0.2 });
-            gsap.to(follower, { scale: 0.8, duration: 0.2 });
+            gsap.to(cursor, { scale: 0.8, duration: 0.15, ease: "power2.out" });
+            gsap.to(follower, { scale: 1.2, duration: 0.15, ease: "power2.out" });
         };
 
         const onMouseUp = () => {
-            gsap.to(cursor, { scale: isHovering.current ? 1.5 : 1, duration: 0.2 });
-            gsap.to(follower, { scale: isHovering.current ? 2 : 1, duration: 0.2 });
+            gsap.to(cursor, { scale: isHovering.current ? 1.5 : 1, duration: 0.15, ease: "back.out(1.7)" });
+            gsap.to(follower, { scale: isHovering.current ? 1.8 : 1, duration: 0.15, ease: "back.out(1.7)" });
         };
 
         const onMouseEnterLink = () => {
             isHovering.current = true;
-            gsap.to(cursor, { scale: 1.5, duration: 0.3, ease: "back.out(1.7)" });
-            gsap.to(follower, { scale: 2, duration: 0.3, ease: "back.out(1.7)", borderColor: "rgba(255,255,255,0.8)" });
-            gsap.to(trails, { opacity: 0, duration: 0.2 });
+            gsap.to(cursor, { scale: 1.5, duration: 0.3, ease: "back.out(2)" });
+            gsap.to(follower, { opacity: 0, duration: 0.2 });
         };
 
         const onMouseLeaveLink = () => {
             isHovering.current = false;
             gsap.to(cursor, { scale: 1, duration: 0.3, ease: "power2.out" });
-            gsap.to(follower, { scale: 1, duration: 0.3, ease: "power2.out", borderColor: "rgba(255,255,255,0.4)" });
-            gsap.to(trails, { opacity: 1, duration: 0.3, stagger: 0.05 });
+            gsap.to(follower, { opacity: 1, duration: 0.2 });
         };
 
         window.addEventListener('mousemove', onMouseMove);
@@ -117,30 +164,17 @@ const CustomCursor = () => {
 
     return (
         <div className="custom-cursor-wrapper">
-            {/* Trail Elements */}
-            {[...Array(3)].map((_, i) => (
-                <div
-                    key={i}
-                    ref={el => trailRefs.current[i] = el}
-                    className="cursor-trail"
-                    style={{
-                        zIndex: 9998 - i,
-                        opacity: 0.3 - i * 0.1
-                    }}
-                />
-            ))}
-
-            {/* Main Follower Ring */}
+            {/* Background Glow Follower */}
             <div
                 ref={followerRef}
-                className="cursor-follower-ring"
+                className="cursor-follower-glow"
             />
 
-            {/* Core Dot Cursor */}
-            <div
-                ref={cursorRef}
-                className="cursor-core-dot"
-            />
+            {/* Main Star Cursor */}
+            <div ref={cursorRef} className="cursor-star">
+                {/* Apply ref to image for independent rotation */}
+                <img ref={starRef} src={starIcon} alt="cursor" className="star-icon" />
+            </div>
         </div>
     );
 };

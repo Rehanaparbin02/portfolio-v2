@@ -8,68 +8,59 @@
     z-index: 9999;
 }
 
-.cursor-core-dot {
+.cursor-star {
     position: fixed;
     top: 0;
     left: 0;
-    width: 12px;
-    height: 12px;
-    margin-top: -6px;
-    margin-left: -6px;
-    background: #ffffff;
-    border-radius: 50%;
+    width: 50px;
+    /* Adjust based on star.png aspect ratio */
+    height: 50px;
     pointer-events: none;
     z-index: 10000;
-    mix-blend-mode: difference;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    /* mix-blend-mode: difference; Optional: might look cool or weird with an image */
     will-change: transform;
     opacity: 0;
     /* Hidden initially */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.cursor-follower-ring {
+.star-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+}
+
+.cursor-follower-glow {
     position: fixed;
     top: 0;
     left: 0;
-    width: 40px;
-    height: 40px;
-    margin-top: -20px;
-    margin-left: -20px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
     pointer-events: none;
     z-index: 9999;
-    mix-blend-mode: difference;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent 70%);
-    will-change: transform;
+    will-change: transform, opacity;
     opacity: 0;
     /* Hidden initially */
+    mix-blend-mode: screen;
 }
 
-.cursor-trail {
+.glitter-particle {
     position: fixed;
     top: 0;
     left: 0;
-    width: 20px;
-    height: 20px;
-    margin-top: -10px;
-    margin-left: -10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
     pointer-events: none;
-    mix-blend-mode: difference;
-    will-change: transform;
-    opacity: 0;
-    /* Hidden initially */
-}
-
-.cursor-particle {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9997;
-    mix-blend-mode: difference;
+    z-index: 9998;
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 15%, rgba(200, 200, 200, 0.9) 40%, rgba(255, 255, 255, 0) 70%);
+    /* 4-point distinct sparkle shape */
+    clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
     will-change: transform, opacity;
+    mix-blend-mode: difference;
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.5));
 }
 
 /* Hide default cursor globally */
