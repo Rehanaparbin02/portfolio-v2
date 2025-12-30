@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ProjectShowcase.css';
@@ -194,8 +194,13 @@ export default function ProjectShowcase() {
             <div className="bg-glow"></div>
             <div className="bg-glow-2"></div>
 
+            <header className="project-showcase-header">
+                <Link to="/" className="back-link">
+                    <span className="arrow">←</span> <span>GO BACK</span>
+                </Link>
+            </header>
             <section className="project-showcase-hero">
-                <span className="hero-sub">Curation 2024-25</span>
+                {/* <span className="hero-sub">Curation 2024-25</span> */}
                 <h1 className="hero-title">
                     <div>{splitText("CRAFTING")}</div>
                     <div className="outline">{splitText("DIGITAL")}</div>

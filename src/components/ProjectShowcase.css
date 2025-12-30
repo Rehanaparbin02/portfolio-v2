@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Oleo+Script:wght@400;700&family=Sofia&display=swap');
+
 /* Basic Responsiveness & Fluid Typography */
 :root {
     --card-height: 70vh;
@@ -21,6 +23,42 @@
     margin-bottom: 25vh;
 }
 
+/* Header & Back Link */
+.project-showcase-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 5vw;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: difference;
+}
+
+.back-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.3s ease;
+}
+
+.back-link:hover {
+    transform: translateX(-10px);
+}
+
+.back-link .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
 .hero-sub {
     font-size: clamp(0.9rem, 1.2vw, 1.2rem);
     color: rgba(255, 255, 255, 0.6);
@@ -34,19 +72,24 @@
 .hero-title {
     font-size: clamp(3.5rem, 10vw, 12rem);
     font-weight: 800;
-    line-height: 0.85;
+    line-height: 0.95;
+    /* Increased from 0.85 to prevent vertical crowding */
     margin: 0;
     letter-spacing: -0.05em;
 }
 
 .hero-title div {
     height: 1.1em;
-    overflow: hidden;
+    overflow: visible;
+    /* Changed from hidden to avoid clipping stroke */
 }
 
 .hero-title .outline {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.535);
     color: transparent;
+    letter-spacing: 0.05em;
+    font-family: "Monoton", sans-serif;
+    text-transform: lowercase;
 }
 
 /* Card Stack Layout */

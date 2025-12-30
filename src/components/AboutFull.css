@@ -133,10 +133,10 @@
 
 .hero-portrait-wrapper {
     position: absolute;
-    top: 0vh;
+    top: -8vh;
     right: 5vw;
     width: 35vw;
-    height: 60vh;
+    height: 65vh;
     z-index: 10;
     /* Brought forward for hoverability */
     overflow: hidden;
@@ -1152,11 +1152,25 @@
 @media (min-width: 1920px) and (max-width: 2559px) {
     .hero-portrait-wrapper {
         width: 32vw;
-        height: 58vh;
+        height: 68vh;
+    }
+
+    .hero-section {
+        margin-top: 6rem;
+
     }
 
     .hero-desc-right {
-        left: 60rem;
+        left: 81rem;
+        font-size: 3vh;
+        bottom: 22rem;
+    }
+
+    .hero-description {
+        max-width: 450px;
+        font-size: 2.1rem;
+        line-height: 1.6;
+        color: var(--text-secondary);
     }
 
     .liquid-btn.resume-btn {

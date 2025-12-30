@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './DoItProject.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,26 +16,26 @@ const DoItProject = () => {
     useEffect(() => {
         const ctx = gsap.context(() => {
             const tl = gsap.timeline();
-
             // 1. Hero Entrance
             tl.to(".doit-hero-image", {
                 scale: 1,
-                duration: 1.8,
-                ease: "power2.inOut"
+                duration: 2,
+                ease: "expo.inOut"
             })
                 .from(".doit-hero-title .char", {
-                    y: 200,
+                    y: 150,
                     opacity: 0,
-                    duration: 1,
-                    stagger: 0.05,
+                    rotateX: -60,
+                    duration: 1.2,
+                    stagger: 0.03,
                     ease: "power4.out"
-                }, "-=1.2")
+                }, "-=1.5")
                 .to(".doit-hero-subtitle", {
-                    opacity: 1,
+                    autoAlpha: 1,
                     y: 0,
                     duration: 1,
-                    ease: "power2.out"
-                }, "-=0.5");
+                    ease: "power3.out"
+                }, "-=0.8");
 
             // Hero Mouse Parallax
             const heroSection = document.querySelector('.doit-hero');
@@ -227,14 +227,14 @@ const DoItProject = () => {
                 const overlay = wrapper.querySelector('.gallery-overlay');
                 const img = wrapper.querySelector('img');
 
-                const tl = gsap.timeline({
+                const tlG = gsap.timeline({
                     scrollTrigger: {
                         trigger: wrapper,
                         start: "top 75%"
                     }
                 });
 
-                tl.to(overlay, {
+                tlG.to(overlay, {
                     scaleY: 0,
                     transformOrigin: "top",
                     duration: 1,
@@ -246,6 +246,28 @@ const DoItProject = () => {
                         ease: "power2.out"
                     }, "-=1");
             });
+
+            // 10. Next Section Hover Effect
+            const nextSection = document.querySelector('.doit-next');
+            if (nextSection) {
+                nextSection.addEventListener('mouseenter', () => {
+                    gsap.to('.doit-next p', {
+                        scale: 1.1,
+                        duration: 0.6,
+                        ease: "power2.out"
+                    });
+                });
+                nextSection.addEventListener('mouseleave', () => {
+                    gsap.to('.doit-next p', {
+                        scale: 1,
+                        duration: 0.6,
+                        ease: "power2.out"
+                    });
+                });
+            }
+
+            // Refresh ScrollTrigger on load
+            window.addEventListener('load', () => ScrollTrigger.refresh());
 
         }, containerRef);
 
@@ -262,6 +284,11 @@ const DoItProject = () => {
 
     return (
         <div className="doit-project-container" ref={containerRef}>
+            <header className="doit-header">
+                <Link to="/projects" className="back-link">
+                    <span className="arrow">←</span> <span>GO BACK</span>
+                </Link>
+            </header>
             <section className="doit-hero">
                 <div className="doit-hero-content">
                     <h1 className="doit-hero-title" ref={heroTitleRef}>

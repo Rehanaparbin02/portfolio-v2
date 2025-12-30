@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import stampImg from '../assets/stamp.png';
 import './Contact.css';
@@ -74,6 +75,11 @@ export default function Contact() {
 
     return (
         <div className="contact-wrapper" ref={contactRef}>
+            <header className="contact-header">
+                <Link to="/" className="back-link">
+                    <span className="arrow">←</span> <span>GO BACK</span>
+                </Link>
+            </header>
             <div className="contact-container">
                 <div className="contact-info-section" ref={infoRef}>
                     <div className="contact-heading">

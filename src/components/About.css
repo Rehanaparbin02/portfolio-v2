@@ -180,8 +180,10 @@
 
     .bg-text {
         font-size: 15.5vw;
-        -webkit-text-stroke: 11px rgba(255, 255, 255, 0.129);
+        -webkit-text-stroke: 4px rgba(255, 255, 255, 0.129);
         line-height: 2.1;
+        position: relative;
+        bottom: 6rem;
     }
 
     .about-card {
@@ -199,7 +201,7 @@
     }
 
     .section-eyebrow {
-        font-size: clamp(5.5rem, 15vw, 13rem);
+        font-size: clamp(5.5rem, 15vw, 12rem);
     }
 
     .about-description {
