@@ -200,11 +200,20 @@
     margin-bottom: 2rem;
 }
 
+.project-info-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    gap: 1rem;
+}
+
 .project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
-    margin-bottom: auto;
+    /* margin-bottom: auto; Removed to allow centering */
 }
 
 .project-tag {
@@ -381,21 +390,40 @@
     }
 }
 
-/* Laptops (15", 14") */
-/* Laptops (15", 14") - Targeting ~1280px to ~1600px width */
+/* Standard Laptops (1366px - 1536px range) - Keep Row Layout but adjust sizing */
 @media (max-width: 1600px) {
     :root {
         --card-height: 80vh;
-        --card-max-width: 1200px;
+        --card-max-width: 1250px;
     }
 
     .project-showcase-hero {
         padding: 0 6vw;
+    }
+
+    .hero-title {
+        font-size: clamp(3rem, 9vw, 9rem);
+    }
+
+    /* Adjust hero text to fit better */
+    .hero-extra-text p {
+        font-size: 1.6rem;
+    }
+}
+
+/* Smaller Laptops & Tablets (Column Layout Switch) */
+@media (max-width: 1200px) {
+    :root {
+        --card-max-width: 1000px;
+    }
+
+    .project-showcase-hero {
         height: auto;
-        min-height: 85vh;
+        min-height: 70vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        padding: 0 6vw;
     }
 
     .hero-content {
@@ -405,7 +433,7 @@
     }
 
     .hero-title {
-        font-size: clamp(3rem, 8vw, 6rem);
+        font-size: clamp(3rem, 10vw, 7rem);
     }
 
     .hero-extra-text {
@@ -424,6 +452,74 @@
 
     .project-category {
         font-size: 1.4rem;
+    }
+}
+
+/* Short Screens (User's specific case: ~695px height) */
+@media (max-height: 800px) {
+    :root {
+        --card-height: 75vh;
+        --card-gap: 3vh;
+    }
+
+    .project-showcase-container {
+        padding-top: 15vh;
+        padding-bottom: 10vh;
+    }
+
+    .project-showcase-hero {
+        margin-bottom: 15vh;
+        min-height: 50vh;
+    }
+
+    .hero-sub {
+        margin-bottom: 1rem;
+    }
+
+    .hero-title {
+        /* Reduce title size on short screens to prevent it taking all vertical space */
+        font-size: clamp(3rem, 8vw, 6.5rem);
+    }
+
+    .hero-extra-text {
+        margin-top: 1rem;
+    }
+
+    .hero-extra-text p {
+        font-size: 1.2rem;
+        line-height: 1.4;
+    }
+
+    /* Adjust Card for Height */
+    .project-item {
+        /* Sticky top adjusted for short header space */
+        top: 12vh;
+        min-height: 480px;
+        border-radius: 20px;
+    }
+
+    .project-card-content {
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .project-header,
+    .project-name,
+    .project-description {
+        margin-bottom: 1rem;
+    }
+
+    .project-name {
+        font-size: 2.5rem;
+    }
+
+    .project-description {
+        font-size: 0.95rem;
+        max-width: 800px;
+    }
+
+    .button {
+        margin-top: 1rem;
+        padding: 0.8rem 2rem;
     }
 }
 

@@ -290,6 +290,19 @@ export default function AboutFull() {
                 ease: "expo.out"
             });
 
+            // --- TEXT HIGHLIGHT REVEAL ---
+            const highlightElements = gsap.utils.toArray('.text-highlight');
+            highlightElements.forEach(el => {
+                ScrollTrigger.create({
+                    trigger: el,
+                    start: "top 85%",
+                    onEnter: () => el.classList.add('active-highlight'),
+                    // Optional: Remove if scrolling back up? 
+                    // onLeaveBack: () => el.classList.remove('active-highlight') 
+                    // Keeping it permanent once triggered looks often better for "reading" flow
+                });
+            });
+
         }, containerRef);
 
         return () => ctx.revert();
@@ -384,10 +397,10 @@ export default function AboutFull() {
                 </h1>
                 <div className="hero-sub">
                     <div className="hero-description">
-                        Full-Stack Developer. Crafting high-performance digital solutions with scalable architectures and purpose-driven design.
+                        <span className="text-highlight">Full-Stack Developer.</span> Crafting <span className="text-highlight">high-performance digital solutions</span> with <span className="text-highlight">scalable architectures</span> and <span className="text-highlight">purpose-driven design.</span>
                     </div>
                     <div className="hero-desc-right">
-                        SPECIALIZING IN MODERN WEB ARCHITECTURES, PERFORMANCE OPTIMIZATION, AND DATA-DRIVEN USER JOURNEYS.
+                        SPECIALIZING IN <span className="text-highlight">MODERN WEB ARCHITECTURES,</span> <span className="text-highlight">PERFORMANCE OPTIMIZATION,</span> AND <span className="text-highlight">DATA-DRIVEN USER JOURNEYS.</span>
                     </div>
                 </div>
             </section>
@@ -399,13 +412,13 @@ export default function AboutFull() {
                     <span className="section-label">THE PHILOSOPHY</span>
                     <div className="phi-content-layout">
                         <div className="phi-title-area">
-                            <h2 className="phi-title">Where logic <br />meets intuition.</h2>
+                            <h2 className="phi-title">Where logic <br />meets <span className="text-highlight">intuition.</span></h2>
                         </div>
                         <div className="phi-content-block">
-                            <p className="phi-lead">My work is a continuous exploration of the boundary where algorithmic precision meets human intuition.</p>
+                            <p className="phi-lead">My work is a continuous exploration of the boundary where <span className="text-highlight">algorithmic precision</span> meets <span className="text-highlight">human intuition.</span></p>
                             <div className="phi-paragraph">
-                                <p>Beyond the screen, I find balance in the tactile ritual of sketching—a space where abstract thoughts crystallize into form. Inspired by the narratives of culture and the discipline of minimalist design, I seek to build digital environments that feel like breathing spaces.</p>
-                                <p>I believe that technology achieves its highest state when it disappears, leaving only a seamless bridge between the complex and the emotional.</p>
+                                <p>Beyond the screen, I find balance in the <span className="text-highlight">tactile ritual of sketching</span>—a space where abstract thoughts crystallize into form. Inspired by the narratives of culture and the discipline of <span className="text-highlight">minimalist design,</span> I seek to build digital environments that feel like <span className="text-highlight">breathing spaces.</span></p>
+                                <p>I believe that technology achieves its <span className="text-highlight">highest state</span> when it disappears, leaving only a <span className="text-highlight">seamless bridge</span> between the complex and the emotional.</p>
                             </div>
                         </div>
                     </div>

@@ -230,13 +230,15 @@ export default function ProjectShowcase() {
                                 <span className="project-category">{project.category}</span>
                             </div>
 
-                            <h2 className="project-name">{project.name}</h2>
-                            <p className="project-description">{project.description}</p>
+                            <div className="project-info-group">
+                                <h2 className="project-name">{project.name}</h2>
+                                <p className="project-description">{project.description}</p>
 
-                            <div className="project-tags">
-                                {project.tags.map(tag => (
-                                    <span key={tag} className="project-tag">{tag}</span>
-                                ))}
+                                <div className="project-tags">
+                                    {project.tags.map(tag => (
+                                        <span key={tag} className="project-tag">{tag}</span>
+                                    ))}
+                                </div>
                             </div>
 
                             <a

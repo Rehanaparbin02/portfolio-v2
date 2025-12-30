@@ -1118,7 +1118,51 @@
     color: #000;
 }
 
-/* Animations */
+/* Text Highlight Effect (Marker Style) */
+.text-highlight {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.25em;
+    margin: 0 0.15em;
+    transition: color 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1;
+    cursor: default;
+}
+
+.text-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    z-index: -1;
+    transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Active State - Expansion (Triggered via JS) */
+.text-highlight.active-highlight::before {
+    width: 100%;
+}
+
+/* Dark Theme (Hero) - Highlight is White, Text becomes Black */
+.hero-section .text-highlight::before {
+    background-color: #ffffff;
+}
+
+.hero-section .text-highlight.active-highlight {
+    color: #000000 !important;
+}
+
+/* Light Theme (Philosophy) - Highlight is Black, Text becomes White */
+.white-theme .text-highlight::before {
+    background-color: #000000;
+}
+
+.white-theme .text-highlight.active-highlight {
+    color: #ffffff !important;
+}
+
 .reveal-char {
     display: inline-block;
 }
@@ -1598,6 +1642,8 @@
         gap: 1.5rem;
     }
 
+
+
     .edu-item {
         position: static;
         max-width: 100%;
@@ -2022,6 +2068,162 @@
 
     .magnetic-btn {
         padding: 2rem 4rem;
+        font-size: 1.2rem;
+    }
+}
+
+/* Custom Optimization for 14-16" Laptops with Short Screens (e.g. 1536 x 696) */
+@media (min-width: 1300px) and (max-width: 1600px) and (max-height: 850px) {
+    .about-full-container {
+        margin-top: 5rem;
+    }
+
+    /* Hero Section Fixes */
+    .hero-section {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 5vh;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hero-main-title {
+        height: auto;
+        font-size: clamp(6rem, 14vw, 14rem);
+        line-height: 0.85;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-portrait-wrapper {
+        width: 33vw;
+        height: 74vh;
+        top: 2vh;
+        right: 4vw;
+        position: absolute;
+    }
+
+    .hero-sub {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+        gap: 2rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        max-width: 450px;
+        line-height: 1.5;
+    }
+
+    .hero-desc-right {
+        left: auto;
+        bottom: auto;
+        right: auto;
+        font-size: 0.85rem;
+        max-width: 350px;
+        position: relative;
+        text-align: right;
+        margin-left: auto;
+        /* Push to right */
+    }
+
+    /* General Spacing Reduction */
+    .philosophy-section.white-theme,
+    .education-section.white-theme {
+        padding: 10vh 0;
+    }
+
+    .phi-content-layout,
+    .edu-content-layout {
+        margin-top: 4rem;
+        gap: 4rem;
+    }
+
+    .phi-title,
+    .edu-main-title {
+        font-size: 4.5rem;
+    }
+
+    .phi-lead {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Fix Content Cutoff/Offsets */
+    .edu-item {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        max-width: 100%;
+    }
+
+    .phi-content-block {
+        max-width: 100%;
+    }
+
+    /* Experience Alignment */
+    .experience-section {
+        padding: 8vh 0;
+    }
+
+    .exp-sticky-title {
+        top: 15vh;
+        position: sticky;
+    }
+
+    .exp-sticky-title h2 {
+        font-size: 3.5rem;
+    }
+
+    .experience-item {
+        padding: 3rem 0;
+        gap: 1rem;
+    }
+
+    .exp-role {
+        font-size: 2.2rem;
+    }
+
+    .experience-list {
+        padding-right: 2vw;
+    }
+
+    /* Tech Stack Books Sizing */
+    .books-shelf {
+        margin-top: 4rem;
+        gap: 2rem;
+    }
+
+    .book-item {
+        height: 450px;
+    }
+
+    .book {
+        width: 280px;
+        height: 400px;
+    }
+
+    .book-title {
+        font-size: 2rem;
+        margin: 1.5rem 0;
+    }
+
+    .skill-note {
+        font-size: 1.2rem;
+        height: 1.6rem;
+    }
+
+    /* Resume Button */
+    .liquid-btn.resume-btn {
+        min-width: 30rem;
+        padding: 1.8rem 4rem;
+    }
+
+    .liquid-btn__label {
         font-size: 1.2rem;
     }
 }
