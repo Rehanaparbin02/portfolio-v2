@@ -30,6 +30,16 @@
     gap: 4rem;
 }
 
+/* Allow flex children to shrink (prevents overflowing long titles) */
+.hero-content > * {
+    min-width: 0;
+}
+
+.project-showcase-hero {
+    /* ensure hero can overflow vertically and horizontally when needed */
+    overflow: visible;
+}
+
 .hero-extra-text {
     max-width: 350px;
     margin-top: 2rem;
@@ -103,12 +113,32 @@
     /* Increased from 0.85 to prevent vertical crowding */
     margin: 0;
     letter-spacing: -0.05em;
+    z-index: 2;
+    max-width: 60%; /* keep the hero title from growing beyond available space */
 }
 
 .hero-title div {
     height: 1.1em;
     overflow: visible;
     /* Changed from hidden to avoid clipping stroke */
+}
+
+/* Make sure characters can wrap on smaller screens */
+@media (max-width: 1200px) {
+    .hero-title {
+        max-width: 100%;
+        font-size: clamp(3rem, 10vw, 7rem);
+        white-space: normal;
+    }
+
+    .hero-title div {
+        display: block;
+        white-space: normal;
+    }
+
+    .hero-content > * {
+        min-width: 0;
+    }
 }
 
 .hero-title .outline {
@@ -626,17 +656,57 @@
 
 /* Phones (Large/Medium/Small) */
 @media (max-width: 480px) {
+    .project-showcase-container {
+        padding-top: 15vh;
+    }
+
     .project-showcase-hero {
         padding: 0 1.5rem;
-        min-height: 70vh;
+        min-height: auto;
+        margin-bottom: 12vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-content {
+        gap: 2.5rem;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .hero-sub {
+        font-size: 0.8rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.35rem;
     }
 
     .hero-title {
-        font-size: 15vw;
+        font-size: 16vw;
+        line-height: 1.05;
+        max-width: 100%;
+    }
+
+    .hero-title div {
+        height: auto;
+        line-height: 1.05;
+    }
+
+    .hero-extra-text {
+        margin-top: 0;
+        max-width: 100%;
+        margin-left: 0;
     }
 
     .hero-extra-text p {
-        font-size: 1rem;
+        font-size: 1.1rem;
+        line-height: 1.65;
+        padding-left: 0;
+        padding-right: 0;
+        border-left: none;
+        border-right: none;
+        text-align: center;
     }
 
     .project-item {
@@ -665,5 +735,36 @@
 
     .project-header {
         margin-bottom: 1.5rem;
+    }
+}
+
+/* Extra Small Phones (360px and below) */
+@media (max-width: 375px) {
+    .project-showcase-container {
+        padding-top: 12vh;
+    }
+
+    .project-showcase-hero {
+        padding: 0 1.2rem;
+        min-height: auto;
+        margin-bottom: 10vh;
+    }
+
+    .hero-sub {
+        font-size: 0.75rem;
+        letter-spacing: 0.3rem;
+    }
+
+    .hero-title {
+        font-size: 15vw;
+    }
+
+    .hero-extra-text p {
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+
+    .project-card-visual {
+        flex: 0 0 250px;
     }
 }
