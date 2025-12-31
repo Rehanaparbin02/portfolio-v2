@@ -3,6 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ProjectShowcase.css';
+import doitMockup from '../../assets/doit-mockup.png';
+import koaMockup from '../../assets/Mockup koa.png';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +15,7 @@ const projects = [
         name: "Do-It: Manage with ease",
         category: "Productivity",
         description: "A task management app that helps users stay organized and productive by allowing them to create, prioritize, and track their tasks in one place.",
-        imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
+        imageUrl: doitMockup,
         tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"]
     },
     {
@@ -20,7 +23,7 @@ const projects = [
         name: "Koa - Budgeting made easy",
         category: "Fintech",
         description: "A comprehensive personal finance tracker that simplifies money management by automating expense categorization, visualizing financial trends, and helping users plan smarter savings goals with clarity-driven dashboards.",
-        imageUrl: "https://images.unsplash.com/photo-1611974717483-3600997e550e?q=80&w=2070&auto=format&fit=crop",
+        imageUrl: koaMockup,
         tags: ["React Native", "Figma", "Express.js", "Node.js", "Supabase", "Firebase"]
     },
     {
@@ -221,7 +224,7 @@ export default function ProjectShowcase() {
             </section>
 
             <div className="project-stack">
-                {projects.map((project, index) => (
+                {projects.map((project) => (
                     <div key={project.id} className="project-item">
                         <div className="project-card-content">
                             <div className="project-header">

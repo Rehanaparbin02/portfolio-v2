@@ -24,7 +24,7 @@ const projectsData = [
         category: "Budgeting App",
         description: "A comprehensive budgeting application designed to streamline expense management. It features real-time data synchronization and detailed financial insights through interactive charts.",
         tags: ["React Native", "Figma", "Redux", "Supabase"],
-        image: new URL('../assets/Mockup koa.png', import.meta.url).href,
+        image: new URL('../../../assets/Mockup koa.png', import.meta.url).href,
         link: "/doit-project"
     },
     {

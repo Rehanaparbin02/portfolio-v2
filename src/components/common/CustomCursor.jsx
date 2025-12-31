@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import './CustomCursor.css';
-import starIcon from '../assets/star.png';
+import starIcon from '../../assets/star.png';
 
 const CustomCursor = () => {
     const cursorRef = useRef(null);

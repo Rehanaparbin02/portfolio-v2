@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import emailjs from '@emailjs/browser';
-import stampImg from '../assets/stamp.png';
+import stampImg from '../../assets/stamp.png';
 import './Contact.css';
 
 export default function Contact() {
