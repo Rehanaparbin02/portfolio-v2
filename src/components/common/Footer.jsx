@@ -188,6 +188,8 @@ export default function Footer() {
                             </nav>
                         </div>
 
+
+
                         <div className="footer-col contact-col">
                             <h4 className="footer-label">Get in Touch</h4>
                             <address className="contact-links">
