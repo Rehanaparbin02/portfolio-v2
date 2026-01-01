@@ -22,7 +22,7 @@ const throttle = (func, limit) => {
 const projectsData = [
     {
             id: "01",
-            name: "Do-It: Manage with ease",
+            title: "Do-It: Manage with ease",
             category: "Productivity",
             description: "A task management app that helps users stay organized and productive by allowing them to create, prioritize, and track their tasks in one place.",
             tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"],
@@ -34,7 +34,7 @@ const projectsData = [
         id: "02",
         title: "Koa - Budgeting made easy",
         category: "Fintech",
-        description: "A comprehensive personal finance tracker that simplifies money management by automating expense categorization, visualizing financial trends, and helping users plan smarter savings goals with clarity-driven dashboards.",
+        description: "A comprehensive personal finance tracker that simplifies money management by automating expense categorization, visualizing financial trends, and helping users plan smarter savings goals.",
         tags: ["React Native", "Figma", "Express.js", "Node.js", "Supabase", "Firebase"],
         image: koaMockup,
         link: "/doit-project",

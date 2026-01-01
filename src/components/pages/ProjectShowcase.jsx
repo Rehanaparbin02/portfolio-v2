@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, Links } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ProjectShowcase.css';
@@ -16,7 +16,8 @@ const projects = [
         category: "Productivity",
         description: "A task management app that helps users stay organized and productive by allowing them to create, prioritize, and track their tasks in one place.",
         imageUrl: doitMockup,
-        tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"]
+        tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"],
+        links: '/doit-project'
     },
     {
         id: "02",
@@ -24,7 +25,8 @@ const projects = [
         category: "Fintech",
         description: "A comprehensive personal finance tracker that simplifies money management by automating expense categorization, visualizing financial trends, and helping users plan smarter savings goals with clarity-driven dashboards.",
         imageUrl: koaMockup,
-        tags: ["React Native", "Figma", "Express.js", "Node.js", "Supabase", "Firebase"]
+        tags: ["React Native", "Figma", "Express.js", "Node.js", "Supabase", "Firebase"],
+        links: '/koa-project'
     },
     {
         id: "03",
@@ -250,7 +252,7 @@ export default function ProjectShowcase() {
                                 onClick={(e) => {
                                     e.preventDefault();
                                     window.scrollTo(0, 0);
-                                    navigate('/doit-project');
+                                    navigate(project.links ? project.links : '/projects');
                                 }}
                             >
                                 <span className="button__flair"></span>

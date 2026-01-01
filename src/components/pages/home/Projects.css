@@ -11,7 +11,7 @@
     --container-width: 1400px;
     --section-pad: clamp(6rem, 15vh, 15rem);
     --card-radius: 2rem;
-    --card-height: clamp(500px, 80vh, 850px);
+    --card-height: clamp(500px, 90vh, 900px);
 }
 
 .projects-section {
@@ -82,9 +82,10 @@
     position: sticky;
     top: 10vh;
     width: 100%;
-    height: var(--card-height);
+    height: auto;
+    min-height: 360px;
     background: var(--card-bg);
-    /* -webkit-filter: var(--glass); */
+    -webkit-backdrop-filter: var(--glass);
     backdrop-filter: var(--glass);
     border-radius: var(--card-radius);
     border: 1px solid var(--card-border);
@@ -234,9 +235,8 @@
 
 .project-image-wrapper {
     width: 100%;
-    height: 130%;
-    position: absolute;
-    top: -15%;
+    height: 100%;
+    position: relative;
     will-change: transform;
 }
 
@@ -304,7 +304,11 @@
 }
 
 /* --- Responsive Adjustments --- */
-
+@media (min-width: 1900px) {
+    :root {
+        --card-height: 100vh;
+    }
+}
 /* 27" & 22" Monitors (High Res) */
 @media (min-width: 1920px) {
     :root {
@@ -340,7 +344,7 @@
 @media (max-width: 1536px) {
     :root {
         --container-width: 1280px;
-        --card-height: 75vh;
+        --card-height: 85vh;
     }
 }
 

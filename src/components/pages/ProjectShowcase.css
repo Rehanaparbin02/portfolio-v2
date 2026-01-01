@@ -166,8 +166,8 @@
     overflow: hidden;
     width: 100%;
     max-width: var(--card-max-width);
-    height: 85vh;
-    min-height: 600px;
+    height: auto; /* allow height to grow with inner content */
+    min-height: 360px; /* sensible minimum so very short content still looks good */
     position: sticky;
     top: 15vh;
     /* This creates the stacking effect */
@@ -412,7 +412,7 @@
 /* Large Monitors (27", 22") */
 @media (min-width: 1900px) {
     :root {
-        --card-height: 75vh;
+        --card-height: 110vh;
         --card-max-width: 1600px;
     }
 
@@ -513,7 +513,10 @@
 
     .hero-title {
         /* Reduce title size on short screens to prevent it taking all vertical space */
-        font-size: clamp(3rem, 8vw, 6.5rem);
+                font-size: clamp(3rem, 10vw, 10.5rem);
+        position: relative;
+        right: 10rem;
+    
     }
 
     .hero-extra-text {

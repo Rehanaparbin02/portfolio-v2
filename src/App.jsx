@@ -15,6 +15,7 @@ import ProjectShowcase from './components/pages/ProjectShowcase'
 import DoItProject from './components/pages/DoItProject'
 import Contact from './components/pages/Contact'
 import CustomCursor from './components/common/CustomCursor'
+import KoaProject from './components/pages/KoaProject'
 // import PageTransition from './components/PageTransition'
 
 
@@ -85,6 +86,11 @@ function App() {
           <Route path="/doit-project" element={
             // <PageTransition>
             <DoItProject />
+            // </PageTransition>
+          } />
+          <Route path='/koa-project' element={
+            // <PageTransition>
+            <KoaProject />
             // </PageTransition>
           } />
           <Route path="/contact" element={
