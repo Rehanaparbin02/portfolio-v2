@@ -13,7 +13,7 @@
    MAIN CONTAINER
    ============================================ */
 .home-bold {
-  background: #000000;
+  background: transparent;
   color: #ffffff;
   font-family: 'Anton', sans-serif;
   overflow-x: hidden;
@@ -215,7 +215,7 @@
    ============================================ */
 @media (max-height: 700px) and (min-width: 1024px) {
   .hero-line {
-    font-size: clamp(2.5rem, 8vw, 10rem);
+            font-size: clamp(2.5rem, 11vw, 15rem);
   }
 }
 

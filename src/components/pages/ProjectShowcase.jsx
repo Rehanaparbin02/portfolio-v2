@@ -196,7 +196,7 @@ export default function ProjectShowcase() {
 
     return (
         <div className="project-showcase-container" ref={containerRef}>
-            <div className="scroll-progress-bar" ref={progressRef}></div>
+            {/* <div className="scroll-progress-bar" ref={progressRef}></div> */}
             <div className="bg-glow"></div>
             <div className="bg-glow-2"></div>
 

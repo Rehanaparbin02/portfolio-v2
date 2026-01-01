@@ -84,6 +84,7 @@
     width: 100%;
     height: var(--card-height);
     background: var(--card-bg);
+    /* -webkit-filter: var(--glass); */
     backdrop-filter: var(--glass);
     border-radius: var(--card-radius);
     border: 1px solid var(--card-border);
@@ -312,7 +313,7 @@
     }
 
     .projects-title {
-        font-size: 12rem;
+        font-size: 15rem;
     }
 
     .project-name {

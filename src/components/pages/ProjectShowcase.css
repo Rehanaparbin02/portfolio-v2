@@ -419,6 +419,9 @@
     .project-name {
         font-size: 6rem;
     }
+    .project-item{
+        height: 95vh;
+    }
 }
 
 /* Standard Laptops (1366px - 1536px range) - Keep Row Layout but adjust sizing */

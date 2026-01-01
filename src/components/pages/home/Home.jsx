@@ -67,19 +67,7 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="footer-bold">
-        <div className="footer-content">
-          <div className="footer-left">
-            <p>© 2024. All Rights Reserved.</p>
-          </div>
-          <div className="footer-right">
-            <a href="#linkedin">LinkedIn</a>
-            <a href="#github">GitHub</a>
-            <a href="#contact">Contact</a>
-          </div>
-        </div>
-      </footer>
+     
     </div>
   );
 }

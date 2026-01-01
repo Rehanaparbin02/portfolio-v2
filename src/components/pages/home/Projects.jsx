@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Projects.css';
+import koaMockup from '../../../assets/Mockup koa.png';
+import doitMockup from '../../../assets/doit-mockup.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,23 +21,25 @@ const throttle = (func, limit) => {
 
 const projectsData = [
     {
-        id: 1,
-        title: "KOA",
-        category: "Budgeting App",
-        description: "A comprehensive budgeting application designed to streamline expense management. It features real-time data synchronization and detailed financial insights through interactive charts.",
-        tags: ["React Native", "Figma", "Redux", "Supabase"],
-        image: new URL('../../../assets/Mockup koa.png', import.meta.url).href,
-        link: "/doit-project"
+            id: "01",
+            name: "Do-It: Manage with ease",
+            category: "Productivity",
+            description: "A task management app that helps users stay organized and productive by allowing them to create, prioritize, and track their tasks in one place.",
+            tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"],
+            image: doitMockup,
+            link: "/doit-project",
+            
     },
     {
-        id: 2,
-        title: "Vanguard",
-        category: "Fintech App",
-        description: "Real-time dashboard for cryptocurrency trading with predictive analytics. Implements heavy data visualization using D3.js and efficient WebSocket connections.",
-        tags: ["React", "D3.js", "WebSockets", "Node.js"],
-        image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2000",
-        link: "/vanguard-project"
-    }
+        id: "02",
+        title: "Koa - Budgeting made easy",
+        category: "Fintech",
+        description: "A comprehensive personal finance tracker that simplifies money management by automating expense categorization, visualizing financial trends, and helping users plan smarter savings goals with clarity-driven dashboards.",
+        tags: ["React Native", "Figma", "Express.js", "Node.js", "Supabase", "Firebase"],
+        image: koaMockup,
+        link: "/doit-project",
+        
+    },
 ];
 
 export default function Projects() {

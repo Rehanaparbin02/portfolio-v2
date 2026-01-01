@@ -14,8 +14,8 @@ export default function Contact() {
     const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
 
     // Replace these with your EmailJS credentials
-    const SERVICE_ID = 'service_d1oecta';
-    const TEMPLATE_ID = 'template_tgkgak9';
+    const SERVICE_ID = 'service_wrjynm8';
+    const TEMPLATE_ID = 'template_0jarhvb';
     const PUBLIC_KEY = '_3ds4Qyhq-FP5hjqA';
 
     useEffect(() => {

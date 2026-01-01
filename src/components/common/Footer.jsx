@@ -178,28 +178,26 @@ export default function Footer() {
 
                         <div className="footer-col menu-col">
                             <h4 className="footer-label">Navigation</h4>
-                            <nav className="footer-nav">
-                                <Link to="/" className="footer-link-item" onClick={scrollToTop}>Home</Link>
-                                <Link to="/about" className="footer-link-item" onClick={scrollToTop}>About</Link>
-                                <Link to="/projects" className="footer-link-item" onClick={scrollToTop}>Projects</Link>
-                                <Link to="/contact" className="footer-link-item" onClick={scrollToTop}>Contact</Link>
+                            <nav className="footer-nav" aria-label="Footer Navigation">
+                                <ul>
+                                    <li><Link to="/" className="footer-link-item" onClick={scrollToTop}>Home</Link></li>
+                                    <li><Link to="/about" className="footer-link-item" onClick={scrollToTop}>About</Link></li>
+                                    <li><Link to="/projects" className="footer-link-item" onClick={scrollToTop}>Projects</Link></li>
+                                    <li><Link to="/contact" className="footer-link-item" onClick={scrollToTop}>Contact</Link></li>
+                                </ul>
                             </nav>
                         </div>
 
                         <div className="footer-col contact-col">
                             <h4 className="footer-label">Get in Touch</h4>
-                            <div className="contact-links">
-                                <a href="mailto:rehanaparbin0210@gmail.com" className="contact-main-link">
-                                    rehanaparbin0210@gmail.com
-                                </a>
-                                <a href="tel:+918638401703" className="contact-sub-link">
-                                    +91 8638401703
-                                </a>
-                            </div>
-                            <div className="social-tags-container">
-                                <a href="https://linkedin.com/in/rehanaparbin" target="_blank" rel="noopener noreferrer" className="footer-social-tag">LinkedIn</a>
-                                <a href="https://github.com/rehanaparbin" target="_blank" rel="noopener noreferrer" className="footer-social-tag">GitHub</a>
-                                <a href="#" target="_blank" rel="noopener noreferrer" className="footer-social-tag">Instagram</a>
+                            <address className="contact-links">
+                                <a href="mailto:rehanaparbin0210@gmail.com" className="contact-main-link" aria-label="Email Rehana">rehanaparbin0210@gmail.com</a>
+                                <a href="tel:+918638401703" className="contact-sub-link" aria-label="Call Rehana">+91 8638401703</a>
+                            </address>
+                            <div className="social-tags-container" role="list">
+                                <a href="https://linkedin.com/in/rehanaparbin" target="_blank" rel="noopener noreferrer" className="footer-social-tag" aria-label="Open LinkedIn profile">LinkedIn</a>
+                                <a href="https://github.com/rehanaparbin" target="_blank" rel="noopener noreferrer" className="footer-social-tag" aria-label="Open GitHub profile">GitHub</a>
+                                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="footer-social-tag" aria-label="Open Instagram profile">Instagram</a>
                             </div>
                         </div>
                     </div>
@@ -211,7 +209,8 @@ export default function Footer() {
                             <span className="location">Based in India, Available Worldwide</span>
                         </div>
                         <div className="footer-bottom-links">
-                            <span>Designed with passion</span>
+                            <button className="back-to-top" onClick={scrollToTop} aria-label="Back to top">Back to top ↑</button>
+                            <span className="designed">Designed with passion</span>
                         </div>
                     </div>
                 </div>
