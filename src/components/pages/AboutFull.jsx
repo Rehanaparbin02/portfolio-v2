@@ -34,13 +34,31 @@ export default function AboutFull() {
                 stagger: 0.1,
                 ease: "power4.out"
             })
-                .from(".hero-description, .hero-desc-right", {
+                .from(".left-panel", {
+                    x: -100,
                     opacity: 0,
-                    y: 30,
-                    duration: 1,
-                    stagger: 0.2,
+                    duration: 1.2,
+                    ease: "power4.out"
+                }, "-=1")
+                .from(".right-panel", {
+                    x: 100,
+                    opacity: 0,
+                    duration: 1.2,
+                    ease: "power4.out"
+                }, "-=1")
+                .from(".central-visual-engine", {
+                    scale: 0,
+                    opacity: 0,
+                    duration: 1.5,
+                    ease: "elastic.out(1, 0.5)"
+                }, "-=1.2")
+                .from(".text-reveal-line", {
+                    y: 20,
+                    opacity: 0,
+                    stagger: 0.1,
+                    duration: 0.8,
                     ease: "power3.out"
-                }, "-=0.8")
+                }, "-=0.5")
                 .from(".hero-portrait-wrapper", {
                     opacity: 0,
                     scale: 1.2,
@@ -54,6 +72,11 @@ export default function AboutFull() {
                     duration: 1,
                     ease: "power3.out"
                 }, "-=0.5");
+
+            // Continuous rotation for visual engine
+            gsap.to(".engine-ring.ring-1", { rotate: 360, duration: 20, repeat: -1, ease: "none" });
+            gsap.to(".engine-ring.ring-2", { rotate: -360, duration: 15, repeat: -1, ease: "none" });
+            gsap.to(".engine-ring.ring-3", { rotate: 360, duration: 25, repeat: -1, ease: "none" });
 
             // --- IMAGE PARALLAX ---
             gsap.to(imageRef.current, {
@@ -395,30 +418,63 @@ export default function AboutFull() {
                     <span className="line"><span>REHANA</span></span>
                     <span className="line"><span>PARBIN</span></span>
                 </h1>
-                <div className="hero-sub">
-                    <div className="hero-description">
-                        <span className="text-highlight">Full-Stack Developer.</span> Crafting <span className="text-highlight">high-performance digital solutions</span> with <span className="text-highlight">scalable architectures</span> and <span className="text-highlight">purpose-driven design.</span>
+                {/* <div className="hero-sub-modern">
+                    <div className="modern-glass-panel left-panel">
+                        <div className="panel-tag">MISSION.SYS</div>
+                        <div className="panel-content">
+                            <div className="hero-description-text">
+                                <span className="text-reveal-line">Full-Stack Developer.</span>
+                                <span className="text-reveal-line">Crafting <span className="text-accent-glow">high-performance</span> digital solutions</span>
+                                <span className="text-reveal-line">with <span className="text-accent-glow">scalable architectures</span></span>
+                                <span className="text-reveal-line">and purpose-driven design.</span>
+                            </div>
+                        </div>
+                        <div className="panel-status">
+                            <span className="status-dot pulsed"></span> STATUS: ACTIVE
+                        </div>
                     </div>
-                    <div className="hero-desc-right">
-                        SPECIALIZING IN <span className="text-highlight">MODERN WEB ARCHITECTURES,</span> <span className="text-highlight">PERFORMANCE OPTIMIZATION,</span> AND <span className="text-highlight">DATA-DRIVEN USER JOURNEYS.</span>
+
+                    <div className="central-visual-engine">
+                        <div className="engine-core"></div>
+                        <div className="engine-ring ring-1"></div>
+                        <div className="engine-ring ring-2"></div>
+                        <div className="engine-ring ring-3"></div>
                     </div>
-                </div>
+
+                    <div className="modern-glass-panel right-panel">
+                        <div className="panel-tag">TECH.SPEC</div>
+                        <div className="panel-content">
+                            <div className="hero-spec-text">
+                                <span className="tech-tag-label">SPECIALIZING IN</span>
+                                <span className="tech-tag">MODERN WEB ARCHITECTURES</span>
+                                <span className="tech-tag">PERFORMANCE OPTIMIZATION</span>
+                                <span className="tech-tag">DATA-DRIVEN USER JOURNEYS</span>
+                            </div>
+                        </div>
+                        <div className="panel-footer">
+                            <div className="loading-bar-mini">
+                                <div className="loading-progress"></div>
+                            </div>
+                            <span>LOAD_089%</span>
+                        </div>
+                    </div>
+                </div> */}
             </section>
 
             {/* Redesigned Philosophy Section - White Theme */}
             <section className="philosophy-section white-theme">
                 <div className="phi-blob"></div>
                 <div className="phi-container">
-                    <span className="section-label">THE PHILOSOPHY</span>
+                    <span className="section-label-about">THE PHILOSOPHY</span>
                     <div className="phi-content-layout">
                         <div className="phi-title-area">
                             <h2 className="phi-title">Where logic <br />meets <span className="text-highlight">intuition.</span></h2>
                         </div>
                         <div className="phi-content-block">
-                            <p className="phi-lead">My work is a continuous exploration of the boundary where <span className="text-highlight">algorithmic precision</span> meets <span className="text-highlight">human intuition.</span></p>
+                            <p className="phi-lead">As a <span className="text-highlight">Full-Stack Developer</span>, I build <span className="text-highlight">digital experiences</span> where <span className="text-highlight">algorithmic precision</span>—honed through researching <span className="text-highlight">quantum optimization</span> and engineering scalable back-ends with <span className="text-highlight">Supabase and PostgreSQL</span>—meets <span className="text-highlight">human intuition.</span></p>
                             <div className="phi-paragraph">
-                                <p>Beyond the screen, I find balance in the <span className="text-highlight">tactile ritual of sketching</span>—a space where abstract thoughts crystallize into form. Inspired by the narratives of culture and the discipline of <span className="text-highlight">minimalist design,</span> I seek to build digital environments that feel like <span className="text-highlight">breathing spaces.</span></p>
-                                <p>I believe that technology achieves its <span className="text-highlight">highest state</span> when it disappears, leaving only a <span className="text-highlight">seamless bridge</span> between the complex and the emotional.</p>
+                                <p>Beyond the screen, I find balance in the <span className="text-highlight">tactile ritual of sketching</span>, a space where <span className="text-highlight">abstract logic</span> from my <span className="text-highlight">Computer Science Engineering</span> background crystallizes into form. Inspired by <span className="text-highlight">minimalist design</span>, I seek to build digital environments like <span className="text-highlight">Do-It and ZenFlow</span> that feel like <span className="text-highlight">breathing spaces</span>, utilizing smooth <span className="text-highlight">React Native animations</span> and <span className="text-highlight">gesture-driven interactions</span> to reduce clutter.</p>
+                                <p>I believe technology achieves its <span className="text-highlight">highest state</span> when it disappears, leaving only a <span className="text-highlight">seamless bridge</span> between complex <span className="text-highlight">RESTful APIs</span> and the <span className="text-highlight">emotional needs</span> of the user.</p>
                             </div>
                         </div>
                     </div>
@@ -453,7 +509,7 @@ export default function AboutFull() {
             {/* Experience Section */}
             <section className="experience-section">
                 <div className="exp-sticky-title">
-                    <span className="section-label">EXPERIENCE</span>
+                    <span className="section-label-about">EXPERIENCE</span>
                     <h2>The Professional Path</h2>
                 </div>
                 <div className="experience-list">
@@ -476,7 +532,7 @@ export default function AboutFull() {
             {/* Resume Download Section */}
             <section className="resume-section">
                 <div className="resume-content">
-                    <a href="/resume.pdf" download className="liquid-btn resume-btn">
+                    <a href="/recent_present_resume_dev.pdf" download className="liquid-btn resume-btn">
                         <span className="liquid-btn__flair"></span>
                         <span className="liquid-btn__label">
                             GET MY RESUME
@@ -491,7 +547,7 @@ export default function AboutFull() {
             {/* Redesigned Tech Matrix Section - Book Style */}
             <section className="tech-living-section">
                 <div className="exp-sticky-title">
-                    <span className="section-label">TECH STACK</span>
+                    <span className="section-label-about">TECH STACK</span>
                     <h2>Skills & Tools</h2>
                 </div>
                 <div className="books-shelf">
@@ -538,7 +594,7 @@ export default function AboutFull() {
             <section className="education-section white-theme">
                 <div className="edu-blob"></div>
                 <div className="edu-container">
-                    <span className="section-label">EDUCATION</span>
+                    <span className="section-label-about">EDUCATION</span>
                     <div className="edu-content-layout">
                         <div className="edu-title-area">
                             <h2 className="edu-main-title">Academic <br />Foundations.</h2>

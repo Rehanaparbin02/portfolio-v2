@@ -77,8 +77,9 @@ const DoItProject = () => {
         });
       });
 
-      // === STATS COUNTER ANIMATION ===
-      gsap.utils.toArray('.doit-stat-item').forEach((stat, i) => {
+     // === STATS COUNTER ANIMATION ===
+    
+      gsap.utils.toArray('.stat-item').forEach((stat, i) => {
         gsap.from(stat, {
           scale: 0,
           opacity: 0,
@@ -92,13 +93,26 @@ const DoItProject = () => {
           delay: i * 0.1
         });
 
-        const value = stat.querySelector('.doit-stat-value');
-        const finalValue = value.textContent;
+        const value = stat.querySelector('.stat-value');
+        const finalValue = value.textContent.trim();
         const isNumber = /[\d.]+/.test(finalValue);
         
         if (isNumber) {
-          const numValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
+          // Extract the numeric part and handle '+' and '%'
+          let numValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
+          const hasPlus = finalValue.includes('+');
+          const hasPercent = finalValue.includes('%');
+          
           const obj = { value: 0 };
+          
+          // Set initial value to 0
+          if (hasPercent) {
+            value.textContent = `0%`;
+          } else if (hasPlus) {
+            value.textContent = `0+`;
+          } else {
+            value.textContent = '0';
+          }
           
           gsap.to(obj, {
             value: numValue,
@@ -106,14 +120,15 @@ const DoItProject = () => {
             ease: 'power2.out',
             scrollTrigger: {
               trigger: stat,
-              start: 'top 85%'
+              start: 'top 85%',
+              toggleActions: 'play none none none'
             },
             delay: 0.3,
             onUpdate: () => {
-              if (finalValue.includes('k+')) {
-                value.textContent = `${Math.round(obj.value)}k+`;
-              } else if (finalValue.includes('%')) {
+              if (hasPercent) {
                 value.textContent = `${Math.round(obj.value)}%`;
+              } else if (hasPlus) {
+                value.textContent = `${Math.round(obj.value)}+`;
               } else {
                 value.textContent = Math.round(obj.value);
               }
@@ -121,7 +136,6 @@ const DoItProject = () => {
           });
         }
       });
-
       // === TEXT HIGHLIGHT ON SCROLL ===
       gsap.utils.toArray('.doit-summary-highlight').forEach((word) => {
         gsap.fromTo(word, 

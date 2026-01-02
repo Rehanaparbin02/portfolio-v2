@@ -32,6 +32,7 @@
     justify-content: center;
     z-index: 0;
     pointer-events: none;
+    -webkit-user-select: none;
     user-select: none;
     will-change: transform;
 }
@@ -271,6 +272,11 @@
 }
 
 @media (max-width: 480px) {
+     .work-section {
+            padding: 0 2rem 7rem 2rem;
+            /* min-height: 90vh; */
+            min-height: 289rem;
+        }
     .work-title {
         font-size: clamp(2rem, 12vw, 3.5rem);
     }
@@ -286,4 +292,6 @@
     .work-hero {
         padding-bottom: 30px;
     }
+
+   
 }

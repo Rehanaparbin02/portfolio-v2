@@ -77,7 +77,7 @@ const KoaProject = () => {
         });
       });
 
-      // === STATS COUNTER ANIMATION ===
+// === STATS COUNTER ANIMATION ===
       gsap.utils.toArray('.stat-item').forEach((stat, i) => {
         gsap.from(stat, {
           scale: 0,
@@ -93,12 +93,25 @@ const KoaProject = () => {
         });
 
         const value = stat.querySelector('.stat-value');
-        const finalValue = value.textContent;
+        const finalValue = value.textContent.trim();
         const isNumber = /[\d.]+/.test(finalValue);
         
         if (isNumber) {
-          const numValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
+          // Extract the numeric part and handle '+' and '%'
+          let numValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
+          const hasPlus = finalValue.includes('+');
+          const hasPercent = finalValue.includes('%');
+          
           const obj = { value: 0 };
+          
+          // Set initial value to 0
+          if (hasPercent) {
+            value.textContent = `0%`;
+          } else if (hasPlus) {
+            value.textContent = `0+`;
+          } else {
+            value.textContent = '0';
+          }
           
           gsap.to(obj, {
             value: numValue,
@@ -106,14 +119,15 @@ const KoaProject = () => {
             ease: 'power2.out',
             scrollTrigger: {
               trigger: stat,
-              start: 'top 85%'
+              start: 'top 85%',
+              toggleActions: 'play none none none'
             },
             delay: 0.3,
             onUpdate: () => {
-              if (finalValue.includes('+')) {
-                value.textContent = `${Math.round(obj.value)}+`;
-              } else if (finalValue.includes('%')) {
+              if (hasPercent) {
                 value.textContent = `${Math.round(obj.value)}%`;
+              } else if (hasPlus) {
+                value.textContent = `${Math.round(obj.value)}+`;
               } else {
                 value.textContent = Math.round(obj.value);
               }
@@ -474,13 +488,36 @@ const KoaProject = () => {
         <div className="hero-modern-bg-gradient"></div>
       </section>
 
-      {/* Summary */}
+    {/* Summary */}
       <section className="summary-full">
         <div className="summary-content">
+          <div className="summary-decorative-line"></div>
           <h2 className="summary-text-highlight">
-            <span className="highlight-word">Koa</span> is a modern design system that bridges the gap between <span className="highlight-word">design</span> and <span className="highlight-word">development</span>, providing a single source of truth for building consistent, accessible digital products at scale.
+            <span className="summary-line">
+              <span className="highlight-word">Koa</span> is a modern design system
+            </span>
+            <span className="summary-line">
+              that bridges the gap between
+            </span>
+            <span className="summary-line">
+              <span className="highlight-word">design</span> and <span className="highlight-word">development</span>,
+            </span>
+            <span className="summary-line">
+              providing a single source of truth
+            </span>
+            <span className="summary-line">
+              for building consistent, accessible
+            </span>
+            <span className="summary-line">
+              digital products at scale.
+            </span>
           </h2>
-          <p className="summary-tags">React · TypeScript · Storybook · Design Tokens · Figma · Documentation</p>
+          <div className="summary-tags-wrapper">
+            {['React', 'TypeScript', 'Storybook', 'Design Tokens', 'Figma', 'Documentation'].map((tag, i) => (
+              <span key={i} className="summary-tag-item">{tag}</span>
+            ))}
+          </div>
+          <div className="summary-gradient-orb"></div>
         </div>
       </section>
 
@@ -508,7 +545,7 @@ const KoaProject = () => {
       <section className="overview-split">
         <div className="overview-text">
           <div className="section-label">OVERVIEW</div>
-          <h2 className="section-title split-text">{splitText('Building at Scale')}</h2>
+          <h2 className="section-title split-text">{splitText('Building  at Scale')}</h2>
           <p className="reveal-text">
             Koa Design System was created to solve the fragmentation across multiple product teams. By establishing a unified design language, comprehensive component library, and clear documentation, we reduced design debt by 40%, accelerated feature development by 60%, and ensured consistent user experiences across all touchpoints. The system includes over 50 production-ready components, 300+ design tokens, accessibility guidelines, and interactive documentation built with Storybook.
           </p>

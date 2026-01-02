@@ -166,6 +166,10 @@ export default function Footer() {
                     WORKING TO FULL POTENTIAL
                 </div>
 
+                <div className="footer-hero-cta">
+                    <a href="/recent_present_resume_dev.pdf" className="resume-download-button" download aria-label="Download Rehana's resume">Download Resume</a>
+                </div>
+
                 <div className="footer-container">
                     <div className="footer-main">
                         <div className="footer-col brand-col">
