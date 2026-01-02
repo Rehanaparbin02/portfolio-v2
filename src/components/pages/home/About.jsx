@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
     const containerRef = useRef(null);
-    const marqueeRef = useRef(null);
+    // const marqueeRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -80,12 +80,12 @@ export default function About() {
 
     return (
         <section className="about-section" id="about" ref={containerRef}>
-            <div className="parallax-bg">
+            {/* <div className="parallax-bg">
                 <h1 className="bg-text">
                     CREATIVE • DEVELOPER • DESIGNER • CREATIVE • DEVELOPER • DESIGNER •
                     CREATIVE • DEVELOPER • DESIGNER • CREATIVE • DEVELOPER • DESIGNER
                 </h1>
-            </div>
+            </div> */}
 
             <div className="about-card">
 

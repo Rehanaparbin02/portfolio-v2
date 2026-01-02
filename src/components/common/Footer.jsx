@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
     const footerRef = useRef(null);
-    const marqueeRef = useRef(null);
+    // const marqueeRef = useRef(null);
     const contentRef = useRef(null);
     const bottomRef = useRef(null);
 
@@ -147,7 +147,7 @@ export default function Footer() {
             </div>
 
             <div className="footer-content" ref={contentRef}>
-                <div className="footer-marquee-section" ref={marqueeRef}>
+                {/* <div className="footer-marquee-section" ref={marqueeRef}>
                     <div className="marquee-container">
                         <div className="marquee-track">
                             {[...Array(8)].map((_, i) => (
@@ -159,6 +159,11 @@ export default function Footer() {
                             ))}
                         </div>
                     </div>
+                </div> */}
+
+                {/* Big hero text above footer content to create prominent call-to-action and page height */}
+                <div className="footer-hero-text" aria-hidden="true">
+                    WORKING TO FULL POTENTIAL
                 </div>
 
                 <div className="footer-container">

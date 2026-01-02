@@ -14,12 +14,14 @@
     background: var(--footer-bg);
     color: var(--footer-text);
     padding: 0 0 4rem 0;
-    overflow: hidden;
+    /* allow overflow so the page can expand and be scrolled fully */
+    overflow: visible;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     border-top-left-radius: clamp(4rem, 12vw, 10rem);
     border-top-right-radius: clamp(4rem, 12vw, 10rem);
     z-index: 100;
-    margin-top: -100px;
+    /* remove negative margin to prevent overlap with previous content */
+    margin-top: 0;
     border-top: 8px solid #ffffff;
     box-shadow: 0 -40px 100px rgba(0, 0, 0, 0.9);
     min-height: auto;
@@ -89,6 +91,57 @@
 .footer-marquee-section {
     padding: clamp(4rem, 10vw, 8rem) 0;
     border-bottom: 1px solid var(--footer-border);
+}
+
+/* Large hero text block above the footer container */
+.footer-hero-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(4rem, 10vw, 8rem) 0;
+    font-size: clamp(4rem, 8vw, 10rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--footer-text);
+    width: 100%;
+    /* white-space: nowrap; */
+    text-align: center;
+    /* Ensure long text doesn't overflow the viewport on very narrow screens */
+    overflow-wrap: break-word;
+}
+
+/* Responsive tweaks for hero text */
+@media (max-width: 1024px) {
+    .footer-hero-text {
+        padding: clamp(3rem, 8vw, 6rem) 0;
+        /* allow wrapping on smaller screens so text remains visible */
+        white-space: normal;
+        font-size: clamp(3rem, 9vw, 8rem);
+        letter-spacing: -0.025em;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-hero-text {
+        padding: clamp(2rem, 6vw, 4rem) 1rem;
+        font-size: clamp(2.2rem, 10vw, 5rem);
+        letter-spacing: -0.015em;
+        line-height: 0.95;
+        white-space: normal;
+        word-break: break-word;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-hero-text {
+        padding: 1.25rem 0.75rem;
+        font-size: clamp(1.6rem, 12vw, 3rem);
+        font-weight: 800;
+        letter-spacing: 0;
+        line-height: 1.02;
+        white-space: normal;
+    }
 }
 
 .marquee-container {
