@@ -1284,53 +1284,35 @@
 
 /* Pastel Blobs on Covers - Heart Shaped & Centered */
 /* Pastel Blobs on Covers - Heart Shaped & Centered */
-.cover-blob {
+/* .cover-blob {
     position: absolute;
     width: 300px;
     height: 300px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 
-    /* Heart Shape Mask */
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+/* Heart Shape Mask */
+/* -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
     mask-repeat: no-repeat;
     mask-size: contain;
     mask-position: center;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: contain;
-    -webkit-mask-position: center;
+    -webkit-mask-position: center; */
 
-    /* Blur & Base Opacity */
-    filter: blur(40px);
+/* Blur & Base Opacity */
+/* filter: blur(40px);
     opacity: 0.7;
-    z-index: 1;
+    z-index: 1; */
 
-    /* Noise Texture */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+/* Noise Texture */
+/* background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     background-blend-mode: overlay;
-}
+} */
 
-.book-item:nth-child(1) .cover-blob {
-    background-color: #ffc2bb;
-    -webkit-backdrop-filter: blur(50rem);
-    backdrop-filter: blur(50rem);
-}
 
-/* Pastel Rose */
-.book-item:nth-child(2) .cover-blob {
-    background-color: #b0d4ff;
-    -webkit-backdrop-filter: blur(50rem);
-    backdrop-filter: blur(50rem);
-}
-
-/* Pastel Baby Blue */
-.book-item:nth-child(3) .cover-blob {
-    background-color: #bfffbf;
-    -webkit-backdrop-filter: blur(50rem);
-    backdrop-filter: blur(50rem);
-}
 
 /* Pastel Mint */
 
