@@ -31,7 +31,7 @@
 }
 
 /* Allow flex children to shrink (prevents overflowing long titles) */
-.hero-content > * {
+.hero-content>* {
     min-width: 0;
 }
 
@@ -114,7 +114,8 @@
     margin: 0;
     letter-spacing: -0.05em;
     z-index: 2;
-    max-width: 60%; /* keep the hero title from growing beyond available space */
+    max-width: 60%;
+    /* keep the hero title from growing beyond available space */
 }
 
 .hero-title div {
@@ -136,7 +137,7 @@
         white-space: normal;
     }
 
-    .hero-content > * {
+    .hero-content>* {
         min-width: 0;
     }
 }
@@ -166,8 +167,10 @@
     overflow: hidden;
     width: 100%;
     max-width: var(--card-max-width);
-    height: auto; /* allow height to grow with inner content */
-    min-height: 360px; /* sensible minimum so very short content still looks good */
+    height: auto;
+    /* allow height to grow with inner content */
+    min-height: 360px;
+    /* sensible minimum so very short content still looks good */
     position: sticky;
     top: 15vh;
     /* This creates the stacking effect */
@@ -419,7 +422,8 @@
     .project-name {
         font-size: 6rem;
     }
-    .project-item{
+
+    .project-item {
         height: 95vh;
     }
 }
@@ -432,10 +436,10 @@
     }
 
     .project-showcase-hero {
-           /* padding: 0 6vw; */
-           position: relative;
-           left: 6rem;
-       }
+        padding: 0 6vw;
+        position: static;
+    }
+
     .hero-title {
         font-size: clamp(3rem, 9vw, 8rem);
     }
@@ -513,10 +517,8 @@
 
     .hero-title {
         /* Reduce title size on short screens to prevent it taking all vertical space */
-                font-size: clamp(3rem, 10vw, 10.5rem);
-        position: relative;
-        right: 10rem;
-    
+        font-size: clamp(3rem, 10vw, 10.5rem);
+        position: static;
     }
 
     .hero-extra-text {
@@ -676,10 +678,13 @@
     }
 
     .hero-content {
-        gap: 2.5rem;
+        gap: 2rem;
         align-items: center;
         text-align: center;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .hero-sub {
@@ -689,14 +694,18 @@
     }
 
     .hero-title {
-        font-size: 16vw;
+        font-size: 14vw;
         line-height: 1.05;
         max-width: 100%;
+        position: static;
+        margin: 0 auto;
     }
 
     .hero-title div {
         height: auto;
-        line-height: 1.05;
+        line-height: 1.1;
+        display: block;
+        width: 100%;
     }
 
     .hero-extra-text {
@@ -762,12 +771,13 @@
     }
 
     .hero-title {
-        font-size: 15vw;
+        font-size: 13vw;
+        letter-spacing: -0.02em;
     }
 
     .hero-extra-text p {
-        font-size: 1.05rem;
-        line-height: 1.6;
+        font-size: 1rem;
+        line-height: 1.5;
     }
 
     .project-card-visual {

@@ -4,6 +4,12 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './DoItProject.css';
 
+// Specific imports for Overview
+import calendarImg from '../../assets/do-it/calender.png';
+import blackImg from '../../assets/do-it/Black.png';
+import anaImg from '../../assets/do-it/ANA1.png';
+
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Import images
@@ -526,24 +532,56 @@ const DoItProject = () => {
       </section>
 
       {/* Overview */}
-      <section className="doit-overview">
-        <div className="doit-overview-text">
-          <div className="doit-section-label">OVERVIEW</div>
-          <h2 className="doit-section-title doit-split-text">{splitText('Full-Stack Productivity')}</h2>
-          <p className="doit-reveal-text">
-            DO-IT is a full-stack, cross-platform note-taking and productivity app built with React Native + Expo and powered by a Supabase (PostgreSQL) backend, delivering real-time sync, secure authentication,
-            and an offline-first experience—featuring full auth (email/password, OTP, recovery), a configurable Guest Mode with seamless account migration, custom Spaces, rich media attachments, advanced search and batch
-            actions, productivity tools (Pomodoro, time tracking, calendar, reminders), native Android widgets with deep linking, smooth navigation, robust validation, and isolated guest sessions—resulting in a
-            production-ready, scalable solution with 3,500+ lines of well-structured UI code.
-          </p>
-        </div>
-        <div className="doit-overview-visual">
-          {doItImages.length > 0 && (
-            <div className="doit-reveal-image">
-              <img src={doItImages[0]} alt="DO-IT App" />
-              <img src={doItImages[1]} alt="DO-IT App" style={{ position: 'relative', right: '6rem' }} />
+      <section className="doit-overview-v2">
+        <div className="doit-overview-container-v2">
+          <div className="doit-overview-header-v2">
+            <div className="doit-section-label">OVERVIEW</div>
+            <h2 className="doit-overview-title-v2 doit-split-text">
+              {splitText('Next-Gen Productivity')} <br />
+              <span className="doit-text-accent">{splitText('Engineered for Speed.')}</span>
+            </h2>
+          </div>
+
+          <div className="doit-overview-grid-v2">
+            <div className="doit-overview-main-text">
+              <p className="doit-reveal-text">
+                DO-IT is a full-stack, cross-platform note-taking and productivity app built with React Native + Expo and powered by a Supabase (PostgreSQL) backend. It delivers real-time sync, secure authentication, and an offline-first experience.
+              </p>
+              <div className="doit-overview-features-mini">
+                <div className="doit-mini-feature">
+                  <div className="doit-mini-icon">☁️</div>
+                  <div className="doit-mini-content">
+                    <h4>Cloud Sync</h4>
+                    <p>Real-time data persistence across devices.</p>
+                  </div>
+                </div>
+                <div className="doit-mini-feature">
+                  <div className="doit-mini-icon">🔒</div>
+                  <div className="doit-mini-content">
+                    <h4>Isolated Auth</h4>
+                    <p>Secure authentication with guest session migration.</p>
+                  </div>
+                </div>
+              </div>
+              <p className="doit-reveal-text secondary-text">
+                Featuring custom Spaces, rich media attachments, and native widgets, DO-IT provides a production-ready solution with over 3,500 lines of optimized UI code.
+              </p>
             </div>
-          )}
+
+            <div className="doit-overview-visual-stack">
+              <div className="doit-visual-layer layer-1 doit-reveal-image">
+                <img src={blackImg} alt="DO-IT App Home" />
+              </div>
+              <div className="doit-visual-layer layer-2 doit-reveal-image">
+                <img src={anaImg} alt="DO-IT App Workspace" />
+              </div>
+              <div className="doit-visual-layer layer-3 doit-reveal-image">
+                <img src={calendarImg} alt="DO-IT App Calendar" />
+              </div>
+              <div className="doit-visual-glow"></div>
+            </div>
+
+          </div>
         </div>
       </section>
 

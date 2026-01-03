@@ -426,6 +426,7 @@
     .hero-meta-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
+        width: 48rem;
     }
 
     .meta-card:last-child {
@@ -710,10 +711,16 @@
 
     .hero-description {
         margin-bottom: 2.5rem;
+        margin-left: 2rem;
     }
 
     .hero-lead {
         font-size: 1.25rem;
+    }
+
+    .scroll-prompt {
+        left: 2vw;
+        top: 44rem;
     }
 }
 
