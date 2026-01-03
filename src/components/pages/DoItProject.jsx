@@ -181,32 +181,42 @@ const DoItProject = () => {
         );
       });
 
-      // === CHALLENGE & SOLUTION ANIMATIONS ===
-      gsap.utils.toArray('.doit-challenge-box').forEach((box) => {
-        gsap.from(box, {
-          x: -200,
-          opacity: 0,
-          duration: 1.2,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: box,
-            start: 'top 85%'
-          }
-        });
-      });
+      // === CHALLENGE & SOLUTION V2 ANIMATIONS ===
+      const challengeSection = document.querySelector('.doit-challenge-solution');
+      if (challengeSection) {
+        const cards = challengeSection.querySelectorAll('.doit-challenge-card');
 
-      gsap.utils.toArray('.doit-solution-box').forEach((box) => {
-        gsap.from(box, {
-          x: 200,
-          opacity: 0,
-          duration: 1.2,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: box,
-            start: 'top 85%'
+        cards.forEach((card, i) => {
+          gsap.from(card, {
+            x: i === 0 ? -100 : 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'expo.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
+            }
+          });
+
+          // Stagger items inside the cards
+          const items = card.querySelectorAll('.doit-reveal-item-v2, .doit-highlight-item-v2');
+          if (items.length > 0) {
+            gsap.from(items, {
+              y: 20,
+              opacity: 0,
+              stagger: 0.1,
+              duration: 0.8,
+              delay: 0.4,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 85%'
+              }
+            });
           }
         });
-      });
+      }
 
       // === DEV BOXES ANIMATIONS ===
       gsap.utils.toArray('.doit-dev-box').forEach((box, i) => {
@@ -239,6 +249,21 @@ const DoItProject = () => {
       });
 
       // === TIMELINE ANIMATIONS ===
+      // Header Animation
+      gsap.from('.doit-timeline-section .doit-section-label, .doit-timeline-section .doit-section-title .word', {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.05,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.doit-timeline-section',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+
+      // Entries Animation
       gsap.utils.toArray('.doit-timeline-entry').forEach((entry, i) => {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -642,23 +667,52 @@ const DoItProject = () => {
 
       {/* Challenge & Solution */}
       <section className="doit-challenge-solution">
-        <div className="doit-challenge-box">
-          <div className="doit-box-number">01</div>
-          <h3>The Challenge</h3>
-          <p>Modern professionals and students struggle with fragmented productivity tools, forcing them to juggle multiple apps for notes, tasks, time tracking, and reminders.</p>
-          <ol className="doit-stagger-list">
-            <li>Require mandatory sign-ups</li>
-            <li>Feel cluttered or slow</li>
-            <li>Fail to work reliably offline</li>
-            <li>Don't provide fast access when information is needed most</li>
-          </ol>
+        <div className="doit-challenge-header-v2">
+          <div className="doit-section-label">STRATEGY</div>
+          <h2 className="doit-section-title doit-split-text">{splitText('Problem vs Solution')}</h2>
         </div>
-        <div className="doit-solution-box">
-          <div className="doit-box-number">02</div>
-          <h3>The Solution</h3>
-          <p>DO-IT delivers an all-in-one productivity platform that combines note-taking, task management, workspace organization, and time tracking in a single native mobile app.</p>
+
+        <div className="doit-challenge-content-v2">
+          <div className="doit-challenge-card challenge">
+            <div className="doit-card-header">
+              <span className="doit-card-tag">THE PROBLEM</span>
+              <div className="doit-card-number">01</div>
+            </div>
+            <h3>Fragmented productivity landscape.</h3>
+            <p>Modern professionals struggle with disconnected tools that increase cognitive load rather than reducing it.</p>
+            <ul className="doit-challenge-list-v2">
+              <li className="doit-reveal-item-v2">Mandatory accounts block instant flow</li>
+              <li className="doit-reveal-item-v2">Cluttered UIs hide essential features</li>
+              <li className="doit-reveal-item-v2">Poor offline support for mobile usage</li>
+              <li className="doit-reveal-item-v2">Fragmented task & note management</li>
+            </ul>
+          </div>
+
+          <div className="doit-challenge-card solution">
+            <div className="doit-card-header">
+              <span className="doit-card-tag green">THE CURE</span>
+              <div className="doit-card-number">02</div>
+            </div>
+            <h3>One hub. No friction. Total focus.</h3>
+            <p>DO-IT consolidates the essentials into a single, blazing-fast interface designed for high-performance deep work.</p>
+            <div className="doit-solution-highlights-v2">
+              <div className="doit-highlight-item-v2">
+                <span className="doit-highlight-icon">✓</span>
+                <span>Native Widgets</span>
+              </div>
+              <div className="doit-highlight-item-v2">
+                <span className="doit-highlight-icon">✓</span>
+                <span>Offline Sync</span>
+              </div>
+              <div className="doit-highlight-item-v2">
+                <span className="doit-highlight-icon">✓</span>
+                <span>Smart Workspaces</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
 
       {/* Features Horizontal Scroll */}
       <section className="doit-features-scroll">
