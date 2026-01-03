@@ -498,26 +498,27 @@
 
 .doit-reveal-image img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  filter: grayscale(100%) contrast(1.1);
+  object-fit: cover;
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.doit-reveal-image:hover img {
-  filter: none;
-  transform: scale(1.05);
-}
+
+/* Removed hover effect */
 
 
 /* ============================================
    OVERVIEW V2
    ============================================ */
 .doit-overview-v2 {
-  padding: 15vh 4rem;
+  padding: 15vh 4rem 5vh;
+  /* Less bottom padding since stack is inside */
   position: relative;
   overflow: hidden;
 }
+
+
 
 .doit-overview-container-v2 {
   max-width: 1400px;
@@ -604,10 +605,14 @@
 
 .doit-overview-visual-stack {
   position: relative;
-  height: 550px;
+  height: 500px;
+  /* Reduced to match layer height better */
+  margin-top: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
+  /* Layers need to translate */
 }
 
 .doit-visual-layer {
@@ -631,7 +636,7 @@
 .layer-1 {
   z-index: 3;
   transform: translate(0, 0) scale(1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* border: 1px solid rgba(255, 255, 255, 0.1); */
 }
 
 .layer-2 {
@@ -648,21 +653,7 @@
   filter: blur(4px);
 }
 
-.doit-overview-visual-stack:hover .layer-1 {
-  transform: scale(1.05);
-}
-
-.doit-overview-visual-stack:hover .layer-2 {
-  transform: translate(-50%, -30%) scale(0.9);
-  opacity: 0.7;
-  filter: blur(0);
-}
-
-.doit-overview-visual-stack:hover .layer-3 {
-  transform: translate(50%, 30%) scale(0.9);
-  opacity: 0.7;
-  filter: blur(0);
-}
+/* Hover effect handled by GSAP rotation */
 
 .doit-visual-glow {
   display: none;
@@ -784,11 +775,14 @@
 
 .doit-visual-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   align-items: start;
-  margin-top: 4rem;
+  margin-top: 5rem;
+  width: 100%;
 }
+
+
 
 
 /* ============================================
@@ -946,34 +940,40 @@
 
 .doit-visual-item {
   position: relative;
-  overflow: visible;
-  border-radius: 12px;
-  min-height: 323px;
-  background: linear-gradient(180deg, rgba(34, 197, 94, 0.05), rgba(0, 0, 0, 0.06));
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
-  width: 21rem;
+  overflow: hidden;
+  border-radius: 24px;
+  /* background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.05); */
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  aspect-ratio: 9 / 19.5;
+  /* Phone aspect ratio */
 }
+
 
 .doit-visual-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* This is fine with the correct aspect ratio */
   display: block;
   transform-origin: center;
-  filter: grayscale(40%) contrast(1.02) saturate(1.05);
-  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease, opacity 0.6s ease;
+  filter: none;
+  /* Removed grayscale to show colors */
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
 }
 
-.doit-visual-item:hover {
+
+/* .doit-visual-item:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 30px 60px rgba(34, 197, 94, 0.2);
-}
+} */
 
-.doit-visual-item:hover img {
+/* .doit-visual-item:hover img {
   transform: scale(1.06) translateY(-4px);
   filter: none;
   opacity: 1;
-}
+} */
 
 /* ============================================
    CHALLENGE & SOLUTION
@@ -1080,11 +1080,19 @@
    FEATURES HORIZONTAL SCROLL - GREEN THEME
    ============================================ */
 .doit-features-scroll {
-  min-height: 150vh;
-  padding: 15vh 0;
+  min-height: 100vh;
+  width: 100%;
   position: relative;
   overflow: hidden;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+
+
 
 .doit-features-scroll::before,
 .doit-features-scroll::after {
@@ -1126,11 +1134,13 @@
 
 .doit-features-container {
   width: 100%;
-  overflow-x: visible;
   position: relative;
-  top: 7rem;
+  margin-top: 4rem;
   z-index: 20;
 }
+
+
+
 
 .doit-features-wrapper {
   display: inline-flex;
@@ -1143,18 +1153,23 @@
   flex: 0 0 450px;
   width: 450px;
   padding: 3.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 24px;
-  background: #ffffff;
-  color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.05);
+  /* Slightly more visible */
+  backdrop-filter: blur(20px);
+  color: #ffffff;
   position: relative;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 0.4s ease, background 0.4s ease;
   transform-style: preserve-3d;
-  height: 500px;
+  height: min(480px, 70vh);
+  /* Flexible height to fit viewport */
   display: flex;
   flex-direction: column;
 }
+
+
 
 .doit-feature-pin {
   position: absolute;
@@ -1193,11 +1208,12 @@
 }
 
 .doit-feature-card:hover {
-  background: #f7f7f7;
-  border-color: rgba(34, 197, 94, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(34, 197, 94, 0.4);
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 12px 40px rgba(34, 197, 94, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
+
 
 .doit-feature-number {
   position: absolute;
@@ -1222,20 +1238,22 @@
   margin-bottom: 1.5rem;
   margin-top: 1rem;
   font-family: 'Space Grotesk', sans-serif;
-  color: #000;
+  color: #fff;
   line-height: 1.2;
   position: relative;
   z-index: 1;
 }
 
+
 .doit-feature-text {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.7;
-  color: rgba(0, 0, 0, 0.75);
+  color: rgba(255, 255, 255, 0.7);
   position: relative;
   z-index: 1;
   flex-grow: 1;
 }
+
 
 .doit-feature-accent {
   position: absolute;
@@ -1959,21 +1977,30 @@
     height: 1px;
   }
 
-  .doit-feature-card {
-    flex: 0 0 350px;
-    width: 350px;
-    height: 400px;
-    padding: 2.5rem;
+  .doit-features-scroll {
+    min-height: auto;
+    padding: 10vh 0;
   }
 
-  .doit-features-header {
-    padding: 0 1.5rem;
+  .doit-features-container {
+    margin-top: 4rem;
   }
 
   .doit-features-wrapper {
+    display: flex;
+    flex-direction: column;
     padding: 0 1.5rem;
-    gap: 1.5rem;
+    gap: 2rem;
   }
+
+  .doit-feature-card {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    min-height: 350px;
+    padding: 2.5rem;
+  }
+
 
   .doit-timeline-container {
     padding-left: 60px;
@@ -1999,10 +2026,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .doit-reveal-image {
-    width: 100%;
-    gap: 2rem;
+  .doit-visual-item {
+    aspect-ratio: 9 / 19.5;
   }
+
 }
 
 @media (max-width: 480px) {

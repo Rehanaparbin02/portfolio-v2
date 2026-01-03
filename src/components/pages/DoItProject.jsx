@@ -4,26 +4,41 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './DoItProject.css';
 
-// Specific imports for Overview
-import calendarImg from '../../assets/do-it/calender.png';
+// Specific imports for Overview and Visual Design
+import ana1Img from '../../assets/do-it/ANA1.png';
+import ana2Img from '../../assets/do-it/ANA2.png';
 import blackImg from '../../assets/do-it/Black.png';
-import anaImg from '../../assets/do-it/ANA1.png';
+import calendarImg from '../../assets/do-it/calender.png';
+import s1Img from '../../assets/do-it/S1.png';
+import s2Img from '../../assets/do-it/S2.png';
+
+// Case Study Screens for Visual Design Section
+import caseAnalysisImg from '../../assets/do-it/do-it-case/analysis2.png';
+import caseCalendarImg from '../../assets/do-it/do-it-case/calender.png';
+import caseDrawerImg from '../../assets/do-it/do-it-case/drawer.png';
+import caseHomeImg from '../../assets/do-it/do-it-case/home-space.png';
+import caseNoteImg from '../../assets/do-it/do-it-case/note.png';
+import casePomoImg from '../../assets/do-it/do-it-case/pomo.png';
+import caseSpaceImg from '../../assets/do-it/do-it-case/space.png';
+import caseTimeImg from '../../assets/do-it/do-it-case/time-tracking.png';
+
+
 
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Import images
-const doItImagesModules = import.meta.glob('../../assets/do-it/do-it-case/**/*.{png,jpg,jpeg,webp,svg}', { eager: true });
-let doItImages = Object.entries(doItImagesModules)
-  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
-  .map(([, mod]) => (mod && (mod.default || mod)) || null)
-  .filter(Boolean)
-  .slice(0, 7); // Limit to first 7 images
+const doItImages = [
+  caseHomeImg,
+  caseAnalysisImg,
+  caseCalendarImg,
+  caseDrawerImg,
+  caseNoteImg,
+  casePomoImg,
+  caseSpaceImg,
+  caseTimeImg
+];
 
-if (doItImages.length > 0 && doItImages.length < 7) {
-  const last = doItImages[doItImages.length - 1];
-  while (doItImages.length < 7) doItImages.push(last);
-}
+
 
 const DoItProject = () => {
   const containerRef = useRef(null);
@@ -225,16 +240,37 @@ const DoItProject = () => {
 
       // === TIMELINE ANIMATIONS ===
       gsap.utils.toArray('.doit-timeline-entry').forEach((entry, i) => {
-        gsap.from(entry, {
-          x: i % 2 === 0 ? -150 : 150,
-          opacity: 0,
-          duration: 1,
-          ease: 'power3.out',
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: entry,
-            start: 'top 85%'
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
           }
         });
+
+        tl.from(entry, {
+          x: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out'
+        })
+          .from(entry.querySelector('.doit-timeline-dot'), {
+            scale: 0,
+            duration: 0.5,
+            ease: 'back.out(2)'
+          }, '-=0.6')
+          .from(entry.querySelector('.doit-timeline-line'), {
+            width: 0,
+            duration: 0.5,
+            ease: 'power3.out'
+          }, '-=0.4')
+          .from(entry.querySelectorAll('.doit-timeline-content > *'), {
+            y: 20,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.6,
+            ease: 'power2.out'
+          }, '-=0.3');
       });
 
       // === IMAGE REVEAL ANIMATIONS ===
@@ -251,32 +287,10 @@ const DoItProject = () => {
           }
         });
 
-        gsap.to(img, {
-          y: -100,
-          scale: 1.05,
-          scrollTrigger: {
-            trigger: img,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1
-          }
-        });
       });
 
-      // === VISUAL ITEMS ANIMATIONS ===
-      gsap.utils.toArray('.doit-visual-item').forEach((item, i) => {
-        gsap.from(item, {
-          y: 50,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 85%'
-          },
-          delay: i * 0.15
-        });
-      });
+
+
 
       // === TEXT REVEAL ===
       gsap.utils.toArray('.doit-reveal-text').forEach((text) => {
@@ -375,45 +389,83 @@ const DoItProject = () => {
       const featuresWrapper = document.querySelector('.doit-features-wrapper');
 
       if (featuresSection && featuresHeader && featuresWrapper) {
-        const scrollDistance = featuresWrapper.scrollWidth - window.innerWidth;
+        const getScrollAmount = () => {
+          let wrapperWidth = featuresWrapper.scrollWidth;
+          return -(wrapperWidth - window.innerWidth);
+        };
 
         const horizontalScroll = gsap.timeline({
           scrollTrigger: {
             trigger: featuresSection,
             start: 'top top',
-            end: () => `+=${scrollDistance}`,
+            end: () => `+=${featuresWrapper.scrollWidth}`,
             scrub: 1,
+            pin: true,
             anticipatePin: 1,
-            pin: '.doit-features-scroll',
-            pinSpacing: true
+            invalidateOnRefresh: true,
           }
         });
 
         horizontalScroll.to(featuresWrapper, {
-          x: -scrollDistance,
+          x: getScrollAmount,
           ease: 'none'
         });
 
-        // Animate cards as they come into view (skip first 3 cards)
-        gsap.utils.toArray('.doit-feature-card').forEach((card, index) => {
-          if (index < 3) {
-            gsap.set(card, { scale: 1, opacity: 1, rotation: 0 });
-          } else {
-            gsap.from(card, {
-              scale: 0.8,
-              opacity: 0,
-              rotation: -10,
-              duration: 0.8,
-              ease: 'back.out(1.7)',
-              scrollTrigger: {
-                trigger: card,
-                start: 'left 85%',
-                end: 'left 50%',
-                containerAnimation: horizontalScroll,
-                toggleActions: 'play none none reverse'
-              }
+        // Simple entrance animation for ALL cards
+        gsap.utils.toArray('.doit-feature-card').forEach((card) => {
+          gsap.from(card, {
+            opacity: 0,
+            y: 30,
+            scale: 0.95,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              containerAnimation: horizontalScroll,
+              start: 'left 90%',
+              toggleActions: 'play none none reverse',
+            }
+          });
+        });
+      }
+
+
+
+      // === VISUAL STACK ROTATION ===
+      const layers = gsap.utils.toArray('.doit-visual-layer');
+      if (layers.length > 0) {
+        const positions = [
+          { x: 0, y: 0, scale: 1, opacity: 1, filter: 'blur(0px)', zIndex: 3, rotate: 0 },
+          { x: -180, y: -40, scale: 0.8, opacity: 0.3, filter: 'blur(6px)', zIndex: 2, rotate: -10 },
+          { x: 180, y: 40, scale: 0.8, opacity: 0.3, filter: 'blur(6px)', zIndex: 1, rotate: 10 }
+        ];
+
+        let step = 0;
+        const totalLayers = layers.length;
+
+        const rotate = () => {
+          step++;
+          layers.forEach((layer, i) => {
+            const posIndex = (i + step) % totalLayers;
+            const pos = positions[posIndex];
+
+            gsap.to(layer, {
+              x: pos.x,
+              y: pos.y,
+              scale: pos.scale,
+              opacity: pos.opacity,
+              filter: pos.filter,
+              zIndex: pos.zIndex,
+              rotate: pos.rotate,
+              duration: 2,
+              ease: 'expo.inOut'
             });
-          }
+          });
+        };
+
+        const rotationTimer = gsap.delayedCall(3.5, function cycle() {
+          rotate();
+          rotationTimer.restart(true);
         });
       }
     }, containerRef);
@@ -422,10 +474,13 @@ const DoItProject = () => {
   }, []);
 
   const splitText = (text) => {
+    if (!text) return '';
     return text.split(' ').map((word, i) => (
-      <span key={i} className="word">{word}</span>
+      <span key={i} className="word" style={{ display: 'inline-block', marginRight: '0.3em' }}>{word}</span>
     ));
   };
+
+
 
   return (
     <div className="doit-case-study-container" ref={containerRef}>
@@ -573,7 +628,7 @@ const DoItProject = () => {
                 <img src={blackImg} alt="DO-IT App Home" />
               </div>
               <div className="doit-visual-layer layer-2 doit-reveal-image">
-                <img src={anaImg} alt="DO-IT App Workspace" />
+                <img src={ana1Img} alt="DO-IT App Workspace" />
               </div>
               <div className="doit-visual-layer layer-3 doit-reveal-image">
                 <img src={calendarImg} alt="DO-IT App Calendar" />
@@ -670,7 +725,7 @@ const DoItProject = () => {
         {doItImages.length > 0 && (
           <div className="doit-visual-grid">
             {doItImages.map((img, index) => (
-              <div key={index} className="doit-visual-item doit-reveal-image">
+              <div key={index} className="doit-visual-item">
                 <img src={img} alt={`DO-IT App Screen ${index + 1}`} />
               </div>
             ))}
