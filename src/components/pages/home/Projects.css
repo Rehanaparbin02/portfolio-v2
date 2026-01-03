@@ -246,7 +246,7 @@
     background-size: cover;
     background-position: center;
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
+    position: relative;
     bottom: 3rem;
 
 }
@@ -264,46 +264,79 @@
 }
 
 .liquid-btn {
+    --color-surface-white: #ffffff;
+    --color-just-black: #000000;
+    --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
     position: relative;
-    padding: 1.8rem 4rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1.5rem 3.5rem;
+    border: none;
     border-radius: 100px;
-    color: white;
+    background: transparent;
+    color: var(--color-surface-white);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.9rem;
     letter-spacing: 0.15em;
+    text-transform: uppercase;
     overflow: hidden;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 1.5rem;
-    transition: border-color 0.4s ease;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: color 0.15s var(--ease-in-out-quart);
+}
+
+.liquid-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 100px;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 .liquid-btn:hover {
-    border-color: white;
+    color: var(--color-just-black);
 }
 
 .liquid-btn__flair {
     position: absolute;
     top: 0;
     left: 0;
-    width: 150%;
-    height: 150%;
-    background: white;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    transform: scale(0);
+    transform-origin: 0 0;
+    will-change: transform;
+}
+
+.liquid-btn__flair::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 170%;
+    aspect-ratio: 1/1;
+    background-color: var(--color-surface-white);
     border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    z-index: 0;
+    transform: translate(-50%, -50%);
     pointer-events: none;
 }
 
 .liquid-btn__label {
     position: relative;
-    z-index: 1;
-    mix-blend-mode: difference;
+    z-index: 2;
     display: flex;
     align-items: center;
     gap: 1rem;
+    transition: color 50ms var(--ease-in-out-quart);
 }
 
 /* --- Responsive Adjustments --- */
@@ -312,6 +345,7 @@
         --card-height: 100vh;
     }
 }
+
 /* 27" & 22" Monitors (High Res) */
 @media (min-width: 1920px) {
     :root {

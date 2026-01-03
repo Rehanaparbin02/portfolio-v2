@@ -77,8 +77,8 @@ const DoItProject = () => {
         });
       });
 
-     // === STATS COUNTER ANIMATION ===
-    
+      // === STATS COUNTER ANIMATION ===
+
       gsap.utils.toArray('.stat-item').forEach((stat, i) => {
         gsap.from(stat, {
           scale: 0,
@@ -96,15 +96,15 @@ const DoItProject = () => {
         const value = stat.querySelector('.stat-value');
         const finalValue = value.textContent.trim();
         const isNumber = /[\d.]+/.test(finalValue);
-        
+
         if (isNumber) {
           // Extract the numeric part and handle '+' and '%'
           let numValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
           const hasPlus = finalValue.includes('+');
           const hasPercent = finalValue.includes('%');
-          
+
           const obj = { value: 0 };
-          
+
           // Set initial value to 0
           if (hasPercent) {
             value.textContent = `0%`;
@@ -113,7 +113,7 @@ const DoItProject = () => {
           } else {
             value.textContent = '0';
           }
-          
+
           gsap.to(obj, {
             value: numValue,
             duration: 2,
@@ -137,14 +137,14 @@ const DoItProject = () => {
         }
       });
       // === TEXT HIGHLIGHT ON SCROLL ===
-      gsap.utils.toArray('.doit-summary-highlight').forEach((word) => {
-        gsap.fromTo(word, 
+      gsap.utils.toArray('.doit-highlight-word').forEach((word) => {
+        gsap.fromTo(word,
           {
             background: 'transparent',
             color: 'rgba(255, 255, 255, 0.7)'
           },
           {
-            background: 'rgba(34, 197, 94, 0.4)',
+            background: 'rgba(34, 197, 94, 0.2)',
             color: '#fff',
             padding: '0.2em 0.4em',
             borderRadius: '4px',
@@ -308,7 +308,7 @@ const DoItProject = () => {
           const rect = button.getBoundingClientRect();
           const x = e.clientX - rect.left - rect.width / 2;
           const y = e.clientY - rect.top - rect.height / 2;
-          
+
           gsap.to(button, {
             x: x * 0.3,
             y: y * 0.3,
@@ -370,7 +370,7 @@ const DoItProject = () => {
 
       if (featuresSection && featuresHeader && featuresWrapper) {
         const scrollDistance = featuresWrapper.scrollWidth - window.innerWidth;
-        
+
         const horizontalScroll = gsap.timeline({
           scrollTrigger: {
             trigger: featuresSection,
@@ -476,12 +476,32 @@ const DoItProject = () => {
       </section>
 
       {/* Summary */}
-      <section className="doit-summary">
-        <div className="doit-summary-content">
-          <h2 className="doit-summary-text">
-            <span className="doit-summary-highlight">DO-IT</span> transforms how you handle tasks by blending <span className="doit-summary-highlight">automation</span>, <span className="doit-summary-highlight">analytics</span>, and <span className="doit-summary-highlight">collaboration</span> into one calm, intelligent task management experience.
+      <section className="doit-summary-full">
+        <div className="doit-summary-content-new">
+          <div className="doit-summary-decorative-line"></div>
+          <h2 className="doit-summary-text-highlight">
+            <span className="doit-summary-line">
+              <span className="doit-highlight-word">DO-IT</span> transforms how you handle
+            </span>
+            <span className="doit-summary-line">
+              tasks by blending <span className="doit-highlight-word">automation</span>,
+            </span>
+            <span className="doit-summary-line">
+              <span className="doit-highlight-word">analytics</span>, and <span className="doit-highlight-word">collaboration</span>
+            </span>
+            <span className="doit-summary-line">
+              into one calm, intelligent
+            </span>
+            <span className="doit-summary-line">
+              task management experience.
+            </span>
           </h2>
-          <p className="doit-summary-tags">React Native · AI UX · Task Management App · iOS · Android · Passion Project</p>
+          <div className="doit-summary-tags-wrapper">
+            {['React Native', 'AI UX', 'Task Management App', 'iOS', 'Android', 'Passion Project'].map((tag, i) => (
+              <span key={i} className="doit-summary-tag-item">{tag}</span>
+            ))}
+          </div>
+          <div className="doit-summary-gradient-orb"></div>
         </div>
       </section>
 
@@ -511,9 +531,9 @@ const DoItProject = () => {
           <div className="doit-section-label">OVERVIEW</div>
           <h2 className="doit-section-title doit-split-text">{splitText('Full-Stack Productivity')}</h2>
           <p className="doit-reveal-text">
-            DO-IT is a full-stack, cross-platform note-taking and productivity app built with React Native + Expo and powered by a Supabase (PostgreSQL) backend, delivering real-time sync, secure authentication, 
-            and an offline-first experience—featuring full auth (email/password, OTP, recovery), a configurable Guest Mode with seamless account migration, custom Spaces, rich media attachments, advanced search and batch 
-            actions, productivity tools (Pomodoro, time tracking, calendar, reminders), native Android widgets with deep linking, smooth navigation, robust validation, and isolated guest sessions—resulting in a 
+            DO-IT is a full-stack, cross-platform note-taking and productivity app built with React Native + Expo and powered by a Supabase (PostgreSQL) backend, delivering real-time sync, secure authentication,
+            and an offline-first experience—featuring full auth (email/password, OTP, recovery), a configurable Guest Mode with seamless account migration, custom Spaces, rich media attachments, advanced search and batch
+            actions, productivity tools (Pomodoro, time tracking, calendar, reminders), native Android widgets with deep linking, smooth navigation, robust validation, and isolated guest sessions—resulting in a
             production-ready, scalable solution with 3,500+ lines of well-structured UI code.
           </p>
         </div>
@@ -521,7 +541,7 @@ const DoItProject = () => {
           {doItImages.length > 0 && (
             <div className="doit-reveal-image">
               <img src={doItImages[0]} alt="DO-IT App" />
-              <img src={doItImages[1]} alt="DO-IT App" style={{position: 'relative', right: '6rem'}}/>
+              <img src={doItImages[1]} alt="DO-IT App" style={{ position: 'relative', right: '6rem' }} />
             </div>
           )}
         </div>
@@ -629,7 +649,7 @@ const DoItProject = () => {
             Over an eight-week Agile cycle, the entire cross-platform app was built solo.
           </p>
         </div>
-        
+
         <div className="doit-dev-content">
           <div className="doit-dev-boxes">
             <div className="doit-dev-box">
@@ -663,7 +683,7 @@ const DoItProject = () => {
               </ul>
             </div>
           </div>
-          
+
           <div className="doit-tech-section">
             <div className="doit-tech-header">
               <div className="doit-section-label">TECHNOLOGY</div>

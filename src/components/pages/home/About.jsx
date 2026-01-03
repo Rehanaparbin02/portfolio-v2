@@ -94,7 +94,7 @@ export default function About() {
                     <h1 className="section-eyebrow" style={{ position: "relative", top: "27rem" }}>THERE!</h1>
                     <p className="about-description">
                         I'm a passionate <span className="highlight highlight-left">Full Stack Developer</span> <span className="emoji">🚀</span> crafting
-                        interactive and immersive <span className="highlight highlight-right">web experiences</span> <span className="emoji">🌐</span>.
+                        interactive and immersive <span className="highlight highlight-right">web experiences</span> <span className="emoji">🌐</span> and <span className="highlight highlight-right">mobile applications</span> .
                         Blurring the line between design and code <span className="emoji">🎨</span> to create digital magic <span className="emoji">✨</span>.
                     </p>
                 </div>

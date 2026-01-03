@@ -21,14 +21,14 @@ const throttle = (func, limit) => {
 
 const projectsData = [
     {
-            id: "01",
-            title: "Do-It: Manage with ease",
-            category: "Productivity",
-            description: "A task management app that helps users stay organized and productive by allowing them to create, prioritize, and track their tasks in one place.",
-            tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"],
-            image: doitMockup,
-            link: "/doit-project",
-            
+        id: "01",
+        title: "Do-It: Manage with ease",
+        category: "Productivity",
+        description: "A task management app that helps users stay organized and productive by allowing them to create, prioritize, and track their tasks in one place.",
+        tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"],
+        image: doitMockup,
+        link: "/doit-project",
+
     },
     {
         id: "02",
@@ -38,7 +38,7 @@ const projectsData = [
         tags: ["React Native", "Figma", "Express.js", "Node.js", "Supabase", "Firebase"],
         image: koaMockup,
         link: "/doit-project",
-        
+
     },
 ];
 
@@ -176,31 +176,44 @@ export default function Projects() {
                 const xSet = gsap.quickSetter(flair, "xPercent");
                 const ySet = gsap.quickSetter(flair, "yPercent");
 
-                btn.addEventListener('mouseenter', () => {
-                    gsap.to(flair, { scale: 1, duration: 0.5, ease: "power2.out" });
-                    gsap.to(label, { x: 5, duration: 0.3 });
+                const getXY = (e) => {
+                    const { left, top, width, height } = btn.getBoundingClientRect();
+                    const xTransformer = gsap.utils.pipe(
+                        gsap.utils.mapRange(0, width, 0, 100),
+                        gsap.utils.clamp(0, 100)
+                    );
+                    const yTransformer = gsap.utils.pipe(
+                        gsap.utils.mapRange(0, height, 0, 100),
+                        gsap.utils.clamp(0, 100)
+                    );
+                    return {
+                        x: xTransformer(e.clientX - left),
+                        y: yTransformer(e.clientY - top)
+                    };
+                };
+
+                btn.addEventListener('mouseenter', (e) => {
+                    const { x, y } = getXY(e);
+                    xSet(x);
+                    ySet(y);
+                    gsap.to(flair, { scale: 1, duration: 0.4, ease: "power2.out" });
                 });
 
-                btn.addEventListener('mouseleave', () => {
-                    gsap.to(flair, { scale: 0, duration: 0.4, ease: "power2.in" });
-                    gsap.to(label, { x: 0, duration: 0.3 });
+                btn.addEventListener('mouseleave', (e) => {
+                    const { x, y } = getXY(e);
+                    gsap.killTweensOf(flair);
+                    gsap.to(flair, {
+                        xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
+                        yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
+                        scale: 0,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
                 });
 
                 btn.addEventListener('mousemove', (e) => {
-                    const { left, top, width, height } = btn.getBoundingClientRect();
-                    const x = ((e.clientX - left) / width) * 100;
-                    const y = ((e.clientY - top) / height) * 100;
-                    xSet(x);
-                    ySet(y);
-
-                    // Subtle magnetic pull
-                    const pullX = (e.clientX - (left + width / 2)) * 0.15;
-                    const pullY = (e.clientY - (top + height / 2)) * 0.15;
-                    gsap.to(btn, { x: pullX, y: pullY, duration: 0.4, ease: "power2.out" });
-                });
-
-                btn.addEventListener('mouseleave', () => {
-                    gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+                    const { x, y } = getXY(e);
+                    gsap.to(flair, { xPercent: x, yPercent: y, duration: 0.4, ease: "power2" });
                 });
             });
 

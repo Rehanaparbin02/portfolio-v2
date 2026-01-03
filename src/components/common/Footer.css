@@ -25,6 +25,10 @@
     border-top: 8px solid #ffffff;
     box-shadow: 0 -40px 100px rgba(0, 0, 0, 0.9);
     min-height: auto;
+    /* Ensure footer is visible on initial load */
+    opacity: 1;
+    visibility: visible;
+    will-change: transform, opacity;
 }
 
 /* More dramatic Rim Light */

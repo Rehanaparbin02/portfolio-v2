@@ -19,12 +19,12 @@ export default function Home() {
         stagger: 0.2,
         duration: 1.2
       })
-      .from('.nav-item, .footer-item', {
-        opacity: 0,
-        y: 10,
-        stagger: 0.1,
-        duration: 0.8
-      }, '-=0.5');
+        .from('.nav-item, .footer-item', {
+          opacity: 0,
+          y: 10,
+          stagger: 0.1,
+          duration: 0.8
+        }, '-=0.5');
 
       // Parallax Marquee effect - Opposing directions
       // Line 1: Moves Right
@@ -48,7 +48,7 @@ export default function Home() {
           scrub: 1
         }
       });
-      
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -67,7 +67,7 @@ export default function Home() {
           <span className="label">BUILDING </span>
           <p>CREATIVELY</p>
         </div>
-    <div className="nav-item" style={{ position: 'relative', right: '5rem' }}>
+        <div className="nav-item" style={{ position: 'relative', right: '5rem' }}>
           <span className="label">WORK AVAILABILITY</span>
           <p>NOW</p>
         </div>

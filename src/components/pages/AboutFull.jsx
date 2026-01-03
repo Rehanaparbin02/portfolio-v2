@@ -409,56 +409,62 @@ export default function AboutFull() {
                 {/* <div className="portfolio-label">REHANA PARBIN / 2025</div> */}
             </header>
 
-            {/* Hero Section */}
             <section className="hero-section">
-                <div className="hero-portrait-wrapper">
-                    <img src={meImg} alt="Rehana Parbin" className="hero-portrait-img" />
+
+
+                <div className="hero-content-wrapper">
+                    <h1 className="hero-main-title">
+                        <span className="line"><span>REHANA</span></span>
+                        <br />
+                        <span className="line"><span>PARBIN</span></span>
+                    </h1>
+                    <div className="hero-portrait-wrapper">
+                        <img src={meImg} alt="Rehana Parbin" className="hero-portrait-img" />
+                        <div className="portrait-frame"></div>
+                    </div>
+                    <div className="hero-meta-grid">
+                        <div className="meta-card role-card">
+                            <span className="meta-label">ROLE</span>
+                            <h2 className="meta-value">Full-Stack Developer</h2>
+                        </div>
+
+                        <div className="meta-card location-card">
+                            <span className="meta-label">BASED IN</span>
+                            <h2 className="meta-value">India</h2>
+                        </div>
+
+                        <div className="meta-card status-card">
+                            <span className="meta-label">STATUS</span>
+                            <div className="status-indicator">
+                                <span className="status-dot"></span>
+                                <h2 className="meta-value">Available for Work</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="hero-description">
+                        <p className="hero-lead">
+                            Building <span className="text-highlight">digital experiences</span> where
+                            <span className="text-highlight"> algorithmic precision</span> meets
+                            <span className="text-highlight"> human intuition</span>—from quantum optimization research
+                            to scalable full-stack applications.
+                        </p>
+                    </div>
+                    {/* 
+                    <div className="hero-tech-tags">
+                        <span className="tech-pill">React.js</span>
+                        <span className="tech-pill">Node.js</span>
+                        <span className="tech-pill">PostgreSQL</span>
+                        <span className="tech-pill">TypeScript</span>
+                        <span className="tech-pill">React Native</span>
+                        <span className="tech-pill">Supabase</span>
+                    </div> */}
                 </div>
-                <h1 className="hero-main-title">
-                    <span className="line"><span>REHANA</span></span>
-                    <span className="line"><span>PARBIN</span></span>
-                </h1>
-                {/* <div className="hero-sub-modern">
-                    <div className="modern-glass-panel left-panel">
-                        <div className="panel-tag">MISSION.SYS</div>
-                        <div className="panel-content">
-                            <div className="hero-description-text">
-                                <span className="text-reveal-line">Full-Stack Developer.</span>
-                                <span className="text-reveal-line">Crafting <span className="text-accent-glow">high-performance</span> digital solutions</span>
-                                <span className="text-reveal-line">with <span className="text-accent-glow">scalable architectures</span></span>
-                                <span className="text-reveal-line">and purpose-driven design.</span>
-                            </div>
-                        </div>
-                        <div className="panel-status">
-                            <span className="status-dot pulsed"></span> STATUS: ACTIVE
-                        </div>
-                    </div>
 
-                    <div className="central-visual-engine">
-                        <div className="engine-core"></div>
-                        <div className="engine-ring ring-1"></div>
-                        <div className="engine-ring ring-2"></div>
-                        <div className="engine-ring ring-3"></div>
-                    </div>
-
-                    <div className="modern-glass-panel right-panel">
-                        <div className="panel-tag">TECH.SPEC</div>
-                        <div className="panel-content">
-                            <div className="hero-spec-text">
-                                <span className="tech-tag-label">SPECIALIZING IN</span>
-                                <span className="tech-tag">MODERN WEB ARCHITECTURES</span>
-                                <span className="tech-tag">PERFORMANCE OPTIMIZATION</span>
-                                <span className="tech-tag">DATA-DRIVEN USER JOURNEYS</span>
-                            </div>
-                        </div>
-                        <div className="panel-footer">
-                            <div className="loading-bar-mini">
-                                <div className="loading-progress"></div>
-                            </div>
-                            <span>LOAD_089%</span>
-                        </div>
-                    </div>
-                </div> */}
+                <div className="scroll-prompt">
+                    <span className="scroll-text">SCROLL TO EXPLORE</span>
+                    <div className="scroll-line"></div>
+                </div>
             </section>
 
             {/* Redesigned Philosophy Section - White Theme */}
@@ -621,3 +627,6 @@ export default function AboutFull() {
         </div>
     );
 }
+
+
+

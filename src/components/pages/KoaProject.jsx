@@ -77,52 +77,115 @@ const KoaProject = () => {
         });
       });
 
-// === STATS COUNTER ANIMATION ===
-      gsap.utils.toArray('.stat-item').forEach((stat, i) => {
-        gsap.from(stat, {
-          scale: 0,
-          opacity: 0,
-          rotation: -180,
-          duration: 1,
-          ease: 'back.out(2)',
-          scrollTrigger: {
-            trigger: stat,
-            start: 'top 85%'
-          },
-          delay: i * 0.1
-        });
+      // === STATS COUNTER ANIMATION ===
 
+      // gsap.utils.toArray('.stat-item').forEach((stat, i) => {
+      //   gsap.from(stat, {
+      //     scale: 0,
+      //     opacity: 0,
+      //     rotation: -180,
+      //     duration: 1,
+      //     ease: 'back.out(2)',
+      //     scrollTrigger: {
+      //       trigger: stat,
+      //       start: 'top 85%'
+      //     },
+      //     delay: i * 0.1
+      //   });
+
+      //   const value = stat.querySelector('.stat-value');
+      //   const finalValue = value.textContent.trim();
+      //   const isNumber = /[\d.]+/.test(finalValue);
+
+      //   if (isNumber) {
+      //     // Extract the numeric part and handle '+' and '%'
+      //     let numValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
+      //     const hasPlus = finalValue.includes('+');
+      //     const hasPercent = finalValue.includes('%');
+
+      //     const obj = { value: 0 };
+
+      //     // Set initial value to 0
+      //     if (hasPercent) {
+      //       value.textContent = `0%`;
+      //     } else if (hasPlus) {
+      //       value.textContent = `0+`;
+      //     } else {
+      //       value.textContent = '0';
+      //     }
+
+      //     gsap.to(obj, {
+      //       value: numValue,
+      //       duration: 2,
+      //       ease: 'power2.out',
+      //       scrollTrigger: {
+      //         trigger: stat,
+      //         start: 'top 85%',
+      //         toggleActions: 'play none none none'
+      //       },
+      //       delay: 0.3,
+      //       onUpdate: () => {
+      //         if (hasPercent) {
+      //           value.textContent = `${Math.round(obj.value)}%`;
+      //         } else if (hasPlus) {
+      //           value.textContent = `${Math.round(obj.value)}+`;
+      //         } else {
+      //           value.textContent = Math.round(obj.value);
+      //         }
+      //       }
+      //     });
+      //   }
+      // });
+      // === STATS COUNTER ANIMATION ===
+
+      gsap.utils.toArray('.stat-item').forEach((stat, i) => {
         const value = stat.querySelector('.stat-value');
         const finalValue = value.textContent.trim();
         const isNumber = /[\d.]+/.test(finalValue);
-        
+
         if (isNumber) {
           // Extract the numeric part and handle '+' and '%'
           let numValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
           const hasPlus = finalValue.includes('+');
           const hasPercent = finalValue.includes('%');
-          
+
           const obj = { value: 0 };
-          
-          // Set initial value to 0
-          if (hasPercent) {
-            value.textContent = `0%`;
-          } else if (hasPlus) {
-            value.textContent = `0+`;
-          } else {
-            value.textContent = '0';
-          }
-          
+
+          // Animate the stat card appearance
+          gsap.from(stat, {
+            scale: 0,
+            opacity: 0,
+            rotation: -180,
+            duration: 1,
+            ease: 'back.out(2)',
+            scrollTrigger: {
+              trigger: stat,
+              start: 'top 85%',
+              onEnter: () => {
+                // Set initial value to 0 only when entering viewport
+                if (hasPercent) {
+                  value.textContent = `0%`;
+                } else if (hasPlus) {
+                  value.textContent = `0+`;
+                } else {
+                  value.textContent = '0';
+                }
+              }
+            },
+            delay: i * 0.1
+          });
+
+          // Animate counter
           gsap.to(obj, {
             value: numValue,
             duration: 2,
             ease: 'power2.out',
+            delay: i * 0.1 + 0.5,
             scrollTrigger: {
               trigger: stat,
               start: 'top 85%',
-              toggleActions: 'play none none none'
+              once: true
             },
-            delay: 0.3,
             onUpdate: () => {
               if (hasPercent) {
                 value.textContent = `${Math.round(obj.value)}%`;
@@ -133,12 +196,25 @@ const KoaProject = () => {
               }
             }
           });
+        } else {
+          // If not a number, just animate the card
+          gsap.from(stat, {
+            scale: 0,
+            opacity: 0,
+            rotation: -180,
+            duration: 1,
+            ease: 'back.out(2)',
+            scrollTrigger: {
+              trigger: stat,
+              start: 'top 85%'
+            },
+            delay: i * 0.1
+          });
         }
       });
-
       // === TEXT HIGHLIGHT ON SCROLL ===
       gsap.utils.toArray('.highlight-word').forEach((word) => {
-        gsap.fromTo(word, 
+        gsap.fromTo(word,
           {
             background: 'transparent',
             color: 'rgba(255, 255, 255, 0.7)'
@@ -324,7 +400,7 @@ const KoaProject = () => {
           const rect = button.getBoundingClientRect();
           const x = e.clientX - rect.left - rect.width / 2;
           const y = e.clientY - rect.top - rect.height / 2;
-          
+
           gsap.to(button, {
             x: x * 0.3,
             y: y * 0.3,
@@ -384,7 +460,7 @@ const KoaProject = () => {
 
       if (featuresSection && featuresWrapper) {
         const scrollDistance = featuresWrapper.scrollWidth - window.innerWidth;
-        
+
         const horizontalScroll = gsap.timeline({
           scrollTrigger: {
             trigger: featuresSection,
@@ -488,7 +564,7 @@ const KoaProject = () => {
         <div className="hero-modern-bg-gradient"></div>
       </section>
 
-    {/* Summary */}
+      {/* Summary */}
       <section className="summary-full">
         <div className="summary-content">
           <div className="summary-decorative-line"></div>
@@ -554,7 +630,7 @@ const KoaProject = () => {
           {koaImages.length > 0 && (
             <div className="reveal-image">
               <img src={koaImages[0]} alt="Koa Design System" />
-              <img src={koaImages[1]} alt="Koa Components" style={{position: 'relative', right: '6rem'}}/>
+              <img src={koaImages[1]} alt="Koa Components" style={{ position: 'relative', right: '6rem' }} />
             </div>
           )}
         </div>
@@ -663,7 +739,7 @@ const KoaProject = () => {
             Built with modern technologies and best practices to ensure performance, maintainability, and developer experience.
           </p>
         </div>
-        
+
         <div className="dev-content-redesigned">
           <div className="dev-boxes">
             <div className="dev-box dev-scale">
@@ -697,7 +773,7 @@ const KoaProject = () => {
               </ul>
             </div>
           </div>
-          
+
           <div className="tech-section-modern">
             <div className="tech-modern-header">
               <div className="section-label">TECHNOLOGY</div>

@@ -14,6 +14,9 @@ export default function Footer() {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
+            // Force immediate refresh before animations
+            ScrollTrigger.refresh();
+
             // 1. Reveal Animation for the entire footer section
             gsap.fromTo(footerRef.current,
                 { yPercent: 40, autoAlpha: 0 },
@@ -26,7 +29,7 @@ export default function Footer() {
                         start: "top bottom",
                         end: "top 20%",
                         scrub: 1,
-                        onEnter: () => ScrollTrigger.refresh()
+                        invalidateOnRefresh: true
                     }
                 }
             );
@@ -41,7 +44,8 @@ export default function Footer() {
                         trigger: footerRef.current,
                         start: "top bottom",
                         end: "bottom bottom",
-                        scrub: true
+                        scrub: true,
+                        invalidateOnRefresh: true
                     }
                 }
             );
@@ -51,7 +55,8 @@ export default function Footer() {
                 scrollTrigger: {
                     trigger: ".footer-main",
                     start: "top 85%",
-                    toggleActions: "play none none reverse"
+                    toggleActions: "play none none reverse",
+                    invalidateOnRefresh: true
                 }
             });
 
@@ -86,6 +91,7 @@ export default function Footer() {
                 scrollTrigger: {
                     trigger: ".footer-marquee-section",
                     start: "top 90%",
+                    invalidateOnRefresh: true
                 }
             });
 
@@ -108,22 +114,32 @@ export default function Footer() {
                 });
             });
 
-            // Robust Refresh Logic
-            ScrollTrigger.refresh();
-            const handleLoad = () => ScrollTrigger.refresh();
+            // Multiple refresh strategies to ensure footer loads
+            const refreshTimers = [
+                setTimeout(() => ScrollTrigger.refresh(), 100),
+                setTimeout(() => ScrollTrigger.refresh(), 300),
+                setTimeout(() => ScrollTrigger.refresh(), 500),
+                setTimeout(() => ScrollTrigger.refresh(), 1000)
+            ];
 
-            if (document.readyState === 'complete') {
+            // Refresh on window load
+            const handleLoad = () => {
                 ScrollTrigger.refresh();
-            } else {
-                window.addEventListener('load', handleLoad);
-            }
+            };
 
-            // Fallback refresh for layout shifts
-            const timeout = setTimeout(() => ScrollTrigger.refresh(), 500);
+            window.addEventListener('load', handleLoad);
+
+            // Refresh on resize
+            const handleResize = () => {
+                ScrollTrigger.refresh();
+            };
+
+            window.addEventListener('resize', handleResize);
 
             return () => {
                 window.removeEventListener('load', handleLoad);
-                clearTimeout(timeout);
+                window.removeEventListener('resize', handleResize);
+                refreshTimers.forEach(timer => clearTimeout(timer));
             };
 
         }, footerRef);
@@ -220,7 +236,7 @@ export default function Footer() {
                             <span className="location">Based in India, Available Worldwide</span>
                         </div>
                         <div className="footer-bottom-links">
-                            <button className="back-to-top" onClick={scrollToTop} aria-label="Back to top">Back to top ↑</button>
+                            <button className="back-to-top" onClick={scrollToTop} aria-label="Back to top">Back to top →</button>
                             <span className="designed">Designed with passion</span>
                         </div>
                     </div>
