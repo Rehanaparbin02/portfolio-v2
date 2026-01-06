@@ -88,7 +88,7 @@ const ZenfloProject = () => {
                         color: 'rgba(255, 255, 255, 0.7)'
                     },
                     {
-                        background: 'rgba(76, 175, 80, 0.2)',
+                        background: 'rgba(255, 204, 0, 0.2)',
                         color: '#fff',
                         padding: '0.2em 0.4em',
                         borderRadius: '4px',
@@ -310,7 +310,7 @@ const ZenfloProject = () => {
                         </span>
                     </h2>
                     <div className="zen-summary-tags-wrapper">
-                        {['React Native', 'Expo', 'Supabase', 'TypeScript', 'Reanimated', 'Figma', 'Gestures'].map((tag, i) => (
+                        {['React Native', 'Expo', 'Supabase', 'TypeScript', 'Reanimated', 'Expo Router', 'Gestures', 'Zustand'].map((tag, i) => (
                             <span key={i} className="zen-summary-tag-item">{tag}</span>
                         ))}
                     </div>
@@ -352,26 +352,26 @@ const ZenfloProject = () => {
                     <div className="zen-overview-grid-v2">
                         <div className="zen-overview-main-text">
                             <p>
-                                <strong>Emotion-Based Categorization:</strong> Happy, Sad, Calm, Stressed, Anxious, Angry. Each mood has a unique color identity that permeates the UI when selected.
+                                <strong>Emotion-Based Categorization:</strong> Based on Plutchik's wheel of emotions, ZenFlow uses 6 distinct mood categories—Happy, Sad, Calm, Stressed, Anxious, Angry—each with a unique color identity that permeates the UI.
                             </p>
                             <div className="zen-overview-features-mini">
                                 <div className="zen-mini-feature">
                                     <div className="zen-mini-icon">🎨</div>
                                     <div className="zen-mini-content">
-                                        <h4>Color Logic</h4>
-                                        <p>Dynamic UI based on mood.</p>
+                                        <h4>Color Psychology</h4>
+                                        <p>Strategic color coding for emotional awareness.</p>
                                     </div>
                                 </div>
                                 <div className="zen-mini-feature">
                                     <div className="zen-mini-icon">🌊</div>
                                     <div className="zen-mini-content">
                                         <h4>Thought Trail</h4>
-                                        <p>Fluid timeline scroll.</p>
+                                        <p>Vertical timeline with fluid scroll.</p>
                                     </div>
                                 </div>
                             </div>
                             <p className="secondary-text">
-                                Unlike standard lists, the Thought Trail is an animated vertical timeline that allows users to scroll through their emotional history with fluid gestures. Built with Supabase, ZenFlow ensures your private thoughts remain private.
+                                Unlike standard lists, the <strong>Thought Trail</strong> allows users to explore their emotional history through a beautiful, animated vertical timeline. Integrated with Supabase and AsyncStorage, it offers a seamless offline-first experience with secure cloud backup.
                             </p>
                         </div>
 
@@ -396,11 +396,11 @@ const ZenfloProject = () => {
                             <div className="zen-card-number">01</div>
                         </div>
                         <h3>The Disconnect.</h3>
-                        <p>In a fast-paced world, many struggle to maintain a consistent journaling habit. Existing apps are often cluttered, overwhelming, or lack meaningful insights.</p>
+                        <p>In a fast-paced world, many struggle to maintain a consistent journaling habit. Existing apps often suffer from cluttered interfaces, lack of personalization, and provide poor visual feedback on emotional patterns.</p>
                         <ul>
                             <li>Inconsistent tracking habits</li>
-                            <li>Complex, cluttered interfaces</li>
-                            <li>Lack of visual feedback</li>
+                            <li>Cluttered, overwhelming UIs</li>
+                            <li>Difficulty identifying mood triggers</li>
                         </ul>
                     </div>
 
@@ -410,11 +410,11 @@ const ZenfloProject = () => {
                             <div className="zen-card-number">02</div>
                         </div>
                         <h3>Mindful Design.</h3>
-                        <p>ZenFlow solves this with a minimalist, neomorphic design that encourages reflection. By focusing on micro-interactions and color psychology, it turns journaling into a delightful habit.</p>
+                        <p>ZenFlow solves this with a minimalist, neomorphic design that encourages reflection. By focusing on micro-interactions and Plutchik's color psychology, it turns journaling into a delightful, secure habit.</p>
                         <ul>
-                            <li><strong>Emotion-Based:</strong> 6 distinct mood categories.</li>
-                            <li><strong>Thought Trail:</strong> Beautiful timeline visualization.</li>
-                            <li><strong>Visual Insights:</strong> Pattern recognition.</li>
+                            <li><strong>Visual Insights:</strong> 6 distinct mood categories.</li>
+                            <li><strong>Thought Trail:</strong> Animated timeline visualization.</li>
+                            <li><strong>Privacy First:</strong> Supabase RLS & Local persistence.</li>
                         </ul>
                     </div>
                 </div>
@@ -426,12 +426,12 @@ const ZenfloProject = () => {
                 <h2 className="zen-section-title zen-split-text">{splitText('Development Journey')}</h2>
                 <div className="zen-timeline-container">
                     {[
-                        { num: '01', title: 'Research & Personas', text: 'Analyzed 15+ apps and created personas to understand pain points like complex onboarding and lack of engagement.' },
-                        { num: '02', title: 'UX & Wireframing', text: 'Designed low-fidelity wireframes focusing on a clutter-free "Neomorphic" aesthetic with soft shadows.' },
-                        { num: '03', title: 'System Architecture', text: 'Set up Supabase for backend, tailored React Native Expo environment, and established a type-safe TypeScript codebase.' },
-                        { num: '04', title: 'UI Implementation', text: 'Built the component library with reusable "Neomorphic Cards" and "Emotion Pills". Implemented color systems.' },
-                        { num: '05', title: 'Animation', text: 'Integrated React Native Reanimated for 60fps gesture-based animations including the "Thought Trail".' },
-                        { num: '06', title: 'Optimization', text: 'Fixed pagination bugs, optimized rendering with React.memo, and refined haptic feedback.' }
+                        { num: '01', title: 'Research & Personas', text: 'Analyzed 15+ apps and created personas (Sarah, 28 & David, 35) to identify pain points like complex onboarding and lack of visual engagement.' },
+                        { num: '02', title: 'UX & Wireframing', text: 'Designed low-fidelity wireframes and tested paper prototypes, focusing on a clutter-free "Neomorphic" aesthetic with soft shadows.' },
+                        { num: '03', title: 'System Architecture', text: 'Implemented Supabase for backend with Row Level Security (RLS), and configured Expo Router for file-based navigation.' },
+                        { num: '04', title: 'UI Implementation', text: 'Built a component library with reusable "Neomorphic Cards" and "Emotion Pills", implementing a strict color system for 6 primary emotions.' },
+                        { num: '05', title: 'Animation & Gestures', text: 'Integrated React Native Reanimated for 60fps shared element transitions and list reveal animations styled after iOS notifications.' },
+                        { num: '06', title: 'Optimization', text: 'Solved pagination infinite loops, optimized FlatList with React.memo, and implemented offline persistence with AsyncStorage.' }
                     ].map((item, i) => (
                         <div key={i} className="zen-timeline-entry">
                             <div className="zen-timeline-line"></div>
@@ -443,6 +443,44 @@ const ZenfloProject = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+            </section>
+
+            {/* Learnings & Impact */}
+            <section className="zen-challenge-solution">
+                <div className="zen-challenge-header-v2">
+                    <div className="zen-section-label">RESULTS</div>
+                    <h2 className="zen-section-title zen-split-text">{splitText('Impact & Learnings')}</h2>
+                </div>
+
+                <div className="zen-challenge-content-v2">
+                    <div className="zen-card challenge">
+                        <div className="zen-card-header">
+                            <span className="zen-card-tag">CHALLENGES</span>
+                            <div className="zen-card-number">⚡</div>
+                        </div>
+                        <h3>Overcoming Hurdles.</h3>
+                        <p>Developing a diverse animation system presented unique challenges.</p>
+                        <ul>
+                            <li><strong>Infinite Loops:</strong> Solved React Query/FlatList pagination bugs by refining dependency arrays.</li>
+                            <li><strong>Android Performance:</strong> Optimized laggy scroll animations using `useNativeDriver`.</li>
+                            <li><strong>Modal State:</strong> Coordinated complex exit animations with `Animated.parallel`.</li>
+                        </ul>
+                    </div>
+
+                    <div className="zen-card solution">
+                        <div className="zen-card-header">
+                            <span className="zen-card-tag">IMPACT</span>
+                            <div className="zen-card-number">🚀</div>
+                        </div>
+                        <h3>Measurable Success.</h3>
+                        <p>The focus on micro-interactions and performance paid off with a high-quality user experience.</p>
+                        <ul>
+                            <li><strong>85% Completion:</strong> Streamlined onboarding flow engagement.</li>
+                            <li><strong>60fps:</strong> Achieved buttery smooth animations on both iOS and Android.</li>
+                            <li><strong>Cross-Platform:</strong> Single codebase delivering native performance.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
@@ -465,6 +503,27 @@ const ZenfloProject = () => {
                             <div className="zen-tech-category">{tech.cat}</div>
                             <div className="zen-tech-name">{tech.name}</div>
                             <div className="zen-tech-bar" style={{ color: tech.color }}></div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Future Roadmap */}
+            <section className="zen-overview-v2" style={{ paddingTop: '5vh' }}>
+                <div className="zen-overview-header-v2" style={{ marginBottom: '4rem' }}>
+                    <div className="zen-section-label">ROADMAP</div>
+                    <h2 className="zen-section-title zen-split-text">{splitText('Future Enhancements')}</h2>
+                </div>
+                <div className="zen-tech-grid">
+                    {[
+                        { name: 'AI Insights', cat: 'Intelligence', color: '#b39ddb' },
+                        { name: 'Social Connect', cat: 'Community', color: '#90caf9' },
+                        { name: 'Apple Health', cat: 'Integration', color: '#ef9a9a' },
+                        { name: 'Statistics', cat: 'Analytics', color: '#80cbc4' },
+                    ].map((tech, i) => (
+                        <div key={i} className="zen-tech-card" style={{ borderColor: 'rgba(255,255,255,0.1)', background: 'transparent' }}>
+                            <div className="zen-tech-category">{tech.cat}</div>
+                            <div className="zen-tech-name">{tech.name}</div>
                         </div>
                     ))}
                 </div>

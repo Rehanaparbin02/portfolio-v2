@@ -64,7 +64,7 @@
 }
 
 /* ============================================
-   HERO SECTION - GREEN/MINT THEME
+   HERO SECTION - YELLOW THEME
    ============================================ */
 .zen-hero {
     min-height: 100vh;
@@ -122,8 +122,8 @@
 .zen-hero-number {
     font-size: 4rem;
     font-weight: 900;
-    color: rgba(76, 175, 80, 0.15);
-    /* Green tint */
+    color: rgba(255, 204, 0, 0.15);
+    /* Yellow tint */
     font-family: 'Space Grotesk', sans-serif;
     line-height: 1;
 }
@@ -165,8 +165,8 @@
 .zen-hero-title-line-2 {
     display: block;
     background: repeating-linear-gradient(0deg,
-            #4caf50 0px,
-            #81c784 2px,
+            #ffcc00 0px,
+            #ffeb3b 2px,
             transparent 2px,
             transparent 4px);
     -webkit-background-clip: text;
@@ -243,7 +243,7 @@
 .zen-scroll-line {
     width: 1px;
     height: 60px;
-    background: linear-gradient(to bottom, rgba(76, 175, 80, 0.5), transparent);
+    background: linear-gradient(to bottom, rgba(255, 204, 0, 0.5), transparent);
     animation: zen-scroll-pulse 2s ease-in-out infinite;
 }
 
@@ -283,7 +283,7 @@
 .zen-summary-decorative-line {
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.6), rgba(129, 199, 132, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 204, 0, 0.6), rgba(255, 235, 59, 0.4), transparent);
     margin-bottom: 6rem;
     transform-origin: left;
 }
@@ -321,7 +321,7 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, rgba(76, 175, 80, 0.8), rgba(129, 199, 132, 0.6));
+    background: linear-gradient(90deg, rgba(255, 204, 0, 0.8), rgba(255, 235, 59, 0.6));
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
@@ -341,8 +341,8 @@
 .zen-summary-tag-item {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background: rgba(76, 175, 80, 0.1);
-    border: 1px solid rgba(76, 175, 80, 0.3);
+    background: rgba(255, 204, 0, 0.1);
+    border: 1px solid rgba(255, 204, 0, 0.3);
     border-radius: 50px;
     font-size: 0.875rem;
     font-weight: 500;
@@ -361,7 +361,7 @@
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(76, 175, 80, 0.3);
+    background: rgba(255, 204, 0, 0.3);
     transform: translate(-50%, -50%);
     transition: width 0.4s ease, height 0.4s ease;
 }
@@ -372,10 +372,10 @@
 }
 
 .zen-summary-tag-item:hover {
-    background: rgba(76, 175, 80, 0.2);
-    border-color: rgba(76, 175, 80, 0.6);
+    background: rgba(255, 204, 0, 0.2);
+    border-color: rgba(255, 204, 0, 0.6);
     transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+    box-shadow: 0 8px 20px rgba(255, 204, 0, 0.3);
     color: #fff;
 }
 
@@ -386,7 +386,7 @@
     width: 600px;
     height: 600px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(76, 175, 80, 0.15), rgba(129, 199, 132, 0.08), transparent);
+    background: radial-gradient(circle, rgba(255, 204, 0, 0.15), rgba(255, 235, 59, 0.08), transparent);
     filter: blur(80px);
     pointer-events: none;
     z-index: 1;
@@ -395,7 +395,7 @@
 }
 
 /* ============================================
-   STATS - GREEN THEME
+   STATS - YELLOW THEME
    ============================================ */
 .zen-stats {
     padding: 15vh 4rem;
@@ -409,9 +409,9 @@
 .zen-stat-item {
     flex: 1;
     padding: 3rem 2rem;
-    border: 1px solid rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(255, 204, 0, 0.2);
     border-radius: 8px;
-    background: rgba(76, 175, 80, 0.05);
+    background: rgba(255, 204, 0, 0.05);
     text-align: center;
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
@@ -426,7 +426,7 @@
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(76, 175, 80, 0.2), transparent);
+    background: radial-gradient(circle, rgba(255, 204, 0, 0.2), transparent);
     transform: translate(-50%, -50%);
     transition: width 0.6s ease, height 0.6s ease;
 }
@@ -437,10 +437,10 @@
 }
 
 .zen-stat-item:hover {
-    background: rgba(76, 175, 80, 0.1);
-    border-color: rgba(76, 175, 80, 0.5);
+    background: rgba(255, 204, 0, 0.1);
+    border-color: rgba(255, 204, 0, 0.5);
     transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 20px 40px rgba(76, 175, 80, 0.2);
+    box-shadow: 0 20px 40px rgba(255, 204, 0, 0.2);
 }
 
 .zen-stat-value {
@@ -465,7 +465,7 @@
 .zen-section-label {
     font-size: 0.85rem;
     letter-spacing: 0.4em;
-    color: #4caf50;
+    color: #ffcc00;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -477,10 +477,10 @@
     content: '';
     width: 8px;
     height: 8px;
-    background: #4caf50;
+    background: #ffcc00;
     border-radius: 50%;
     display: inline-block;
-    box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
 }
 
 .zen-section-title {
@@ -537,7 +537,7 @@
 
 .zen-text-accent {
     color: transparent;
-    -webkit-text-stroke: 1px #4caf50;
+    -webkit-text-stroke: 1px #ffcc00;
 }
 
 .zen-overview-grid-v2 {
@@ -577,12 +577,12 @@
     font-size: 1.5rem;
     width: 54px;
     height: 54px;
-    background: rgba(76, 175, 80, 0.1);
+    background: rgba(255, 204, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 14px;
-    color: #4caf50;
+    color: #ffcc00;
     flex-shrink: 0;
 }
 
@@ -647,7 +647,7 @@
 .zen-card:hover {
     transform: translateY(-10px);
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(76, 175, 80, 0.3);
+    border-color: rgba(255, 204, 0, 0.3);
 }
 
 .zen-card-header {
@@ -661,7 +661,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.2em;
     font-weight: 700;
-    color: #4caf50;
+    color: #ffcc00;
     text-transform: uppercase;
 }
 
@@ -690,7 +690,7 @@
     content: '→';
     position: absolute;
     left: 0;
-    color: #4caf50;
+    color: #ffcc00;
     font-weight: bold;
 }
 
@@ -728,13 +728,13 @@
 .zen-timeline-dot {
     width: 20px;
     height: 20px;
-    background: #4caf50;
+    background: #ffcc00;
     border: 4px solid #111;
     border-radius: 50%;
     position: relative;
     z-index: 1;
     margin: 0.5rem auto 0;
-    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+    box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.2);
 }
 
 .zen-timeline-num {
@@ -865,8 +865,8 @@
     width: 100%;
     height: 100%;
     background:
-        radial-gradient(circle at 10% 20%, rgba(76, 175, 80, 0.03), transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(129, 199, 132, 0.03), transparent 40%);
+        radial-gradient(circle at 10% 20%, rgba(255, 204, 0, 0.03), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 235, 59, 0.03), transparent 40%);
     z-index: -1;
     pointer-events: none;
 }

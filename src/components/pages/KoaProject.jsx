@@ -6,13 +6,18 @@ import './KoaProject.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Import images dynamically (Preserving existing logic)
-const koaImagesModules = import.meta.glob('../../assets/koa/koa-case/**/*.{png,jpg,jpeg,webp,svg}', { eager: true });
+// Import images for Overview Stack
+import koa2Img from '../../assets/koa-case/2.png';
+import koa3Img from '../../assets/koa-case/3.png';
+import koaBlueImg from '../../assets/koa-case/Blue.png';
+
+// Import images dynamically (Preserving existing logic with corrected path)
+const koaImagesModules = import.meta.glob('../../assets/koa-case/**/*.{png,jpg,jpeg,webp,svg}', { eager: true });
 let koaImages = Object.entries(koaImagesModules)
   .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
   .map(([, mod]) => (mod && (mod.default || mod)) || null)
   .filter(Boolean)
-  .slice(0, 5);
+  .slice(0, 8); // Increased slice to show more in gallery if available
 
 if (koaImages.length > 0 && koaImages.length < 5) {
   const last = koaImages[koaImages.length - 1];
@@ -326,6 +331,44 @@ const KoaProject = () => {
         });
       }
 
+      // === VISUAL STACK ROTATION ===
+      const layers = gsap.utils.toArray('.koa-visual-layer');
+      if (layers.length > 0) {
+        const positions = [
+          { x: 0, y: 0, scale: 1, opacity: 1, filter: 'blur(0px)', zIndex: 3, rotate: 0 },
+          { x: -180, y: -40, scale: 0.8, opacity: 0.3, filter: 'blur(6px)', zIndex: 2, rotate: -10 },
+          { x: 180, y: 40, scale: 0.8, opacity: 0.3, filter: 'blur(6px)', zIndex: 1, rotate: 10 }
+        ];
+
+        let step = 0;
+        const totalLayers = layers.length;
+
+        const rotate = () => {
+          step++;
+          layers.forEach((layer, i) => {
+            const posIndex = (i + step) % totalLayers;
+            const pos = positions[posIndex];
+
+            gsap.to(layer, {
+              x: pos.x,
+              y: pos.y,
+              scale: pos.scale,
+              opacity: pos.opacity,
+              filter: pos.filter,
+              zIndex: pos.zIndex,
+              rotate: pos.rotate,
+              duration: 2,
+              ease: 'expo.inOut'
+            });
+          });
+        };
+
+        const rotationTimer = gsap.delayedCall(3.5, function cycle() {
+          rotate();
+          rotationTimer.restart(true);
+        });
+      }
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -483,25 +526,15 @@ const KoaProject = () => {
             </div>
 
             <div className="koa-overview-visual-stack">
-              {koaImages.length > 0 ? (
-                <>
-                  <div className="koa-visual-layer layer-1 koa-reveal-image">
-                    <img src={koaImages[0]} alt="Koa Design System" />
-                  </div>
-                  {koaImages[1] && (
-                    <div className="koa-visual-layer layer-2 koa-reveal-image">
-                      <img src={koaImages[1]} alt="Koa Components" />
-                    </div>
-                  )}
-                  {koaImages[2] && (
-                    <div className="koa-visual-layer layer-3 koa-reveal-image">
-                      <img src={koaImages[2]} alt="Koa Components" />
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className="koa-visual-layer layer-1" style={{ background: '#7c3aed' }}></div>
-              )}
+              <div className="koa-visual-layer layer-1 koa-reveal-image">
+                <img src={koaBlueImg} alt="Koa Design System Main" />
+              </div>
+              <div className="koa-visual-layer layer-2 koa-reveal-image">
+                <img src={koa2Img} alt="Koa Component View" />
+              </div>
+              <div className="koa-visual-layer layer-3 koa-reveal-image">
+                <img src={koa3Img} alt="Koa Style Guide" />
+              </div>
               <div className="koa-visual-glow"></div>
             </div>
 
