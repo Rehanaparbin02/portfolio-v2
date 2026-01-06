@@ -11,6 +11,29 @@ import koa2Img from '../../assets/koa-case/2.png';
 import koa3Img from '../../assets/koa-case/3.png';
 import koaBlueImg from '../../assets/koa-case/Blue.png';
 
+// Import images for Gallery
+import homeImg from '../../assets/koa-case/home.png';
+import home1Img from '../../assets/koa-case/home-1.png';
+import home2Img from '../../assets/koa-case/home-2.png';
+import home3Img from '../../assets/koa-case/home-3.png';
+import home4Img from '../../assets/koa-case/home-4.png';
+import home5Img from '../../assets/koa-case/home-5.png';
+import home6Img from '../../assets/koa-case/home-6.png';
+import home7Img from '../../assets/koa-case/home-7.png';
+import home8Img from '../../assets/koa-case/home-8.png';
+
+const koaGalleryImages = [
+  homeImg,
+  home1Img,
+  home2Img,
+  home3Img,
+  home4Img,
+  home5Img,
+  home6Img,
+  home7Img,
+  home8Img
+];
+
 // Import images dynamically (Preserving existing logic with corrected path)
 const koaImagesModules = import.meta.glob('../../assets/koa-case/**/*.{png,jpg,jpeg,webp,svg}', { eager: true });
 let koaImages = Object.entries(koaImagesModules)
@@ -648,15 +671,15 @@ const KoaProject = () => {
       {/* Visual Design / Gallery */}
       <section className="koa-visual-section">
         <div className="koa-visual-header">
-          <div className="koa-section-label">GALLERY</div>
-          <h2 className="koa-section-title koa-split-text">{splitText('System Showcase')}</h2>
-          <p className="koa-visual-intro">A selection of components from the Koa Design System.</p>
+          <div className="koa-section-label">DESIGN</div>
+          <h2 className="koa-section-title koa-split-text">{splitText('Visual Design')}</h2>
+          <p className="koa-visual-intro">A comprehensive look at the design system library, showcasing key components and style guides.</p>
         </div>
-        {koaImages.length > 0 && (
+        {koaGalleryImages.length > 0 && (
           <div className="koa-visual-grid">
-            {koaImages.map((img, index) => (
+            {koaGalleryImages.map((img, index) => (
               <div key={index} className="koa-visual-item">
-                <img src={img} alt={`Koa Component ${index + 1}`} />
+                <img src={img} alt={`Koa System Screen ${index + 1}`} />
               </div>
             ))}
           </div>
