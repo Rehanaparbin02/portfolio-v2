@@ -169,7 +169,7 @@
     max-width: var(--card-max-width);
     height: auto;
     /* allow height to grow with inner content */
-    min-height: 360px;
+    min-height: 85vh;
     /* sensible minimum so very short content still looks good */
     position: sticky;
     top: 15vh;

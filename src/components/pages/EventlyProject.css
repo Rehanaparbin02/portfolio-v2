@@ -1,0 +1,2165 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.evently-case-study-container {
+  background: transparent;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.evently-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  mix-blend-mode: difference;
+}
+
+.evently-nav-badge {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+  position: relative;
+  right: 3rem;
+}
+
+.evently-nav-back-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.evently-nav-back-btn:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* ============================================
+   HERO SECTION - GREEN THEME
+   ============================================ */
+.evently-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 4rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.evently-hero-bg-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.evently-hero-container {
+  max-width: 1600px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.evently-hero-badge {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 4rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.evently-hero-content {
+  display: grid;
+  grid-template-columns: 120px 1fr 280px;
+  gap: 4rem;
+  align-items: start;
+}
+
+.evently-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.evently-hero-number {
+  font-size: 4rem;
+  font-weight: 900;
+  color: rgba(59, 130, 246, 0.15);
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1;
+}
+
+.evently-hero-subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.evently-hero-center {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.evently-hero-title {
+  font-size: clamp(4rem, 12vw, 14rem);
+  font-weight: 900;
+  line-height: 0.85;
+  font-family: 'Space Grotesk', sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.evently-hero-title-line-1 {
+  display: block;
+  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.evently-hero-title-line-2 {
+  display: block;
+  background: repeating-linear-gradient(0deg,
+      #3b82f6 0px,
+      #60a5fa 2px,
+      transparent 2px,
+      transparent 4px);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.1em;
+}
+
+.evently-hero-title-line-3 {
+  display: block;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.7em;
+  letter-spacing: 0.05em;
+}
+
+.evently-hero-description {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin-top: 1rem;
+}
+
+.evently-hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 1rem;
+}
+
+.evently-hero-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: 2rem;
+}
+
+.evently-hero-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.evently-meta-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.evently-meta-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.evently-hero-scroll-indicator {
+  position: absolute;
+  bottom: 4rem;
+  left: 101%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.evently-scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(59, 130, 246, 0.5), transparent);
+  animation: evently-scroll-pulse 2s ease-in-out infinite;
+}
+
+@keyframes evently-scroll-pulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scaleY(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scaleY(1.2);
+  }
+}
+
+/* ============================================
+   SUMMARY
+   ============================================ */
+.evently-summary-full {
+  padding: 20vh 4rem;
+  background: rgba(255, 255, 255, 0.01);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.evently-summary-content-new {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.evently-summary-decorative-line {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.6), rgba(96, 165, 250, 0.4), transparent);
+  margin-bottom: 6rem;
+  transform-origin: left;
+}
+
+.evently-summary-text-highlight {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 4rem;
+  font-family: 'Space Grotesk', sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  perspective: 1000px;
+}
+
+.evently-summary-line {
+  display: block;
+  margin-bottom: 0.5rem;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+}
+
+.evently-highlight-word {
+  display: inline-block;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  color: #fff;
+  font-weight: 800;
+  transform-style: preserve-3d;
+}
+
+.evently-highlight-word::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.8), rgba(96, 165, 250, 0.6));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.evently-highlight-word:hover::after {
+  transform: scaleX(1);
+}
+
+.evently-summary-tags-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.evently-summary-tag-item {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.evently-summary-tag-item::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.evently-summary-tag-item:hover::before {
+  width: 200%;
+  height: 200%;
+}
+
+.evently-summary-tag-item:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.6);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+  color: #fff;
+}
+
+.evently-summary-gradient-orb {
+  position: absolute;
+  top: 50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.08), transparent);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+  transform: translate(0, -50%);
+}
+
+/* ============================================
+   STATS - GREEN THEME
+   ============================================ */
+.evently-stats {
+  padding: 15vh 4rem;
+  display: flex;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.evently-stat-item {
+  flex: 1;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  background: rgba(59, 130, 246, 0.05);
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.evently-stat-item::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.evently-stat-item:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.evently-stat-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+}
+
+.evently-stat-value {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.evently-stat-label {
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   SHARED SECTION STYLES
+   ============================================ */
+.evently-section-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  color: #3b82f6;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.evently-section-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #3b82f6;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+}
+
+.evently-section-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 3rem;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.evently-reveal-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.evently-reveal-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* Removed hover effect */
+
+
+/* ============================================
+   OVERVIEW V2
+   ============================================ */
+.evently-overview-v2 {
+  padding: 15vh 4rem 5vh;
+  /* Less bottom padding since stack is inside */
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+.evently-overview-container-v2 {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.evently-overview-header-v2 {
+  margin-bottom: 6rem;
+}
+
+
+
+.evently-overview-title-v2 {
+  font-size: clamp(3.5rem, 7vw, 7.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+}
+
+.evently-text-accent {
+  color: transparent;
+  -webkit-text-stroke: 1px #3b82f6;
+}
+
+.evently-overview-grid-v2 {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.evently-overview-main-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.evently-overview-main-text p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.evently-overview-features-mini {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  padding: 3rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.evently-mini-feature {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.evently-mini-icon {
+  font-size: 1.5rem;
+  width: 54px;
+  height: 54px;
+  background: rgba(59, 130, 246, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  color: #3b82f6;
+  flex-shrink: 0;
+}
+
+.evently-mini-content h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.evently-mini-content p {
+  font-size: 0.95rem !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  line-height: 1.5 !important;
+}
+
+.evently-overview-visual-stack {
+  position: relative;
+  height: 500px;
+  /* Reduced to match layer height better */
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  /* Layers need to translate */
+}
+
+.evently-visual-layer {
+  position: absolute;
+  width: 240px;
+  height: 500px;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.evently-visual-layer img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+}
+
+.layer-1 {
+  z-index: 3;
+  transform: translate(0, 0) scale(1);
+  /* border: 1px solid rgba(255, 255, 255, 0.1); */
+}
+
+.layer-2 {
+  z-index: 2;
+  transform: translate(-30%, -20%) scale(0.85);
+  opacity: 0.4;
+  filter: blur(4px);
+}
+
+.layer-3 {
+  z-index: 1;
+  transform: translate(30%, 20%) scale(0.85);
+  opacity: 0.4;
+  filter: blur(4px);
+}
+
+/* Hover effect handled by GSAP rotation */
+
+.evently-visual-glow {
+  display: none;
+}
+
+
+/* Base Reveal Overrides for the stack */
+.evently-overview-visual-stack .evently-reveal-image {
+  width: auto;
+  border-radius: 0;
+  overflow: visible;
+  display: block;
+  gap: 0;
+}
+
+.evently-overview-visual-stack .evently-reveal-image img {
+  filter: contrast(1.1);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.evently-overview-visual-stack .evently-reveal-image:hover img {
+  filter: contrast(1.1);
+}
+
+.evently-overview-visual-stack .evently-reveal-image::before {
+  display: none;
+}
+
+/* Layout Specifics */
+.evently-overview-visual-stack {
+  perspective: 1000px;
+}
+
+@media (max-width: 1200px) {
+  .evently-overview-grid-v2 {
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .evently-overview-v2 {
+    padding: 10vh 2rem;
+  }
+
+  .evently-overview-grid-v2 {
+    grid-template-columns: 1fr;
+    gap: 8rem;
+  }
+
+  .evently-overview-header-v2 {
+    text-align: center;
+  }
+
+  .evently-overview-main-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .evently-overview-features-mini {
+    text-align: left;
+    gap: 2rem;
+  }
+
+  .evently-overview-visual-stack {
+    height: 500px;
+    margin-top: 4rem;
+  }
+
+  .evently-visual-layer {
+    width: 240px;
+    height: 480px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .evently-overview-title-v2 {
+    font-size: 3rem;
+  }
+
+  .evently-overview-features-mini {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .evently-overview-visual-stack {
+    height: 450px;
+  }
+
+  .evently-visual-layer {
+    width: 200px;
+    height: 420px;
+  }
+}
+
+
+/* ============================================
+   VISUAL DESIGN SHOWCASE
+   ============================================ */
+.evently-visual-section {
+  padding: 12vh 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.evently-visual-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.evently-visual-intro {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.05rem;
+  max-width: 900px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: relative;
+  left: 12rem;
+}
+
+.evently-visual-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  align-items: start;
+  margin-top: 5rem;
+  width: 100%;
+}
+
+
+
+
+/* ============================================
+   CAROUSEL OVERRIDES & STYLES
+   ============================================ */
+.evently-carousel {
+  position: relative;
+  max-width: 1400px;
+  margin: 2rem auto 0;
+  z-index: 20;
+}
+
+.evently-carousel-viewport {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* allow vertical page scroll while enabling horizontal swipes */
+.evently-carousel-viewport {
+  touch-action: pan-y;
+}
+
+.evently-carousel.dragging .evently-carousel-viewport {
+  cursor: grabbing;
+}
+
+.evently-carousel-viewport {
+  cursor: grab;
+}
+
+.evently-carousel-track {
+  display: flex;
+  will-change: transform;
+}
+
+.evently-carousel .evently-visual-item {
+  min-width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.03), rgba(0, 0, 0, 0.04));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 360px;
+}
+
+.evently-carousel .evently-visual-item img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+  filter: none;
+  transform: none;
+}
+
+/* Hide the decorative reveal overlay inside carousel slides */
+.evently-carousel .evently-reveal-image::before {
+  display: none;
+}
+
+/* Arrows */
+.evently-carousel-prev,
+.evently-carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  z-index: 30;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.evently-carousel-prev:hover,
+.evently-carousel-next:hover {
+  transform: translateY(-50%) scale(1.03);
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.evently-carousel-prev {
+  left: 1rem;
+}
+
+.evently-carousel-next {
+  right: 1rem;
+}
+
+/* Dots */
+.evently-carousel-dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 30;
+}
+
+.evently-carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.evently-carousel-dot.active {
+  background: #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.35);
+}
+
+@media (max-width: 1024px) {
+  .evently-carousel .evently-visual-item {
+    min-height: 300px;
+    padding: 1.25rem;
+  }
+
+  .evently-carousel-prev,
+  .evently-carousel-next {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .evently-carousel {
+    margin-top: 1.5rem;
+  }
+
+  .evently-carousel .evently-visual-item {
+    min-height: 260px;
+  }
+
+  .evently-carousel-prev,
+  .evently-carousel-next {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.evently-visual-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  /* background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.05); */
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  aspect-ratio: 9 / 19.5;
+  /* Phone aspect ratio */
+}
+
+
+.evently-visual-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* This is fine with the correct aspect ratio */
+  display: block;
+  transform-origin: center;
+  filter: none;
+  /* Removed grayscale to show colors */
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
+}
+
+
+/* .evently-visual-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(59, 130, 246, 0.2);
+} */
+
+/* .evently-visual-item:hover img {
+  transform: scale(1.06) translateY(-4px);
+  filter: none;
+  opacity: 1;
+} */
+
+/* ============================================
+   CHALLENGE & SOLUTION
+   ============================================ */
+/* ============================================
+   CHALLENGE & SOLUTION - REDESIGN V2
+   ============================================ */
+.evently-challenge-solution {
+  padding: 15vh 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.evently-challenge-header-v2 {
+  margin-bottom: 5rem;
+  text-align: left;
+}
+
+.evently-challenge-content-v2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  align-items: stretch;
+}
+
+.evently-challenge-card {
+  padding: 4rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.evently-challenge-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-10px);
+}
+
+.evently-challenge-card.challenge:hover {
+  border-color: rgba(239, 68, 68, 0.3);
+  /* Slight red tint for problems */
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(239, 68, 68, 0.05);
+}
+
+.evently-challenge-card.solution:hover {
+  border-color: rgba(59, 130, 246, 0.3);
+  /* Green for solution */
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.05);
+}
+
+.evently-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+}
+
+.evently-card-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.evently-card-tag.green {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.evently-card-number {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  opacity: 0.2;
+}
+
+.evently-challenge-card h3 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+}
+
+.evently-challenge-card p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2.5rem;
+}
+
+.evently-challenge-list-v2 {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.evently-reveal-item-v2 {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  padding-left: 2rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.evently-reveal-item-v2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.evently-challenge-card.solution .evently-reveal-item-v2::before {
+  background: #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+.evently-solution-highlights-v2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: auto;
+}
+
+.evently-highlight-item-v2 {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.evently-highlight-item-v2:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.evently-highlight-icon {
+  color: #3b82f6;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 1024px) {
+  .evently-challenge-solution {
+    padding: 10vh 2rem;
+  }
+
+  .evently-challenge-card {
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .evently-challenge-content-v2 {
+    grid-template-columns: 1fr;
+  }
+
+  .evently-challenge-card h3 {
+    font-size: 1.75rem;
+  }
+}
+
+
+/* ============================================
+   FEATURES HORIZONTAL SCROLL - GREEN THEME
+   ============================================ */
+.evently-features-scroll {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+.evently-features-scroll::before,
+.evently-features-scroll::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.evently-features-scroll::before {
+  left: 0;
+  background: linear-gradient(to right, #000, transparent);
+}
+
+.evently-features-scroll::after {
+  right: 0;
+  background: linear-gradient(to left, #000, transparent);
+}
+
+.evently-features-header {
+  position: relative;
+  z-index: 10;
+  padding: 0 4rem;
+  text-align: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.evently-features-intro {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 700px;
+  margin: 2rem auto 0;
+}
+
+.evently-features-container {
+  width: 100%;
+  position: relative;
+  margin-top: 4rem;
+  z-index: 20;
+}
+
+
+
+
+.evently-features-wrapper {
+  display: inline-flex;
+  gap: 2rem;
+  padding: 0 4rem;
+  will-change: transform;
+}
+
+.evently-feature-card {
+  flex: 0 0 450px;
+  width: 450px;
+  padding: 3.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.05);
+  /* Slightly more visible */
+  backdrop-filter: blur(20px);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s ease, background 0.4s ease;
+  transform-style: preserve-3d;
+  height: min(480px, 70vh);
+  /* Flexible height to fit viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.evently-feature-pin {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.15);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.evently-feature-card:hover .evently-feature-pin {
+  background: rgba(59, 130, 246, 0.3);
+  transform: scale(1.3);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.evently-feature-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(59, 130, 246, 0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: rotate(0deg);
+}
+
+.evently-feature-card:hover::before {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+.evently-feature-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+
+.evently-feature-number {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(59, 130, 246, 0.1);
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1;
+  transition: color 0.4s ease;
+  z-index: 1;
+}
+
+.evently-feature-card:hover .evently-feature-number {
+  color: rgba(59, 130, 246, 0.2);
+}
+
+.evently-feature-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+
+.evently-feature-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  z-index: 1;
+  flex-grow: 1;
+}
+
+
+.evently-feature-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.3), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.evently-feature-card:hover .evently-feature-accent {
+  transform: scaleX(1);
+}
+
+/* ============================================
+   TIMELINE - GREEN THEME
+   ============================================ */
+.evently-timeline-section {
+  padding: 15vh 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.evently-timeline-container {
+  margin-top: 6rem;
+  position: relative;
+  padding-left: 100px;
+}
+
+.evently-timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 45px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.evently-timeline-entry {
+  position: relative;
+  margin-bottom: 6rem;
+  padding-left: 4rem;
+}
+
+.evently-timeline-line {
+  position: absolute;
+  left: -55px;
+  top: 0;
+  width: 20px;
+  height: 2px;
+  background: rgba(59, 130, 246, 0.5);
+}
+
+.evently-timeline-dot {
+  position: absolute;
+  left: -60px;
+  top: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 3px solid #000;
+}
+
+.evently-timeline-content {
+  position: relative;
+}
+
+.evently-timeline-num {
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  color: rgba(59, 130, 246, 0.7);
+  margin-bottom: 1rem;
+}
+
+.evently-timeline-content h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.evently-timeline-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ============================================
+   DEVELOPMENT - GREEN THEME
+   ============================================ */
+.evently-development {
+  padding: 15vh 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.evently-dev-header {
+  margin-bottom: 6rem;
+  text-align: center;
+}
+
+.evently-dev-intro {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 800px;
+  margin: 2rem auto 0;
+}
+
+.evently-dev-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.evently-dev-boxes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.evently-dev-box {
+  padding: 3rem;
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  border-radius: 16px;
+  background: rgba(59, 130, 246, 0.05);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.evently-dev-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid rgba(59, 130, 246, 0.5);
+  border-radius: 16px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.6s ease;
+}
+
+.evently-dev-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.8), rgba(96, 165, 250, 0.4));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.6s ease;
+}
+
+.evently-dev-box:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.evently-dev-box:hover::after {
+  transform: scaleY(1);
+}
+
+.evently-dev-box:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 25px 50px rgba(59, 130, 246, 0.2);
+}
+
+.evently-dev-box-number {
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgba(59, 130, 246, 0.2);
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.evently-dev-box-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+}
+
+.evently-dev-box-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.evently-dev-box-list li {
+  padding-left: 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.evently-dev-box-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: rgba(59, 130, 246, 0.7);
+}
+
+/* ============================================
+   TECH STACK - GREEN THEME
+   ============================================ */
+.evently-tech-section {
+  padding: 4rem 0;
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.evently-tech-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.evently-tech-intro {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 700px;
+  margin: 2rem auto 0;
+}
+
+.evently-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 4rem;
+}
+
+.evently-tech-card {
+  padding: 2.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 16px;
+  background: rgba(59, 130, 246, 0.05);
+  position: relative;
+  overflow: visible;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.evently-tech-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, var(--tech-color, rgba(59, 130, 246, 0.2)) 0%, transparent 70%);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  transition: all 0.5s ease;
+  pointer-events: none;
+  filter: blur(20px);
+}
+
+.evently-tech-card:hover .evently-tech-glow {
+  opacity: 0.4;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.evently-tech-card:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-10px) rotateZ(5deg) scale(1.05);
+  box-shadow: 0 25px 50px rgba(59, 130, 246, 0.2);
+}
+
+.evently-tech-content {
+  position: relative;
+  z-index: 1;
+}
+
+.evently-tech-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.evently-tech-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: transform 0.4s ease;
+}
+
+.evently-tech-card:hover .evently-tech-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.evently-tech-category {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.evently-tech-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.evently-tech-bar {
+  height: 3px;
+  width: 100%;
+  border-radius: 2px;
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+
+.evently-tech-card:hover .evently-tech-bar {
+  transform: scaleX(1.1);
+}
+
+.evently-tech-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem 4rem;
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.evently-tech-footer-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.evently-tech-footer-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.evently-tech-footer-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.evently-tech-footer-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(59, 130, 246, 0.2);
+}
+
+/* ============================================
+   LEARNINGS - GREEN THEME
+   ============================================ */
+.evently-learnings {
+  padding: 15vh 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.evently-learnings-header {
+  margin-bottom: 6rem;
+  text-align: center;
+}
+
+.evently-learnings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.evently-learning-card {
+  padding: 3rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 16px;
+  background: rgba(59, 130, 246, 0.05);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.evently-learning-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.7), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.evently-learning-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent);
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+  transition: transform 0.5s ease;
+}
+
+.evently-learning-card:hover::before {
+  transform: scaleX(1);
+}
+
+.evently-learning-card:hover::after {
+  transform: translate(30%, -30%) scale(2.5);
+}
+
+.evently-learning-card:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-12px) translateX(5px);
+  box-shadow: -5px 20px 40px rgba(59, 130, 246, 0.2);
+}
+
+.evently-learning-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.evently-learning-num {
+  font-size: 0.875rem;
+  letter-spacing: 0.2em;
+  color: rgba(59, 130, 246, 0.7);
+  font-weight: 500;
+  min-width: 30px;
+}
+
+.evently-learning-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.evently-learning-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ============================================
+   NEXT STEPS - GREEN THEME
+   ============================================ */
+.evently-next-steps {
+  padding: 15vh 4rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.evently-next-steps-list {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.evently-next-step-item {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  background: rgba(59, 130, 246, 0.05);
+  transition: all 0.3s ease;
+}
+
+.evently-next-step-item:hover {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateX(20px);
+}
+
+.evently-step-indicator {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: rgba(59, 130, 246, 0.5);
+  font-family: 'Space Grotesk', sans-serif;
+  min-width: 60px;
+}
+
+.evently-step-text {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+/* ============================================
+   CTA - GREEN THEME
+   ============================================ */
+.evently-cta {
+  padding: 20vh 4rem;
+  text-align: center;
+}
+
+.evently-cta-title {
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 900;
+  line-height: 0.9;
+  margin-bottom: 3rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.evently-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 4rem;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+}
+
+.evently-cta-button:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+}
+
+/* ============================================
+   PARALLAX BACKGROUND - GREEN THEME
+   ============================================ */
+.evently-parallax-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.evently-split-text .word {
+  display: inline-block;
+  overflow: visible;
+}
+
+.evently-reveal-text {
+  clip-path: inset(0 0 0 0);
+}
+
+.evently-magnetic-btn {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .evently-hero {
+    padding: 6rem 2rem 4rem;
+  }
+
+  .evently-hero-content {
+    grid-template-columns: 80px 1fr 200px;
+    gap: 2rem;
+  }
+
+  .evently-hero-number {
+    font-size: 3rem;
+  }
+
+  .evently-nav {
+    padding: 1.5rem 2rem;
+  }
+
+  .evently-dev-boxes {
+    grid-template-columns: 1fr;
+  }
+
+  .evently-stats {
+    flex-wrap: wrap;
+    padding: 10vh 2rem;
+    gap: 1.5rem;
+  }
+
+  .evently-stat-item {
+    flex: 1 1 calc(50% - 0.75rem);
+    min-width: 200px;
+  }
+
+  .evently-overview-v2,
+  .evently-challenge-solution {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding: 10vh 2rem;
+  }
+
+
+  .evently-tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 2rem;
+  }
+
+  .evently-learnings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .evently-feature-card {
+    flex: 0 0 400px;
+    width: 400px;
+    height: 450px;
+  }
+
+  .evently-features-wrapper {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .evently-hero-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .evently-hero-left {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .evently-hero-subtitle {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+
+  .evently-hero-right {
+    border-left: none;
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+    padding-left: 0;
+    padding-top: 2rem;
+  }
+
+  .evently-hero-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    padding-left: 0;
+    gap: 2rem;
+  }
+
+  .evently-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .evently-stat-item {
+    flex: 1 1 100%;
+  }
+
+  .evently-tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .evently-tech-footer {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .evently-tech-footer-divider {
+    width: 40px;
+    height: 1px;
+  }
+
+  .evently-features-scroll {
+    min-height: auto;
+    padding: 10vh 0;
+  }
+
+  .evently-features-container {
+    margin-top: 4rem;
+  }
+
+  .evently-features-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1.5rem;
+    gap: 2rem;
+  }
+
+  .evently-feature-card {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    min-height: 350px;
+    padding: 2.5rem;
+  }
+
+
+  .evently-timeline-container {
+    padding-left: 60px;
+  }
+
+  .evently-timeline-container::before {
+    left: 25px;
+  }
+
+  .evently-timeline-entry {
+    padding-left: 2rem;
+  }
+
+  .evently-timeline-dot {
+    left: -35px;
+  }
+
+  .evently-timeline-line {
+    left: -45px;
+  }
+
+  .evently-visual-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .evently-visual-item {
+    aspect-ratio: 9 / 19.5;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .evently-nav {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .evently-nav-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+  }
+
+  .evently-hero {
+    padding: 8rem 1.5rem 3rem;
+  }
+
+  .evently-tech-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+
+  .evently-cta-button {
+    padding: 1.2rem 2rem;
+    gap: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .evently-visual-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+

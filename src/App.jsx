@@ -130,6 +130,8 @@ import DoItProject from './components/pages/DoItProject'
 import Contact from './components/pages/Contact'
 import CustomCursor from './components/common/CustomCursor'
 import KoaProject from './components/pages/KoaProject'
+import EventlyProject from './components/pages/EventlyProject'
+import ZenfloProject from './components/pages/ZenfloProject'
 // import PageTransition from './components/PageTransition'
 
 
@@ -225,6 +227,16 @@ function App() {
           <Route path='/koa-project' element={
             // <PageTransition>
             <KoaProject />
+            // </PageTransition>
+          } />
+          <Route path='/evently-project' element={
+            // <PageTransition>
+            <EventlyProject />
+            // </PageTransition>
+          } />
+          <Route path='/zenflo-project' element={
+            // <PageTransition>
+            <ZenfloProject />
             // </PageTransition>
           } />
           <Route path="/contact" element={

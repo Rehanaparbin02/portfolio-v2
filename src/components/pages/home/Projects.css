@@ -342,13 +342,14 @@
 /* --- Responsive Adjustments --- */
 @media (min-width: 1900px) {
     :root {
-        --card-height: 100vh;
+        --card-height: 110vh;
     }
 }
 
 /* 27" & 22" Monitors (High Res) */
 @media (min-width: 1920px) {
     :root {
+        --card-height: 100vh;
         --container-width: 1800px;
         --card-radius: 3rem;
     }

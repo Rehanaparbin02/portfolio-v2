@@ -1,0 +1,924 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.zen-case-study-container {
+    background: transparent;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.zen-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    mix-blend-mode: difference;
+}
+
+.zen-nav-badge {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    position: relative;
+    right: 3rem;
+}
+
+.zen-nav-back-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 0.75rem 2rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.zen-nav-back-btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* ============================================
+   HERO SECTION - GREEN/MINT THEME
+   ============================================ */
+.zen-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.zen-hero-bg-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    /* Optional: Add a subtle green gradient like DoIt but unique for Zen */
+}
+
+.zen-hero-container {
+    max-width: 1600px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.zen-hero-badge {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 4rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+.zen-hero-content {
+    display: grid;
+    grid-template-columns: 120px 1fr 280px;
+    gap: 4rem;
+    align-items: start;
+}
+
+.zen-hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.zen-hero-number {
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(76, 175, 80, 0.15);
+    /* Green tint */
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1;
+}
+
+.zen-hero-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+}
+
+.zen-hero-center {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.zen-hero-title {
+    font-size: clamp(4rem, 12vw, 14rem);
+    font-weight: 900;
+    line-height: 0.85;
+    font-family: 'Space Grotesk', sans-serif;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.zen-hero-title-line-1 {
+    display: block;
+    background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.zen-hero-title-line-2 {
+    display: block;
+    background: repeating-linear-gradient(0deg,
+            #4caf50 0px,
+            #81c784 2px,
+            transparent 2px,
+            transparent 4px);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.1em;
+}
+
+.zen-hero-title-line-3 {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.7em;
+    letter-spacing: 0.05em;
+}
+
+.zen-hero-description {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin-top: 1rem;
+}
+
+.zen-hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 1rem;
+}
+
+.zen-hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 2rem;
+}
+
+.zen-hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.zen-meta-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.zen-meta-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.zen-hero-scroll-indicator {
+    position: absolute;
+    bottom: 4rem;
+    left: 101%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.zen-scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(76, 175, 80, 0.5), transparent);
+    animation: zen-scroll-pulse 2s ease-in-out infinite;
+}
+
+@keyframes zen-scroll-pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scaleY(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleY(1.2);
+    }
+}
+
+/* ============================================
+   SUMMARY
+   ============================================ */
+.zen-summary-full {
+    padding: 20vh 4rem;
+    background: rgba(255, 255, 255, 0.01);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.zen-summary-content-new {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.zen-summary-decorative-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.6), rgba(129, 199, 132, 0.4), transparent);
+    margin-bottom: 6rem;
+    transform-origin: left;
+}
+
+.zen-summary-text-highlight {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 4rem;
+    font-family: 'Space Grotesk', sans-serif;
+    color: rgba(255, 255, 255, 0.8);
+    perspective: 1000px;
+}
+
+.zen-summary-line {
+    display: block;
+    margin-bottom: 0.5rem;
+    transform-style: preserve-3d;
+    transform-origin: left center;
+}
+
+.zen-highlight-word {
+    display: inline-block;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    color: #fff;
+    font-weight: 800;
+    transform-style: preserve-3d;
+}
+
+.zen-highlight-word::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(76, 175, 80, 0.8), rgba(129, 199, 132, 0.6));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.zen-highlight-word:hover::after {
+    transform: scaleX(1);
+}
+
+.zen-summary-tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.zen-summary-tag-item {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.zen-summary-tag-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.zen-summary-tag-item:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.zen-summary-tag-item:hover {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: rgba(76, 175, 80, 0.6);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+    color: #fff;
+}
+
+.zen-summary-gradient-orb {
+    position: absolute;
+    top: 50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(76, 175, 80, 0.15), rgba(129, 199, 132, 0.08), transparent);
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+    transform: translate(0, -50%);
+}
+
+/* ============================================
+   STATS - GREEN THEME
+   ============================================ */
+.zen-stats {
+    padding: 15vh 4rem;
+    display: flex;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.zen-stat-item {
+    flex: 1;
+    padding: 3rem 2rem;
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    border-radius: 8px;
+    background: rgba(76, 175, 80, 0.05);
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.zen-stat-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(76, 175, 80, 0.2), transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.zen-stat-item:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.zen-stat-item:hover {
+    background: rgba(76, 175, 80, 0.1);
+    border-color: rgba(76, 175, 80, 0.5);
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 20px 40px rgba(76, 175, 80, 0.2);
+}
+
+.zen-stat-value {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.zen-stat-label {
+    font-size: 0.875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ============================================
+   SHARED SECTION STYLES
+   ============================================ */
+.zen-section-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    color: #4caf50;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.zen-section-label::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #4caf50;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+}
+
+.zen-section-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.zen-reveal-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.zen-reveal-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   OVERVIEW V2
+   ============================================ */
+.zen-overview-v2 {
+    padding: 15vh 4rem 5vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.zen-overview-container-v2 {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.zen-overview-header-v2 {
+    margin-bottom: 6rem;
+}
+
+.zen-overview-title-v2 {
+    font-size: clamp(3.5rem, 7vw, 7.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #fff;
+}
+
+.zen-text-accent {
+    color: transparent;
+    -webkit-text-stroke: 1px #4caf50;
+}
+
+.zen-overview-grid-v2 {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.zen-overview-main-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.zen-overview-main-text p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.zen-overview-features-mini {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.zen-mini-feature {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.zen-mini-icon {
+    font-size: 1.5rem;
+    width: 54px;
+    height: 54px;
+    background: rgba(76, 175, 80, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    color: #4caf50;
+    flex-shrink: 0;
+}
+
+.zen-mini-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.zen-mini-content p {
+    font-size: 0.95rem !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    line-height: 1.5 !important;
+}
+
+.zen-visual-stack-placeholder {
+    height: 500px;
+    background: rgba(255, 255, 255, 0.05);
+    /* Dark placeholder */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   CHALLENGE & SOLUTION
+   ============================================ */
+.zen-challenge-solution {
+    padding: 15vh 4rem;
+    background: transparent;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.zen-challenge-header-v2 {
+    margin-bottom: 5rem;
+}
+
+.zen-challenge-content-v2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.zen-card {
+    padding: 3rem;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.4s ease;
+}
+
+.zen-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.zen-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.zen-card-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    color: #4caf50;
+    text-transform: uppercase;
+}
+
+.zen-card h3 {
+    font-size: 2rem;
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.zen-card p {
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+}
+
+.zen-card li {
+    list-style: none;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.zen-card li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* ============================================
+   TIMELINE
+   ============================================ */
+.zen-timeline-section {
+    padding: 15vh 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.zen-timeline-container {
+    position: relative;
+}
+
+.zen-timeline-entry {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 2rem;
+    padding-bottom: 4rem;
+    position: relative;
+}
+
+.zen-timeline-line {
+    position: absolute;
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+.zen-timeline-dot {
+    width: 20px;
+    height: 20px;
+    background: #4caf50;
+    border: 4px solid #111;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    margin: 0.5rem auto 0;
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+}
+
+.zen-timeline-num {
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.05);
+    /* Faded num */
+    font-family: 'Space Grotesk', sans-serif;
+    position: absolute;
+    top: -1rem;
+    right: 0;
+}
+
+.zen-timeline-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.zen-timeline-content p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+}
+
+/* ============================================
+   TECH STACK
+   ============================================ */
+.zen-tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.zen-tech-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.zen-tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.zen-tech-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.1em;
+}
+
+.zen-tech-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.zen-tech-bar {
+    height: 4px;
+    width: 100%;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.zen-tech-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: currentColor;
+}
+
+/* ============================================
+   CTA
+   ============================================ */
+.zen-cta {
+    padding: 20vh 4rem;
+    text-align: center;
+    background: transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.zen-cta-button {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1.5rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 3rem;
+}
+
+.zen-cta-button:hover {
+    transform: translateY(-5px);
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* ============================================
+   PARALLAX BG
+   ============================================ */
+.zen-parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 10% 20%, rgba(76, 175, 80, 0.03), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(129, 199, 132, 0.03), transparent 40%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+    .zen-overview-grid-v2 {
+        grid-template-columns: 1fr;
+        gap: 8rem;
+    }
+
+    .zen-overview-header-v2 {
+        text-align: center;
+    }
+
+    .zen-overview-main-text {
+        text-align: center;
+    }
+
+    .zen-overview-features-mini {
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .zen-hero-title {
+        font-size: 3.5rem;
+    }
+
+    .zen-hero-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .zen-challenge-content-v2 {
+        grid-template-columns: 1fr;
+    }
+
+    .zen-nav {
+        padding: 1.5rem;
+    }
+
+    .zen-hero {
+        padding: 6rem 1.5rem;
+    }
+
+    .zen-summary-full,
+    .zen-stats,
+    .zen-overview-v2,
+    .zen-challenge-solution,
+    .zen-timeline-section,
+    .zen-cta {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}

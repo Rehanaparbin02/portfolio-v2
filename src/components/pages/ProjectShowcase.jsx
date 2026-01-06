@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ProjectShowcase.css';
 import doitMockup from '../../assets/doit-mockup.png';
 import koaMockup from '../../assets/Mockup koa.png';
+import eventlyMockup from '../../assets/evently/eventmock1.png';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -30,19 +31,21 @@ const projects = [
     },
     {
         id: "03",
-        name: "Nebula OS",
+        name: "Evently",
         category: "Web Application",
-        description: "A cloud-based operating system interface running entirely in the browser. Mimics desktop styling with window management, file systems, and multitasking capabilities.",
-        imageUrl: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop",
-        tags: ["Vue.js", "Firebase", "SCSS", "PWA"]
+        description: "A comprehensive event management platform that streamlines the entire lifecycle of events, from seamless ticket booking and attendee registration to real-time scheduling and interactive community engagement tools.",
+        imageUrl: eventlyMockup,
+        tags: ["Next.js", "Figma", "Supabase", "Firebase", "Tailwind CSS", "gsap"],
+        links: '/evently-project'
     },
     {
         id: "04",
-        name: "Aether Lens",
-        category: "AI Platform",
-        description: "Generative AI platform interface for editing and synthesizing images. Focuses on intuitive controls and instant feedback loops using edge computing.",
-        imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
-        tags: ["React Three Fiber", "TensorFlow.js", "Python", "AWS"]
+        name: "ZenFlow - Mental Wellness",
+        category: "Mobile Application",
+        description: "A comprehensive mental wellness mobile application designed to help users track their emotional journey through intuitive journaling and mood tracking.",
+        imageUrl: "https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?q=80&w=2038&auto=format&fit=crop",
+        tags: ["React Native", "Expo", "Supabase", "TypeScript", "Reanimated"],
+        links: '/zenflo-project'
     }
 ];
 
