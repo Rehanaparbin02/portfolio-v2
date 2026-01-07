@@ -335,32 +335,33 @@ export default function AboutFull() {
         {
             category: "LANGUAGES",
             items: [
-                { name: "JavaScript", level: 95 },
-                { name: "TypeScript", level: 90 },
-                { name: "Python", level: 85 },
-                { name: "C++", level: 80 },
-                { name: "SQL", level: 88 }
+                { name: "JavaScript" },
+                { name: "TypeScript" },
+                { name: "Python" },
+                { name: "C++" },
+                { name: "SQL" }
             ]
         },
         {
             category: "FRONTEND",
             items: [
-                { name: "React.js", level: 98 },
-                { name: "React Native", level: 92 },
-                { name: "HTML5", level: 99 },
-                { name: "CSS3", level: 99 },
-                { name: "Tailwind CSS", level: 95 }
+                { name: "React.js" },
+                { name: "Next.js" },
+                { name: "React Native" },
+                { name: "HTML5" },
+                { name: "CSS3" },
+                { name: "Tailwind CSS" }
             ]
         },
         {
             category: "BACKEND & DATA",
             items: [
-                { name: "Node.js", level: 90 },
-                { name: "Express.js", level: 92 },
-                { name: "Supabase", level: 95 },
-                { name: "PostgreSQL", level: 90 },
-                { name: "MongoDB", level: 85 },
-                { name: "Firebase", level: 88 }
+                { name: "Node.js" },
+                { name: "Express.js" },
+                { name: "Supabase" },
+                { name: "PostgreSQL" },
+                { name: "MongoDB" },
+                { name: "Firebase" }
             ]
         }
     ];
@@ -442,14 +443,14 @@ export default function AboutFull() {
                         </div>
                     </div>
 
-                    <div className="hero-description">
+                    {/* <div className="hero-description">
                         <p className="hero-lead">
-                            Building <span className="text-highlight">digital experiences</span> where
-                            <span className="text-highlight"> algorithmic precision</span> meets
-                            <span className="text-highlight"> human intuition</span>—from quantum optimization research
-                            to scalable full-stack applications.
+                            I create <span className="text-highlight">digital products</span> by combining
+                            <span className="text-highlight"> smart technology</span> with a
+                            <span className="text-highlight"> human touch</span>, focusing on building
+                            <span className="text-highlight"> clean, reliable, and user-friendly solutions</span>.
                         </p>
-                    </div>
+                    </div> */}
                     {/* 
                     <div className="hero-tech-tags">
                         <span className="tech-pill">React.js</span>
@@ -474,13 +475,15 @@ export default function AboutFull() {
                     <span className="section-label-about">THE PHILOSOPHY</span>
                     <div className="phi-content-layout">
                         <div className="phi-title-area">
-                            <h2 className="phi-title">Where logic <br />meets <span className="text-highlight">intuition.</span></h2>
+                            <h2 className="phi-title">WHERE <span className="text-highlight">THINKING</span><br />
+                                BECOMES <span className="text-highlight">EXPERIENCE.</span></h2>
                         </div>
                         <div className="phi-content-block">
-                            <p className="phi-lead">As a <span className="text-highlight">Full-Stack Developer</span>, I build <span className="text-highlight">digital experiences</span> where <span className="text-highlight">algorithmic precision</span>—honed through researching <span className="text-highlight">quantum optimization</span> and engineering scalable back-ends with <span className="text-highlight">Supabase and PostgreSQL</span>—meets <span className="text-highlight">human intuition.</span></p>
+                            <p className="phi-lead">As a <span className="text-highlight">Full-Stack Developer</span>, I design and build <span className="text-highlight">digital products</span> that feel <span className="text-highlight">intentional</span>—systems that are <span className="text-highlight">carefully engineered</span>, yet <span className="text-highlight">effortless to use.</span></p>
                             <div className="phi-paragraph">
-                                <p>Beyond the screen, I find balance in the <span className="text-highlight">tactile ritual of sketching</span>, a space where <span className="text-highlight">abstract logic</span> from my <span className="text-highlight">Computer Science Engineering</span> background crystallizes into form. Inspired by <span className="text-highlight">minimalist design</span>, I seek to build digital environments like <span className="text-highlight">Do-It and ZenFlow</span> that feel like <span className="text-highlight">breathing spaces</span>, utilizing smooth <span className="text-highlight">React Native animations</span> and <span className="text-highlight">gesture-driven interactions</span> to reduce clutter.</p>
-                                <p>I believe technology achieves its <span className="text-highlight">highest state</span> when it disappears, leaving only a <span className="text-highlight">seamless bridge</span> between complex <span className="text-highlight">RESTful APIs</span> and the <span className="text-highlight">emotional needs</span> of the user.</p>
+                                <p>My work lives at the intersection of <span className="text-highlight">structure and simplicity</span>. With a background in <span className="text-highlight">Computer Science</span> and a strong appreciation for <span className="text-highlight">minimal design</span>, I focus on turning <span className="text-highlight">complex logic</span> into clear, usable interfaces.</p>
+                                <p>Whether I’m crafting <span className="text-highlight">responsive frontends</span>, designing <span className="text-highlight">scalable back-end architectures</span>, or refining interactions through <span className="text-highlight">motion and gestures</span>, my goal is always the same: <span className="text-highlight">reduce friction</span> and let the product speak for itself.</p>
+                                <p><span className="text-highlight">Great technology</span> doesn’t demand attention—it quietly supports the user, connecting <span className="text-highlight">robust systems</span> with <span className="text-highlight">real human needs.</span></p>
                             </div>
                         </div>
                     </div>
@@ -627,6 +630,3 @@ export default function AboutFull() {
         </div>
     );
 }
-
-
-

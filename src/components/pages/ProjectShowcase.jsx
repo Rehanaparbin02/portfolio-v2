@@ -17,14 +17,14 @@ const projects = [
         category: "Productivity",
         description: "A task management app that helps users stay organized and productive by allowing them to create, prioritize, and track their tasks in one place.",
         imageUrl: doitMockup,
-        tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"],
+        tags: ["Async Storage", "Figma", "Expo", "Supabase", "React Native"],
         links: '/doit-project'
     },
     {
         id: "02",
         name: "Koa - Budgeting made easy",
         category: "Fintech",
-        description: "A comprehensive personal finance tracker that simplifies money management by automating expense categorization, visualizing financial trends, and helping users plan smarter savings goals with clarity-driven dashboards.",
+        description: "A personal finance tool built to reduce the friction of money management, offering automatic expense organization, clear insights into spending patterns, and practical guidance for setting and tracking savings goals.",
         imageUrl: koaMockup,
         tags: ["React Native", "Figma", "Express.js", "Node.js", "Supabase", "Firebase"],
         links: '/koa-project'
@@ -33,7 +33,7 @@ const projects = [
         id: "03",
         name: "Evently",
         category: "Web Application",
-        description: "A comprehensive event management platform that streamlines the entire lifecycle of events, from seamless ticket booking and attendee registration to real-time scheduling and interactive community engagement tools.",
+        description: "A centralized solution for organizing events efficiently, enabling smooth ticketing, structured registrations, real-time agenda management, and meaningful participant interaction.",
         imageUrl: eventlyMockup,
         tags: ["Next.js", "Figma", "Supabase", "Firebase", "Tailwind CSS", "gsap"],
         links: '/evently-project'
@@ -42,7 +42,7 @@ const projects = [
         id: "04",
         name: "ZenFlow - Mental Wellness",
         category: "Mobile Application",
-        description: "A comprehensive mental wellness mobile application designed to help users track their emotional journey through intuitive journaling and mood tracking.",
+        description: "A mental wellness mobile app focused on self-reflection and emotional awareness, enabling users to log thoughts, monitor mood patterns, and gain a clearer understanding of their mental state over time.",
         imageUrl: zenmockup,
         tags: ["React Native", "Expo", "Supabase", "TypeScript", "Reanimated"],
         links: '/zenflo-project'
@@ -220,7 +220,7 @@ export default function ProjectShowcase() {
 
                     <div className="hero-extra-text">
                         <p>
-                            We merge creative vision with technical excellence
+                            I merge creative vision with technical excellence
                             to build digital masterpieces that stand the test of time.
                             Every pixel is curated for impact.
                         </p>

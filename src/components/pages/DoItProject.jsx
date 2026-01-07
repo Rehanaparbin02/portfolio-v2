@@ -586,10 +586,10 @@ const DoItProject = () => {
               <span className="doit-highlight-word">DO-IT</span> transforms how you handle
             </span>
             <span className="doit-summary-line">
-              tasks by blending <span className="doit-highlight-word">automation</span>,
+              tasks by bringing together
             </span>
             <span className="doit-summary-line">
-              <span className="doit-highlight-word">analytics</span>, and <span className="doit-highlight-word">collaboration</span>
+              <span className="doit-highlight-word">analytics</span> and <span className="doit-highlight-word">collaboration</span>
             </span>
             <span className="doit-summary-line">
               into one calm, intelligent
@@ -598,8 +598,9 @@ const DoItProject = () => {
               task management experience.
             </span>
           </h2>
+
           <div className="doit-summary-tags-wrapper">
-            {['React Native', 'AI UX', 'Task Management App', 'iOS', 'Android', 'Passion Project'].map((tag, i) => (
+            {['React Native', 'UI/UX', 'Task Management App', 'iOS', 'Android', 'Passion Project'].map((tag, i) => (
               <span key={i} className="doit-summary-tag-item">{tag}</span>
             ))}
           </div>

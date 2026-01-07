@@ -25,7 +25,7 @@ const projectsData = [
         title: "Do-It: Manage with ease",
         category: "Productivity",
         description: "A task management app that helps users stay organized and productive by allowing them to create, prioritize, and track their tasks in one place.",
-        tags: ["Next.js", "Figma", "Expo", "Supabase", "React Native"],
+        tags: ["Async Storage", "Figma", "Expo", "Supabase", "React Native"],
         image: doitMockup,
         link: "/doit-project",
 

@@ -134,24 +134,34 @@
 .project-meta {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
 }
 
 .project-number {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 600;
     color: var(--text-main);
-    padding: 0.5rem 1.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.4rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .project-category {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.3em;
     color: var(--text-dim);
-    font-weight: 500;
+    font-weight: 600;
+    opacity: 0.8;
+    line-height: 1;
+    transform: translateY(3px);
+    /* Optical baseline alignment */
 }
 
 .project-details {
