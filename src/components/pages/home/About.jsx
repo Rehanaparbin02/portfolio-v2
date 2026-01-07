@@ -93,9 +93,8 @@ export default function About() {
                     <h1 className="section-eyebrow" style={{ position: "relative", top: "27rem" }}>HEY</h1>
                     <h1 className="section-eyebrow" style={{ position: "relative", top: "27rem" }}>THERE!</h1>
                     <p className="about-description">
-                        I'm a passionate <span className="highlight highlight-left">Full Stack Developer</span> <span className="emoji">🚀</span> crafting
-                        interactive and immersive <span className="highlight highlight-right">web experiences</span> <span className="emoji">🌐</span> and <span className="highlight highlight-right">mobile applications</span> .
-                        Blurring the line between design and code <span className="emoji">🎨</span> to create digital magic <span className="emoji">✨</span>.
+                        I’m a <span className="highlight highlight-left">Full Stack Developer</span> <i className="fa-solid fa-rocket emoji"></i> driven by a passion for building <span className="highlight highlight-right">engaging web and mobile experiences <i className="fa-solid fa-mobile-screen-button emoji-black"></i></span>.
+                        I merge thoughtful<span className="highlight highlight-left"> design <i className="fa-solid fa-palette emoji-black"></i></span> with <span className="highlight highlight-right">clean, efficient code</span> <i className="fa-solid fa-laptop-code emoji"></i> to transform ideas into <span className="highlight highlight-right">seamless digital experiences <i className="fa-solid fa-wand-magic-sparkles emoji-black"></i></span>.
                     </p>
                 </div>
             </div>

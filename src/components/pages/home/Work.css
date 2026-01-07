@@ -73,16 +73,33 @@
 }
 
 .work-desc {
-    font-size: 2.2rem;
+    font-size: clamp(1.2rem, 2.5vw, 2.2rem);
     font-weight: 500;
     color: rgb(0, 0, 0);
-    max-width: 800px;
-    text-align: left;
-    margin-top: 0vw;
-    line-height: 1.4;
-    /* justify-content: center; */
-    /* display: flex; */
-    margin-left: 39px;
+    max-width: 900px;
+    text-align: center;
+    margin: 2rem auto 0;
+    line-height: 1.6;
+}
+
+.work-highlight {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 0.1em 0.4em;
+    font-weight: 700;
+    display: inline-block;
+    line-height: 1.1;
+    margin: 0 0.2em;
+    vertical-align: middle;
+    border-radius: 4px;
+}
+
+.work-emoji {
+    filter: grayscale(100%) brightness(0);
+    display: inline-block;
+    margin: 0 0.3em;
+    font-size: 0.9em;
+    vertical-align: middle;
 }
 
 .work-title {
@@ -110,11 +127,10 @@
 
 .curved-svg {
     position: absolute;
-    left: 50%;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    transform: translateX(-50%);
     z-index: 1;
     overflow: visible;
 }
@@ -122,18 +138,49 @@
 .moving-ball {
     fill: #000000 !important;
     opacity: 1 !important;
-    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.4));
-    transition: filter 0.3s ease;
     z-index: 100;
 }
 
 .curved-svg {
     pointer-events: none;
     z-index: 5;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.05));
 }
 
 .curved-svg path {
     pointer-events: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.active-path {
+    stroke: url(#path-gradient);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+}
+
+.path-glow {
+    stroke: rgba(0, 0, 0, 0.05);
+    stroke-width: 12px;
+    filter: blur(8px);
+}
+
+.moving-ball-group {
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.3));
+}
+
+.ball-outer {
+    fill: #000;
+}
+
+.ball-inner {
+    fill: #fff;
+    opacity: 0.8;
+}
+
+.ball-glow {
+    fill: #000;
+    opacity: 0.2;
+    filter: blur(4px);
 }
 
 .cards-list {
@@ -254,12 +301,9 @@
     }
 
     .work-desc {
-        font-size: 1.2rem;
-        margin-left: 0;
-        text-align: center;
-        padding: 0 20px;
         max-width: 100%;
         margin-top: 1.5rem;
+        padding: 0 1rem;
     }
 
     .work-hero {
@@ -272,17 +316,19 @@
 }
 
 @media (max-width: 480px) {
-     .work-section {
-            padding: 0 2rem 7rem 2rem;
-            /* min-height: 90vh; */
-            min-height: 289rem;
-        }
+    .work-section {
+        padding: 0 2rem 7rem 2rem;
+        /* min-height: 90vh; */
+        min-height: 289rem;
+    }
+
     .work-title {
         font-size: clamp(2rem, 12vw, 3.5rem);
     }
 
     .work-desc {
-        font-size: 1rem;
+        font-size: 1.1rem;
+        line-height: 1.5;
     }
 
     .service-card {
@@ -293,5 +339,5 @@
         padding-bottom: 30px;
     }
 
-   
+
 }

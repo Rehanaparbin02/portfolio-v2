@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 export default function Work() {
     const sectionRef = useRef(null);
     const pathRef = useRef(null);
+    const glowPathRef = useRef(null);
     const ballRef = useRef(null);
     const bgTextRef = useRef(null);
 
@@ -39,15 +40,15 @@ export default function Work() {
         },
         {
             number: "05",
-            title: "Fintech & Security",
-            description: "Implementing bank-grade data protection, encrypted storage, and real-time transaction tracking for financial applications.",
-            tags: ["Security", "Encryption", "Auth"]
+            title: "API Security & Authentication",
+            description: "Implementing industry-standard security protocols, including data encryption, secure communication channels, and robust authentication flows for web services.",
+            tags: ["Security", "Auth", "Encryption"]
         },
         {
             number: "06",
-            title: "Emerging Tech Research",
-            description: "Researching Quantum-enhanced ML techniques at C-DAC, optimizing complex computational problems with 40% efficiency gains.",
-            tags: ["Python", "Quantum ML", "Research"]
+            title: "Design Systems & Component Libraries",
+            description: "Architecting scalable design systems and reusable component libraries that ensure visual consistency and streamline the development lifecycle across platforms.",
+            tags: ["Storybook", "Atomic Design", "Figma"]
         },
     ];
 
@@ -125,34 +126,23 @@ export default function Work() {
                 }
             });
 
-            // 4. Path & Ball Animation (Absolute Mathematical Sync)
-            const pathElement = pathRef.current;
-            const ballElement = ballRef.current;
+            // 4. Path & Ball Animation (Enhanced Sync & Performance)
+            const path = pathRef.current;
+            const glowPath = glowPathRef.current;
+            const ball = ballRef.current;
 
-            // Helper to set up the path
-            const setPath = () => {
-                const pathLength = pathElement.getTotalLength();
+            // Measure total length precisely
+            const pathLength = path.getTotalLength();
 
-                // Initialize styles
-                gsap.set(pathElement, {
-                    strokeDasharray: pathLength,
-                    strokeDashoffset: pathLength,
-                    visibility: "visible"
-                });
+            // Set up main path and glow path for drawing
+            gsap.set([path, glowPath], {
+                strokeDasharray: pathLength + 5, // Small buffer
+                strokeDashoffset: pathLength + 5,
+                visibility: "visible"
+            });
 
-                // Position ball at start point
-                const startPoint = pathElement.getPointAtLength(0);
-                ballElement.setAttribute("cx", startPoint.x);
-                ballElement.setAttribute("cy", startPoint.y);
-
-                return pathLength;
-            };
-
-            let pathLength = setPath();
-
-            // Unified progress-driven animation
-            const animObj = { p: 0 };
-            const syncTl = gsap.timeline({
+            // Master timeline for synchronization
+            const masterTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".cards-container",
                     start: "top center",
@@ -162,33 +152,30 @@ export default function Work() {
                 }
             });
 
-            syncTl.to(animObj, {
-                p: 1,
-                ease: "none",
-                onUpdate: () => {
-                    const progress = animObj.p;
-                    if (pathLength === 0) pathLength = pathElement.getTotalLength();
+            // Animate ball motion and path drawing together
+            masterTl.to(ball, {
+                motionPath: {
+                    path: path,
+                    alignOrigin: [0.5, 0.5]
+                },
+                ease: "none"
+            }, 0)
+                .to([path, glowPath], {
+                    strokeDashoffset: 0,
+                    ease: "none"
+                }, 0);
 
-                    const drawnLength = pathLength * progress;
-
-                    // 1. Precise ball positioning
-                    const point = pathElement.getPointAtLength(drawnLength);
-                    ballElement.setAttribute("cx", point.x);
-                    ballElement.setAttribute("cy", point.y);
-
-                    // 2. Precise line growth
-                    const offset = pathLength * (1 - progress);
-                    pathElement.setAttribute("stroke-dashoffset", offset);
-                }
-            });
-
-            // Handle Resize
-            const handleResize = () => {
-                pathLength = setPath();
-                syncTl.scrollTrigger.refresh();
+            // Handle Resize & ScrollTrigger Cleanup
+            const handleRefresh = () => {
+                const newLength = path.getTotalLength();
+                gsap.set([path, glowPath], {
+                    strokeDasharray: newLength + 5,
+                    strokeDashoffset: masterTl.progress() === 1 ? 0 : newLength + 5
+                });
+                ScrollTrigger.refresh();
             };
 
-            window.addEventListener('resize', handleResize);
+            window.addEventListener('resize', handleRefresh);
             setTimeout(() => ScrollTrigger.refresh(), 500);
 
             // 5. Card Reveals (Enhanced Animatic Style)
@@ -256,36 +243,68 @@ export default function Work() {
                     ))}
                 </h2>
                 <p className="work-desc">
-                    {"Transforming ideas into exceptional digital experiences through expertise and innovation".split(" ").map((word, index) => (
-                        <span key={index} className="word" style={{ display: "inline-block", marginRight: "0.25em" }}>
-                            {word}
-                        </span>
-                    ))}
+                    <span className="word">Transforming</span>{" "}
+                    <span className="word work-highlight">ideas</span>{" "}
+                    <i className="fa-solid fa-lightbulb word work-emoji"></i>{" "}
+                    <span className="word">into</span>{" "}
+                    <span className="word work-highlight">exceptional digital experiences</span>{" "}
+                    <i className="fa-solid fa-wand-magic-sparkles word work-emoji"></i>{" "}
+                    <span className="word">through</span>{" "}
+                    <span className="word work-highlight">expertise</span>{" "}
+                    <span className="word">and</span>{" "}
+                    <span className="word work-highlight">innovation</span>{" "}
+                    <i className="fa-solid fa-gears word work-emoji"></i>
                 </p>
             </div>
 
             <div className="cards-container">
                 <svg className="curved-svg" viewBox="0 0 400 3500" preserveAspectRatio="xMidYMin meet">
-                    {/* Background Guide Path (Thicker) */}
+                    <defs>
+                        <linearGradient id="path-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="rgba(0,0,0,0.1)" />
+                            <stop offset="20%" stopColor="rgba(0,0,0,0.5)" />
+                            <stop offset="80%" stopColor="rgba(0,0,0,0.8)" />
+                            <stop offset="100%" stopColor="rgba(0,0,0,1)" />
+                        </linearGradient>
+                    </defs>
+
+                    {/* Background Guide Path */}
                     <path
                         d="M200 0C200 300 350 300 350 600C350 900 50 900 50 1200C50 1500 350 1500 350 1800C350 2100 50 2100 50 2400C50 2700 350 2700 350 3000C350 3300 200 3300 200 3500"
-                        stroke="rgba(0,0,0,0.06)"
-                        strokeWidth="4"
+                        stroke="rgba(0,0,0,0.03)"
+                        strokeWidth="2"
                         fill="none"
                         vectorEffect="non-scaling-stroke"
                     />
-                    {/* Active Animated Path (Much Thicker trail) */}
+
+                    {/* Active Animated Path Trail (Glow) */}
+                    <path
+                        ref={glowPathRef}
+                        className="path-glow"
+                        d="M200 0C200 300 350 300 350 600C350 900 50 900 50 1200C50 1500 350 1500 350 1800C350 2100 50 2100 50 2400C50 2700 350 2700 350 3000C350 3300 200 3300 200 3500"
+                        strokeWidth="8"
+                        fill="none"
+                        vectorEffect="non-scaling-stroke"
+                        strokeLinecap="round"
+                    />
+
+                    {/* Active Animated Path (Main) */}
                     <path
                         ref={pathRef}
+                        className="active-path"
                         d="M200 0C200 300 350 300 350 600C350 900 50 900 50 1200C50 1500 350 1500 350 1800C350 2100 50 2100 50 2400C50 2700 350 2700 350 3000C350 3300 200 3300 200 3500"
-                        stroke="rgba(0,0,0,0.06)"
                         strokeWidth="4"
                         fill="none"
                         vectorEffect="non-scaling-stroke"
                         strokeLinecap="round"
                     />
-                    {/* The Circle */}
-                    <circle ref={ballRef} r="12" fill="#000" className="moving-ball" />
+
+                    {/* The Glowing Ball Group */}
+                    <g ref={ballRef} className="moving-ball-group">
+                        <circle className="ball-glow" r="18" />
+                        <circle className="ball-outer" r="10" />
+                        <circle className="ball-inner" r="4" cx="-2" cy="-2" />
+                    </g>
                 </svg>
 
                 <div className="cards-list">
