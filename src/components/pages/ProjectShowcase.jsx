@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ProjectShowcase.css';
 import doitMockup from '../../assets/doit-mockup.png';
 import koaMockup from '../../assets/Mockup koa.png';
-import eventlyMockup from '../../assets/evently/eventmock1.png';
+import eventlyMockup from '../../assets/evently/mockuper.png';
 
 
 gsap.registerPlugin(ScrollTrigger);

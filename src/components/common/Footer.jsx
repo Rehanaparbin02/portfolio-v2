@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -8,139 +8,105 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
     const footerRef = useRef(null);
-    // const marqueeRef = useRef(null);
+    const ctaRef = useRef(null);
     const contentRef = useRef(null);
-    const bottomRef = useRef(null);
+    const [time, setTime] = useState(new Date());
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTime(new Date());
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const formatTime = (date) => {
+        return date.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true,
+            timeZone: 'Asia/Kolkata'
+        });
+    };
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // Force immediate refresh before animations
-            ScrollTrigger.refresh();
-
-            // 1. Reveal Animation for the entire footer section
-            gsap.fromTo(footerRef.current,
-                { yPercent: 40, autoAlpha: 0 },
-                {
-                    yPercent: 0,
-                    autoAlpha: 1,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: footerRef.current,
-                        start: "top bottom",
-                        end: "top 20%",
-                        scrub: 1,
-                        invalidateOnRefresh: true
-                    }
-                }
-            );
-
-            // 2. Parallax effect for the content inside
-            gsap.fromTo(contentRef.current,
-                { y: -100 },
-                {
-                    y: 0,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: footerRef.current,
-                        start: "top bottom",
-                        end: "bottom bottom",
-                        scrub: true,
-                        invalidateOnRefresh: true
-                    }
-                }
-            );
-
-            // 3. Staggered reveal for footer columns and elements
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".footer-main",
-                    start: "top 85%",
-                    toggleActions: "play none none reverse",
-                    invalidateOnRefresh: true
-                }
-            });
-
-            tl.from(".footer-col", {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
-                ease: "power4.out"
-            })
-                .from(".footer-social-tag", {
-                    scale: 0.8,
-                    opacity: 0,
-                    duration: 0.8,
-                    stagger: 0.1,
-                    ease: "back.out(1.7)"
-                }, "-=0.5")
-                .from(bottomRef.current, {
-                    opacity: 0,
-                    y: 20,
-                    duration: 1,
-                    ease: "power2.out"
-                }, "-=0.5");
-
-            // 4. Marquee Text Reveal - each letter or whole words
-            gsap.from(".marquee-item a", {
-                duration: 1.5,
+            // Hero CTA Animation
+            gsap.from(".footer-cta-title span", {
                 y: 100,
-                skewY: 7,
+                opacity: 0,
                 stagger: 0.1,
+                duration: 1.2,
                 ease: "power4.out",
                 scrollTrigger: {
-                    trigger: ".footer-marquee-section",
-                    start: "top 90%",
-                    invalidateOnRefresh: true
+                    trigger: ctaRef.current,
+                    start: "top 80%",
                 }
             });
 
-            // 5. Marquee Text Animation (GSAP)
-            gsap.to(".marquee-track", {
-                xPercent: -50,
-                repeat: -1,
-                duration: 40,
-                ease: "none"
+            // Parallax on CTA
+            gsap.to(".footer-cta-title", {
+                y: -50,
+                scrollTrigger: {
+                    trigger: ctaRef.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
             });
 
-            // 6. Magnetic effect for social links
-            const links = document.querySelectorAll('.footer-link-item');
+            // Reveal Animation for columns
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".footer-main-new",
+                    start: "top 85%",
+                }
+            });
+
+            tl.from(".footer-col-new", {
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power3.out"
+            })
+                .from(".footer-bottom-new", {
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.8
+                }, "-=0.4");
+
+            // Magnetic effect for social links
+            const links = document.querySelectorAll('.social-link-new');
             links.forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    gsap.to(link, { x: 10, color: '#fff', duration: 0.3 });
+                link.addEventListener('mousemove', (e) => {
+                    const rect = link.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    gsap.to(link, {
+                        x: x * 0.3,
+                        y: y * 0.3,
+                        duration: 0.4
+                    });
                 });
                 link.addEventListener('mouseleave', () => {
-                    gsap.to(link, { x: 0, color: 'rgba(255, 255, 255, 0.6)', duration: 0.3 });
+                    gsap.to(link, { x: 0, y: 0, duration: 0.4 });
                 });
             });
 
-            // Multiple refresh strategies to ensure footer loads
-            const refreshTimers = [
-                setTimeout(() => ScrollTrigger.refresh(), 100),
-                setTimeout(() => ScrollTrigger.refresh(), 300),
-                setTimeout(() => ScrollTrigger.refresh(), 500),
-                setTimeout(() => ScrollTrigger.refresh(), 1000)
-            ];
-
-            // Refresh on window load
-            const handleLoad = () => {
-                ScrollTrigger.refresh();
-            };
-
-            window.addEventListener('load', handleLoad);
-
-            // Refresh on resize
-            const handleResize = () => {
-                ScrollTrigger.refresh();
-            };
-
-            window.addEventListener('resize', handleResize);
-
-            return () => {
-                window.removeEventListener('load', handleLoad);
-                window.removeEventListener('resize', handleResize);
-                refreshTimers.forEach(timer => clearTimeout(timer));
-            };
+            // Gradient follow effect
+            const footer = footerRef.current;
+            footer.addEventListener('mousemove', (e) => {
+                const rect = footer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                gsap.to(".footer-cursor-glow", {
+                    x: x,
+                    y: y,
+                    duration: 0.6,
+                    ease: "power2.out"
+                });
+            });
 
         }, footerRef);
 
@@ -148,100 +114,96 @@ export default function Footer() {
     }, []);
 
     const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
-        <footer className="footer-section" id="contact" ref={footerRef}>
-            <div className="footer-background">
-                <div className="footer-glow glow-1"></div>
-                <div className="footer-glow glow-2"></div>
-                <div className="footer-noise"></div>
+        <footer className="footer-new" id="contact" ref={footerRef}>
+            <div className="footer-cursor-glow"></div>
+
+            <div className="footer-cta-section" ref={ctaRef}>
+                <div className="footer-cta-container">
+                    <div className="footer-label-new">MY COMMITMENT</div>
+                    <h2 className="footer-cta-title">
+                        <span>BEYOND</span> <span>ALL</span> <span>LIMITS</span> <br />
+                        <span className="text-outline">FULL POTENTIAL</span>
+                    </h2>
+                    <div className="footer-cta-btn-wrap">
+                        <a href="mailto:rehanaparbin0210@gmail.com" className="footer-primary-btn">
+                            START A PROJECT
+                            <span className="btn-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            <div className="footer-content" ref={contentRef}>
-                {/* <div className="footer-marquee-section" ref={marqueeRef}>
-                    <div className="marquee-container">
-                        <div className="marquee-track">
-                            {[...Array(8)].map((_, i) => (
-                                <div key={i} className="marquee-item">
-                                    <a href="mailto:rehanaparbin0210@gmail.com">
-                                        Let's talk <span className="arrow">↗</span>
-                                    </a>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div> */}
-
-                {/* Big hero text above footer content to create prominent call-to-action and page height */}
-                <div className="footer-hero-text" aria-hidden="true">
-                    WORKING TO FULL POTENTIAL
-                </div>
-
-                <div className="footer-hero-cta">
-                    <a href="/recent_present_resume_dev.pdf" className="resume-download-button" download aria-label="Download Rehana's resume">Download Resume</a>
-                </div>
-
-                <div className="footer-container">
-                    <div className="footer-main">
-                        <div className="footer-col brand-col">
-                            <div className="footer-logo">
-                                <h2>REHANA<span>.</span></h2>
+            <div className="footer-content-new" ref={contentRef}>
+                <div className="footer-container-new">
+                    <div className="footer-main-new">
+                        <div className="footer-col-new brand-info">
+                            <div className="footer-logo-new">
+                                REHANA<span>.</span>
                             </div>
-                            <p className="footer-bio">
-                                Crafting digital experiences that blend aesthetic excellence with functional precision.
+                            <p className="footer-description-new">
+                                Specializing in creating high-performance digital products and immersive user experiences with a focus on modern aesthetics and functional precision.
                             </p>
-                            <div className="footer-status">
-                                <span className="status-dot"></span>
-                                Available for new opportunities
+                            <div className="footer-availability">
+                                <span className="availability-dot"></span>
+                                Available for freelance & full-time roles
                             </div>
                         </div>
 
-                        <div className="footer-col menu-col">
-                            <h4 className="footer-label">Navigation</h4>
-                            <nav className="footer-nav" aria-label="Footer Navigation">
-                                <ul>
-                                    <li><Link to="/" className="footer-link-item" onClick={scrollToTop}>Home</Link></li>
-                                    <li><Link to="/about" className="footer-link-item" onClick={scrollToTop}>About</Link></li>
-                                    <li><Link to="/projects" className="footer-link-item" onClick={scrollToTop}>Projects</Link></li>
-                                    <li><Link to="/contact" className="footer-link-item" onClick={scrollToTop}>Contact</Link></li>
-                                </ul>
+                        <div className="footer-col-new">
+                            <h4 className="footer-col-label">EXPLORE</h4>
+                            <nav className="footer-nav-new">
+                                <Link to="/" onClick={scrollToTop}>Home</Link>
+                                <Link to="/about" onClick={scrollToTop}>About</Link>
+                                <Link to="/projects" onClick={scrollToTop}>Projects</Link>
+                                <Link to="/contact" onClick={scrollToTop}>Contact</Link>
                             </nav>
                         </div>
 
-
-
-                        <div className="footer-col contact-col">
-                            <h4 className="footer-label">Get in Touch</h4>
-                            <address className="contact-links">
-                                <a href="mailto:rehanaparbin0210@gmail.com" className="contact-main-link" aria-label="Email Rehana">rehanaparbin0210@gmail.com</a>
-                                <a href="tel:+918638401703" className="contact-sub-link" aria-label="Call Rehana">+91 8638401703</a>
-                            </address>
-                            <div className="social-tags-container" role="list">
-                                <a href="https://linkedin.com/in/rehanaparbin" target="_blank" rel="noopener noreferrer" className="footer-social-tag" aria-label="Open LinkedIn profile">LinkedIn</a>
-                                <a href="https://github.com/rehanaparbin" target="_blank" rel="noopener noreferrer" className="footer-social-tag" aria-label="Open GitHub profile">GitHub</a>
-                                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="footer-social-tag" aria-label="Open Instagram profile">Instagram</a>
+                        <div className="footer-col-new">
+                            <h4 className="footer-col-label">CONNECT</h4>
+                            <div className="footer-social-new">
+                                <a href="https://linkedin.com/in/rehanaparbin" target="_blank" rel="noopener noreferrer" className="social-link-new">LinkedIn</a>
+                                <a href="https://github.com/rehanaparbin" target="_blank" rel="noopener noreferrer" className="social-link-new">GitHub</a>
+                                <a href="https://twitter.com/rehanaparbin" target="_blank" rel="noopener noreferrer" className="social-link-new">Twitter</a>
+                                <a href="https://instagram.com/rehanaparbin" target="_blank" rel="noopener noreferrer" className="social-link-new">Instagram</a>
                             </div>
+                        </div>
+
+                        <div className="footer-col-new contact-direct">
+                            <h4 className="footer-col-label">GET IN TOUCH</h4>
+                            <a href="mailto:rehanaparbin0210@gmail.com" className="footer-email-link">
+                                rehanaparbin0210@gmail.com
+                            </a>
+                            <p className="footer-phone">+91 8638401703</p>
                         </div>
                     </div>
 
-                    <div className="footer-bottom" ref={bottomRef}>
-                        <div className="footer-bottom-info">
-                            <span className="copyright">© {new Date().getFullYear()} Rehana Parbin</span>
-                            <span className="separator">/</span>
-                            <span className="location">Based in India, Available Worldwide</span>
+                    <div className="footer-bottom-new">
+                        <div className="footer-bottom-left">
+                            <span className="copyright-new">© {new Date().getFullYear()} REHANA PARBIN</span>
+                            <span className="footer-separator">•</span>
+                            <span className="footer-location-new">BASED IN INDIA</span>
                         </div>
-                        <div className="footer-bottom-links">
-                            <button className="back-to-top" onClick={scrollToTop} aria-label="Back to top">Back to top →</button>
-                            <span className="designed">Designed with passion</span>
+
+                        <div className="footer-time-section">
+                            <span className="time-label">LOCAL TIME (IST):</span>
+                            <span className="time-value">{formatTime(time)}</span>
+                        </div>
+
+                        <div className="footer-bottom-right">
+                            <button className="back-to-top-new" onClick={scrollToTop}>
+                                BACK TO TOP <span className="top-arrow">↑</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div className="footer-noise-overlay"></div>
         </footer>
     );
 }

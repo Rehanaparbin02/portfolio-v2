@@ -244,13 +244,13 @@ const ZenfloProject = () => {
                 <button className="zen-nav-back-btn zen-magnetic-btn" onClick={() => navigate('/projects')}>
                     <span>← BACK</span>
                 </button>
-                <div className="zen-nav-badge">CASE STUDY · 2025</div>
+                {/* <div className="zen-nav-badge">CASE STUDY · 2025</div> */}
             </nav>
 
             {/* Hero Section */}
             <section className="zen-hero">
                 <div className="zen-hero-container">
-                    <div className="zen-hero-badge">CASE STUDY 2025</div>
+                    {/* <div className="zen-hero-badge">CASE STUDY 2025</div> */}
                     <div className="zen-hero-content">
                         <div className="zen-hero-left">
                             <div className="zen-hero-number">03</div>
@@ -259,8 +259,8 @@ const ZenfloProject = () => {
                         <div className="zen-hero-center">
                             <h1 className="zen-hero-title">
                                 <span className="zen-hero-title-line-1">ZENFLOW</span>
-                                <span className="zen-hero-title-line-2">JOURNALING</span>
-                                <span className="zen-hero-title-line-3">REIMAGINED</span>
+                                <span className="zen-hero-title-line-2">MICRO</span>
+                                <span className="zen-hero-title-line-3">JOURNALING</span>
                             </h1>
                             <div className="zen-hero-description">
                                 A comprehensive mental wellness mobile application designed to help users track their emotional journey through intuitive journaling and mood tracking.

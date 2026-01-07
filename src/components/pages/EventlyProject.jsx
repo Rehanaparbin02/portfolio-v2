@@ -4,8 +4,33 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './EventlyProject.css';
 
-// Using the one available image for now, and placeholders for others
-const mainImg = "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop";
+// Import images for Overview Stack
+import event1 from '../../assets/evently/event (1).png';
+import event2 from '../../assets/evently/event (2).png';
+import event3 from '../../assets/evently/event (3).png';
+
+// Import images for Gallery
+import evently01 from '../../assets/evently/evently01.png';
+// import evently02 from '../../assets/evently/evently02.png';
+import evently03 from '../../assets/evently/evently03.png';
+import evently04 from '../../assets/evently/evently04.png';
+import evently05 from '../../assets/evently/evently05.png';
+import evently06 from '../../assets/evently/evently06.png';
+import evently07 from '../../assets/evently/evently07.png';
+import evently08 from '../../assets/evently/evently08.png';
+
+const eventlyGalleryImages = [
+    evently01,
+    // evently02,
+    evently03,
+    evently04,
+    evently05,
+    evently06,
+    evently07,
+    evently08
+];
+
+const mainImg = event1;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -317,6 +342,91 @@ const EventlyProject = () => {
                 });
             }
 
+            // === VISUAL STACK ROTATION ===
+            const layers = gsap.utils.toArray('.evently-visual-layer');
+            if (layers.length > 0) {
+                const positions = [
+                    { x: 0, y: 0, scale: 1, opacity: 1, filter: 'blur(0px)', zIndex: 3, rotate: 0 },
+                    { x: -280, y: -50, scale: 0.8, opacity: 0.3, filter: 'blur(6px)', zIndex: 2, rotate: -5 },
+                    { x: 280, y: 50, scale: 0.8, opacity: 0.3, filter: 'blur(6px)', zIndex: 1, rotate: 5 }
+                ];
+
+                let step = 0;
+                const totalLayers = layers.length;
+
+                const rotate = () => {
+                    step++;
+                    layers.forEach((layer, i) => {
+                        const posIndex = (i + step) % totalLayers;
+                        const pos = positions[posIndex];
+
+                        gsap.to(layer, {
+                            x: pos.x,
+                            y: pos.y,
+                            scale: pos.scale,
+                            opacity: pos.opacity,
+                            filter: pos.filter,
+                            zIndex: pos.zIndex,
+                            rotate: pos.rotate,
+                            duration: 2,
+                            ease: 'expo.inOut'
+                        });
+                    });
+                };
+
+                const rotationTimer = gsap.delayedCall(3.5, function cycle() {
+                    rotate();
+                    rotationTimer.restart(true);
+                });
+            }
+
+            // === VISUAL DESIGN GRID ANIMATIONS ===
+            gsap.utils.toArray('.evently-visual-item').forEach((item, i) => {
+                gsap.from(item, {
+                    y: 100,
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    delay: (i % 4) * 0.1 // Stagger by column
+                });
+            });
+
+            // === DEV BOXES ANIMATIONS ===
+            gsap.utils.toArray('.evently-dev-box').forEach((box, i) => {
+                gsap.from(box, {
+                    scale: 0.7,
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'elastic.out(1, 0.5)',
+                    scrollTrigger: {
+                        trigger: box,
+                        start: 'top 85%'
+                    },
+                    delay: i * 0.15
+                });
+            });
+
+            // === TECH CARDS ANIMATIONS ===
+            gsap.utils.toArray('.evently-tech-card').forEach((card, i) => {
+                gsap.from(card, {
+                    scale: 0,
+                    opacity: 0,
+                    rotation: 180,
+                    duration: 1,
+                    ease: 'back.out(2)',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%'
+                    },
+                    delay: i * 0.1
+                });
+            });
+
         }, containerRef);
 
         return () => ctx.revert();
@@ -336,13 +446,13 @@ const EventlyProject = () => {
                 <button className="evently-nav-back-btn evently-magnetic-btn" onClick={() => navigate('/projects')}>
                     <span>← BACK</span>
                 </button>
-                <div className="evently-nav-badge">CASE STUDY · 2026</div>
+                {/* <div className="evently-nav-badge">CASE STUDY · 2026</div> */}
             </nav>
 
             {/* Hero Section */}
             <section className="evently-hero">
                 <div className="evently-hero-container">
-                    <div className="evently-hero-badge">CASE STUDY 2026</div>
+                    {/* <div className="evently-hero-badge">CASE STUDY 2026</div> */}
                     <div className="evently-hero-content">
                         <div className="evently-hero-left">
                             <div className="evently-hero-number">03</div>
@@ -351,8 +461,10 @@ const EventlyProject = () => {
                         <div className="evently-hero-center">
                             <h1 className="evently-hero-title">
                                 <span className="evently-hero-title-line-1">EVENTLY</span>
-                                <span className="evently-hero-title-line-2">WEB</span>
-                                <span className="evently-hero-title-line-3">SOLUTION</span>
+                                <span className="evently-hero-title-line-2">PLANNING</span>
+                                <span className="evently-hero-title-line-3">& ORGANIZING
+
+                                </span>
                             </h1>
                             <div className="evently-hero-description">
                                 A state-of-the-art, responsive web application designed to streamline the complexities of event planning, team coordination, and financial tracking.
@@ -472,11 +584,14 @@ const EventlyProject = () => {
 
                         <div className="evently-overview-visual-stack">
                             <div className="evently-visual-layer layer-1 evently-reveal-image">
-                                <img src={mainImg} alt="Evently Dashboard" />
+                                <img src={event1} alt="Evently Dashboard" />
                             </div>
-                            {/* Added placeholders for the stack feel */}
-                            <div className="evently-visual-layer layer-2 evently-reveal-image" style={{ background: '#1e3a8a' }}></div>
-                            <div className="evently-visual-layer layer-3 evently-reveal-image" style={{ background: '#172554' }}></div>
+                            <div className="evently-visual-layer layer-2 evently-reveal-image">
+                                <img src={event2} alt="Evently Analytics" />
+                            </div>
+                            <div className="evently-visual-layer layer-3 evently-reveal-image">
+                                <img src={event3} alt="Evently Team Board" />
+                            </div>
                             <div className="evently-visual-glow"></div>
                         </div>
 
@@ -561,18 +676,18 @@ const EventlyProject = () => {
                 </div>
             </section>
 
-            {/* Timeline (Adapted to Architecture/Process) */}
+            {/* Timeline (Design Process) */}
             <section className="evently-timeline-section">
-                <div className="evently-section-label">ARCHITECTURE</div>
-                <h2 className="evently-section-title evently-split-text">{splitText('Technical Stack')}</h2>
+                <div className="evently-section-label">PROCESS</div>
+                <h2 className="evently-section-title evently-split-text">{splitText('Design Process')}</h2>
                 <div className="evently-timeline-container">
                     {[
-                        { num: '01', title: 'Core Framework', text: 'Built on Next.js 16 (App Router) leveraging React Server Components (RSC) for optimal performance and SEO.' },
-                        { num: '02', title: 'Styling Engine', text: 'Tailwind CSS 4 provides a utility-first framework for rapid, responsive UI development with CSS Modules for scoped styling.' },
-                        { num: '03', title: 'Interactivity', text: 'React 19 utilizing the latest hooks, combined with Framer Motion for fluid animations and page transitions.' },
-                        { num: '04', title: 'Data Visualization', text: 'Recharts used for all analytics and reporting graphs, offering composable and responsive charting components.' },
-                        { num: '05', title: 'Code Quality', text: 'TypeScript ensures type safety, while ESLint and Prettier maintain code style and consistency throughout the codebase.' },
-                        { num: '06', title: 'Future Roadmap', text: 'Planned integration with PostgreSQL/Supabase, Auth.js for authentication, and React Native for mobile adaptation.' }
+                        { num: '01', title: 'Research & Discovery', text: 'Analysis of event planning complexities and stakeholder needs to identify core operational friction points.' },
+                        { num: '02', title: 'Information Architecture', text: 'Mapping out hierarchical data models for complex event structures, financial tracking, and team roles.' },
+                        { num: '03', title: 'UX/UI Design', text: 'Developing an intuitive dashboard and modular control systems optimized for data-heavy operational management.' },
+                        { num: '04', title: 'Visual Identity', text: 'Creating a clean, professional blue palette and data-driven interface inspired by modern enterprise standards.' },
+                        { num: '05', title: 'Interactive Prototyping', text: 'Iterating on complex interaction patterns for analytics, real-time reporting, and collaborative team boards.' },
+                        { num: '06', title: 'Testing & Refinement', text: 'Usability testing with event coordinators to optimize workflows and ensure high-performance at scale.' }
                     ].map((item, i) => (
                         <div key={i} className="evently-timeline-entry">
                             <div className="evently-timeline-line"></div>
@@ -587,7 +702,7 @@ const EventlyProject = () => {
                 </div>
             </section>
 
-            {/* Visual Design / Gallery - Placeholder */}
+            {/* Visual Design / Gallery */}
             <section className="evently-visual-section">
                 <div className="evently-visual-header">
                     <div className="evently-section-label">INTERFACE</div>
@@ -595,26 +710,109 @@ const EventlyProject = () => {
                     <p className="evently-visual-intro">A glimpse into the modern, aesthetic interface of Evently.</p>
                 </div>
                 <div className="evently-visual-grid">
-                    <div className="evently-visual-item" style={{ minHeight: '400px', background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ color: '#3b82f6', fontSize: '1.5rem' }}>Dashboard View</span>
-                    </div>
-                    <div className="evently-visual-item" style={{ minHeight: '400px', background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ color: '#3b82f6', fontSize: '1.5rem' }}>Analytics</span>
-                    </div>
-                    <div className="evently-visual-item" style={{ minHeight: '400px', background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ color: '#3b82f6', fontSize: '1.5rem' }}>Team Board</span>
-                    </div>
-                    <div className="evently-visual-item" style={{ minHeight: '400px', background: '#0f172a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <span style={{ color: '#3b82f6', fontSize: '1.5rem' }}>Finance</span>
-                    </div>
+                    {eventlyGalleryImages.map((img, index) => (
+                        <div key={index} className="evently-visual-item">
+                            <img src={img} alt={`Evently Screen ${index + 1}`} />
+                        </div>
+                    ))}
                 </div>
             </section>
 
-            {/* Development / Footer logic */}
+            {/* Development Phase */}
             <section className="evently-development">
                 <div className="evently-dev-header">
-                    <h2 className="evently-section-title evently-split-text">{splitText('Future Ready')}</h2>
-                    <p className="evently-dev-intro">Evently is actively developed with a clear roadmap for full backend integration and mobile expansion.</p>
+                    <div className="evently-section-label">DEVELOPMENT</div>
+                    <h2 className="evently-section-title evently-split-text">{splitText('Development Phase')}</h2>
+                    <p className="evently-dev-intro">
+                        A robust engineering approach focused on scalability, performance, and operational visibility.
+                    </p>
+                </div>
+
+                <div className="evently-dev-content">
+                    <div className="evently-dev-boxes">
+                        <div className="evently-dev-box">
+                            <div className="evently-dev-box-number">01</div>
+                            <h4 className="evently-dev-box-title">Architecture Highlights</h4>
+                            <ul className="evently-dev-box-list">
+                                <li>Modular Next.js 16 App Router structure</li>
+                                <li>Server Component (RSC) optimization for performance</li>
+                                <li>Clean Architecture principles for data integrity</li>
+                                <li>Responsive dashboard layouts with CSS Modules</li>
+                            </ul>
+                        </div>
+                        <div className="evently-dev-box">
+                            <div className="evently-dev-box-number">02</div>
+                            <h4 className="evently-dev-box-title">Key Challenges Solved</h4>
+                            <ul className="evently-dev-box-list">
+                                <li>Real-time complex data visualization with Recharts</li>
+                                <li>Unified financial and task management synchronization</li>
+                                <li>High-performance reporting for high-volume stats</li>
+                                <li>Dynamic team board with aggregate statistics</li>
+                            </ul>
+                        </div>
+                        <div className="evently-dev-box">
+                            <div className="evently-dev-box-number">03</div>
+                            <h4 className="evently-dev-box-title">Outcomes</h4>
+                            <ul className="evently-dev-box-list">
+                                <li>50% faster event planning and coordination speed</li>
+                                <li>100% type safety for complex financial computations</li>
+                                <li>Scalable design suitable for international conferences</li>
+                                <li>Production-ready operational interface architecture</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="evently-tech-section">
+                        <div className="evently-tech-header">
+                            <div className="evently-section-label">TECHNOLOGY</div>
+                            <h2 className="evently-section-title evently-split-text">{splitText('Technology Stack')}</h2>
+                            <p className="evently-tech-intro">Modern tools and frameworks powering the operational hub.</p>
+                        </div>
+
+                        <div className="evently-tech-grid">
+                            {[
+                                { name: 'Next.js 16', category: 'Framework', color: '#ffffff' },
+                                { name: 'React 19', category: 'Library', color: '#61DAFB' },
+                                { name: 'Tailwind 4', category: 'Styling', color: '#06B6D4' },
+                                { name: 'TypeScript', category: 'Language', color: '#3178C6' },
+                                { name: 'Recharts', category: 'Analytics', color: '#3178C6' },
+                                { name: 'Framer Motion', category: 'Animation', color: '#E10098' },
+                                { name: 'Lucide', category: 'Icons', color: '#ffffff' },
+                                { name: 'PostCSS', category: 'Processing', color: '#DD3A0A' }
+                            ].map((tech, i) => (
+                                <div key={i} className="evently-tech-card">
+                                    <div className="evently-tech-glow" style={{ '--tech-color': tech.color }}></div>
+                                    <div className="evently-tech-content">
+                                        <div className="evently-tech-card-header">
+                                            <div className="evently-tech-icon" style={{ backgroundColor: tech.color + '20', color: tech.color }}>
+                                                {tech.name === 'Next.js 16' ? 'NX' : tech.name.charAt(0)}
+                                            </div>
+                                            <div className="evently-tech-category">{tech.category}</div>
+                                        </div>
+                                        <div className="evently-tech-name">{tech.name}</div>
+                                        <div className="evently-tech-bar" style={{ backgroundColor: tech.color }}></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="evently-tech-footer">
+                            <div className="evently-tech-footer-item">
+                                <span className="evently-tech-footer-label">PLATFORM</span>
+                                <span className="evently-tech-footer-value">Responsive Web</span>
+                            </div>
+                            <div className="evently-tech-footer-divider"></div>
+                            <div className="evently-tech-footer-item">
+                                <span className="evently-tech-footer-label">ARCHITECTURE</span>
+                                <span className="evently-tech-footer-value">App Router (RSC)</span>
+                            </div>
+                            <div className="evently-tech-footer-divider"></div>
+                            <div className="evently-tech-footer-item">
+                                <span className="evently-tech-footer-label">VISUALS</span>
+                                <span className="evently-tech-footer-value">Recharts & Framer</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 

@@ -454,6 +454,22 @@ const DoItProject = () => {
         });
       }
 
+      // === VISUAL DESIGN GRID ANIMATIONS ===
+      gsap.utils.toArray('.doit-visual-item').forEach((item, i) => {
+        gsap.from(item, {
+          y: 100,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse'
+          },
+          delay: (i % 4) * 0.1 // Stagger by column
+        });
+      });
+
 
 
       // === VISUAL STACK ROTATION ===
@@ -514,13 +530,13 @@ const DoItProject = () => {
         <button className="doit-nav-back-btn doit-magnetic-btn" onClick={() => navigate('/projects')}>
           <span>← BACK</span>
         </button>
-        <div className="doit-nav-badge">CASE STUDY · 2025</div>
+        {/* <div className="doit-nav-badge">CASE STUDY · 2025</div> */}
       </nav>
 
       {/* Hero Section */}
       <section className="doit-hero">
         <div className="doit-hero-container">
-          <div className="doit-hero-badge">CASE STUDY 2025</div>
+          {/* <div className="doit-hero-badge">CASE STUDY 2025</div> */}
           <div className="doit-hero-content">
             <div className="doit-hero-left">
               <div className="doit-hero-number">01</div>
@@ -840,7 +856,7 @@ const DoItProject = () => {
             <div className="doit-tech-grid">
               {[
                 { name: 'React Native', category: 'Framework', color: '#61DAFB' },
-                { name: 'Expo', category: 'Platform', color: '#000020' },
+                { name: 'Expo', category: 'Platform', color: '#b5b5fbff' },
                 { name: 'TypeScript', category: 'Language', color: '#3178C6' },
                 { name: 'Supabase', category: 'Backend', color: '#3ECF8E' },
                 { name: 'PostgreSQL', category: 'Database', color: '#336791' },
@@ -853,11 +869,11 @@ const DoItProject = () => {
                   <div className="doit-tech-content">
                     <div className="doit-tech-card-header">
                       <div className="doit-tech-icon" style={{ backgroundColor: tech.color + '20', color: tech.color }}>
-                        {tech.name.charAt(0)}
+                        {tech.name === 'React Native' ? 'RN' : tech.name.charAt(0)}
                       </div>
                       <div className="doit-tech-category">{tech.category}</div>
                     </div>
-                    <h3 className="doit-tech-name">{tech.name}</h3>
+                    <div className="doit-tech-name">{tech.name}</div>
                     <div className="doit-tech-bar" style={{ backgroundColor: tech.color }}></div>
                   </div>
                 </div>

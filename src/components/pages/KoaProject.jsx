@@ -354,6 +354,22 @@ const KoaProject = () => {
         });
       }
 
+      // === VISUAL DESIGN GRID ANIMATIONS ===
+      gsap.utils.toArray('.koa-visual-item').forEach((item, i) => {
+        gsap.from(item, {
+          y: 100,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse'
+          },
+          delay: (i % 4) * 0.1 // Stagger by column
+        });
+      });
+
       // === VISUAL STACK ROTATION ===
       const layers = gsap.utils.toArray('.koa-visual-layer');
       if (layers.length > 0) {
@@ -392,6 +408,46 @@ const KoaProject = () => {
         });
       }
 
+      // === TECH CARDS ANIMATIONS ===
+      gsap.utils.toArray('.koa-tech-card').forEach((card, i) => {
+        gsap.from(card, {
+          scale: 0,
+          opacity: 0,
+          rotation: 180,
+          duration: 1,
+          ease: 'back.out(2)',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%'
+          },
+          delay: i * 0.1
+        });
+
+        // Continuous glow pulse
+        gsap.to(card.querySelector('.koa-tech-glow'), {
+          opacity: 0.2,
+          duration: 2,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true
+        });
+      });
+
+      // === LEARNING CARDS ANIMATIONS ===
+      gsap.utils.toArray('.koa-learning-card').forEach((card, i) => {
+        gsap.from(card, {
+          y: 60,
+          opacity: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%'
+          },
+          delay: i * 0.12
+        });
+      });
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -411,13 +467,13 @@ const KoaProject = () => {
         <button className="koa-nav-back-btn koa-magnetic-btn" onClick={() => navigate('/projects')}>
           <span>← BACK</span>
         </button>
-        <div className="koa-nav-badge">CASE STUDY · 2024</div>
+        {/* <div className="koa-nav-badge">CASE STUDY · 2024</div> */}
       </nav>
 
       {/* Hero Section */}
       <section className="koa-hero">
         <div className="koa-hero-container">
-          <div className="koa-hero-badge">CASE STUDY 2024</div>
+          {/* <div className="koa-hero-badge">CASE STUDY 2024</div> */}
           <div className="koa-hero-content">
             <div className="koa-hero-left">
               <div className="koa-hero-number">02</div>
@@ -426,8 +482,8 @@ const KoaProject = () => {
             <div className="koa-hero-center">
               <h1 className="koa-hero-title">
                 <span className="koa-hero-title-line-1">KOA</span>
-                <span className="koa-hero-title-line-2">DESIGN</span>
-                <span className="koa-hero-title-line-3">SYSTEM</span>
+                <span className="koa-hero-title-line-2">BUDGET</span>
+                <span className="koa-hero-title-line-3">MANAGEMENT</span>
               </h1>
               <div className="koa-hero-description">
                 A comprehensive design system and component library built to scale, featuring 50+ reusable components, design tokens, and extensive documentation for modern product teams.
@@ -645,7 +701,7 @@ const KoaProject = () => {
       {/* Timeline */}
       <section className="koa-timeline-section">
         <div className="koa-section-label">PROCESS</div>
-        <h2 className="koa-section-title koa-split-text">{splitText('Development Journey')}</h2>
+        <h2 className="koa-section-title koa-split-text">{splitText('Design Process')}</h2>
         <div className="koa-timeline-container">
           {[
             { num: '01', title: 'Research & Audit', text: 'Conducted comprehensive audit of existing products, identifying 200+ unique component variations and inconsistencies.' },
@@ -686,34 +742,143 @@ const KoaProject = () => {
         )}
       </section>
 
-      {/* Development / Tech Stack */}
+      {/* Development */}
       <section className="koa-development">
         <div className="koa-dev-header">
-          <div className="koa-section-label">TECHNOLOGY</div>
-          <h2 className="koa-section-title koa-split-text">{splitText('Tech Stack')}</h2>
-          <p className="koa-dev-intro">Modern tools and frameworks powering the design system.</p>
+          <div className="koa-section-label">DEVELOPMENT</div>
+          <h2 className="koa-section-title koa-split-text">{splitText('Development Phase')}</h2>
+          <p className="koa-dev-intro">
+            A robust engineering approach focused on scalability, performance, and developer experience.
+          </p>
         </div>
 
-        <div className="koa-tech-grid">
-          {[
-            { name: 'React', category: 'Framework', color: '#61DAFB' },
-            { name: 'TypeScript', category: 'Language', color: '#3178C6' },
-            { name: 'Storybook', category: 'Documentation', color: '#FF4785' },
-            { name: 'Emotion', category: 'Styling', color: '#D36AC2' },
-            { name: 'Nx', category: 'Monorepo', color: '#143055' },
-            { name: 'Figma', category: 'Design', color: '#F24E1E' },
-            { name: 'Jest', category: 'Testing', color: '#C21325' },
-            { name: 'Rollup', category: 'Bundling', color: '#EC4A3F' }
-          ].map((tech, i) => (
-            <div key={i} className="koa-tech-card">
-              <div className="koa-tech-glow" style={{ '--tech-color': tech.color }}></div>
-              <div className="koa-tech-content">
-                <div className="koa-tech-card-header">
-                  <div className="koa-tech-category">{tech.category}</div>
+        <div className="koa-dev-content">
+          <div className="koa-dev-boxes">
+            <div className="koa-dev-box">
+              <div className="koa-dev-box-number">01</div>
+              <h4 className="koa-dev-box-title">Architecture Highlights</h4>
+              <ul className="koa-dev-box-list">
+                <li>Atomic Design methodology for component hierarchy</li>
+                <li>Comprehensive design token system with multi-brand support</li>
+                <li>Strict TypeScript implementation for type-safe components</li>
+                <li>Monorepo architecture with Nx for efficient development</li>
+              </ul>
+            </div>
+            <div className="koa-dev-box">
+              <div className="koa-dev-box-number">02</div>
+              <h4 className="koa-dev-box-title">Key Challenges Solved</h4>
+              <ul className="koa-dev-box-list">
+                <li>Automated visual regression testing for consistency</li>
+                <li>WCAG 2.1 AA accessibility compliance across all components</li>
+                <li>Seamless sync between Figma styles and code tokens</li>
+                <li>Efficient documentation with interactive Storybook guides</li>
+              </ul>
+            </div>
+            <div className="koa-dev-box">
+              <div className="koa-dev-box-number">03</div>
+              <h4 className="koa-dev-box-title">Outcomes</h4>
+              <ul className="koa-dev-box-list">
+                <li>40% reduction in design debt across 12 product teams</li>
+                <li>~60% faster prototyping speed for new features</li>
+                <li>85+ adoption rate within 6 months of rollout</li>
+                <li>50+ production-ready, highly reusable components</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="koa-tech-section">
+            <div className="koa-tech-header">
+              <div className="koa-section-label">TECHNOLOGY</div>
+              <h2 className="koa-section-title koa-split-text">{splitText('Technology Stack')}</h2>
+              <p className="koa-tech-intro">Modern tools and frameworks powering the design system.</p>
+            </div>
+
+            <div className="koa-tech-grid">
+              {[
+                { name: 'React Native', category: 'Framework', color: '#61DAFB' },
+                { name: 'Expo Router', category: 'Navigation', color: '#ffffff' },
+                { name: 'Supabase', category: 'Backend', color: '#3ECF8E' },
+                { name: 'JavaScript', category: 'Language', color: '#F7DF1E' },
+                { name: 'Gesture Handler', category: 'Interaction', color: '#61DAFB' },
+                { name: 'Async Storage', category: 'Storage', color: '#336791' },
+                { name: 'Figma', category: 'Design', color: '#F24E1E' },
+                { name: 'AES-JS', category: 'Security', color: '#FFC107' }
+              ].map((tech, i) => (
+                <div key={i} className="koa-tech-card">
+                  <div className="koa-tech-glow" style={{ '--tech-color': tech.color }}></div>
+                  <div className="koa-tech-content">
+                    <div className="koa-tech-card-header">
+                      <div className="koa-tech-icon" style={{ backgroundColor: tech.color + '20', color: tech.color }}>
+                        {tech.name === 'React Native' ? 'RN' : tech.name.charAt(0)}
+                      </div>
+                      <div className="koa-tech-category">{tech.category}</div>
+                    </div>
+                    <div className="koa-tech-name">{tech.name}</div>
+                    <div className="koa-tech-bar" style={{ backgroundColor: tech.color }}></div>
+                  </div>
                 </div>
-                <div className="koa-tech-name">{tech.name}</div>
-                <div className="koa-tech-bar" style={{ backgroundColor: tech.color }}></div>
+              ))}
+            </div>
+
+            <div className="koa-tech-footer">
+              <div className="koa-tech-footer-item">
+                <span className="koa-tech-footer-label">PLATFORMS</span>
+                <span className="koa-tech-footer-value">iOS & Android</span>
               </div>
+              <div className="koa-tech-footer-divider"></div>
+              <div className="koa-tech-footer-item">
+                <span className="koa-tech-footer-label">ARCHITECTURE</span>
+                <span className="koa-tech-footer-value">Modular SDK</span>
+              </div>
+              <div className="koa-tech-footer-divider"></div>
+              <div className="koa-tech-footer-item">
+                <span className="koa-tech-footer-label">STORAGE</span>
+                <span className="koa-tech-footer-value">Async & Supabase</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Learnings */}
+      <section className="koa-learnings">
+        <div className="koa-learnings-header">
+          <div className="koa-section-label">REFLECTIONS</div>
+          <h2 className="koa-section-title koa-split-text">{splitText('Key Learnings')}</h2>
+        </div>
+        <div className="koa-learnings-grid">
+          {[
+            { num: '01', title: 'Consistency over creativity', text: 'Stricter guidelines lead to better user experiences. By prioritizing unified patterns, we reduced cognitive load and improved brand trust.' },
+            { num: '02', title: 'Documentation is a product', text: 'A system is only as good as its guides. Investing in interactive documentation significantly reduced support tickets and improved developer onboarding.' },
+            { num: '03', title: 'Accessibility is non-negotiable', text: 'Building for everyone makes the product better for everyone. Semantic HTML and ARIA patterns improved usability for all users.' },
+            { num: '04', title: 'Adoption needs advocacy', text: 'Systems are built by people, for people. Regular workshops and active support channels were critical for achieving high adoption rates.' }
+          ].map((learning, i) => (
+            <div key={i} className="koa-learning-card">
+              <div className="koa-learning-header">
+                <div className="koa-learning-num">{learning.num}</div>
+                <h3 className="koa-learning-title">{learning.title}</h3>
+              </div>
+              <p className="koa-learning-text">{learning.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Next Steps */}
+      <section className="koa-next-steps">
+        <div className="koa-section-label">FUTURE</div>
+        <h2 className="koa-section-title koa-split-text">{splitText('Next Steps')}</h2>
+        <div className="koa-next-steps-list">
+          {[
+            'Expand icon library with 100+ new items',
+            'Implement automated accessibility testing CI/CD',
+            'Create comprehensive design-to-code playground',
+            'Launch version 2.0 with enhanced multi-theme support',
+            'Conduct cross-functional workshops for advanced usage'
+          ].map((step, i) => (
+            <div key={i} className="koa-next-step-item">
+              <span className="koa-step-indicator">{String(i + 1).padStart(2, '0')}</span>
+              <span className="koa-step-text">{step}</span>
             </div>
           ))}
         </div>
