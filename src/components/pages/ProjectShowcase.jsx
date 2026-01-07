@@ -6,7 +6,7 @@ import './ProjectShowcase.css';
 import doitMockup from '../../assets/doit-mockup.png';
 import koaMockup from '../../assets/Mockup koa.png';
 import eventlyMockup from '../../assets/evently/mockuper.png';
-
+import zenmockup from '../../assets/zenflow/zenMock.png'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,7 +43,7 @@ const projects = [
         name: "ZenFlow - Mental Wellness",
         category: "Mobile Application",
         description: "A comprehensive mental wellness mobile application designed to help users track their emotional journey through intuitive journaling and mood tracking.",
-        imageUrl: "https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?q=80&w=2038&auto=format&fit=crop",
+        imageUrl: zenmockup,
         tags: ["React Native", "Expo", "Supabase", "TypeScript", "Reanimated"],
         links: '/zenflo-project'
     }

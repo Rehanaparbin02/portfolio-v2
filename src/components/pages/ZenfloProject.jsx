@@ -3,6 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ZenfloProject.css';
+import zenImg1 from '../../assets/zenflow/zen01.png';
+import zenImg2 from '../../assets/zenflow/zen02.png';
+import zenImg3 from '../../assets/zenflow/zen03.png';
+import mock01 from '../../assets/zenflow/zenmock01.png';
+import mock02 from '../../assets/zenflow/zenmock02.png';
+import mock03 from '../../assets/zenflow/zenmock03.png';
+import mock04 from '../../assets/zenflow/zenmock04.png';
+import mock05 from '../../assets/zenflow/zenmock05.png';
+import mock06 from '../../assets/zenflow/zenmock06.png';
+import mock07 from '../../assets/zenflow/zenmock07.png';
+import mock08 from '../../assets/zenflow/zenmock08.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -301,6 +312,73 @@ const ZenfloProject = () => {
                 }
             });
 
+            // === VISUAL DESIGN ANIMATIONS ===
+            gsap.from('.zen-visual-section .zen-section-label, .zen-visual-section .zen-section-title .word', {
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.05,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.zen-visual-section',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+
+            gsap.utils.toArray('.zen-visual-item').forEach((item, i) => {
+                gsap.from(item, {
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    delay: (i % 2) * 0.2
+                });
+            });
+
+            // === VISUAL STACK ROTATION ===
+            const layers = gsap.utils.toArray('.zen-visual-layer');
+            if (layers.length > 0) {
+                const positions = [
+                    { x: 0, y: 0, scale: 1, opacity: 1, filter: 'blur(0px)', zIndex: 3, rotate: 0 },
+                    { x: -180, y: -40, scale: 0.8, opacity: 0.3, filter: 'blur(6px)', zIndex: 2, rotate: -10 },
+                    { x: 180, y: 40, scale: 0.8, opacity: 0.3, filter: 'blur(6px)', zIndex: 1, rotate: 10 }
+                ];
+
+                let step = 0;
+                const totalLayers = layers.length;
+
+                const rotate = () => {
+                    step++;
+                    layers.forEach((layer, i) => {
+                        const posIndex = (i + step) % totalLayers;
+                        const pos = positions[posIndex];
+
+                        gsap.to(layer, {
+                            x: pos.x,
+                            y: pos.y,
+                            scale: pos.scale,
+                            opacity: pos.opacity,
+                            filter: pos.filter,
+                            zIndex: pos.zIndex,
+                            rotate: pos.rotate,
+                            duration: 2,
+                            ease: 'expo.inOut'
+                        });
+                    });
+                };
+
+                const rotationTimer = gsap.delayedCall(3.5, function cycle() {
+                    rotate();
+                    rotationTimer.restart(true);
+                });
+            }
+
         }, containerRef);
 
         return () => ctx.revert();
@@ -451,8 +529,17 @@ const ZenfloProject = () => {
                             </p>
                         </div>
 
-                        <div className="zen-visual-stack-placeholder">
-                            ZENFLOW APP INTERFACE
+                        <div className="zen-overview-visual-stack">
+                            <div className="zen-visual-layer layer-1 zen-reveal-image">
+                                <img src={zenImg1} alt="ZenFlow Screen 1" />
+                            </div>
+                            <div className="zen-visual-layer layer-2 zen-reveal-image">
+                                <img src={zenImg2} alt="ZenFlow Screen 2" />
+                            </div>
+                            <div className="zen-visual-layer layer-3 zen-reveal-image">
+                                <img src={zenImg3} alt="ZenFlow Screen 3" />
+                            </div>
+                            <div className="zen-visual-glow"></div>
                         </div>
                     </div>
                 </div>
@@ -545,6 +632,33 @@ const ZenfloProject = () => {
                                 <div className="zen-timeline-num">{item.num}</div>
                                 <h3>{item.title}</h3>
                                 <p>{item.text}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Visual Design */}
+            <section className="zen-visual-section">
+                <div className="zen-visual-header">
+                    <div className="zen-section-label">VISUAL DESIGN</div>
+                    <h2 className="zen-section-title zen-split-text">{splitText('Crafting the Experience')}</h2>
+                    <p className="zen-visual-intro">A closer look at the interfaces and micro-interactions that define Zenflo.</p>
+                </div>
+                <div className="zen-visual-grid">
+                    {[
+                        mock01, mock02, mock03, mock04,
+                        mock05, mock06, mock07, mock08
+                    ].map((img, i) => (
+                        <div key={i} className="zen-visual-item">
+                            <div className="zen-visual-image-wrapper">
+                                <img src={img} alt={`ZenFlo Interface ${i + 1}`} />
+                                <div className="zen-visual-overlay">
+                                    <div className="zen-overlay-content">
+                                        <span className="zen-overlay-num">{String(i + 1).padStart(2, '0')}</span>
+                                        <span className="zen-overlay-tag">UI/UX</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -648,29 +762,7 @@ const ZenfloProject = () => {
                 </div>
             </section>
 
-            {/* Learnings */}
-            <section className="zen-learnings">
-                <div className="zen-learnings-header">
-                    <div className="zen-section-label">REFLECTIONS</div>
-                    <h2 className="zen-section-title zen-split-text">{splitText('Impact & Learnings')}</h2>
-                </div>
-                <div className="zen-learnings-grid">
-                    {[
-                        { num: '01', title: 'Micro-interactions Matter', text: 'Focusing on tactile feedback and 60fps animations turned a simple utility into a delightful daily habit for users.' },
-                        { num: '02', title: 'Color Psychology works', text: 'Using Plutchik-based color mapping helped users identify emotional patterns without needing complex analytical tools.' },
-                        { num: '03', title: 'Offline-First is Crucial', text: 'Mental wellness journaling often happens in personal moments where connectivity might be limited; local persistence is key.' },
-                        { num: '04', title: 'Secure Privacy Builds Trust', text: 'Implementation of Supabase RLS ensured users felt safe sharing their most personal thoughts in a private digital space.' }
-                    ].map((learning, i) => (
-                        <div key={i} className="zen-learning-card">
-                            <div className="zen-learning-header">
-                                <div className="zen-learning-num">{learning.num}</div>
-                                <h3 className="zen-learning-title">{learning.title}</h3>
-                            </div>
-                            <p className="zen-learning-text">{learning.text}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
+
 
             {/* Future Roadmap */}
             <section className="zen-next-steps">
