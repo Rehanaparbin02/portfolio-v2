@@ -105,13 +105,11 @@ const ZenfloProject = () => {
             });
 
             // === CHALLENGE & SOLUTION ANIMATIONS ===
-            const challengeSection = document.querySelector('.zen-challenge-solution');
-            if (challengeSection) {
-                const cards = challengeSection.querySelectorAll('.zen-card');
-
+            gsap.utils.toArray('.zen-challenge-solution').forEach((section) => {
+                const cards = section.querySelectorAll('.zen-card');
                 cards.forEach((card, i) => {
                     gsap.from(card, {
-                        x: i === 0 ? -100 : 100,
+                        x: i % 2 === 0 ? -100 : 100,
                         opacity: 0,
                         duration: 1.2,
                         ease: 'expo.out',
@@ -122,8 +120,53 @@ const ZenfloProject = () => {
                         }
                     });
                 });
-            }
+            });
 
+            // === FEATURES HORIZONTAL SCROLL ===
+            const featuresSection = document.querySelector('.zen-features-scroll');
+            const featuresHeader = document.querySelector('.zen-features-header');
+            const featuresWrapper = document.querySelector('.zen-features-wrapper');
+
+            if (featuresSection && featuresHeader && featuresWrapper) {
+                const getScrollAmount = () => {
+                    let wrapperWidth = featuresWrapper.scrollWidth;
+                    return -(wrapperWidth - window.innerWidth);
+                };
+
+                const horizontalScroll = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: featuresSection,
+                        start: 'top top',
+                        end: () => `+=${featuresWrapper.scrollWidth}`,
+                        scrub: 1,
+                        pin: true,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
+                    }
+                });
+
+                horizontalScroll.to(featuresWrapper, {
+                    x: getScrollAmount,
+                    ease: 'none'
+                });
+
+                // Simple entrance animation for ALL cards
+                gsap.utils.toArray('.zen-feature-card').forEach((card) => {
+                    gsap.from(card, {
+                        opacity: 0,
+                        y: 30,
+                        scale: 0.95,
+                        duration: 1,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: card,
+                            containerAnimation: horizontalScroll,
+                            start: 'left 90%',
+                            toggleActions: 'play none none reverse',
+                        }
+                    });
+                });
+            }
             // === TIMELINE ANIMATIONS ===
             gsap.from('.zen-timeline-section .zen-section-label, .zen-timeline-section .zen-section-title .word', {
                 y: 30,
@@ -198,8 +241,24 @@ const ZenfloProject = () => {
                 });
             });
 
+            // === DEV BOXES ANIMATIONS ===
+            gsap.utils.toArray('.zen-dev-box').forEach((box, i) => {
+                gsap.from(box, {
+                    scale: 0.7,
+                    opacity: 0,
+                    duration: 1,
+                    ease: 'elastic.out(1, 0.5)',
+                    scrollTrigger: {
+                        trigger: box,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    delay: i * 0.15
+                });
+            });
+
             // === TECH CARDS ANIMATIONS ===
-            gsap.utils.toArray('.zen-tech-card').forEach((card, i) => {
+            gsap.utils.toArray('.zen-tech-card-v2').forEach((card, i) => {
                 gsap.from(card, {
                     scale: 0,
                     opacity: 0,
@@ -208,9 +267,26 @@ const ZenfloProject = () => {
                     ease: 'back.out(2)',
                     scrollTrigger: {
                         trigger: card,
-                        start: 'top 85%'
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
                     },
                     delay: i * 0.1
+                });
+            });
+
+            // === LEARNING CARDS ANIMATIONS ===
+            gsap.utils.toArray('.zen-learning-card').forEach((card, i) => {
+                gsap.from(card, {
+                    y: 60,
+                    opacity: 0,
+                    duration: 0.9,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    delay: i * 0.12
                 });
             });
 
@@ -420,18 +496,47 @@ const ZenfloProject = () => {
                 </div>
             </section>
 
-            {/* Development Timeline */}
+            {/* Key Features Scroll */}
+            <section className="zen-features-scroll">
+                <div className="zen-features-header">
+                    <div className="zen-section-label">FEATURES</div>
+                    <h2 className="zen-section-title zen-split-text">{splitText('Key Features')}</h2>
+                    <p className="zen-features-intro">Experience a journaling app that feels alive and intuitive.</p>
+                </div>
+                <div className="zen-features-container">
+                    <div className="zen-features-wrapper">
+                        {[
+                            { title: 'Thought Trail', text: 'An animated vertical timeline that allows for fluid exploration of past entries and emotional states.' },
+                            { title: 'Mood Psychology', text: 'Integrated Plutchik wheel-based categorization with dynamic thematic color mapping across the entire UI.' },
+                            { title: 'Neomorphic UI', text: 'A soft, tactile design system focused on depth and interactive elements that reduce cognitive load.' },
+                            { title: 'Secure Persistence', text: 'Offline-first architecture with AsyncStorage and secure cloud sync using Supabase Row Level Security.' },
+                            { title: 'Micro-Animations', text: '60fps interactions powered by Reanimated, providing immediate tactile feedback for every user action.' },
+                            { title: 'Deep Insights', text: 'Visualized mood patterns and emotional trends through a clean, distraction-free analytical interface.' }
+                        ].map((feature, i) => (
+                            <div key={i} className="zen-feature-card">
+                                <div className="zen-feature-pin"></div>
+                                <div className="zen-feature-number">{String(i + 1).padStart(2, '0')}</div>
+                                <h3 className="zen-feature-title">{feature.title}</h3>
+                                <p className="zen-feature-text">{feature.text}</p>
+                                <div className="zen-feature-accent"></div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Design Process / Timeline */}
             <section className="zen-timeline-section">
                 <div className="zen-section-label">PROCESS</div>
-                <h2 className="zen-section-title zen-split-text">{splitText('Development Journey')}</h2>
+                <h2 className="zen-section-title zen-split-text">{splitText('Design Process')}</h2>
                 <div className="zen-timeline-container">
                     {[
-                        { num: '01', title: 'Research & Personas', text: 'Analyzed 15+ apps and created personas (Sarah, 28 & David, 35) to identify pain points like complex onboarding and lack of visual engagement.' },
-                        { num: '02', title: 'UX & Wireframing', text: 'Designed low-fidelity wireframes and tested paper prototypes, focusing on a clutter-free "Neomorphic" aesthetic with soft shadows.' },
-                        { num: '03', title: 'System Architecture', text: 'Implemented Supabase for backend with Row Level Security (RLS), and configured Expo Router for file-based navigation.' },
-                        { num: '04', title: 'UI Implementation', text: 'Built a component library with reusable "Neomorphic Cards" and "Emotion Pills", implementing a strict color system for 6 primary emotions.' },
-                        { num: '05', title: 'Animation & Gestures', text: 'Integrated React Native Reanimated for 60fps shared element transitions and list reveal animations styled after iOS notifications.' },
-                        { num: '06', title: 'Optimization', text: 'Solved pagination infinite loops, optimized FlatList with React.memo, and implemented offline persistence with AsyncStorage.' }
+                        { num: '01', title: 'Empathy Mapping', text: 'Understanding the emotional state of users and the need for a distraction-free journaling space.' },
+                        { num: '02', title: 'Mood Architecture', text: 'Establishing a 6-tier mood system based on Plutchik\'s Wheel for balanced emotional tracking.' },
+                        { num: '03', title: 'Neomorphic System', text: 'Exploratory visual design focused on soft shadows and tactile interaction to reduce cognitive load.' },
+                        { num: '04', title: 'UX/UI Prototyping', text: 'Iterating on the "Thought Trail" timeline concept to ensure fluid exploration of past journal entries.' },
+                        { num: '05', title: 'Privacy Strategy', text: 'Implementing Supabase Row Level Security and local encryption to ensure user data remains deeply personal.' },
+                        { num: '06', title: 'Analytics Design', text: 'Developing clean, non-intrusive data visualizations for identifying long-term emotional patterns.' }
                     ].map((item, i) => (
                         <div key={i} className="zen-timeline-entry">
                             <div className="zen-timeline-line"></div>
@@ -446,84 +551,142 @@ const ZenfloProject = () => {
                 </div>
             </section>
 
-            {/* Learnings & Impact */}
-            <section className="zen-challenge-solution">
-                <div className="zen-challenge-header-v2">
-                    <div className="zen-section-label">RESULTS</div>
-                    <h2 className="zen-section-title zen-split-text">{splitText('Impact & Learnings')}</h2>
+            {/* Development & Technology */}
+            <section className="zen-development">
+                <div className="zen-dev-header">
+                    <div className="zen-section-label">DEVELOPMENT</div>
+                    <h2 className="zen-section-title zen-split-text">{splitText('Development Phase')}</h2>
+                    <p className="zen-dev-intro">
+                        Focused on high-performance mobile engineering and secure data synchronization.
+                    </p>
                 </div>
 
-                <div className="zen-challenge-content-v2">
-                    <div className="zen-card challenge">
-                        <div className="zen-card-header">
-                            <span className="zen-card-tag">CHALLENGES</span>
-                            <div className="zen-card-number">⚡</div>
+                <div className="zen-dev-content">
+                    <div className="zen-dev-boxes">
+                        <div className="zen-dev-box">
+                            <div className="zen-dev-box-number">01</div>
+                            <h4 className="zen-dev-box-title">Architecture Highlights</h4>
+                            <ul className="zen-dev-box-list">
+                                <li>Expo Router for file-based navigation</li>
+                                <li>Supabase RLS for secure user-owned data</li>
+                                <li>Offline-first sync with AsyncStorage</li>
+                                <li>Reusable Neomorphic component library</li>
+                            </ul>
                         </div>
-                        <h3>Overcoming Hurdles.</h3>
-                        <p>Developing a diverse animation system presented unique challenges.</p>
-                        <ul>
-                            <li><strong>Infinite Loops:</strong> Solved React Query/FlatList pagination bugs by refining dependency arrays.</li>
-                            <li><strong>Android Performance:</strong> Optimized laggy scroll animations using `useNativeDriver`.</li>
-                            <li><strong>Modal State:</strong> Coordinated complex exit animations with `Animated.parallel`.</li>
-                        </ul>
+                        <div className="zen-dev-box">
+                            <div className="zen-dev-box-number">02</div>
+                            <h4 className="zen-dev-box-title">Key Challenges Solved</h4>
+                            <ul className="zen-dev-box-list">
+                                <li>Refined pagination to prevent infinite loops</li>
+                                <li>`useNativeDriver` for Android animation parity</li>
+                                <li>Coordinated modal exit animations</li>
+                                <li>Dynamic theme engine for mood states</li>
+                            </ul>
+                        </div>
+                        <div className="zen-dev-box">
+                            <div className="zen-dev-box-number">03</div>
+                            <h4 className="zen-dev-box-title">Outcomes</h4>
+                            <ul className="zen-dev-box-list">
+                                <li>60fps buttery smooth UI interactions</li>
+                                <li>85% User onboarding completion rate</li>
+                                <li>Unified iOS and Android codebase</li>
+                                <li>Scalable state management with Zustand</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div className="zen-card solution">
-                        <div className="zen-card-header">
-                            <span className="zen-card-tag">IMPACT</span>
-                            <div className="zen-card-number">🚀</div>
+                    <div className="zen-tech-section">
+                        <div className="zen-tech-header">
+                            <div className="zen-section-label">TECHNOLOGY</div>
+                            <h2 className="zen-section-title zen-split-text">{splitText('Technology Stack')}</h2>
+                            <p className="zen-tech-intro">A modern, native-first stack optimized for the mobile experience.</p>
                         </div>
-                        <h3>Measurable Success.</h3>
-                        <p>The focus on micro-interactions and performance paid off with a high-quality user experience.</p>
-                        <ul>
-                            <li><strong>85% Completion:</strong> Streamlined onboarding flow engagement.</li>
-                            <li><strong>60fps:</strong> Achieved buttery smooth animations on both iOS and Android.</li>
-                            <li><strong>Cross-Platform:</strong> Single codebase delivering native performance.</li>
-                        </ul>
+                        <div className="zen-tech-grid-v2">
+                            {[
+                                { name: 'React Native', category: 'Framework', color: '#61dafb' },
+                                { name: 'Expo Router', category: 'Navigation', color: '#ffffff' },
+                                { name: 'Supabase', category: 'Backend', color: '#3ecf8e' },
+                                { name: 'TypeScript', category: 'Language', color: '#3178c6' },
+                                { name: 'Reanimated', category: 'Animation', color: '#ff5252' },
+                                { name: 'Zustand', category: 'State', color: '#ffffff' },
+                                { name: 'Gestures', category: 'Interaction', color: '#ffffff' },
+                                { name: 'AsyncStorage', category: 'Storage', color: '#4e9ad4' }
+                            ].map((tech, i) => (
+                                <div key={i} className="zen-tech-card-v2">
+                                    <div className="zen-tech-glow" style={{ '--tech-color': tech.color }}></div>
+                                    <div className="zen-tech-content">
+                                        <div className="zen-tech-card-header">
+                                            <div className="zen-tech-icon" style={{ backgroundColor: tech.color + '20', color: tech.color }}>
+                                                {tech.name === 'React Native' ? 'RN' : tech.name.charAt(0)}
+                                            </div>
+                                            <div className="zen-tech-category">{tech.category}</div>
+                                        </div>
+                                        <div className="zen-tech-name">{tech.name}</div>
+                                        <div className="zen-tech-bar" style={{ backgroundColor: tech.color }}></div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="zen-tech-footer">
+                            <div className="zen-tech-footer-item">
+                                <span className="zen-tech-footer-label">PLATFORMS</span>
+                                <span className="zen-tech-footer-value">iOS & Android</span>
+                            </div>
+                            <div className="zen-tech-footer-divider"></div>
+                            <div className="zen-tech-footer-item">
+                                <span className="zen-tech-footer-label">ARCHITECTURE</span>
+                                <span className="zen-tech-footer-value">Offline-First</span>
+                            </div>
+                            <div className="zen-tech-footer-divider"></div>
+                            <div className="zen-tech-footer-item">
+                                <span className="zen-tech-footer-label">BACKEND</span>
+                                <span className="zen-tech-footer-value">Supabase RLS</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* Tech Stack Grid */}
-            <section className="zen-overview-v2">
-                <div className="zen-overview-header-v2">
-                    <div className="zen-section-label">TECHNOLOGY</div>
-                    <h2 className="zen-section-title zen-split-text">{splitText('Tech Stack')}</h2>
+            {/* Learnings */}
+            <section className="zen-learnings">
+                <div className="zen-learnings-header">
+                    <div className="zen-section-label">REFLECTIONS</div>
+                    <h2 className="zen-section-title zen-split-text">{splitText('Impact & Learnings')}</h2>
                 </div>
-                <div className="zen-tech-grid">
+                <div className="zen-learnings-grid">
                     {[
-                        { name: 'React Native', cat: 'Framework', color: '#61dafb' },
-                        { name: 'Expo', cat: 'Platform', color: '#ffffff' },
-                        { name: 'Supabase', cat: 'Backend', color: '#3ecf8e' },
-                        { name: 'TypeScript', cat: 'Language', color: '#3178c6' },
-                        { name: 'Reanimated', cat: 'Animation', color: '#ff5252' },
-                        { name: 'Zustand', cat: 'State', color: '#777' },
-                    ].map((tech, i) => (
-                        <div key={i} className="zen-tech-card">
-                            <div className="zen-tech-category">{tech.cat}</div>
-                            <div className="zen-tech-name">{tech.name}</div>
-                            <div className="zen-tech-bar" style={{ color: tech.color }}></div>
+                        { num: '01', title: 'Micro-interactions Matter', text: 'Focusing on tactile feedback and 60fps animations turned a simple utility into a delightful daily habit for users.' },
+                        { num: '02', title: 'Color Psychology works', text: 'Using Plutchik-based color mapping helped users identify emotional patterns without needing complex analytical tools.' },
+                        { num: '03', title: 'Offline-First is Crucial', text: 'Mental wellness journaling often happens in personal moments where connectivity might be limited; local persistence is key.' },
+                        { num: '04', title: 'Secure Privacy Builds Trust', text: 'Implementation of Supabase RLS ensured users felt safe sharing their most personal thoughts in a private digital space.' }
+                    ].map((learning, i) => (
+                        <div key={i} className="zen-learning-card">
+                            <div className="zen-learning-header">
+                                <div className="zen-learning-num">{learning.num}</div>
+                                <h3 className="zen-learning-title">{learning.title}</h3>
+                            </div>
+                            <p className="zen-learning-text">{learning.text}</p>
                         </div>
                     ))}
                 </div>
             </section>
 
             {/* Future Roadmap */}
-            <section className="zen-overview-v2" style={{ paddingTop: '5vh' }}>
-                <div className="zen-overview-header-v2" style={{ marginBottom: '4rem' }}>
-                    <div className="zen-section-label">ROADMAP</div>
-                    <h2 className="zen-section-title zen-split-text">{splitText('Future Enhancements')}</h2>
-                </div>
-                <div className="zen-tech-grid">
+            <section className="zen-next-steps">
+                <div className="zen-section-label">ROADMAP</div>
+                <h2 className="zen-section-title zen-split-text">{splitText('Future Enhancements')}</h2>
+                <div className="zen-next-steps-list">
                     {[
-                        { name: 'AI Insights', cat: 'Intelligence', color: '#b39ddb' },
-                        { name: 'Social Connect', cat: 'Community', color: '#90caf9' },
-                        { name: 'Apple Health', cat: 'Integration', color: '#ef9a9a' },
-                        { name: 'Statistics', cat: 'Analytics', color: '#80cbc4' },
-                    ].map((tech, i) => (
-                        <div key={i} className="zen-tech-card" style={{ borderColor: 'rgba(255,255,255,0.1)', background: 'transparent' }}>
-                            <div className="zen-tech-category">{tech.cat}</div>
-                            <div className="zen-tech-name">{tech.name}</div>
+                        'AI-driven emotional pattern recognition and personalized journaling prompts',
+                        'Social Connect feature for shared reflection and community support',
+                        'Deep integration with Apple Health and Google Fit for holistic wellness data',
+                        'Expanded statistics dashboard with monthly/yearly emotional heatmaps',
+                        'Voice-to-text journaling with sentiment analysis for easier reflection'
+                    ].map((step, i) => (
+                        <div key={i} className="zen-next-step-item">
+                            <span className="zen-next-step-indicator">{String(i + 1).padStart(2, '0')}</span>
+                            <span className="zen-next-step-text">{step}</span>
                         </div>
                     ))}
                 </div>
@@ -531,7 +694,7 @@ const ZenfloProject = () => {
 
             {/* CTA */}
             <section className="zen-cta">
-                <h2 className="zen-hero-title zen-split-text" style={{ fontSize: '3rem', marginBottom: '2rem' }}>{splitText('READY TO REFLECT?')}</h2>
+                <h2 className="zen-cta-title zen-split-text">{splitText('EXPLORE MORE')}</h2>
                 <button className="zen-cta-button zen-magnetic-btn" onClick={() => navigate('/projects')}>
                     <span>VIEW ALL PROJECTS</span>
                 </button>

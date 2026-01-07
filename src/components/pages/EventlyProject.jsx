@@ -11,7 +11,6 @@ import event3 from '../../assets/evently/event (3).png';
 
 // Import images for Gallery
 import evently01 from '../../assets/evently/evently01.png';
-// import evently02 from '../../assets/evently/evently02.png';
 import evently03 from '../../assets/evently/evently03.png';
 import evently04 from '../../assets/evently/evently04.png';
 import evently05 from '../../assets/evently/evently05.png';
@@ -21,7 +20,6 @@ import evently08 from '../../assets/evently/evently08.png';
 
 const eventlyGalleryImages = [
     evently01,
-    // evently02,
     evently03,
     evently04,
     evently05,
@@ -29,8 +27,6 @@ const eventlyGalleryImages = [
     evently07,
     evently08
 ];
-
-const mainImg = event1;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,6 +36,9 @@ const EventlyProject = () => {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
+            // Force refresh on initial load
+            ScrollTrigger.refresh();
+
             // === HERO ANIMATIONS ===
             gsap.from('.evently-nav-badge', {
                 x: 100,
@@ -87,13 +86,14 @@ const EventlyProject = () => {
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: el,
-                        start: 'top 85%'
+                        start: 'top 85%',
+                        invalidateOnRefresh: true
                     }
                 });
             });
 
             // === STATS COUNTER ANIMATION ===
-            gsap.utils.toArray('.stat-item').forEach((stat, i) => {
+            gsap.utils.toArray('.evently-stat-item').forEach((stat, i) => {
                 gsap.from(stat, {
                     scale: 0,
                     opacity: 0,
@@ -102,12 +102,12 @@ const EventlyProject = () => {
                     ease: 'back.out(2)',
                     scrollTrigger: {
                         trigger: stat,
-                        start: 'top 85%'
+                        start: 'top 85%',
+                        invalidateOnRefresh: true
                     },
                     delay: i * 0.1
                 });
             });
-            // Simple text replacement for stats for now as logic was specific to DoIt
 
             // === TEXT HIGHLIGHT ON SCROLL ===
             gsap.utils.toArray('.evently-highlight-word').forEach((word) => {
@@ -117,7 +117,7 @@ const EventlyProject = () => {
                         color: 'rgba(255, 255, 255, 0.7)'
                     },
                     {
-                        background: 'rgba(59, 130, 246, 0.2)', // Blue highlight
+                        background: 'rgba(59, 130, 246, 0.2)',
                         color: '#fff',
                         padding: '0.2em 0.4em',
                         borderRadius: '4px',
@@ -127,7 +127,8 @@ const EventlyProject = () => {
                             trigger: word,
                             start: 'top 90%',
                             end: 'bottom 10%',
-                            scrub: true
+                            scrub: true,
+                            invalidateOnRefresh: true
                         }
                     }
                 );
@@ -137,7 +138,6 @@ const EventlyProject = () => {
             const challengeSection = document.querySelector('.evently-challenge-solution');
             if (challengeSection) {
                 const cards = challengeSection.querySelectorAll('.evently-challenge-card');
-
                 cards.forEach((card, i) => {
                     gsap.from(card, {
                         x: i === 0 ? -100 : 100,
@@ -147,7 +147,8 @@ const EventlyProject = () => {
                         scrollTrigger: {
                             trigger: card,
                             start: 'top 85%',
-                            toggleActions: 'play none none reverse'
+                            toggleActions: 'play none none reverse',
+                            invalidateOnRefresh: true
                         }
                     });
 
@@ -162,27 +163,13 @@ const EventlyProject = () => {
                             ease: 'power2.out',
                             scrollTrigger: {
                                 trigger: card,
-                                start: 'top 85%'
+                                start: 'top 85%',
+                                invalidateOnRefresh: true
                             }
                         });
                     }
                 });
             }
-
-            // === DEV BOXES ANIMATIONS ===
-            gsap.utils.toArray('.evently-dev-box').forEach((box, i) => {
-                gsap.from(box, {
-                    scale: 0.7,
-                    opacity: 0,
-                    duration: 1,
-                    ease: 'elastic.out(1, 0.5)',
-                    scrollTrigger: {
-                        trigger: box,
-                        start: 'top 85%'
-                    },
-                    delay: i * 0.15
-                });
-            });
 
             // === TIMELINE ANIMATIONS ===
             gsap.from('.evently-timeline-section .evently-section-label, .evently-timeline-section .evently-section-title .word', {
@@ -194,7 +181,8 @@ const EventlyProject = () => {
                 scrollTrigger: {
                     trigger: '.evently-timeline-section',
                     start: 'top 80%',
-                    toggleActions: 'play none none reverse'
+                    toggleActions: 'play none none reverse',
+                    invalidateOnRefresh: true
                 }
             });
 
@@ -203,7 +191,8 @@ const EventlyProject = () => {
                     scrollTrigger: {
                         trigger: entry,
                         start: 'top 85%',
-                        toggleActions: 'play none none reverse'
+                        toggleActions: 'play none none reverse',
+                        invalidateOnRefresh: true
                     }
                 });
 
@@ -232,86 +221,16 @@ const EventlyProject = () => {
                     }, '-=0.3');
             });
 
-            // === IMAGE REVEAL ANIMATIONS ===
-            gsap.utils.toArray('.evently-reveal-image').forEach((img) => {
-                gsap.from(img, {
-                    scale: 1.5,
-                    opacity: 0,
-                    filter: 'blur(20px)',
-                    duration: 1.5,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: img,
-                        start: 'top 85%'
-                    }
-                });
-            });
-
-            // === TEXT REVEAL ===
-            gsap.utils.toArray('.evently-reveal-text').forEach((text) => {
-                gsap.from(text, {
-                    clipPath: 'inset(100% 0 0 0)',
-                    duration: 1.2,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: text,
-                        start: 'top 85%'
-                    }
-                });
-            });
-
-            // === MAGNETIC BUTTONS ===
-            const buttons = document.querySelectorAll('.evently-magnetic-btn');
-            buttons.forEach(button => {
-                button.addEventListener('mousemove', (e) => {
-                    const rect = button.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-
-                    gsap.to(button, {
-                        x: x * 0.3,
-                        y: y * 0.3,
-                        duration: 0.5,
-                        ease: 'power2.out'
-                    });
-                });
-
-                button.addEventListener('mouseleave', () => {
-                    gsap.to(button, {
-                        x: 0,
-                        y: 0,
-                        duration: 0.5,
-                        ease: 'power2.out'
-                    });
-                });
-            });
-
-            // === PARALLAX BACKGROUND ===
-            gsap.to('.evently-parallax-bg', {
-                y: 300,
-                scrollTrigger: {
-                    trigger: '.evently-parallax-bg',
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 1
-                }
-            });
-
             // === FEATURES HORIZONTAL SCROLL ===
             const featuresSection = document.querySelector('.evently-features-scroll');
             const featuresWrapper = document.querySelector('.evently-features-wrapper');
 
             if (featuresSection && featuresWrapper) {
-                const getScrollAmount = () => {
-                    let wrapperWidth = featuresWrapper.scrollWidth;
-                    return -(wrapperWidth - window.innerWidth);
-                };
-
                 const horizontalScroll = gsap.timeline({
                     scrollTrigger: {
                         trigger: featuresSection,
                         start: 'top top',
-                        end: () => `+=${featuresWrapper.scrollWidth}`,
+                        end: () => `+=${featuresWrapper.scrollWidth - window.innerWidth}`,
                         scrub: 1,
                         pin: true,
                         anticipatePin: 1,
@@ -320,11 +239,10 @@ const EventlyProject = () => {
                 });
 
                 horizontalScroll.to(featuresWrapper, {
-                    x: getScrollAmount,
+                    x: () => -(featuresWrapper.scrollWidth - window.innerWidth),
                     ease: 'none'
                 });
 
-                // Simple entrance animation for ALL cards
                 gsap.utils.toArray('.evently-feature-card').forEach((card) => {
                     gsap.from(card, {
                         opacity: 0,
@@ -337,6 +255,7 @@ const EventlyProject = () => {
                             containerAnimation: horizontalScroll,
                             start: 'left 90%',
                             toggleActions: 'play none none reverse',
+                            invalidateOnRefresh: true
                         }
                     });
                 });
@@ -390,9 +309,10 @@ const EventlyProject = () => {
                     scrollTrigger: {
                         trigger: item,
                         start: 'top 90%',
-                        toggleActions: 'play none none reverse'
+                        toggleActions: 'play none none reverse',
+                        invalidateOnRefresh: true
                     },
-                    delay: (i % 4) * 0.1 // Stagger by column
+                    delay: (i % 4) * 0.1
                 });
             });
 
@@ -405,7 +325,9 @@ const EventlyProject = () => {
                     ease: 'elastic.out(1, 0.5)',
                     scrollTrigger: {
                         trigger: box,
-                        start: 'top 85%'
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse',
+                        invalidateOnRefresh: true
                     },
                     delay: i * 0.15
                 });
@@ -421,15 +343,45 @@ const EventlyProject = () => {
                     ease: 'back.out(2)',
                     scrollTrigger: {
                         trigger: card,
-                        start: 'top 85%'
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse',
+                        invalidateOnRefresh: true
                     },
                     delay: i * 0.1
                 });
             });
 
+            // === LEARNING CARDS ANIMATIONS ===
+            gsap.utils.toArray('.evently-learning-card').forEach((card, i) => {
+                gsap.from(card, {
+                    y: 60,
+                    opacity: 0,
+                    duration: 0.9,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse',
+                        invalidateOnRefresh: true
+                    },
+                    delay: i * 0.12
+                });
+            });
+
+            // Recalculate ScrollTrigger on window resize
+            window.addEventListener('resize', () => ScrollTrigger.refresh());
+
+            // Delayed refresh to handle image loads correctly
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 1000);
+
         }, containerRef);
 
-        return () => ctx.revert();
+        return () => {
+            ctx.revert();
+            window.removeEventListener('resize', () => ScrollTrigger.refresh());
+        };
     }, []);
 
     const splitText = (text) => {
@@ -439,20 +391,18 @@ const EventlyProject = () => {
         ));
     };
 
+    const scrollToProjects = () => navigate('/projects');
+
     return (
         <div className="evently-case-study-container" ref={containerRef}>
-            {/* Navigation */}
             <nav className="evently-nav">
-                <button className="evently-nav-back-btn evently-magnetic-btn" onClick={() => navigate('/projects')}>
+                <button className="evently-nav-back-btn evently-magnetic-btn" onClick={scrollToProjects}>
                     <span>← BACK</span>
                 </button>
-                {/* <div className="evently-nav-badge">CASE STUDY · 2026</div> */}
             </nav>
 
-            {/* Hero Section */}
             <section className="evently-hero">
                 <div className="evently-hero-container">
-                    {/* <div className="evently-hero-badge">CASE STUDY 2026</div> */}
                     <div className="evently-hero-content">
                         <div className="evently-hero-left">
                             <div className="evently-hero-number">03</div>
@@ -462,9 +412,7 @@ const EventlyProject = () => {
                             <h1 className="evently-hero-title">
                                 <span className="evently-hero-title-line-1">EVENTLY</span>
                                 <span className="evently-hero-title-line-2">PLANNING</span>
-                                <span className="evently-hero-title-line-3">& ORGANIZING
-
-                                </span>
+                                <span className="evently-hero-title-line-3">& ORGANIZING</span>
                             </h1>
                             <div className="evently-hero-description">
                                 A state-of-the-art, responsive web application designed to streamline the complexities of event planning, team coordination, and financial tracking.
@@ -495,7 +443,6 @@ const EventlyProject = () => {
                 <div className="evently-hero-bg-gradient"></div>
             </section>
 
-            {/* Summary */}
             <section className="evently-summary-full">
                 <div className="evently-summary-content-new">
                     <div className="evently-summary-decorative-line"></div>
@@ -525,7 +472,6 @@ const EventlyProject = () => {
                 </div>
             </section>
 
-            {/* Stats */}
             <section className="evently-stats">
                 <div className="evently-stat-item">
                     <div className="evently-stat-value">5+</div>
@@ -545,7 +491,6 @@ const EventlyProject = () => {
                 </div>
             </section>
 
-            {/* Overview */}
             <section className="evently-overview-v2">
                 <div className="evently-overview-container-v2">
                     <div className="evently-overview-header-v2">
@@ -555,7 +500,6 @@ const EventlyProject = () => {
                             <span className="evently-text-accent">{splitText('Defined by Data.')}</span>
                         </h2>
                     </div>
-
                     <div className="evently-overview-grid-v2">
                         <div className="evently-overview-main-text">
                             <p className="evently-reveal-text">
@@ -581,31 +525,26 @@ const EventlyProject = () => {
                                 Built with a "Frontend-First" modern stack including Next.js 16 and React 19, leveraging Server Components (RSC) for optimal performance and SEO.
                             </p>
                         </div>
-
                         <div className="evently-overview-visual-stack">
-                            <div className="evently-visual-layer layer-1 evently-reveal-image">
+                            <div className="evently-visual-layer layer-1">
                                 <img src={event1} alt="Evently Dashboard" />
                             </div>
-                            <div className="evently-visual-layer layer-2 evently-reveal-image">
+                            <div className="evently-visual-layer layer-2">
                                 <img src={event2} alt="Evently Analytics" />
                             </div>
-                            <div className="evently-visual-layer layer-3 evently-reveal-image">
+                            <div className="evently-visual-layer layer-3">
                                 <img src={event3} alt="Evently Team Board" />
                             </div>
-                            <div className="evently-visual-glow"></div>
                         </div>
-
                     </div>
                 </div>
             </section>
 
-            {/* Challenge & Solution */}
             <section className="evently-challenge-solution">
                 <div className="evently-challenge-header-v2">
                     <div className="evently-section-label">STRATEGY</div>
                     <h2 className="evently-section-title evently-split-text">{splitText('Problem vs Solution')}</h2>
                 </div>
-
                 <div className="evently-challenge-content-v2">
                     <div className="evently-challenge-card challenge">
                         <div className="evently-card-header">
@@ -621,7 +560,6 @@ const EventlyProject = () => {
                             <li className="evently-reveal-item-v2">Scattered data analysis</li>
                         </ul>
                     </div>
-
                     <div className="evently-challenge-card solution">
                         <div className="evently-card-header">
                             <span className="evently-card-tag green">THE SOLUTION</span>
@@ -647,11 +585,10 @@ const EventlyProject = () => {
                 </div>
             </section>
 
-            {/* Features Horizontal Scroll */}
             <section className="evently-features-scroll">
                 <div className="evently-features-header">
                     <div className="evently-section-label">FEATURES</div>
-                    <h2 className="evently-section-title evently-split-text">{splitText('Key Modules')}</h2>
+                    <h2 className="evently-section-title evently-split-text">{splitText('Key Features')}</h2>
                     <p className="evently-features-intro">Discover the powerful modules that make Evently the ultimate event management solution.</p>
                 </div>
                 <div className="evently-features-container">
@@ -676,7 +613,6 @@ const EventlyProject = () => {
                 </div>
             </section>
 
-            {/* Timeline (Design Process) */}
             <section className="evently-timeline-section">
                 <div className="evently-section-label">PROCESS</div>
                 <h2 className="evently-section-title evently-split-text">{splitText('Design Process')}</h2>
@@ -702,7 +638,6 @@ const EventlyProject = () => {
                 </div>
             </section>
 
-            {/* Visual Design / Gallery */}
             <section className="evently-visual-section">
                 <div className="evently-visual-header">
                     <div className="evently-section-label">INTERFACE</div>
@@ -718,7 +653,6 @@ const EventlyProject = () => {
                 </div>
             </section>
 
-            {/* Development Phase */}
             <section className="evently-development">
                 <div className="evently-dev-header">
                     <div className="evently-section-label">DEVELOPMENT</div>
@@ -727,7 +661,6 @@ const EventlyProject = () => {
                         A robust engineering approach focused on scalability, performance, and operational visibility.
                     </p>
                 </div>
-
                 <div className="evently-dev-content">
                     <div className="evently-dev-boxes">
                         <div className="evently-dev-box">
@@ -761,61 +694,111 @@ const EventlyProject = () => {
                             </ul>
                         </div>
                     </div>
+                </div>
+            </section>
 
-                    <div className="evently-tech-section">
-                        <div className="evently-tech-header">
-                            <div className="evently-section-label">TECHNOLOGY</div>
-                            <h2 className="evently-section-title evently-split-text">{splitText('Technology Stack')}</h2>
-                            <p className="evently-tech-intro">Modern tools and frameworks powering the operational hub.</p>
-                        </div>
-
-                        <div className="evently-tech-grid">
-                            {[
-                                { name: 'Next.js 16', category: 'Framework', color: '#ffffff' },
-                                { name: 'React 19', category: 'Library', color: '#61DAFB' },
-                                { name: 'Tailwind 4', category: 'Styling', color: '#06B6D4' },
-                                { name: 'TypeScript', category: 'Language', color: '#3178C6' },
-                                { name: 'Recharts', category: 'Analytics', color: '#3178C6' },
-                                { name: 'Framer Motion', category: 'Animation', color: '#E10098' },
-                                { name: 'Lucide', category: 'Icons', color: '#ffffff' },
-                                { name: 'PostCSS', category: 'Processing', color: '#DD3A0A' }
-                            ].map((tech, i) => (
-                                <div key={i} className="evently-tech-card">
-                                    <div className="evently-tech-glow" style={{ '--tech-color': tech.color }}></div>
-                                    <div className="evently-tech-content">
-                                        <div className="evently-tech-card-header">
-                                            <div className="evently-tech-icon" style={{ backgroundColor: tech.color + '20', color: tech.color }}>
-                                                {tech.name === 'Next.js 16' ? 'NX' : tech.name.charAt(0)}
-                                            </div>
-                                            <div className="evently-tech-category">{tech.category}</div>
-                                        </div>
-                                        <div className="evently-tech-name">{tech.name}</div>
-                                        <div className="evently-tech-bar" style={{ backgroundColor: tech.color }}></div>
+            <section className="evently-tech-section">
+                <div className="evently-tech-header">
+                    <div className="evently-section-label">TECHNOLOGY</div>
+                    <h2 className="evently-section-title evently-split-text">{splitText('Technology Stack')}</h2>
+                    <p className="evently-tech-intro">Modern tools and frameworks powering the operational hub.</p>
+                </div>
+                <div className="evently-tech-grid">
+                    {[
+                        { name: 'Next.js 16', category: 'Framework', color: '#ffffff' },
+                        { name: 'React 19', category: 'Library', color: '#61DAFB' },
+                        { name: 'Tailwind 4', category: 'Styling', color: '#06B6D4' },
+                        { name: 'TypeScript', category: 'Language', color: '#3178C6' },
+                        { name: 'Recharts', category: 'Analytics', color: '#3178C6' },
+                        { name: 'Framer Motion', category: 'Animation', color: '#E10098' },
+                        { name: 'Lucide', category: 'Icons', color: '#ffffff' },
+                        { name: 'PostCSS', category: 'Processing', color: '#DD3A0A' }
+                    ].map((tech, i) => (
+                        <div key={i} className="evently-tech-card">
+                            <div className="evently-tech-glow" style={{ '--tech-color': tech.color }}></div>
+                            <div className="evently-tech-content">
+                                <div className="evently-tech-card-header">
+                                    <div className="evently-tech-icon" style={{ backgroundColor: tech.color + '20', color: tech.color }}>
+                                        {tech.name === 'Next.js 16' ? 'NX' : tech.name.charAt(0)}
                                     </div>
+                                    <div className="evently-tech-category">{tech.category}</div>
                                 </div>
-                            ))}
-                        </div>
-
-                        <div className="evently-tech-footer">
-                            <div className="evently-tech-footer-item">
-                                <span className="evently-tech-footer-label">PLATFORM</span>
-                                <span className="evently-tech-footer-value">Responsive Web</span>
-                            </div>
-                            <div className="evently-tech-footer-divider"></div>
-                            <div className="evently-tech-footer-item">
-                                <span className="evently-tech-footer-label">ARCHITECTURE</span>
-                                <span className="evently-tech-footer-value">App Router (RSC)</span>
-                            </div>
-                            <div className="evently-tech-footer-divider"></div>
-                            <div className="evently-tech-footer-item">
-                                <span className="evently-tech-footer-label">VISUALS</span>
-                                <span className="evently-tech-footer-value">Recharts & Framer</span>
+                                <div className="evently-tech-name">{tech.name}</div>
+                                <div className="evently-tech-bar" style={{ backgroundColor: tech.color }}></div>
                             </div>
                         </div>
+                    ))}
+                </div>
+                <div className="evently-tech-footer">
+                    <div className="evently-tech-footer-item">
+                        <span className="evently-tech-footer-label">PLATFORM</span>
+                        <span className="evently-tech-footer-value">Responsive Web</span>
+                    </div>
+                    <div className="evently-tech-footer-divider"></div>
+                    <div className="evently-tech-footer-item">
+                        <span className="evently-tech-footer-label">ARCHITECTURE</span>
+                        <span className="evently-tech-footer-value">App Router (RSC)</span>
+                    </div>
+                    <div className="evently-tech-footer-divider"></div>
+                    <div className="evently-tech-footer-item">
+                        <span className="evently-tech-footer-label">VISUALS</span>
+                        <span className="evently-tech-footer-value">Recharts & Framer</span>
                     </div>
                 </div>
             </section>
 
+            {/* Learnings */}
+            <section className="evently-learnings">
+                <div className="evently-learnings-header">
+                    <div className="evently-section-label">REFLECTIONS</div>
+                    <h2 className="evently-section-title evently-split-text">{splitText('Key Learnings')}</h2>
+                </div>
+                <div className="evently-learnings-grid">
+                    {[
+                        { num: '01', title: 'Data Viz is Operational Power', text: 'Real-time charting using Recharts transforms raw numbers into actionable insights, providing immediate operational visibility for planners.' },
+                        { num: '02', title: 'RSC for Heavy Dashboards', text: 'Leveraging React Server Components significantly reduces client-side JS, ensuring that data-dense dashboards remain blazing fast and responsive.' },
+                        { num: '03', title: 'End-to-End Type Safety', text: 'In financial and personnel management, TypeScript is non-negotiable. It prevents entire classes of calculation errors and data integrity issues.' },
+                        { num: '04', title: 'Unified UX solved Fragmentation', text: 'Consolidating finance, tasks, and team management into one interface eliminates context switching and improves planning speed by 50%.' }
+                    ].map((learning, i) => (
+                        <div key={i} className="evently-learning-card">
+                            <div className="evently-learning-header">
+                                <div className="evently-learning-num">{learning.num}</div>
+                                <h3 className="evently-learning-title">{learning.title}</h3>
+                            </div>
+                            <p className="evently-learning-text">{learning.text}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Next Steps */}
+            <section className="evently-next-steps">
+                <div className="evently-section-label">FUTURE</div>
+                <h2 className="evently-section-title evently-split-text">{splitText('Next Steps')}</h2>
+                <div className="evently-next-steps-list">
+                    {[
+                        'Integrate AI-driven event suggestions and automated scheduling',
+                        'Implement real-time collaborative editing for team boards',
+                        'Expand reporting with custom PDF/CSV export functionality',
+                        'Add multi-currency support for international event budgeting',
+                        'Develop a dedicated mobile app for on-site management'
+                    ].map((step, i) => (
+                        <div key={i} className="evently-next-step-item">
+                            <span className="evently-step-indicator">{String(i + 1).padStart(2, '0')}</span>
+                            <span className="evently-step-text">{step}</span>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* CTA */}
+            <section className="evently-cta">
+                <h2 className="evently-cta-title evently-split-text">{splitText('NEXT PROJECT')}</h2>
+                <button className="evently-cta-button evently-magnetic-btn" onClick={() => navigate('/projects')}>
+                    <span>VIEW ALL PROJECTS</span>
+                    <span>→</span>
+                </button>
+            </section>
         </div>
     );
 }
