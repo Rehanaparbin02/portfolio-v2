@@ -488,9 +488,10 @@
   margin-bottom: 3rem;
   font-family: 'Space Grotesk', sans-serif;
   color: #fff;
-  align-items: center;
-  justify-content: center;
   display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .koa-reveal-image {

@@ -90,6 +90,9 @@ const KoaProject = () => {
 
       // === SPLIT TEXT ANIMATIONS ===
       gsap.utils.toArray('.koa-split-text').forEach((el) => {
+        // Skip elements in timeline section as they have a more specific animation below
+        if (el.closest('.koa-timeline-section')) return;
+
         const words = el.querySelectorAll('.word');
         gsap.from(words, {
           y: 100,
@@ -126,12 +129,15 @@ const KoaProject = () => {
         gsap.fromTo(word,
           {
             background: 'transparent',
-            color: 'rgba(255, 255, 255, 0.7)'
+            color: 'rgba(255, 255, 255, 0.7)',
+            padding: '0.1em 0.3em',
+            borderRadius: '4px',
+            margin: '0 -0.1em'
           },
           {
-            background: 'rgba(139, 92, 246, 0.2)', // Violet highlight
+            background: 'rgba(139, 92, 246, 0.2)',
             color: '#fff',
-            padding: '0.2em 0.4em',
+            padding: '0.1em 0.3em',
             borderRadius: '4px',
             duration: 0.5,
             ease: 'power2.out',
@@ -198,9 +204,10 @@ const KoaProject = () => {
 
       // === TIMELINE ANIMATIONS ===
       gsap.from('.koa-timeline-section .koa-section-label, .koa-timeline-section .koa-section-title .word', {
-        y: 30,
+        y: 60,
         opacity: 0,
-        duration: 1,
+        rotateX: -45, // Adding a bit of rotation for consistency
+        duration: 1.2,
         stagger: 0.05,
         ease: 'power3.out',
         scrollTrigger: {
@@ -485,15 +492,15 @@ const KoaProject = () => {
                 <span className="koa-hero-title-line-2">BUDGET</span>
                 <span className="koa-hero-title-line-3">MANAGEMENT</span>
               </h1>
-              <div className="koa-hero-description">
+              {/* <div className="koa-hero-description">
                 A comprehensive design system and component library built to scale, featuring 50+ reusable components, design tokens, and extensive documentation for modern product teams.
-              </div>
+              </div> */}
             </div>
             <div className="koa-hero-right">
               <div className="koa-hero-meta">
                 <div className="koa-hero-meta-item">
                   <span className="koa-meta-label">PLATFORM</span>
-                  <span className="koa-meta-value">Web</span>
+                  <span className="koa-meta-value">Mobile</span>
                 </div>
                 <div className="koa-hero-meta-item">
                   <span className="koa-meta-label">ROLE</span>
@@ -520,26 +527,26 @@ const KoaProject = () => {
           <div className="koa-summary-decorative-line"></div>
           <h2 className="koa-summary-text-highlight">
             <span className="koa-summary-line">
-              <span className="koa-highlight-word">Koa</span> is a modern design system
+              <span className="koa-highlight-word">Koa</span> is a <span className="koa-highlight-word">personal finance tool</span>
             </span>
             <span className="koa-summary-line">
-              that bridges the gap between
+              designed to <span className="koa-highlight-word">streamline</span> how you
             </span>
             <span className="koa-summary-line">
-              <span className="koa-highlight-word">design</span> and <span className="koa-highlight-word">development</span>,
+              <span className="koa-highlight-word">track, manage, and analyze</span>
             </span>
             <span className="koa-summary-line">
-              providing a single source of truth
+              your <span className="koa-highlight-word">budget,</span> providing a clear
             </span>
             <span className="koa-summary-line">
-              for building consistent
+              overview of your spending to
             </span>
             <span className="koa-summary-line">
-              digital products at scale.
+              achieve <span className="koa-highlight-word">financial freedom.</span>
             </span>
           </h2>
           <div className="koa-summary-tags-wrapper">
-            {['React', 'TypeScript', 'Storybook', 'Design Tokens', 'Figma', 'Documentation'].map((tag, i) => (
+            {['React Native', 'Supabase', 'Expo Router', 'Financial Dashboard', 'iOS & Android', 'Full-Stack'].map((tag, i) => (
               <span key={i} className="koa-summary-tag-item">{tag}</span>
             ))}
           </div>
@@ -554,12 +561,12 @@ const KoaProject = () => {
           <div className="koa-stat-label">Components</div>
         </div>
         <div className="koa-stat-item">
-          <div className="koa-stat-value">12</div>
-          <div className="koa-stat-label">Product Teams</div>
+          <div className="koa-stat-value">12+</div>
+          <div className="koa-stat-label">Screens</div>
         </div>
         <div className="koa-stat-item">
-          <div className="koa-stat-value">300+</div>
-          <div className="koa-stat-label">Design Tokens</div>
+          <div className="koa-stat-value">8k+</div>
+          <div className="koa-stat-label">Lines Of Code</div>
         </div>
         <div className="koa-stat-item">
           <div className="koa-stat-value">60%</div>
@@ -581,26 +588,26 @@ const KoaProject = () => {
           <div className="koa-overview-grid-v2">
             <div className="koa-overview-main-text">
               <p className="koa-reveal-text">
-                Koa Design System was created to solve the fragmentation across multiple product teams. By establishing a unified design language, comprehensive component library, and clear documentation, we reduced design debt by 40% and accelerated feature development.
+                Koa is an intelligent personal finance application built to help users master their money. By combining intuitive tracking, automated categorization, and deep financial analytics, Koa provides a comprehensive view of your financial health in a single, beautiful interface.
               </p>
               <div className="koa-overview-features-mini">
                 <div className="koa-mini-feature">
-                  <div className="koa-mini-icon">🧩</div>
+                  <div className="koa-mini-icon">📊</div>
                   <div className="koa-mini-content">
-                    <h4>Components</h4>
-                    <p>50+ Production Ready Components.</p>
+                    <h4>Analytics</h4>
+                    <p>Deep spending insights & charts.</p>
                   </div>
                 </div>
                 <div className="koa-mini-feature">
-                  <div className="koa-mini-icon">🎨</div>
+                  <div className="koa-mini-icon">💰</div>
                   <div className="koa-mini-content">
-                    <h4>Tokens</h4>
-                    <p>Semantic Design Tokens.</p>
+                    <h4>Budgeting</h4>
+                    <p>Smart envelope-style saving goals.</p>
                   </div>
                 </div>
               </div>
               <p className="koa-reveal-text secondary-text">
-                The system includes detailed accessibility guidelines, interactive documentation built with Storybook, and seamless Figma integration.
+                The platform features end-to-end encryption for security, real-time sync across devices, and automated receipt scanning to minimize manual entry.
               </p>
             </div>
 
@@ -631,38 +638,38 @@ const KoaProject = () => {
         <div className="koa-challenge-content-v2">
           <div className="koa-challenge-card challenge">
             <div className="koa-card-header">
-              <span className="koa-card-tag">THE CHALLENGE</span>
+              <span className="koa-card-tag">THE PROBLEM</span>
               <div className="koa-card-number">01</div>
             </div>
-            <h3>Fragmentation.</h3>
-            <p>Product teams across the organization were reinventing the wheel, leading to inconsistent experiences and wasted effort.</p>
+            <h3>Financial Chaos.</h3>
+            <p>Users often struggle to keep track of multiple accounts, subscriptions, and hidden expenses across different platforms.</p>
             <ul className="koa-challenge-list-v2">
-              <li className="koa-reveal-item-v2">Duplicate components</li>
-              <li className="koa-reveal-item-v2">Inconsistent styling</li>
-              <li className="koa-reveal-item-v2">No single source of truth</li>
-              <li className="koa-reveal-item-v2">Accessibility gaps</li>
+              <li className="koa-reveal-item-v2">Mixed manual tracking</li>
+              <li className="koa-reveal-item-v2">No clear spending trends</li>
+              <li className="koa-reveal-item-v2">Subscription fatigue</li>
+              <li className="koa-reveal-item-v2">Security concerns</li>
             </ul>
           </div>
 
           <div className="koa-challenge-card solution">
             <div className="koa-card-header">
-              <span className="koa-card-tag green">THE SOLUTION</span>
+              <span className="koa-card-tag green">THE CURE</span>
               <div className="koa-card-number">02</div>
             </div>
-            <h3>Unified System.</h3>
-            <p>Koa provides a comprehensive design system with production-ready components and tokens that enables teams to build faster.</p>
+            <h3>Unified Hub.</h3>
+            <p>Koa provides a seamless, secure platform to consolidate all financial data into one intuitive dashboard for better decision-making.</p>
             <div className="koa-solution-highlights-v2">
               <div className="koa-highlight-item-v2">
                 <span className="koa-highlight-icon">✓</span>
-                <span>Consistency</span>
+                <span>Auto-Sync</span>
               </div>
               <div className="koa-highlight-item-v2">
                 <span className="koa-highlight-icon">✓</span>
-                <span>Speed</span>
+                <span>AI Insights</span>
               </div>
               <div className="koa-highlight-item-v2">
                 <span className="koa-highlight-icon">✓</span>
-                <span>Accessibility</span>
+                <span>Privacy First</span>
               </div>
             </div>
           </div>
@@ -679,12 +686,12 @@ const KoaProject = () => {
         <div className="koa-features-container">
           <div className="koa-features-wrapper">
             {[
-              { title: 'Component Library', text: '50+ production-ready React components with TypeScript support, extensive props, and customization options.' },
-              { title: 'Design Tokens', text: '300+ design tokens for colors, typography, spacing, and more, ensuring consistency across all platforms.' },
-              { title: 'Accessibility First', text: 'WCAG 2.1 AA compliant components with keyboard navigation, screen reader support, and focus management.' },
-              { title: 'Interactive Docs', text: 'Storybook-powered documentation with live code examples, props tables, and usage guidelines.' },
-              { title: 'Figma Integration', text: 'Synchronized Figma library with matching components, styles, and auto-layout specifications.' },
-              { title: 'Theme System', text: 'Flexible theming engine supporting dark mode, custom brands, and runtime theme switching.' }
+              { title: 'Smart Tracking', text: 'Automatically categorizes your transactions with 98% accuracy using intelligent learning algorithms.' },
+              { title: 'Goal Setting', text: 'Create and monitor multiple savings goals with milestone notifications and visual progress tracking.' },
+              { title: 'Bill Monitoring', text: 'Never miss a payment again with smart bill detection and early reminder notifications.' },
+              { title: 'Deep Analytics', text: 'Interactive charts and weekly reports that break down your spending habits by category and time.' },
+              { title: 'Cloud Sync', text: 'Securely access your financial data across multiple devices with real-time end-to-end encrypted sync.' },
+              { title: 'Export Ready', text: 'Generate professional PDF reports or CSV exports for your accountant with a single tap.' }
             ].map((feature, i) => (
               <div key={i} className="koa-feature-card">
                 <div className="koa-feature-pin"></div>
@@ -704,12 +711,12 @@ const KoaProject = () => {
         <h2 className="koa-section-title koa-split-text">{splitText('Design Process')}</h2>
         <div className="koa-timeline-container">
           {[
-            { num: '01', title: 'Research & Audit', text: 'Conducted comprehensive audit of existing products, identifying 200+ unique component variations and inconsistencies.' },
-            { num: '02', title: 'Foundation & Principles', text: 'Established core design principles and defined atomic design tokens for colors, typography, spacing, and motion.' },
-            { num: '03', title: 'Component Architecture', text: 'Designed atomic component hierarchy and created initial library of 30 foundational components with strict naming conventions.' },
-            { num: '04', title: 'Documentation System', text: 'Built comprehensive Storybook documentation with code examples, accessibility notes, and usage guidelines.' },
-            { num: '05', title: 'Testing & Refinement', text: 'Conducted usability testing with 3 pilot teams. Refined components based on feedback, increasing robustness and flexibility.' },
-            { num: '06', title: 'Rollout & Adoption', text: 'Phased rollout across 12 product teams with workshops and support. Achieved 85% adoption rate within 6 months.' }
+            { num: '01', title: 'Market Research', text: 'Analyzed top budgeting apps to identify gaps in user experience, focusing on automation and privacy features.' },
+            { num: '02', title: 'Feature Mapping', text: 'Defined the core architecture for the transaction engine, categorization logic, and security protocols.' },
+            { num: '03', title: 'UI/UX Prototyping', text: 'Designed high-fidelity mobile interfaces with a focus on ease of entry and clear data visualization.' },
+            { num: '04', title: 'Beta Development', text: 'Built the core MVP with React Native, integrating Supabase for real-time sync and secure data storage.' },
+            { num: '05', title: 'Security Audit', text: 'Conducted rigorous penetration testing and implemented AES-256 encryption for all sensitive user data.' },
+            { num: '06', title: 'Launch & Iterate', text: 'Successfully launched on iOS and Android. Achieved high user retention by iterating based on feedback.' }
           ].map((item, i) => (
             <div key={i} className="koa-timeline-entry">
               <div className="koa-timeline-line"></div>
@@ -758,30 +765,30 @@ const KoaProject = () => {
               <div className="koa-dev-box-number">01</div>
               <h4 className="koa-dev-box-title">Architecture Highlights</h4>
               <ul className="koa-dev-box-list">
-                <li>Atomic Design methodology for component hierarchy</li>
-                <li>Comprehensive design token system with multi-brand support</li>
-                <li>Strict TypeScript implementation for type-safe components</li>
-                <li>Monorepo architecture with Nx for efficient development</li>
+                <li>Real-time data sync with Supabase PostgreSQL</li>
+                <li>Secure AES-256 client-side encryption for transactions</li>
+                <li>Offline-first architecture with local SQLite storage</li>
+                <li>Modular React Native components for scalability</li>
               </ul>
             </div>
             <div className="koa-dev-box">
               <div className="koa-dev-box-number">02</div>
               <h4 className="koa-dev-box-title">Key Challenges Solved</h4>
               <ul className="koa-dev-box-list">
-                <li>Automated visual regression testing for consistency</li>
-                <li>WCAG 2.1 AA accessibility compliance across all components</li>
-                <li>Seamless sync between Figma styles and code tokens</li>
-                <li>Efficient documentation with interactive Storybook guides</li>
+                <li>Optimized chart rendering for performance on low-end devices</li>
+                <li>Automated category prediction using lightweight ML models</li>
+                <li>Seamless sync conflict resolution across multiple devices</li>
+                <li>Secure integration with multi-factor authentication</li>
               </ul>
             </div>
             <div className="koa-dev-box">
               <div className="koa-dev-box-number">03</div>
-              <h4 className="koa-dev-box-title">Outcomes</h4>
+              <h4 className="koa-dev-box-title">Project Milestones</h4>
               <ul className="koa-dev-box-list">
-                <li>40% reduction in design debt across 12 product teams</li>
-                <li>~60% faster prototyping speed for new features</li>
-                <li>85+ adoption rate within 6 months of rollout</li>
-                <li>50+ production-ready, highly reusable components</li>
+                <li>Successfully passed external security audits</li>
+                <li>Achieved sub-100ms response times for data fetching</li>
+                <li>10k+ transactions processed during pilot phase</li>
+                <li>99.9% crash-free sessions on production launch</li>
               </ul>
             </div>
           </div>

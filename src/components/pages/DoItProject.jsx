@@ -47,12 +47,14 @@ const DoItProject = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // === HERO ANIMATIONS ===
-      gsap.from('.doit-nav-badge', {
-        x: 100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
-      });
+      if (document.querySelector('.doit-nav-badge')) {
+        gsap.from('.doit-nav-badge', {
+          x: 100,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out'
+        });
+      }
 
       gsap.from('.doit-hero-title span', {
         y: 150,
@@ -64,13 +66,15 @@ const DoItProject = () => {
         delay: 0.3
       });
 
-      gsap.from('.doit-hero-description', {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        delay: 0.8
-      });
+      if (document.querySelector('.doit-hero-description')) {
+        gsap.from('.doit-hero-description', {
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+          delay: 0.8
+        });
+      }
 
       gsap.from('.doit-hero-meta-item', {
         x: -30,
@@ -100,7 +104,7 @@ const DoItProject = () => {
 
       // === STATS COUNTER ANIMATION ===
 
-      gsap.utils.toArray('.stat-item').forEach((stat, i) => {
+      gsap.utils.toArray('.doit-stat-item').forEach((stat, i) => {
         gsap.from(stat, {
           scale: 0,
           opacity: 0,
@@ -114,7 +118,8 @@ const DoItProject = () => {
           delay: i * 0.1
         });
 
-        const value = stat.querySelector('.stat-value');
+        const value = stat.querySelector('.doit-stat-value');
+        if (!value) return;
         const finalValue = value.textContent.trim();
         const isNumber = /[\d.]+/.test(finalValue);
 
@@ -331,19 +336,21 @@ const DoItProject = () => {
       });
 
       // === STAGGERED LIST ITEMS ===
-      gsap.utils.toArray('.doit-stagger-list li').forEach((list) => {
-        const items = list.querySelectorAll('li') || [list];
-        gsap.from(items, {
-          x: -30,
-          opacity: 0,
-          stagger: 0.1,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: list,
-            start: 'top 85%'
-          }
-        });
+      gsap.utils.toArray('.doit-challenge-list-v2, .doit-dev-box-list').forEach((list) => {
+        const items = list.querySelectorAll('li');
+        if (items.length > 0) {
+          gsap.from(items, {
+            x: -30,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: list,
+              start: 'top 85%'
+            }
+          });
+        }
       });
 
       // === MAGNETIC BUTTONS ===
@@ -509,6 +516,10 @@ const DoItProject = () => {
           rotationTimer.restart(true);
         });
       }
+
+      // Refresh ScrollTrigger to ensure all markers are correctly placed after DOM/CSS is ready
+      ScrollTrigger.refresh();
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -548,9 +559,9 @@ const DoItProject = () => {
                 <span className="doit-hero-title-line-2">TASK</span>
                 <span className="doit-hero-title-line-3">REIMAGINED</span>
               </h1>
-              <div className="doit-hero-description">
+              {/* <div className="doit-hero-description">
                 A full-stack productivity platform that transforms task management through intelligent automation, seamless collaboration, and beautiful design.
-              </div>
+              </div> */}
             </div>
             <div className="doit-hero-right">
               <div className="doit-hero-meta">
@@ -598,12 +609,12 @@ const DoItProject = () => {
               task management experience.
             </span>
           </h2>
-
+          {/* 
           <div className="doit-summary-tags-wrapper">
             {['React Native', 'UI/UX', 'Task Management App', 'iOS', 'Android', 'Passion Project'].map((tag, i) => (
               <span key={i} className="doit-summary-tag-item">{tag}</span>
             ))}
-          </div>
+          </div> */}
           <div className="doit-summary-gradient-orb"></div>
         </div>
       </section>
@@ -666,13 +677,13 @@ const DoItProject = () => {
             </div>
 
             <div className="doit-overview-visual-stack">
-              <div className="doit-visual-layer layer-1 doit-reveal-image">
+              <div className="doit-visual-layer layer-1">
                 <img src={blackImg} alt="DO-IT App Home" />
               </div>
-              <div className="doit-visual-layer layer-2 doit-reveal-image">
+              <div className="doit-visual-layer layer-2">
                 <img src={ana1Img} alt="DO-IT App Workspace" />
               </div>
-              <div className="doit-visual-layer layer-3 doit-reveal-image">
+              <div className="doit-visual-layer layer-3">
                 <img src={calendarImg} alt="DO-IT App Calendar" />
               </div>
               <div className="doit-visual-glow"></div>
