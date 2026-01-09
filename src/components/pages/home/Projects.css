@@ -17,7 +17,7 @@
 .projects-section {
     background-color: var(--bg-dark);
     color: var(--text-main);
-    padding: var(--section-pad) 2rem;
+    padding: 0 2rem var(--section-pad);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
     position: relative;

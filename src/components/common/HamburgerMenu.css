@@ -1,3 +1,18 @@
+/* Logo */
+.top-left-logo {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 1001;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    mix-blend-mode: difference;
+}
+
+.top-left-logo:hover {
+    transform: scale(1.05);
+}
+
 /* Hamburger Button */
 .hamburger-btn {
     position: fixed;

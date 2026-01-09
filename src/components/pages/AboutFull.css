@@ -55,6 +55,12 @@
     background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 70%);
 }
 
+.orb-1 {
+    top: -30vw;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .orb-2 {
     bottom: -10%;
     left: -10%;

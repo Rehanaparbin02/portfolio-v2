@@ -4,6 +4,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Footer.css';
 
+import Logo from './Logo';
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
@@ -140,10 +142,10 @@ export default function Footer() {
             <div className="footer-content-new" ref={contentRef}>
                 <div className="footer-container-new">
                     <div className="footer-main-new">
-                        <div className="footer-col-new brand-info">
-                            <div className="footer-logo-new">
-                                REHANA<span>.</span>
-                            </div>
+                        <div className="footer-col-new brand-info" style={{ position: 'relative', top: '-1.5rem' }}>
+                            <Link to="/" onClick={scrollToTop} className="footer-logo-link">
+                                <Logo className="footer-logo-svg" style={{ width: '80px', height: 'auto', borderRadius: '4px' }} />
+                            </Link>
                             <p className="footer-description-new">
                                 Specializing in creating high-performance digital products and immersive user experiences with a focus on modern aesthetics and functional precision.
                             </p>
