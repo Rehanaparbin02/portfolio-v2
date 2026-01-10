@@ -21,6 +21,7 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
     position: relative;
+    padding-top: 20vh;
 }
 
 /* Background Atmosphere */

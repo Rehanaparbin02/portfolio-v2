@@ -23,10 +23,10 @@ import CounterLoader from './components/common/CounterLoader'
 
 gsap.registerPlugin(ScrollTrigger)
 
-function HomeLayout() {
+function HomeLayout({ isLoaded }) {
   return (
     <>
-      <Home />
+      <Home isLoaded={isLoaded} />
       <About />
       <Work />
       <Projects />
@@ -99,7 +99,7 @@ function App() {
           <HamburgerMenu />
           <Routes>
             <Route path="/" element={
-              <HomeLayout />
+              <HomeLayout isLoaded={!isLoading} />
             } />
             <Route path="/about" element={
               <AboutFull />

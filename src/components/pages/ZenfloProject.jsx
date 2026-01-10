@@ -179,18 +179,7 @@ const ZenfloProject = () => {
                 });
             }
             // === TIMELINE ANIMATIONS ===
-            gsap.from('.zen-timeline-section .zen-section-label, .zen-timeline-section .zen-section-title .word', {
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.05,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.zen-timeline-section',
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                }
-            });
+            // (Removed duplicate heading animation to prevent conflict with splitText loop)
 
             gsap.utils.toArray('.zen-timeline-entry').forEach((entry, i) => {
                 const tl = gsap.timeline({
@@ -313,18 +302,7 @@ const ZenfloProject = () => {
             });
 
             // === VISUAL DESIGN ANIMATIONS ===
-            gsap.from('.zen-visual-section .zen-section-label, .zen-visual-section .zen-section-title .word', {
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.05,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.zen-visual-section',
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                }
-            });
+            // (Removed duplicate heading animation to prevent conflict with splitText loop)
 
             gsap.utils.toArray('.zen-visual-item').forEach((item, i) => {
                 gsap.from(item, {
@@ -416,15 +394,15 @@ const ZenfloProject = () => {
                                 <span className="zen-hero-title-line-2">MICRO</span>
                                 <span className="zen-hero-title-line-3">JOURNALING</span>
                             </h1>
-                            <div className="zen-hero-description">
+                            {/* <div className="zen-hero-description">
                                 A comprehensive mental wellness mobile application designed to help users track their emotional journey through intuitive journaling and mood tracking.
-                            </div>
+                            </div> */}
                         </div>
                         <div className="zen-hero-right">
                             <div className="zen-hero-meta">
                                 <div className="zen-hero-meta-item">
                                     <span className="zen-meta-label">PLATFORM</span>
-                                    <span className="zen-meta-value">iOS & Android</span>
+                                    <span className="zen-meta-value">Mobile</span>
                                 </div>
                                 <div className="zen-hero-meta-item">
                                     <span className="zen-meta-label">ROLE</span>
@@ -432,7 +410,7 @@ const ZenfloProject = () => {
                                 </div>
                                 <div className="zen-hero-meta-item">
                                     <span className="zen-meta-label">YEAR</span>
-                                    <span className="zen-meta-value">2025</span>
+                                    <span className="zen-meta-value">2024</span>
                                 </div>
                             </div>
                         </div>

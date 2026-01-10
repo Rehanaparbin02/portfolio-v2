@@ -38,6 +38,10 @@
   z-index: 2;
 }
 
+.nav-item {
+  opacity: 0;
+}
+
 .nav-item .label {
   color: #666;
   font-size: 0.7rem;
@@ -82,6 +86,28 @@
   display: block;
   /* Ensure separate animation targets */
   will-change: transform;
+  opacity: 0;
+}
+
+.bg-ampersand {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 55vw;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: transparent;
+  -webkit-text-stroke: 8.5px rgba(255, 255, 255, 0.365);
+  z-index: -1;
+  pointer-events: none;
+  font-weight: 300;
+  line-height: 0;
+  opacity: 0;
+  font-style: italic;
+}
+
+.footer-item {
+  opacity: 0;
 }
 
 .footer-bold {

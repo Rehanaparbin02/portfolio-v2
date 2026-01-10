@@ -168,10 +168,9 @@ export default function Footer() {
                         <div className="footer-col-new">
                             <h4 className="footer-col-label">CONNECT</h4>
                             <div className="footer-social-new">
-                                <a href="https://linkedin.com/in/rehanaparbin" target="_blank" rel="noopener noreferrer" className="social-link-new">LinkedIn</a>
-                                <a href="https://github.com/rehanaparbin" target="_blank" rel="noopener noreferrer" className="social-link-new">GitHub</a>
-                                <a href="https://twitter.com/rehanaparbin" target="_blank" rel="noopener noreferrer" className="social-link-new">Twitter</a>
-                                <a href="https://instagram.com/rehanaparbin" target="_blank" rel="noopener noreferrer" className="social-link-new">Instagram</a>
+                                <a href="https://www.linkedin.com/in/rehanaparbin1002/" target="_blank" rel="noopener noreferrer" className="social-link-new">LinkedIn</a>
+                                <a href="https://github.com/Rehanaparbin02" target="_blank" rel="noopener noreferrer" className="social-link-new">GitHub</a>
+                                <a href="https://www.instagram.com/_rehana_02_?igsh=am9wejVtYmhzOXpl" target="_blank" rel="noopener noreferrer" className="social-link-new">Instagram</a>
                             </div>
                         </div>
 
