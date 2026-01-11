@@ -137,18 +137,18 @@ export default function Projects() {
                 );
 
                 // Image Parallax Effect
-                if (imgWrapper) {
-                    gsap.to(img, {
-                        yPercent: 20,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top bottom",
-                            end: "bottom top",
-                            scrub: true
-                        }
-                    });
-                }
+                // if (imgWrapper) {
+                //     gsap.to(img, {
+                //         yPercent: 20,
+                //         ease: "none",
+                //         scrollTrigger: {
+                //             trigger: card,
+                //             start: "top bottom",
+                //             end: "bottom top",
+                //             scrub: true
+                //         }
+                //     });
+                // }
 
                 // Stacking Card Effect
                 const nextCard = cardsRef.current[index + 1];

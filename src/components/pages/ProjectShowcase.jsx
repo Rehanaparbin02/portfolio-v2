@@ -1,12 +1,14 @@
 import { useEffect, useRef } from 'react';
-import { useNavigate, Link, Links } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './ProjectShowcase.css';
+import ScrollStack, { ScrollStackItem } from './ScrollStack';
 import doitMockup from '../../assets/doit-mockup.png';
 import koaMockup from '../../assets/Mockup koa.png';
 import eventlyMockup from '../../assets/evently/mockuper.png';
 import zenmockup from '../../assets/zenflow/zenMock.png'
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,7 +33,7 @@ const projects = [
     },
     {
         id: "03",
-        name: "Evently",
+        name: "Evently - Event Management",
         category: "Web Application",
         description: "A centralized solution for organizing events efficiently, enabling smooth ticketing, structured registrations, real-time agenda management, and meaningful participant interaction.",
         imageUrl: eventlyMockup,
@@ -51,7 +53,6 @@ const projects = [
 
 export default function ProjectShowcase() {
     const containerRef = useRef(null);
-    const progressRef = useRef(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -64,77 +65,27 @@ export default function ProjectShowcase() {
                 }
             });
 
-            heroTl.from(".hero-sub", {
-                y: 30, opacity: 0, duration: 1, ease: "power3.out"
+            heroTl.from(".hero-title .char", {
+                y: 100,
+                skewY: 10,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.02,
+                ease: "expo.out"
             })
-                .from(".hero-title .char", {
-                    y: 100, skewY: 10, opacity: 0, duration: 1.2, stagger: 0.02, ease: "expo.out"
-                }, "-=0.7")
                 .from(".hero-extra-text", {
-                    y: 20, opacity: 0, duration: 1, ease: "power3.out"
-                }, "-=0.5");
-
-            // Progress Bar
-            gsap.to(progressRef.current, {
-                width: "100%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top top",
-                    end: "bottom bottom",
-                    scrub: 1
-                }
-            });
-
-            // Card Stack Animation
-            const cards = gsap.utils.toArray('.project-item');
-            cards.forEach((card, i) => {
-                if (i !== cards.length - 1) {
-                    gsap.to(card, {
-                        scale: 0.9,
-                        opacity: 0.5,
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top 10% ",
-                            end: "bottom 10%",
-                            scrub: true,
-                            onEnter: () => {
-                                gsap.to(card, { boxShadow: "0 20px 50px rgba(0,0,0,0.5)" });
-                            }
-                        }
-                    });
-                }
-
-                // Content Entrance Reveal
-                gsap.from(card.querySelector('.project-card-content > *'), {
-                    y: 50,
+                    y: 20,
                     opacity: 0,
-                    stagger: 0.1,
                     duration: 1,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 60%",
-                    }
-                });
-
-                // Image Entrance Reveal
-                gsap.from(card.querySelector('.project-image'), {
-                    scale: 1.2,
-                    opacity: 0,
-                    duration: 1.5,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 60%",
-                    }
-                });
-            });
+                    ease: "power3.out"
+                }, "-=0.8");
 
             // Premium Button Hover Logic
             const buttonElements = document.querySelectorAll('[data-block="button"]');
             buttonElements.forEach((btn) => {
                 const flair = btn.querySelector('.button__flair');
+                if (!flair) return;
+
                 const xSet = gsap.quickSetter(flair, "xPercent");
                 const ySet = gsap.quickSetter(flair, "yPercent");
 
@@ -179,16 +130,28 @@ export default function ProjectShowcase() {
                 });
             });
 
-            // Background Smooth tracking
+            // Background Smooth tracking - throttled for better performance
+            let mouseMoveRaf = null;
             const onMouseMove = (e) => {
-                const x = (e.clientX - window.innerWidth / 2) * 0.05;
-                const y = (e.clientY - window.innerHeight / 2) * 0.05;
-                gsap.to('.bg-glow', { x, y, duration: 2, ease: 'power2.out' });
-                gsap.to('.bg-glow-2', { x: -x, y: -y, duration: 3, ease: 'power2.out' });
-            };
-            window.addEventListener('mousemove', onMouseMove);
+                if (mouseMoveRaf) return;
 
-            return () => window.removeEventListener('mousemove', onMouseMove);
+                mouseMoveRaf = requestAnimationFrame(() => {
+                    const x = (e.clientX - window.innerWidth / 2) * 0.05;
+                    const y = (e.clientY - window.innerHeight / 2) * 0.05;
+                    gsap.to('.bg-glow', { x, y, duration: 2, ease: 'power2.out' });
+                    gsap.to('.bg-glow-2', { x: -x, y: -y, duration: 3, ease: 'power2.out' });
+                    mouseMoveRaf = null;
+                });
+            };
+
+            window.addEventListener('mousemove', onMouseMove, { passive: true });
+
+            return () => {
+                window.removeEventListener('mousemove', onMouseMove);
+                if (mouseMoveRaf) {
+                    cancelAnimationFrame(mouseMoveRaf);
+                }
+            };
 
         }, containerRef);
 
@@ -201,7 +164,6 @@ export default function ProjectShowcase() {
 
     return (
         <div className="project-showcase-container" ref={containerRef}>
-            {/* <div className="scroll-progress-bar" ref={progressRef}></div> */}
             <div className="bg-glow"></div>
             <div className="bg-glow-2"></div>
 
@@ -210,6 +172,7 @@ export default function ProjectShowcase() {
                     <span className="arrow">←</span> <span>GO BACK</span>
                 </Link>
             </header>
+
             <section className="project-showcase-hero">
                 <div className="hero-content">
                     <h1 className="hero-title">
@@ -228,54 +191,56 @@ export default function ProjectShowcase() {
                 </div>
             </section>
 
-            <div className="project-stack">
-                {projects.map((project) => (
-                    <div key={project.id} className="project-item">
-                        <div className="project-card-content">
-                            <div className="project-header">
-                                <span className="project-num">{project.id}</span>
-                                <span className="project-category">{project.category}</span>
+            <ScrollStack>
+                {projects.map((project, index) => (
+                    <ScrollStackItem key={project.id} index={index}>
+                        <div className="project-item-inner">
+                            <div className="project-card-content">
+                                <div className="project-header">
+                                    <span className="project-num">{project.id}</span>
+                                    <span className="project-category">{project.category}</span>
+                                </div>
+
+                                <div className="project-info-group">
+                                    <h2 className="project-name">{project.name}</h2>
+                                    <p className="project-description">{project.description}</p>
+
+                                    <div className="project-tags">
+                                        {project.tags.map(tag => (
+                                            <span key={tag} className="project-tag">{tag}</span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <a
+                                    href="#"
+                                    className="button button--stroke"
+                                    data-block="button"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        window.scrollTo(0, 0);
+                                        navigate(project.links ? project.links : '/projects');
+                                    }}
+                                >
+                                    <span className="button__flair"></span>
+                                    <span className="button__label">VIEW FULL PROJECT
+                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1.5 7.5H13.5M13.5 7.5L7.5 1.5M13.5 7.5L7.5 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </span>
+                                </a>
                             </div>
 
-                            <div className="project-info-group">
-                                <h2 className="project-name">{project.name}</h2>
-                                <p className="project-description">{project.description}</p>
-
-                                <div className="project-tags">
-                                    {project.tags.map(tag => (
-                                        <span key={tag} className="project-tag">{tag}</span>
-                                    ))}
+                            <div className="project-card-visual">
+                                <div className="project-image-wrapper" style={{ position: 'relative', top: '0rem' }}>
+                                    <div className="img-overlay"></div>
+                                    <img src={project.imageUrl} alt={project.name} className="project-image" loading="lazy" />
                                 </div>
                             </div>
-
-                            <a
-                                href="#"
-                                className="button button--stroke"
-                                data-block="button"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    window.scrollTo(0, 0);
-                                    navigate(project.links ? project.links : '/projects');
-                                }}
-                            >
-                                <span className="button__flair"></span>
-                                <span className="button__label">VIEW FULL PROJECT
-                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.5 7.5H13.5M13.5 7.5L7.5 1.5M13.5 7.5L7.5 13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </span>
-                            </a>
                         </div>
-
-                        <div className="project-card-visual">
-                            <div className="project-image-wrapper" style={{ position: 'relative', top: '0rem' }}>
-                                <div className="img-overlay"></div>
-                                <img src={project.imageUrl} alt={project.name} className="project-image" />
-                            </div>
-                        </div>
-                    </div>
+                    </ScrollStackItem>
                 ))}
-            </div>
+            </ScrollStack>
         </div>
     );
 }

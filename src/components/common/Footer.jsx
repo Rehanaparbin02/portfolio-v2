@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Footer.css';
@@ -12,6 +12,7 @@ export default function Footer() {
     const footerRef = useRef(null);
     const ctaRef = useRef(null);
     const contentRef = useRef(null);
+    const location = useLocation();
     const [time, setTime] = useState(new Date());
 
     useEffect(() => {
@@ -33,6 +34,20 @@ export default function Footer() {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
+            // Footer Container Scroll Into View Effect
+            gsap.from(footerRef.current, {
+                y: 100,
+                opacity: 0,
+                duration: 1.5,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: footerRef.current,
+                    start: "top 95%", // Starts slightly earlier when entering from bottom
+                    end: "bottom top",
+                    toggleActions: "play none none reverse", // Plays on enter, reverses on leave back
+                }
+            });
+
             // Hero CTA Animation
             gsap.from(".footer-cta-title span", {
                 y: 100,
@@ -113,7 +128,7 @@ export default function Footer() {
         }, footerRef);
 
         return () => ctx.revert();
-    }, []);
+    }, [location.pathname]);
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });

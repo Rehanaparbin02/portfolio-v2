@@ -151,33 +151,9 @@
 }
 
 /* Card Stack Layout */
-.project-stack {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--card-gap);
-    padding: 0 8vw;
-    position: relative;
-}
 
-.project-item {
-    display: flex;
-    background-color: #0e0e0e;
-    border-radius: clamp(20px, 3vw, 40px);
-    overflow: hidden;
-    width: 100%;
-    max-width: var(--card-max-width);
-    height: auto;
-    /* allow height to grow with inner content */
-    min-height: 104vh;
-    /* sensible minimum so very short content still looks good */
-    position: sticky;
-    top: 15vh;
-    /* This creates the stacking effect */
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    will-change: transform, opacity;
-}
+
+
 
 .project-card-content {
     flex: 0 0 45%;

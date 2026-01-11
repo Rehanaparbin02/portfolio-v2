@@ -541,7 +541,7 @@ export default function AboutFull() {
             {/* Resume Download Section */}
             <section className="resume-section">
                 <div className="resume-content">
-                    <a href="/recent_present_resume_dev.pdf" download className="liquid-btn resume-btn">
+                    <a href="/final-Dev-resume.pdf" download className="liquid-btn resume-btn">
                         <span className="liquid-btn__flair"></span>
                         <span className="liquid-btn__label">
                             GET MY RESUME

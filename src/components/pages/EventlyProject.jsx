@@ -105,7 +105,8 @@ const EventlyProject = () => {
                         start: 'top 85%',
                         invalidateOnRefresh: true
                     },
-                    delay: i * 0.1
+                    delay: i * 0.1,
+                    clearProps: 'all' // Ensure CSS hover works after animation
                 });
             });
 
@@ -165,7 +166,8 @@ const EventlyProject = () => {
                                 trigger: card,
                                 start: 'top 85%',
                                 invalidateOnRefresh: true
-                            }
+                            },
+                            clearProps: 'all'
                         });
                     }
                 });

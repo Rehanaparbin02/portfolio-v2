@@ -1,0 +1,101 @@
+.scroll-stack-scroller {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.scroll-stack-inner {
+    /* padding: 0 0 100vh 0; */
+    min-height: 100vh;
+    position: relative;
+}
+
+.scroll-stack-card-wrapper {
+    position: relative;
+}
+
+.scroll-stack-card {
+    transform-origin: top center;
+    will-change: transform;
+    backface-visibility: hidden;
+    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.3);
+    height: var(--card-height, 85vh);
+    max-width: var(--card-max-width, 1400px);
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 40px;
+    box-sizing: border-box;
+    background: #0e0e0e;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    position: relative;
+    /* Optimize rendering */
+    contain: layout style paint;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Force GPU acceleration and prevent layout shifts */
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
+
+.scroll-stack-card .project-item-inner {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.scroll-stack-end {
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1600px) {
+    .scroll-stack-card {
+        height: 80vh;
+        max-width: 1250px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .scroll-stack-card {
+        max-width: 1000px;
+        width: 95%;
+    }
+
+    .scroll-stack-card .project-item-inner {
+        flex-direction: column-reverse;
+    }
+}
+
+@media (max-height: 800px) {
+    .scroll-stack-card {
+        height: 75vh;
+        min-height: 480px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .scroll-stack-card {
+        height: auto;
+        min-height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .scroll-stack-card {
+        width: 95%;
+        border-radius: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-stack-card {
+        width: 90%;
+        border-radius: 20px;
+    }
+}
