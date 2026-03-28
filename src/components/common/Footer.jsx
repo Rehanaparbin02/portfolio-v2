@@ -146,7 +146,7 @@ export default function Footer() {
                         <span className="text-outline">FULL POTENTIAL</span>
                     </h2>
                     <div className="footer-cta-btn-wrap">
-                        <a href="mailto:rehanaparbin0210@gmail.com" className="footer-primary-btn">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=rehanaparbin0210@gmail.com" target="_blank" rel="noopener noreferrer" className="footer-primary-btn">
                             START A PROJECT
                             <span className="btn-arrow">→</span>
                         </a>

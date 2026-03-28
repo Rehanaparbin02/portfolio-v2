@@ -288,7 +288,7 @@ export default function Projects() {
                 </div>
 
                 <div className="view-all-footer">
-                    <Link to="/projects" className="liquid-btn">
+                    <Link to="/projects" className="liquid-btn" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                         <span className="liquid-btn__flair"></span>
                         <div className="liquid-btn__label">
                             <span>VIEW ALL PROJECTS</span>
